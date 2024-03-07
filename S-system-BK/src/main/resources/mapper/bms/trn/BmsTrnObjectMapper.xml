@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.anylogic.ssystem.bms.trn.mapper.BmsTrnObjectMapper">
+
+    <resultMap id="selectTrnObjectListMap" type="com.anylogic.ssystem.bms.trn.model.SelectTrnObjectListResVO">
+        <id column="transferid" property="transferid" />
+        <id column="objectid" property="objectid" />
+        <result column="secstatus" property="secstatus" />
+    </resultMap>
+
+
+    <!-- 인계인수 대상 조회 -->
+    <select id="selectTrnObjectList" parameterType="com.anylogic.ssystem.bms.trn.model.SelectTrnObjectListReqVO" resultMap="selectTrnObjectListMap">
+        SELECT
+            transferid as "transferid"
+            , objectid as "objectid"
+            , secstatus as "secstatus"
+        FROM
+            sbms.sbms_user.bms_trn_object
+        WHERE 1 = 1
+            <if test="objectid != null and objectid !=''">
+                and objectid = #{objectid}
+            </if>
+        ORDER BY transferid DESC
+        LIMIT 1
+    </select>
+
+    <!--  인계인수 대상 등록 -->
+    <insert id="insetTrnObject" parameterType="com.anylogic.ssystem.bms.trn.model.InsetTrnObjectReqVO">
+        INSERT INTO
+        sbms.sbms_user.bms_trn_object(
+            <trim suffixOverrides=",">
+            <if test="transferid != null and transferid !=''">
+                transferid,
+            </if>
+            <if test="objectid != null and objectid !=''">
+                objectid,
+            </if>
+            <if test="objectname != null and objectname !=''">
+                objectname,
+            </if>
+            <if test="objecttype != null and objecttype !=''">
+                objecttype,
+            </if>
+            <if test="pjtcardid != null and pjtcardid !=''">
+                pjtcardid,
+            </if>
+            <if test="pjtcardname != null and pjtcardname !=''">
+                pjtcardname,
+            </if>
+            <if test="paperflag != null and paperflag !=''">
+                paperflag,
+            </if>
+            <if test="status != null and status !=''">
+                status,
+            </if>
+            <if test="procdate != null and procdate !=''">
+                procdate,
+            </if>
+            <if test="rfidflag != null and rfidflag !=''">
+                rfidflag,
+            </if>
+            <if test="rfiddate != null and rfiddate !=''">
+                rfiddate,
+            </if>
+            <if test="mgmtno != null and mgmtno !=''">
+                mgmtno,
+            </if>
+            <if test="seclevel != null and seclevel !=''">
+                seclevel,
+            </if>
+            <if test="reportdt != null and reportdt !=''">
+                reportdt,
+            </if>
+            <if test="docnoseq != null and docnoseq !=''">
+                docnoseq,
+            </if>
+            <if test="prerfidflag != null and prerfidflag !=''">
+                prerfidflag,
+            </if>
+            <if test="prerfiddate != null and prerfiddate !=''">
+                prerfiddate,
+            </if>
+            <if test="secstatus != null and secstatus !=''">
+                secstatus,
+            </if>
+            </trim>
+        )
+        VALUES(
+            <trim suffixOverrides=",">
+            <if test="transferid != null and transferid !=''">
+                #{transferid},
+            </if>
+            <if test="objectid != null and objectid !=''">
+                #{objectid},
+            </if>
+            <if test="objectname != null and objectname !=''">
+                #{objectname},
+            </if>
+            <if test="objecttype != null and objecttype !=''">
+                #{objecttype},
+            </if>
+            <if test="pjtcardid != null and pjtcardid !=''">
+                #{pjtcardid},
+            </if>
+            <if test="pjtcardname != null and pjtcardname !=''">
+                #{pjtcardname},
+            </if>
+            <if test="paperflag != null and paperflag !=''">
+                #{paperflag},
+            </if>
+            <if test="status != null and status !=''">
+                #{status},
+            </if>
+            <if test="procdate != null and procdate !=''">
+                #{procdate},
+            </if>
+            <if test="rfidflag != null and rfidflag !=''">
+                #{rfidflag},
+            </if>
+            <if test="rfiddate != null and rfiddate !=''">
+                #{rfiddate},
+            </if>
+            <if test="mgmtno != null and mgmtno !=''">
+                #{mgmtno},
+            </if>
+            <if test="seclevel != null and seclevel !=''">
+                #{seclevel},
+            </if>
+            <if test="reportdt != null and reportdt !=''">
+                #{reportdt},
+            </if>
+            <if test="docnoseq != null and docnoseq !=''">
+                #{docnoseq},
+            </if>
+            <if test="prerfidflag != null and prerfidflag !=''">
+                #{prerfidflag},
+            </if>
+            <if test="prerfiddate != null and prerfiddate !=''">
+                #{prerfiddate},
+            </if>
+            <if test="secstatus != null and secstatus !=''">
+                #{secstatus},
+            </if>
+            </trim>
+        )
+    </insert>
+
+    <!-- 인계인수 대상 수정 -->
+    <update id="updateTrnObject" parameterType="com.anylogic.ssystem.bms.trn.model.UpdateTrnObjectReqVO">
+        UPDATE sbms.sbms_user.bms_trn_object
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="objectname != null and objectname !=''">
+                objectname = #{objectname},
+            </if>
+            <if test="paperflag != null and paperflag !=''">
+                paperflag = #{paperflag},
+            </if>
+            <if test="status != null and status !=''">
+                status = #{status},
+            </if>
+            <if test="mgmtno != null and mgmtno !=''">
+                mgmtno = #{mgmtno},
+            </if>
+            <if test="seclevel != null and seclevel !=''">
+                seclevel = #{seclevel},
+            </if>
+            <if test="reportdt != null and reportdt !=''">
+                reportdt = #{reportdt},
+            </if>
+            <if test="docnoseq != null and docnoseq !=''">
+                docnoseq = #{docnoseq},
+            </if>
+            <if test="secstatus != null and secstatus !=''">
+                secstatus = #{secstatus},
+            </if>
+        </trim>
+        WHERE 1 = 1
+            and transferid = #{transferid}
+            and objectid = #{objectid}
+    </update>
+
+</mapper>

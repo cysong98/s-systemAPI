@@ -1,0 +1,436 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.anylogic.ssystem.bms.com.mapper.BmsDctFormMapper">
+
+    <resultMap id="selectFormListMap" type="com.anylogic.ssystem.bms.com.model.SelectFormListResVO">
+        <id column="fileid" property="fileid" />                      <!-- 파일 ID -->
+        <result column="formid" property="formid" />                  <!-- 서식 ID -->
+        <result column="formtitle" property="formtitle" />            <!-- 서식 제목 -->
+        <result column="formname" property="formname" />              <!-- 서식 이름 -->
+        <result column="formsize" property="formsize" />              <!-- 서식 크기 -->
+        <result column="formorder" property="formorder" />            <!-- 서식 순서 -->
+        <result column="inid" property="inid" />                      <!-- 등록자 ID -->
+        <result column="indt" property="indt" />                      <!-- 등록일 -->
+        <result column="upid" property="upid" />                      <!-- 수정자 ID -->
+        <result column="updt" property="updt" />                      <!-- 수정일 -->
+        <result column="deptid" property="deptid" />                  <!-- 부서 ID -->
+        <result column="deptname" property="deptname" />              <!-- 부서 이름 -->
+        <result column="depttype" property="depttype" />              <!-- 부서 유형 -->
+        <result column="formcode1" property="formcode1" />            <!-- 서식코드 1 -->
+        <result column="formcode2" property="formcode2" />            <!-- 서식코드 2 -->
+        <result column="formcode3" property="formcode3" />            <!-- 서식코드 3 -->
+        <result column="formcomment" property="formcomment" />        <!-- 서식비고 -->
+        <result column="categoryid" property="categoryid" />          <!-- 카테고리 ID -->
+        <result column="username" property="username" />              <!-- 카테고리 이름 -->
+        <result column="fileurl" property="fileurl" />
+        <result column="filepath" property="filepath" />
+    </resultMap>
+
+    <resultMap id="getFormDetailMap" type="com.anylogic.ssystem.bms.com.model.GetFormDetailResVO">
+        <id column="fileid" property="fileid" />                      <!-- 파일 ID -->
+        <result column="formid" property="formid" />                  <!-- 서식 ID -->
+        <result column="formtitle" property="formtitle" />            <!-- 서식 제목 -->
+        <result column="formname" property="formname" />              <!-- 서식 이름 -->
+        <result column="formsize" property="formsize" />              <!-- 서식 크기 -->
+        <result column="formorder" property="formorder" />            <!-- 서식 순서 -->
+        <result column="inid" property="inid" />                      <!-- 등록자 ID -->
+        <result column="indt" property="indt" />                      <!-- 등록일 -->
+        <result column="upid" property="upid" />                      <!-- 수정자 ID -->
+        <result column="updt" property="updt" />                      <!-- 수정일 -->
+        <result column="deptid" property="deptid" />                  <!-- 부서 ID -->
+        <result column="deptname" property="deptname" />              <!-- 부서 이름 -->
+        <result column="depttype" property="depttype" />              <!-- 부서 유형 -->
+        <result column="formcode1" property="formcode1" />            <!-- 서식코드 1 -->
+        <result column="formcode2" property="formcode2" />            <!-- 서식코드 2 -->
+        <result column="formcode3" property="formcode3" />            <!-- 서식코드 3 -->
+        <result column="formcomment" property="formcomment" />        <!-- 서식비고 -->
+        <result column="categoryid" property="categoryid" />          <!-- 카테고리 ID -->
+        <result column="categoryname" property="categoryname" />      <!-- 카테고리 이름 -->
+    </resultMap>
+
+    <resultMap id="getFormDetailSelectFileMap" type="com.anylogic.ssystem.bms.com.model.GetFormDetailSelectFileResVO">
+        <id column="fileid" property="fileid" />                      <!-- 파일 ID -->
+        <result column="formid" property="formid" />
+        <result column="formtitle" property="formtitle" />
+        <result column="formname" property="formname" />
+        <result column="formsize" property="formsize" />
+        <result column="filewidth" property="formorder" />
+        <result column="inid" property="inid" />                      <!-- 등록자 ID -->
+        <result column="indt" property="indt" />                      <!-- 등록일시 -->
+        <result column="upid" property="upid" />                      <!-- 수정자 ID -->
+        <result column="updt" property="updt" />                      <!-- 수정일시 -->
+        <result column="deptid" property="deptid" />
+        <result column="deptname" property="deptname" />
+        <result column="depttype" property="depttype" />
+        <result column="formcode1" property="formcode1" />
+        <result column="formcode2" property="formcode2" />
+        <result column="formcode3" property="formcode3" />
+        <result column="formcomment" property="formcomment" />
+        <result column="categoryid" property="categoryid" />
+        <result column="fileurl" property="fileurl" />                <!-- 파일 URL -->
+        <result column="filepath" property="filepath" />              <!-- 파일경로 -->
+    </resultMap>
+
+    <resultMap id="deleteFormSelectFileMap" type="com.anylogic.ssystem.bms.com.model.DeleteFormSelectFileResVO">
+        <id column="fileid" property="fileid" />                      <!-- 파일 ID -->
+        <result column="formid" property="formid" />
+        <result column="formtitle" property="formtitle" />
+        <result column="formname" property="formname" />
+        <result column="formsize" property="formsize" />
+        <result column="filewidth" property="formorder" />
+        <result column="inid" property="inid" />                      <!-- 등록자 ID -->
+        <result column="indt" property="indt" />                      <!-- 등록일시 -->
+        <result column="upid" property="upid" />                      <!-- 수정자 ID -->
+        <result column="updt" property="updt" />                      <!-- 수정일시 -->
+        <result column="deptid" property="deptid" />
+        <result column="deptname" property="deptname" />
+        <result column="depttype" property="depttype" />
+        <result column="formcode1" property="formcode1" />
+        <result column="formcode2" property="formcode2" />
+        <result column="formcode3" property="formcode3" />
+        <result column="formcomment" property="formcomment" />
+        <result column="categoryid" property="categoryid" />
+        <result column="fileurl" property="fileurl" />                <!-- 파일 URL -->
+        <result column="filepath" property="filepath" />              <!-- 파일경로 -->
+    </resultMap>
+
+
+    <!-- 시스템관리 > 서식관리 > 서식 목록 조회 -->
+    <select id="selectFormList" parameterType="com.anylogic.ssystem.bms.com.model.SelectFormListReqVO" resultMap="selectFormListMap">
+        SELECT
+            A.fileid as "fileid"
+            , A.formid as "formid" 
+            , A.formtitle as "formtitle" 
+            , A.formname as "formname" 
+            , A.formsize as "formsize" 
+            , A.formorder as "formorder" 
+            , A.inid as "inid" 
+            , A.indt as "indt" 
+            , A.upid as "upid" 
+            , A.updt as "updt" 
+            , A.deptid as "deptid" 
+            , A.deptname as "deptname" 
+            , A.depttype as "depttype" 
+            , A.formcode1 as "formcode1" 
+            , A.formcode2 as "formcode2" 
+            , A.formcode3 as "formcode3" 
+            , A.formcomment as "formcomment" 
+            , A.categoryid as "categoryid"
+            , A.fileurl as "fileurl"
+            , A.filepath as "filepath"
+            , B.username as "username"
+        FROM  sbms.sbms_user.bms_dct_form  A
+        LEFT OUTER JOIN  sbms.sbms_user.com_userinfo  B
+            ON ( A.inid  =  B.userid  )
+        WHERE 1 = 1
+            <if test="formtitle != null and formtitle !=''">
+                and formtitle like CONCAT('%', #{formtitle}, '%')
+            </if>
+            <if test="startDt != null and startDt !=''">
+                and A.indt <![CDATA[>=]]> #{startDt}
+            </if>
+            <if test="endDt != null and endDt !=''">
+                and A.indt <![CDATA[<=]]> #{endDt}
+            </if>
+        ORDER BY indt DESC
+    </select>
+
+    <!-- 시스템관리 > 서식관리 > 서식 삭제 -->
+    <delete id="deleteForm" parameterType="com.anylogic.ssystem.bms.com.model.DeleteFormReqVO">
+        DELETE FROM sbms.sbms_user.bms_dct_form
+        WHERE 1 = 1
+            and fileid = #{fileid}
+    </delete>
+
+    <!--  시스템관리 > 서식관리 > 삭제할 서식파일 목록 조회 -->
+    <select id="deleteFormSelectFile" parameterType="com.anylogic.ssystem.bms.com.model.DeleteFormSelectFileReqVO" resultMap="deleteFormSelectFileMap">
+        SELECT
+            fileid as "fileid"
+            , formid as "formid"
+            , formtitle as "formtitle"
+            , formname as "formname"
+            , formsize as "formsize"
+            , formorder as "formorder"
+            , inid as "inid"
+            , indt as "indt"
+            , upid as "upid"
+            , updt as "updt"
+            , deptid as "deptid"
+            , deptname as "deptname"
+            , depttype as "depttype"
+            , formcode1 as "formcode1"
+            , formcode2 as "formcode2"
+            , formcode3 as "formcode3"
+            , formcomment as "formcomment"
+            , categoryid as "categoryid"
+            , fileurl as "fileurl"
+            , filepath as "filepath"
+        FROM  sbms.sbms_user.bms_dct_form
+        WHERE 1 = 1
+            <if test="fileid != null and fileid !=''">
+                and fileid = #{fileid}
+            </if>
+
+    </select>
+
+    <!-- 시스템관리 > 서식관리 > 서식 상세 조회 -->
+    <select id="getFormDetail" parameterType="com.anylogic.ssystem.bms.com.model.GetFormDetailReqVO" resultMap="getFormDetailMap">
+        SELECT
+            A.fileid as "fileid" 
+            , A.formid as "formid" 
+            , A.formtitle as "formtitle" 
+            , A.formname as "formname" 
+            , A.formsize as "formsize" 
+            , A.formorder as "formorder" 
+            , A.inid as "inid" 
+            , A.indt as "indt" 
+            , A.upid as "upid" 
+            , A.updt as "updt" 
+            , A.deptid as "deptid" 
+            , A.deptname as "deptname" 
+            , A.depttype as "depttype" 
+            , A.formcode1 as "formcode1" 
+            , A.formcode2 as "formcode2" 
+            , A.formcode3 as "formcode3" 
+            , A.formcomment as "formcomment" 
+            , A.categoryid as "categoryid"
+            , B.categoryname as "categoryname" 
+        FROM  sbms.sbms_user.bms_dct_form  A
+            LEFT OUTER JOIN  sbms.sbms_user.bms_dct_category  B
+                ON ( A.categoryid  =  B.categoryid  )
+        WHERE 1 = 1
+            <if test="fileid != null and fileid !=''"> 
+                and fileid = #{fileid}
+            </if>
+    </select>
+
+    <!-- 시스템관리 > 서식관리 > 상세 > 서식파일 목록 조회 -->
+    <select id="getFormDetailSelectFile" parameterType="com.anylogic.ssystem.bms.com.model.GetFormDetailSelectFileReqVO" resultMap="getFormDetailSelectFileMap">
+        SELECT
+            fileid as "fileid"
+            , formid as "formid"
+            , formtitle as "formtitle"
+            , formname as "formname"
+            , formsize as "formsize"
+            , formorder as "formorder"
+            , inid as "inid"
+            , indt as "indt"
+            , upid as "upid"
+            , updt as "updt"
+            , deptid as "deptid"
+            , deptname as "deptname"
+            , depttype as "depttype"
+            , formcode1 as "formcode1"
+            , formcode2 as "formcode2"
+            , formcode3 as "formcode3"
+            , formcomment as "formcomment"
+            , categoryid as "categoryid"
+            , fileurl as "fileurl"
+            , filepath as "filepath"
+        FROM  sbms.sbms_user.bms_dct_form
+        WHERE 1 = 1
+            <if test="fileid != null and fileid !=''">
+                and fileid = #{fileid}
+            </if>
+    </select>
+
+    <!-- 시스템관리 > 서식관리 > 서식 등록 -->
+    <insert id="insertFormBIA" parameterType="com.anylogic.ssystem.bms.com.model.InsertFormBIAReqVO">
+        INSERT INTO
+        sbms.sbms_user.bms_dct_form(
+            <trim suffixOverrides=",">
+            <if test="fileid != null and fileid !=''">
+                fileid,
+            </if>
+            <if test="formid != null and formid !=''">
+                formid,
+            </if>
+            <if test="formtitle != null and formtitle !=''">
+                formtitle,
+            </if>
+            <if test="formname != null and formname !=''">
+                formname,
+            </if>
+            <if test="formsize != null and formsize !=''">
+                formsize,
+            </if>
+            <if test="formorder != null and formorder !=''">
+                formorder,
+            </if>
+            <if test="inid != null and inid !=''">
+                inid,
+            </if>
+            <if test="indt != null and indt !=''">
+                indt,
+            </if>
+            <if test="upid != null and upid !=''">
+                upid,
+            </if>
+            <if test="updt != null and updt !=''">
+                updt,
+            </if>
+            <if test="deptid != null and deptid !=''">
+                deptid,
+            </if>
+            <if test="deptname != null and deptname !=''">
+                deptname,
+            </if>
+            <if test="depttype != null and depttype !=''">
+                depttype,
+            </if>
+            <if test="formcode1 != null and formcode1 !=''">
+                formcode1,
+            </if>
+            <if test="formcode2 != null and formcode2 !=''">
+                formcode2,
+            </if>
+            <if test="formcode3 != null and formcode3 !=''">
+                formcode3,
+            </if>
+            <if test="formcomment != null and formcomment !=''">
+                formcomment,
+            </if>
+            <if test="categoryid != null and categoryid !=''">
+                categoryid,
+            </if>
+            <if test="fileurl != null and fileurl !=''">
+                fileurl,
+            </if>
+            <if test="filepath != null and filepath !=''">
+                filepath,
+            </if>
+            <if test="filename != null and filename !=''">
+                filename,
+            </if>
+            </trim>
+        )
+        VALUES(
+            <trim suffixOverrides=",">
+            <if test="fileid != null and fileid !=''">
+                #{fileid},
+            </if>
+            <if test="formid != null and formid !=''">
+                #{formid},
+            </if>
+            <if test="formtitle != null and formtitle !=''">
+                #{formtitle},
+            </if>
+            <if test="formname != null and formname !=''">
+                #{formname},
+            </if>
+            <if test="formsize != null and formsize !=''">
+                #{formsize}::double precision,
+            </if>
+            <if test="formorder != null and formorder !=''">
+                #{formorder},
+            </if>
+            <if test="inid != null and inid !=''">
+                #{inid},
+            </if>
+            <if test="indt != null and indt !=''">
+                #{indt},
+            </if>
+            <if test="upid != null and upid !=''">
+                #{upid},
+            </if>
+            <if test="updt != null and updt !=''">
+                #{updt},
+            </if>
+            <if test="deptid != null and deptid !=''">
+                #{deptid},
+            </if>
+            <if test="deptname != null and deptname !=''">
+                #{deptname},
+            </if>
+            <if test="depttype != null and depttype !=''">
+                #{depttype},
+            </if>
+            <if test="formcode1 != null and formcode1 !=''">
+                #{formcode1},
+            </if>
+            <if test="formcode2 != null and formcode2 !=''">
+                #{formcode2},
+            </if>
+            <if test="formcode3 != null and formcode3 !=''">
+                #{formcode3},
+            </if>
+            <if test="formcomment != null and formcomment !=''">
+                #{formcomment},
+            </if>
+            <if test="categoryid != null and categoryid !=''">
+                #{categoryid},
+            </if>
+            <if test="fileurl != null and fileurl !=''">
+                #{fileurl},
+            </if>
+            <if test="filepath != null and filepath !=''">
+                #{filepath},
+            </if>
+            <if test="filename != null and filename !=''">
+                #{filename},
+            </if>
+            </trim>
+        )
+    </insert>
+
+    <!-- 시스템관리 > 서식관리 > 서식 수정 -->
+    <update id="updateFormBIA" parameterType="com.anylogic.ssystem.bms.com.model.UpdateFormBIAReqVO">
+        UPDATE sbms.sbms_user.bms_dct_form
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="formid != null and formid !=''">
+                formid = #{formid},
+            </if>
+            <if test="formtitle != null and formtitle !=''">
+                formtitle = #{formtitle},
+            </if>
+            <if test="formname != null and formname !=''">
+                formname = #{formname},
+            </if>
+            <if test="formsize != null and formsize !=''">
+                formsize = #{formsize},
+            </if>
+            <if test="formorder != null">
+                formorder = #{formorder},
+            </if>
+            <if test="inid != null and inid !=''">
+                inid = #{inid},
+            </if>
+            <if test="indt != null and indt !=''">
+                indt = #{indt},
+            </if>
+            <if test="upid != null and upid !=''">
+                upid = #{upid},
+            </if>
+            <if test="updt != null and updt !=''">
+                updt = #{updt},
+            </if>
+            <if test="deptid != null and deptid !=''">
+                deptid = #{deptid},
+            </if>
+            <if test="deptname != null and deptname !=''">
+                deptname = #{deptname},
+            </if>
+            <if test="depttype != null and depttype !=''">
+                depttype = #{depttype},
+            </if>
+            <if test="formcode1 != null and formcode1 !=''">
+                formcode1 = #{formcode1},
+            </if>
+            <if test="formcode2 != null and formcode2 !=''">
+                formcode2 = #{formcode2},
+            </if>
+            <if test="formcode3 != null and formcode3 !=''">
+                formcode3 = #{formcode3},
+            </if>
+            <if test="formcomment != null">
+                formcomment = #{formcomment},
+            </if>
+            <if test="categoryid != null and categoryid !=''">
+                categoryid = #{categoryid},
+            </if>
+        </trim>
+        WHERE 1 = 1
+            and fileid = #{fileid}
+    </update>
+
+</mapper>

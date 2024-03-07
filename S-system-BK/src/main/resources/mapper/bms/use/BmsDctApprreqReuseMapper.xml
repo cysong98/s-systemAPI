@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.anylogic.ssystem.bms.use.mapper.BmsDctApprreqReuseMapper">
+
+    <!-- 재사용 요청내용 등록 -->
+    <insert id="insertReUseReq" parameterType="com.anylogic.ssystem.bms.use.model.InsertReUseReqReqVO">
+        INSERT INTO
+        sbms.sbms_user.bms_dct_apprreq_reuse(
+            <trim suffixOverrides=",">
+            <if test="apprreqid != null and apprreqid !=''">
+                apprreqid,
+            </if>
+            <if test="mgmtid != null and mgmtid !=''">
+                mgmtid,
+            </if>
+            <if test="reqreusebegindt != null and reqreusebegindt !=''">
+                reqreusebegindt,
+            </if>
+            <if test="reqreuseenddt != null and reqreuseenddt !=''">
+                reqreuseenddt,
+            </if>
+            <if test="grantreusebegindt != null and grantreusebegindt !=''">
+                grantreusebegindt,
+            </if>
+            <if test="grantreuseenddt != null and grantreuseenddt !=''">
+                grantreuseenddt,
+            </if>
+            <if test="grantflag != null and grantflag !=''">
+                grantflag,
+            </if>
+            </trim>
+        )
+        VALUES(
+            <trim suffixOverrides=",">
+            <if test="apprreqid != null and apprreqid !=''">
+                #{apprreqid},
+            </if>
+            <if test="mgmtid != null and mgmtid !=''">
+                #{mgmtid},
+            </if>
+            <if test="reqreusebegindt != null and reqreusebegindt !=''">
+                #{reqreusebegindt},
+            </if>
+            <if test="reqreuseenddt != null and reqreuseenddt !=''">
+                #{reqreuseenddt},
+            </if>
+            <if test="grantreusebegindt != null and grantreusebegindt !=''">
+                #{grantreusebegindt},
+            </if>
+            <if test="grantreuseenddt != null and grantreuseenddt !=''">
+                #{grantreuseenddt},
+            </if>
+            <if test="grantflag != null and grantflag !=''">
+                #{grantflag},
+            </if>
+            </trim>
+        )
+    </insert>
+
+    <!-- 각 요청서 승인/반려 처리 - 승인한 재사용정보 수정 -->
+    <update id="updateUseReqMapRecycle" parameterType="java.util.Map">
+        UPDATE sbms.sbms_user.bms_dct_apprreq_reuse
+        SET
+            grantreusebegindt = REPLACE(#{grantreusebegindt},'-','') || '000000'
+          ,grantreuseenddt = REPLACE(#{grantreuseenddt},'-','') || '235959'
+          ,grantflag = #{grantflag}
+        WHERE apprreqid = #{apprreqid}
+          AND mgmtid = #{mgmtid}
+    </update>
+
+    <!-- 각 요청서 상세화면 조회 - 재사용할 문서 정보 -->
+    <select id="selectUseReqRecycleMapList" parameterType="java.util.Map" resultType="java.util.HashMap">
+        SELECT
+            b.apprreqid as "apprreqid"
+             , a.mgmtid as "mgmtid"
+             , a.mgmtno as "mgmtno"
+             , a.copyno as "copyno"
+             , a.secttl as "secttl"
+             , a.authorname as "authorname"
+             , TO_CHAR(TO_TIMESTAMP(b.reqreusebegindt, 'YYYYMMDDHH24MISS'), 'YYYY.MM.DD') || '~' ||
+               TO_CHAR(TO_TIMESTAMP(b.reqreuseenddt, 'YYYYMMDDHH24MISS'), 'YYYY.MM.DD') as "requsetran"
+             , TO_CHAR(TO_TIMESTAMP(b.reqreusebegindt, 'YYYYMMDDHH24MISS'), 'YYYY-MM-DD')   as "reqreusebegindt"
+             , TO_CHAR(TO_TIMESTAMP(b.reqreuseenddt, 'YYYYMMDDHH24MISS'), 'YYYY-MM-DD')     as "reqreuseenddt"
+             , TO_CHAR(TO_TIMESTAMP(COALESCE(NULLIF(TRIM(b.grantreusebegindt),''),b.reqreusebegindt), 'YYYYMMDDHH24MISS'), 'YYYY-MM-DD') as "grantreusebegindt"
+             , TO_CHAR(TO_TIMESTAMP(COALESCE(NULLIF(TRIM(b.grantreuseenddt),''),b.reqreuseenddt), 'YYYYMMDDHH24MISS'), 'YYYY-MM-DD')   as "grantreuseenddt"
+             , a.regirecvtype as "regirecvtype"
+             , a.docid as "docid"
+             , COALESCE(TO_CHAR(TO_TIMESTAMP(c.authexpiredt, 'YYYYMMDDHH24MISS'), 'YYYY-MM-DD'), NULL) AS "readauthexpiredt"
+        FROM sbms.sbms_user.bms_dct_mgmt_regi a
+                 LEFT OUTER JOIN sbms.sbms_user.bms_dct_apprreq_reuse b ON (a.mgmtid = b.mgmtid)
+                 LEFT OUTER JOIN (
+            SELECT DISTINCT ON (docid) docid, authexpiredt
+            FROM sbms.sbms_user.bms_dct_auth_card
+            WHERE reqid = (
+                SELECT reqid
+                FROM sbms.sbms_user.bms_dct_apprreq
+                WHERE apprreqid = #{apprreqid}
+                ) AND authgubun = '01' AND authgrantflag = 'Y'
+        ) c ON a.docid = c.docid
+        WHERE apprreqid = #{apprreqid}
+    </select>
+
+</mapper>

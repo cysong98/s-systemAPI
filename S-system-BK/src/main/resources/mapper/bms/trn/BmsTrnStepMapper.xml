@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.anylogic.ssystem.bms.trn.mapper.BmsTrnStepMapper">
+
+    <resultMap id="selectTransStepMap" type="com.anylogic.ssystem.bms.trn.model.SelectTransStepResVO">
+        <result column="transferid" property="transferid" />
+        <result column="apprseq" property="apprseq" />
+        <result column="apprusername" property="apprusername" />
+    </resultMap>
+
+
+    <!-- 인계인수 결재경로 조회 -->
+    <select id="selectTransStep" parameterType="com.anylogic.ssystem.bms.trn.model.SelectTransStepReqVO" resultMap="selectTransStepMap">
+        SELECT
+            transferid as "transferid"
+            , apprseq as "apprseq"
+            , apprusername as "apprusername"
+        FROM  sbms.sbms_user.bms_trn_step
+        WHERE 1 = 1
+            <if test="transferid != null and transferid !=''">
+                and transferid = #{transferid}
+            </if>
+        ORDER BY apprseq DESC
+    </select>
+
+    <!-- 인계인수서 승인요청 - 결재정보 등록 -->
+    <insert id="insertTrnStep" parameterType="com.anylogic.ssystem.bms.trn.model.InsertTrnStepReqVO">
+        INSERT INTO
+        sbms.sbms_user.bms_trn_step(
+            <trim suffixOverrides=",">
+            <if test="transferid != null and transferid !=''">
+                transferid,
+            </if>
+            <if test="apprseq != null and apprseq !=''">
+                apprseq,
+            </if>
+            <if test="apprusername != null and apprusername !=''">
+                apprusername,
+            </if>
+            <if test="appruserid != null and appruserid !=''">
+                appruserid,
+            </if>
+            <if test="apprdeptname != null and apprdeptname !=''">
+                apprdeptname,
+            </if>
+            <if test="apprdeptid != null and apprdeptid !=''">
+                apprdeptid,
+            </if>
+            <if test="apprposition != null and apprposition !=''">
+                apprposition,
+            </if>
+            <if test="apprcode != null and apprcode !=''">
+                apprcode,
+            </if>
+            <if test="apprstatus != null and apprstatus !=''">
+                apprstatus,
+            </if>
+            <if test="apprdate != null and apprdate !=''">
+                apprdate,
+            </if>
+            <if test="apprreason != null and apprreason !=''">
+                apprreason,
+            </if>
+            <if test="inid != null and inid !=''">
+                inid,
+            </if>
+            <if test="indt != null and indt !=''">
+                indt,
+            </if>
+            <if test="state != null and state !=''">
+                state,
+            </if>
+            <if test="electsignid != null and electsignid !=''">
+                electsignid,
+            </if>
+            </trim>
+        )
+        VALUES(
+            <trim suffixOverrides=",">
+            <if test="transferid != null and transferid !=''">
+                #{transferid},
+            </if>
+            <if test="apprseq != null and apprseq !=''">
+                #{apprseq},
+            </if>
+            <if test="apprusername != null and apprusername !=''">
+                #{apprusername},
+            </if>
+            <if test="appruserid != null and appruserid !=''">
+                #{appruserid},
+            </if>
+            <if test="apprdeptname != null and apprdeptname !=''">
+                #{apprdeptname},
+            </if>
+            <if test="apprdeptid != null and apprdeptid !=''">
+                #{apprdeptid},
+            </if>
+            <if test="apprposition != null and apprposition !=''">
+                #{apprposition},
+            </if>
+            <if test="apprcode != null and apprcode !=''">
+                #{apprcode},
+            </if>
+            <if test="apprstatus != null and apprstatus !=''">
+                #{apprstatus},
+            </if>
+            <if test="apprdate != null and apprdate !=''">
+                #{apprdate},
+            </if>
+            <if test="apprreason != null and apprreason !=''">
+                #{apprreason},
+            </if>
+            <if test="inid != null and inid !=''">
+                #{inid},
+            </if>
+            <if test="indt != null and indt !=''">
+                #{indt},
+            </if>
+            <if test="state != null and state !=''">
+                #{state},
+            </if>
+            <if test="electsignid != null and electsignid !=''">
+                #{electsignid},
+            </if>
+            </trim>
+        )
+    </insert>
+
+    <!--  인계인수서 승인/반려처리- 결재정보 수정 -->
+    <update id="updateTrnStep" parameterType="com.anylogic.ssystem.bms.trn.model.UpdateTrnStepReqVO">
+        UPDATE sbms.sbms_user.bms_trn_step
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="apprusername != null and apprusername !=''">
+                apprusername = #{apprusername},
+            </if>
+            <if test="appruserid != null and appruserid !=''">
+                appruserid = #{appruserid},
+            </if>
+            <if test="apprdeptname != null and apprdeptname !=''">
+                apprdeptname = #{apprdeptname},
+            </if>
+            <if test="apprdeptid != null and apprdeptid !=''">
+                apprdeptid = #{apprdeptid},
+            </if>
+            <if test="apprposition != null and apprposition !=''">
+                apprposition = #{apprposition},
+            </if>
+            <if test="apprcode != null and apprcode !=''">
+                apprcode = #{apprcode},
+            </if>
+            <if test="apprstatus != null and apprstatus !=''">
+                apprstatus = #{apprstatus},
+            </if>
+            <if test="apprdate != null and apprdate !=''">
+                apprdate = #{apprdate},
+            </if>
+            <if test="apprreason != null and apprreason !=''">
+                apprreason = #{apprreason},
+            </if>
+            <if test="inid != null and inid !=''">
+                inid = #{inid},
+            </if>
+            <if test="indt != null and indt !=''">
+                indt = #{indt},
+            </if>
+            <if test="state != null and state !=''">
+                state = #{state},
+            </if>
+            <if test="electsignid != null and electsignid !=''">
+                electsignid = #{electsignid},
+            </if>
+        </trim>
+        WHERE 1 = 1
+            and transferid = #{transferid}
+            and apprseq = #{apprseq}
+    </update>
+
+    <!-- 인계인수 대상/결재정보 삭제 -->
+    <delete id="deleteTempList" parameterType="java.util.Map">
+        DELETE FROM ${table}
+        WHERE transferid = #{transferid}
+    </delete>
+
+</mapper>

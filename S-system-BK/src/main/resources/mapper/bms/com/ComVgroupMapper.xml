@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.anylogic.ssystem.bms.com.mapper.ComVgroupMapper">
+
+    <resultMap id="selectUserVgroupMap" type="com.anylogic.ssystem.bms.com.model.SelectUserVgroupResVO">
+        <id column="vgroupid" property="vgroupid" />                  <!-- 가상그룹아이디 -->
+        <result column="vgroupname" property="vgroupname" />          <!-- 가상그룹명 -->
+        <result column="detail" property="detail" />                  <!-- 상세 -->
+        <result column="authtype" property="authtype" />              <!-- 보안유형 -->
+        <result column="inid" property="inid" />                      <!-- 등록자아이디 -->
+        <result column="indt" property="indt" />                      <!-- 등록일시 -->
+        <result column="upid" property="upid" />                      <!-- 수정자아이디 -->
+        <result column="updt" property="updt" />                      <!-- 수정일시 -->
+    </resultMap>
+
+
+    <!-- 조직관리 > 부서/사용자관리 > 권한 검색 팝업 > 권한 목록 조회 -->
+    <select id="selectUserVgroup" parameterType="com.anylogic.ssystem.bms.com.model.SelectUserVgroupReqVO" resultMap="selectUserVgroupMap">
+        SELECT
+            vgroupid as "vgroupid" 
+            , vgroupname as "vgroupname" 
+            , detail as "detail" 
+            , authtype as "authtype" 
+            , inid as "inid" 
+            , indt as "indt" 
+            , upid as "upid" 
+            , updt as "updt" 
+        FROM  sbms.sbms_user.com_vgroup
+        WHERE 1 = 1
+            <if test="vgroupid != null and vgroupid !=''">
+                and vgroupid like CONCAT('%', #{vgroupid}, '%')
+            </if>
+            <if test="vgroupname != null and vgroupname !=''">
+                and vgroupname like CONCAT('%', #{vgroupname}, '%')
+            </if>
+        ORDER BY vgroupid ASC
+    </select>
+
+</mapper>

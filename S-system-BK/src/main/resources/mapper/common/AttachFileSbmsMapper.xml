@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.anylogic.ssystem.common.file.mapper.AttachFileSbmsMapper">
+
+
+    <resultMap id = "attachFileInfoMap" type = "com.anylogic.ssystem.common.file.model.AttachFileVO">
+        <id column = "fleid" property = "fleid" />
+        <result column = "docid" property = "docid" />
+        <result column = "sfilename" property = "sfilename" />
+        <result column = "fleurl" property = "fleurl" />
+        <result column = "gubun" property = "gubun" />
+        <result column = "flettl" property = "flettl" />
+        <result column = "flesize" property = "flesize" />
+        <result column = "fleorder" property = "fleorder" />
+        <result column = "flepath" property = "flepath" />
+        <result column = "inid" property = "inid" />
+    </resultMap>
+
+    <select id="getFormFilePath" parameterType="String" resultType="String">
+        SELECT
+        filepath
+        FROM sbms.sbms_user.bms_dct_form
+        WHERE filename = #{fileName}
+    </select>
+
+    <select id="getDctFilePath" parameterType="String" resultType="String">
+        SELECT
+            flepath
+        FROM sbms.sbms_user.bms_dct_file
+        WHERE flettl = #{fileName}
+    </select>
+
+    <select id="getFilePath" parameterType="String" resultType="String">
+        SELECT
+            filepath
+        FROM sbms.sbms_user.com_image
+        WHERE cfilename = #{fileName}
+    </select>
+
+    <select  id="getAttachFileByFleid" parameterType="com.anylogic.ssystem.common.file.model.AttachFileVO" resultMap="attachFileInfoMap">
+        SELECT
+        docid
+        , fleid
+        , sfilename
+        , fleurl
+        , gubun
+        , flettl
+        , flesize
+        , fleorder
+        , flepath
+        FROM sbms.sbms_user.bms_dct_file
+        WHERE fleid = #{fleid}
+    </select>
+
+
+    <select  id="selectAttachFileByRecord" parameterType="com.anylogic.ssystem.common.file.model.AttachFileVO" resultMap="attachFileInfoMap">
+        SELECT
+            docid
+            , fleid
+            , sfilename
+            , fleurl
+            , gubun
+            , flettl
+            , flesize
+            , fleorder
+            , flepath
+            , inid
+        FROM sbms.sbms_user.bms_dct_file
+        WHERE 1=1
+          and docid = #{docid}
+        <if test="gubun != null and gubun !=''">
+            and gubun = #{gubun}
+        </if>
+        <if test="inid != null and inid !=''">
+            and inid = #{inid}
+        </if>
+    </select>
+    
+
+    <!--  첨부파일 - getAttachFile -->
+    <select id="getAttachFile" parameterType="com.anylogic.ssystem.common.file.model.AttachFileVO" resultMap="attachFileInfoMap">
+        SELECT
+            docid
+            , fleid
+            , sfilename
+            , fleurl
+            , gubun
+            , flettl
+            , flesize
+            , fleorder
+            , flepath
+        FROM sbms.sbms_user.bms_dct_file
+        WHERE 1=1
+            and docid = #{docid}
+            and fleid = #{fleid}
+    </select>
+    
+
+    <!--  첨부파일 - insertAttachFile -->
+    <insert id="insertAttachFile" parameterType="com.anylogic.ssystem.common.file.model.AttachFileVO">
+        INSERT INTO
+        sbms.sbms_user.bms_dct_file (
+            docid
+            ,gubun
+            ,indt
+            ,inid
+            ,origubun
+            ,oridocid
+            ,isviewtype
+            , fleid
+            , sfilename
+            , fleurl
+            , flepath
+            , flettl
+            , flesize
+            , fleorder
+        )
+        VALUES(
+            #{docid}
+            , #{gubun}
+            , #{indt}
+            , #{inid}
+            , #{origubun}
+            , #{oridocid}
+            , #{isviewtype}
+            , #{fleid}
+            , #{sfilename}
+            , #{fleurl}
+            , #{flepath}
+            , #{flettl}
+            , #{flesize}
+            , #{fleorder}
+        )
+    </insert>
+
+    <!--  시행용(사본) 첨부파일 - insertCommFile -->
+    <insert id="insertCommFile" parameterType="com.anylogic.ssystem.common.file.model.CommFileVO">
+        INSERT INTO sbms_user.bms_dct_comm_file (
+            docid
+            , docgubun
+            , fileid
+            , fileseq
+            , sfilename
+            , filegubun
+            , filewidth
+            , fileheight
+            , filetitle
+            , filesize
+            , indt
+            , inid
+            , markflag
+            , origubun
+            , oridocid
+            , isviewtype
+        )
+        VALUES (
+            #{docid}
+            , #{docgubun}
+            , #{fileid}
+            , #{fileseq}
+            , #{sfilename}
+            , #{filegubun}
+            , #{filewidth}
+            , #{fileheight}
+            , #{filetitle}
+            , #{filesize}
+            , #{indt}
+            , #{inid}
+            , #{markflag}
+            , #{origubun}
+            , #{oridocid}
+            , #{isviewtype}
+        )
+    </insert>
+
+
+
+    <!--  첨부파일 - updateAttachFile -->
+    <update id="updateAttachFile" parameterType="com.anylogic.ssystem.common.file.model.AttachFileVO">
+        UPDATE sbms.sbms_user.bms_dct_file
+        <trim prefix="SET" suffixOverrides=",">
+            , sfilename = #{sfilename}
+            , fleurl = #{fleurl}
+            , gubun = #{gubun}
+            , flettl = #{flettl}
+            , flesize = #{flesize}
+            , fleorder = #{fleorder}
+            , flepath = #{flepath}
+        </trim>
+        WHERE docid = #{docid}
+          and fleid = #{fleid}
+    </update>
+
+    <!--  첨부파일 - updateAttachFilePath -->
+    <update id="updateAttachFilePath" parameterType="com.anylogic.ssystem.common.file.model.AttachFileVO">
+        UPDATE sbms.sbms_user.bms_dct_file
+            SET flepath = #{flepath}
+        WHERE fleid = #{fleid}
+    </update>
+
+
+<!--    <update id="deleteAttachFileDelYN" parameterType="com.anylogic.ssystem.common.file.model.AttachFileVO">-->
+<!--        UPDATE sbms.sbms_user.tb_attach_file-->
+<!--        SET-->
+<!--        del_yn = #{delYn}-->
+<!--        WHERE attach_file_id = #{attachFileId}-->
+<!--    </update>-->
+
+    <delete id="deleteAttachFileByFleid" parameterType="com.anylogic.ssystem.common.file.model.AttachFileVO">
+        DELETE FROM sbms.sbms_user.bms_dct_file
+        WHERE fleid = #{fleid}
+    </delete>
+
+    <delete id="deleteAttachFile" parameterType="com.anylogic.ssystem.common.file.model.AttachFileVO">
+        DELETE FROM sbms.sbms_user.bms_dct_file
+        WHERE docid = #{docid}
+          and fleid = #{fleid}
+    </delete>
+
+
+    <!--  첨부파일 - deleteAttachFileByFileInfo -->
+    <delete id="deleteAttachFileByRecord" parameterType="com.anylogic.ssystem.common.file.model.AttachFileVO">
+        DELETE FROM sbms.sbms_user.bms_dct_file
+        WHERE 1 = 1
+          and docid = #{docid}
+    </delete>
+
+
+</mapper>
+

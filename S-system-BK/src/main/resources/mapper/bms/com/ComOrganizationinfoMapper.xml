@@ -1,0 +1,960 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.anylogic.ssystem.bms.com.mapper.ComOrganizationinfoMapper">
+
+    <resultMap id="selectOrganizationListMap" type="com.anylogic.ssystem.bms.com.model.SelectOrganizationListResVO">
+        <id column="orgid" property="orgid" />                        <!-- 조직 ID -->
+        <result column="orgname" property="orgname" />                <!-- 조직 이름 -->
+        <result column="parentorgid" property="parentorgid" />        <!-- 상위조직 ID -->
+        <result column="orgtype" property="orgtype" />                <!-- 조직유형 -->
+        <result column="orgorder" property="orgorder" />              <!-- 조직순서 -->
+        <result column="toporgid" property="toporgid" />              <!-- 최상위조직 ID -->
+        <result column="displayname" property="displayname" />        <!-- 화면표시이름 -->
+        <result column="descriptionid" property="descriptionid" />    <!-- 설명 ID -->
+        <result column="whencreated" property="whencreated" />        <!-- 생성일 -->
+        <result column="whendeleted" property="whendeleted" />        <!-- 폐지일 -->
+        <result column="isdeleted" property="isdeleted" />            <!-- 존폐여부 -->
+        <result column="chiefid" property="chiefid" />                <!-- 기관장 ID -->
+        <result column="chiefposition" property="chiefposition" />    <!-- 기관장 직위 -->
+        <result column="suborgtype" property="suborgtype" />          <!-- 하부소속기관유형 -->
+        <result column="orgkind" property="orgkind" />                <!-- 조직종류 -->
+        <result column="relaytype" property="relaytype" />            <!-- 유통망 종류 -->
+        <result column="inid" property="inid" />                      <!-- 등록자 ID -->
+        <result column="indt" property="indt" />                      <!-- 등록일 -->
+        <result column="upid" property="upid" />                      <!-- 수정자 ID -->
+        <result column="updt" property="updt" />                      <!-- 수정일 -->
+        <result column="docdeptid" property="docdeptid" />            <!-- 문서부서 ID -->
+        <result column="presedeptid" property="presedeptid" />        <!-- 존안지원부서 ID -->
+        <result column="transdeptid" property="transdeptid" />        <!-- 이관관리부서 ID -->
+        <result column="orgdepth" property="orgdepth" />              <!-- 부서 수준 -->
+        <result column="docsysteminfo" property="docsysteminfo" />    <!-- 전자문서시스템 -->
+        <result column="readtype" property="readtype" />              <!-- 오프라인 열람여부 -->
+        <result column="belonguserid" property="belonguserid" />      <!-- 장비관리자 ID -->
+    </resultMap>
+
+    <resultMap id="getOrganizationDetailMap" type="com.anylogic.ssystem.bms.com.model.GetOrganizationDetailResVO">
+        <id column="orgid" property="orgid" />                        <!-- 조직 ID -->
+        <result column="orgname" property="orgname" />                <!-- 조직 이름 -->
+        <result column="parentorgid" property="parentorgid" />        <!-- 상위조직 ID -->
+        <result column="orgtype" property="orgtype" />                <!-- 조직유형 -->
+        <result column="orgorder" property="orgorder" />              <!-- 조직순서 -->
+        <result column="toporgid" property="toporgid" />              <!-- 최상위조직 ID -->
+        <result column="displayname" property="displayname" />        <!-- 화면표시이름 -->
+        <result column="descriptionid" property="descriptionid" />    <!-- 설명 ID -->
+        <result column="whencreated" property="whencreated" />        <!-- 생성일 -->
+        <result column="whendeleted" property="whendeleted" />        <!-- 폐지일 -->
+        <result column="isdeleted" property="isdeleted" />            <!-- 존폐여부 -->
+        <result column="chiefid" property="chiefid" />                <!-- 기관장 ID -->
+        <result column="chiefposition" property="chiefposition" />    <!-- 기관장 직위 -->
+        <result column="suborgtype" property="suborgtype" />          <!-- 하부소속기관유형 -->
+        <result column="orgkind" property="orgkind" />                <!-- 조직종류 -->
+        <result column="relaytype" property="relaytype" />            <!-- 유통망 종류 -->
+        <result column="inid" property="inid" />                      <!-- 등록자 ID -->
+        <result column="indt" property="indt" />                      <!-- 등록일 -->
+        <result column="upid" property="upid" />                      <!-- 수정자 ID -->
+        <result column="updt" property="updt" />                      <!-- 수정일 -->
+        <result column="docdeptid" property="docdeptid" />            <!-- 문서부서 ID -->
+        <result column="presedeptid" property="presedeptid" />        <!-- 존안지원부서 ID -->
+        <result column="transdeptid" property="transdeptid" />        <!-- 이관관리부서 ID -->
+        <result column="orgdepth" property="orgdepth" />              <!-- 부서 수준 -->
+        <result column="docsysteminfo" property="docsysteminfo" />    <!-- 전자문서시스템 -->
+        <result column="readtype" property="readtype" />              <!-- 오프라인 열람여부 -->
+        <result column="belonguserid" property="belonguserid" />      <!-- 장비관리자 ID -->
+        <result column="description" property="description" />        <!-- 설명 -->
+        <result column="homepage" property="homepage" />              <!-- 홈페이지 -->
+        <result column="zipcode" property="zipcode" />                <!-- 우편번호 -->
+        <result column="address" property="address" />                <!-- 주소정보 -->
+        <result column="addressdetail" property="addressdetail" />    <!-- 주소상세 -->
+        <result column="telephone" property="telephone" />            <!-- 전화번호 -->
+        <result column="fax" property="fax" />                        <!-- FAX -->
+        <result column="username" property="username" />              <!-- 사용자 이름 -->
+    </resultMap>
+
+    <resultMap id="selectSignListMap" type="com.anylogic.ssystem.bms.com.model.SelectSignListResVO">
+        <id column="orgid" property="orgid" />                        <!-- 조직 ID -->
+        <result column="orgname" property="orgname" />                <!-- 조직 이름 -->
+        <result column="parentorgid" property="parentorgid" />        <!-- 상위조직 ID -->
+        <result column="orgtype" property="orgtype" />                <!-- 조직유형 -->
+        <result column="orgorder" property="orgorder" />              <!-- 조직순서 -->
+        <result column="toporgid" property="toporgid" />              <!-- 최상위조직 ID -->
+        <result column="displayname" property="displayname" />        <!-- 화면표시이름 -->
+        <result column="descriptionid" property="descriptionid" />    <!-- 설명 ID -->
+        <result column="whencreated" property="whencreated" />        <!-- 생성일 -->
+        <result column="whendeleted" property="whendeleted" />        <!-- 폐지일 -->
+        <result column="isdeleted" property="isdeleted" />            <!-- 존폐여부 -->
+        <result column="chiefid" property="chiefid" />                <!-- 기관장 ID -->
+        <result column="chiefposition" property="chiefposition" />    <!-- 기관장 직위 -->
+        <result column="suborgtype" property="suborgtype" />          <!-- 하부소속기관유형 -->
+        <result column="orgkind" property="orgkind" />                <!-- 조직종류 -->
+        <result column="relaytype" property="relaytype" />            <!-- 유통망 종류 -->
+        <result column="inid" property="inid" />                      <!-- 등록자 ID -->
+        <result column="indt" property="indt" />                      <!-- 등록일 -->
+        <result column="upid" property="upid" />                      <!-- 수정자 ID -->
+        <result column="updt" property="updt" />                      <!-- 수정일 -->
+        <result column="docdeptid" property="docdeptid" />            <!-- 문서부서 ID -->
+        <result column="presedeptid" property="presedeptid" />        <!-- 존안지원부서 ID -->
+        <result column="transdeptid" property="transdeptid" />        <!-- 이관관리부서 ID -->
+        <result column="orgdepth" property="orgdepth" />              <!-- 부서 수준 -->
+        <result column="docsysteminfo" property="docsysteminfo" />    <!-- 전자문서시스템 -->
+        <result column="readtype" property="readtype" />              <!-- 오프라인 열람여부 -->
+        <result column="belonguserid" property="belonguserid" />      <!-- 장비관리자 ID -->
+        <result column="seq" property="seq" />                        <!-- 일련번호 -->
+        <result column="managegubun" property="managegubun" />        <!-- 관리구분 -->
+        <result column="fileid" property="fileid" />                  <!-- 파일 ID -->
+        <result column="etc" property="etc" />                        <!-- 비고 -->
+        <result column="isuse" property="isuse" />                    <!-- 사용여부 -->
+        <result column="isdefault" property="isdefault" />            <!-- 기본여부 -->
+        <result column="username" property="username" />              <!-- 등록자명 -->
+    </resultMap>
+
+    <resultMap id="getSignDetailMap" type="com.anylogic.ssystem.bms.com.model.GetSignDetailResVO">
+        <id column="orgid" property="orgid" />                        <!-- 조직 ID -->
+        <result column="orgname" property="orgname" />                <!-- 조직 이름 -->
+        <result column="parentorgid" property="parentorgid" />        <!-- 상위조직 ID -->
+        <result column="orgtype" property="orgtype" />                <!-- 조직유형 -->
+        <result column="orgorder" property="orgorder" />              <!-- 조직순서 -->
+        <result column="toporgid" property="toporgid" />              <!-- 최상위조직 ID -->
+        <result column="displayname" property="displayname" />        <!-- 화면표시이름 -->
+        <result column="descriptionid" property="descriptionid" />    <!-- 설명 ID -->
+        <result column="whencreated" property="whencreated" />        <!-- 생성일 -->
+        <result column="whendeleted" property="whendeleted" />        <!-- 폐지일 -->
+        <result column="isdeleted" property="isdeleted" />            <!-- 존폐여부 -->
+        <result column="chiefid" property="chiefid" />                <!-- 기관장 ID -->
+        <result column="chiefposition" property="chiefposition" />    <!-- 기관장 직위 -->
+        <result column="suborgtype" property="suborgtype" />          <!-- 하부소속기관유형 -->
+        <result column="orgkind" property="orgkind" />                <!-- 조직종류 -->
+        <result column="relaytype" property="relaytype" />            <!-- 유통망 종류 -->
+        <result column="inid" property="inid" />                      <!-- 등록자 ID -->
+        <result column="indt" property="indt" />                      <!-- 등록일 -->
+        <result column="upid" property="upid" />                      <!-- 수정자 ID -->
+        <result column="updt" property="updt" />                      <!-- 수정일 -->
+        <result column="docdeptid" property="docdeptid" />            <!-- 문서부서 ID -->
+        <result column="presedeptid" property="presedeptid" />        <!-- 존안지원부서 ID -->
+        <result column="transdeptid" property="transdeptid" />        <!-- 이관관리부서 ID -->
+        <result column="orgdepth" property="orgdepth" />              <!-- 부서 수준 -->
+        <result column="docsysteminfo" property="docsysteminfo" />    <!-- 전자문서시스템 -->
+        <result column="readtype" property="readtype" />              <!-- 오프라인 열람여부 -->
+        <result column="belonguserid" property="belonguserid" />      <!-- 장비관리자 ID -->
+        <result column="seq" property="seq" />                        <!-- 문서부서 ID -->
+        <result column="managegubun" property="managegubun" />        <!-- 존안지원부서 ID -->
+        <result column="fileid" property="fileid" />                  <!-- 이관관리부서 ID -->
+        <result column="etc" property="etc" />                        <!-- 부서 수준 -->
+        <result column="isuse" property="isuse" />                    <!-- 전자문서시스템 -->
+        <result column="isdefault" property="isdefault" />            <!-- 오프라인 열람여부 -->
+        <result column="cfilename" property="cfilename" />            <!-- 파일이름 -->
+        <result column="sfilename" property="sfilename" />            <!-- 파일고유이름 -->
+        <result column="filesize" property="filesize" />              <!-- 파일크기 -->
+        <result column="saveid" property="saveid" />                  <!-- 저장아이디 -->
+        <result column="filewidth" property="filewidth" />            <!-- 파일WIDTH -->
+        <result column="fileheight" property="fileheight" />          <!-- 파일HEIGHT -->
+        <result column="username" property="username" />              <!-- 장비관리자 ID -->
+    </resultMap>
+
+    <resultMap id="getSignDetailSelectFileMap" type="com.anylogic.ssystem.bms.com.model.GetSignDetailSelectFileResVO">
+        <id column="fileid" property="fileid" />                      <!-- 파일 ID -->
+        <result column="cfilename" property="cfilename" />            <!-- 파일이름 -->
+        <result column="sfilename" property="sfilename" />            <!-- 파일 고유이름 -->
+        <result column="filesize" property="filesize" />              <!-- 파일크기 -->
+        <result column="saveid" property="saveid" />                  <!-- 저장아이디 -->
+        <result column="filewidth" property="filewidth" />            <!-- 파일WIDTH -->
+        <result column="fileheight" property="fileheight" />          <!-- 파일HEIGHT -->
+        <result column="inid" property="inid" />                      <!-- 등록자 ID -->
+        <result column="indt" property="indt" />                      <!-- 등록일시 -->
+        <result column="upid" property="upid" />                      <!-- 수정자 ID -->
+        <result column="updt" property="updt" />                      <!-- 수정일시 -->
+        <result column="fileurl" property="fileurl" />                <!-- 파일 URL -->
+        <result column="filepath" property="filepath" />              <!-- 파일경로 -->
+    </resultMap>
+
+    <resultMap id="selectLogoListMap" type="com.anylogic.ssystem.bms.com.model.SelectLogoListResVO">
+        <id column="orgid" property="orgid" />                        <!-- 조직 ID -->
+        <result column="orgname" property="orgname" />                <!-- 조직 이름 -->
+        <result column="parentorgid" property="parentorgid" />        <!-- 상위조직 ID -->
+        <result column="orgtype" property="orgtype" />                <!-- 조직유형 -->
+        <result column="orgorder" property="orgorder" />              <!-- 조직순서 -->
+        <result column="toporgid" property="toporgid" />              <!-- 최상위조직 ID -->
+        <result column="displayname" property="displayname" />        <!-- 화면표시이름 -->
+        <result column="descriptionid" property="descriptionid" />    <!-- 설명 ID -->
+        <result column="whencreated" property="whencreated" />        <!-- 생성일 -->
+        <result column="whendeleted" property="whendeleted" />        <!-- 폐지일 -->
+        <result column="isdeleted" property="isdeleted" />            <!-- 존폐여부 -->
+        <result column="chiefid" property="chiefid" />                <!-- 기관장 ID -->
+        <result column="chiefposition" property="chiefposition" />    <!-- 기관장 직위 -->
+        <result column="suborgtype" property="suborgtype" />          <!-- 하부소속기관유형 -->
+        <result column="orgkind" property="orgkind" />                <!-- 조직종류 -->
+        <result column="relaytype" property="relaytype" />            <!-- 유통망 종류 -->
+        <result column="inid" property="inid" />                      <!-- 등록자 ID -->
+        <result column="indt" property="indt" />                      <!-- 등록일 -->
+        <result column="upid" property="upid" />                      <!-- 수정자 ID -->
+        <result column="updt" property="updt" />                      <!-- 수정일 -->
+        <result column="docdeptid" property="docdeptid" />            <!-- 문서부서 ID -->
+        <result column="presedeptid" property="presedeptid" />        <!-- 존안지원부서 ID -->
+        <result column="transdeptid" property="transdeptid" />        <!-- 이관관리부서 ID -->
+        <result column="orgdepth" property="orgdepth" />              <!-- 부서 수준 -->
+        <result column="docsysteminfo" property="docsysteminfo" />    <!-- 전자문서시스템 -->
+        <result column="readtype" property="readtype" />              <!-- 오프라인 열람여부 -->
+        <result column="belonguserid" property="belonguserid" />      <!-- 장비관리자 ID -->
+        <result column="seq" property="seq" />                        <!-- 문서부서 ID -->
+        <result column="managegubun" property="managegubun" />        <!-- 존안지원부서 ID -->
+        <result column="fileid" property="fileid" />                  <!-- 이관관리부서 ID -->
+        <result column="etc" property="etc" />                        <!-- 부서 수준 -->
+        <result column="isuse" property="isuse" />                    <!-- 전자문서시스템 -->
+        <result column="isdefault" property="isdefault" />            <!-- 오프라인 열람여부 -->
+        <result column="username" property="username" />              <!-- 장비관리자 ID -->
+    </resultMap>
+
+    <resultMap id="getLogoDetailMap" type="com.anylogic.ssystem.bms.com.model.GetLogoDetailResVO">
+        <id column="orgid" property="orgid" />                        <!-- 조직 ID -->
+        <result column="orgname" property="orgname" />                <!-- 조직 이름 -->
+        <result column="parentorgid" property="parentorgid" />        <!-- 상위조직 ID -->
+        <result column="orgtype" property="orgtype" />                <!-- 조직유형 -->
+        <result column="orgorder" property="orgorder" />              <!-- 조직순서 -->
+        <result column="toporgid" property="toporgid" />              <!-- 최상위조직 ID -->
+        <result column="displayname" property="displayname" />        <!-- 화면표시이름 -->
+        <result column="descriptionid" property="descriptionid" />    <!-- 설명 ID -->
+        <result column="whencreated" property="whencreated" />        <!-- 생성일 -->
+        <result column="whendeleted" property="whendeleted" />        <!-- 폐지일 -->
+        <result column="isdeleted" property="isdeleted" />            <!-- 존폐여부 -->
+        <result column="chiefid" property="chiefid" />                <!-- 기관장 ID -->
+        <result column="chiefposition" property="chiefposition" />    <!-- 기관장 직위 -->
+        <result column="suborgtype" property="suborgtype" />          <!-- 하부소속기관유형 -->
+        <result column="orgkind" property="orgkind" />                <!-- 조직종류 -->
+        <result column="relaytype" property="relaytype" />            <!-- 유통망 종류 -->
+        <result column="inid" property="inid" />                      <!-- 등록자 ID -->
+        <result column="indt" property="indt" />                      <!-- 등록일 -->
+        <result column="upid" property="upid" />                      <!-- 수정자 ID -->
+        <result column="updt" property="updt" />                      <!-- 수정일 -->
+        <result column="docdeptid" property="docdeptid" />            <!-- 문서부서 ID -->
+        <result column="presedeptid" property="presedeptid" />        <!-- 존안지원부서 ID -->
+        <result column="transdeptid" property="transdeptid" />        <!-- 이관관리부서 ID -->
+        <result column="orgdepth" property="orgdepth" />              <!-- 부서 수준 -->
+        <result column="docsysteminfo" property="docsysteminfo" />    <!-- 전자문서시스템 -->
+        <result column="readtype" property="readtype" />              <!-- 오프라인 열람여부 -->
+        <result column="belonguserid" property="belonguserid" />      <!-- 장비관리자 ID -->
+        <result column="seq" property="seq" />                        <!-- 문서부서 ID -->
+        <result column="managegubun" property="managegubun" />        <!-- 존안지원부서 ID -->
+        <result column="fileid" property="fileid" />                  <!-- 이관관리부서 ID -->
+        <result column="etc" property="etc" />                        <!-- 부서 수준 -->
+        <result column="isuse" property="isuse" />                    <!-- 전자문서시스템 -->
+        <result column="isdefault" property="isdefault" />            <!-- 오프라인 열람여부 -->
+        <result column="cfilename" property="cfilename" />            <!-- 파일이름 -->
+        <result column="sfilename" property="sfilename" />            <!-- 파일고유이름 -->
+        <result column="filesize" property="filesize" />              <!-- 파일크기 -->
+        <result column="saveid" property="saveid" />                  <!-- 저장아이디 -->
+        <result column="filewidth" property="filewidth" />            <!-- 파일WIDTH -->
+        <result column="fileheight" property="fileheight" />          <!-- 파일HEIGHT -->
+        <result column="username" property="username" />              <!-- 장비관리자 ID -->
+    </resultMap>
+
+    <resultMap id="getLogoDetailSelectFileMap" type="com.anylogic.ssystem.bms.com.model.GetLogoDetailSelectFileResVO">
+        <id column="fileid" property="fileid" />                      <!-- 파일 ID -->
+        <result column="cfilename" property="cfilename" />            <!-- 파일이름 -->
+        <result column="sfilename" property="sfilename" />            <!-- 파일 고유이름 -->
+        <result column="filesize" property="filesize" />              <!-- 파일크기 -->
+        <result column="saveid" property="saveid" />                  <!-- 저장아이디 -->
+        <result column="filewidth" property="filewidth" />            <!-- 파일WIDTH -->
+        <result column="fileheight" property="fileheight" />          <!-- 파일HEIGHT -->
+        <result column="inid" property="inid" />                      <!-- 등록자 ID -->
+        <result column="indt" property="indt" />                      <!-- 등록일시 -->
+        <result column="upid" property="upid" />                      <!-- 수정자 ID -->
+        <result column="updt" property="updt" />                      <!-- 수정일시 -->
+        <result column="fileurl" property="fileurl" />                <!-- 파일 URL -->
+        <result column="filepath" property="filepath" />              <!-- 파일경로 -->
+    </resultMap>
+
+    <!--  LDAP 연동된 부서 삭제 -->
+    <delete id="deleteLDAPDept">
+        DELETE FROM sbms.sbms_user.com_organizationinfo
+        WHERE orgtype = '1'
+    </delete>
+
+    <!--  LDAP 부서 등록 전 중복 체크 -->
+    <select id="checkLDAPDeptid" parameterType="java.util.Map" resultType="int">
+        SELECT count(*) FROM sbms.sbms_user.com_organizationinfo
+        WHERE orgtype = '1' AND orgid = #{orgid}
+    </select>
+
+    <!-- ============================================== 부서관리  ============================================== -->
+
+    <!-- 부서 정보 TREE 조회 -->
+    <select id="selectOrganizationList" parameterType="com.anylogic.ssystem.bms.com.model.SelectOrganizationListReqVO" resultMap="selectOrganizationListMap">
+        SELECT
+            orgid as "orgid" 
+            , orgname as "orgname" 
+            , parentorgid as "parentorgid" 
+            , orgtype as "orgtype" 
+            , orgorder as "orgorder" 
+            , toporgid as "toporgid" 
+            , displayname as "displayname" 
+            , descriptionid as "descriptionid" 
+            , whencreated as "whencreated" 
+            , whendeleted as "whendeleted" 
+            , isdeleted as "isdeleted" 
+            , chiefid as "chiefid" 
+            , chiefposition as "chiefposition" 
+            , suborgtype as "suborgtype" 
+            , orgkind as "orgkind" 
+            , relaytype as "relaytype" 
+            , inid as "inid" 
+            , indt as "indt" 
+            , upid as "upid" 
+            , updt as "updt" 
+            , docdeptid as "docdeptid" 
+            , presedeptid as "presedeptid" 
+            , transdeptid as "transdeptid" 
+            , orgdepth as "orgdepth" 
+            , docsysteminfo as "docsysteminfo" 
+            , readtype as "readtype" 
+            , belonguserid as "belonguserid" 
+        FROM  sbms.sbms_user.com_organizationinfo
+        WHERE orgtype IS NULL
+            <if test="orgid != null and orgid !=''"> 
+                and orgid like CONCAT('%', #{orgid}, '%')
+            </if>
+            <if test="orgname != null and orgname !=''"> 
+                and orgname like CONCAT('%', #{orgname}, '%') 
+            </if>
+            <if test="orgdepth != null and orgdepth !=''">
+                and orgdepth = #{orgdepth}
+            </if>
+            <if test="toporgid != null and toporgid !=''">
+                and toporgid = #{toporgid}
+            </if>
+            ORDER BY orgid ASC
+    </select>
+
+    <!-- 조직관리 > 부서/사용자관리 > 부서 삭제 -->
+    <delete id="deleteOrganizationBIA" parameterType="com.anylogic.ssystem.bms.com.model.DeleteOrganizationBIAReqVO">
+        DELETE FROM sbms.sbms_user.com_organizationinfo
+        WHERE 1 = 1
+            and orgid = #{orgid}
+    </delete>
+
+    <!-- 조직관리 > 부서/사용자관리 > 부서 상세 조회 -->
+    <select id="getOrganizationDetail" parameterType="com.anylogic.ssystem.bms.com.model.GetOrganizationDetailReqVO" resultMap="getOrganizationDetailMap">
+        SELECT
+            A.orgid as "orgid" 
+            , A.orgname as "orgname" 
+            , A.parentorgid as "parentorgid" 
+            , A.orgtype as "orgtype" 
+            , A.orgorder as "orgorder" 
+            , A.toporgid as "toporgid" 
+            , A.displayname as "displayname" 
+            , A.descriptionid as "descriptionid" 
+            , A.whencreated as "whencreated" 
+            , A.whendeleted as "whendeleted" 
+            , A.isdeleted as "isdeleted" 
+            , A.chiefid as "chiefid" 
+            , A.chiefposition as "chiefposition" 
+            , A.suborgtype as "suborgtype" 
+            , A.orgkind as "orgkind" 
+            , A.relaytype as "relaytype" 
+            , A.inid as "inid" 
+            , A.indt as "indt" 
+            , A.upid as "upid" 
+            , A.updt as "updt" 
+            , A.docdeptid as "docdeptid" 
+            , A.presedeptid as "presedeptid" 
+            , A.transdeptid as "transdeptid" 
+            , A.orgdepth as "orgdepth" 
+            , A.docsysteminfo as "docsysteminfo" 
+            , A.readtype as "readtype" 
+            , A.belonguserid as "belonguserid"
+            , B.description as "description" 
+            , B.homepage as "homepage" 
+            , B.zipcode as "zipcode" 
+            , B.address as "address" 
+            , B.addressdetail as "addressdetail" 
+            , B.telephone as "telephone" 
+            , B.fax as "fax"
+            , C.username as "username"
+        FROM  sbms.sbms_user.com_organizationinfo  A
+            LEFT OUTER JOIN  sbms.sbms_user.com_org_detail  B
+                ON ( A.orgid  =  B.orgid  )
+            LEFT OUTER JOIN  sbms.sbms_user.com_userinfo  C
+                ON ( A.chiefid  =  C.userid  )
+        WHERE 1 = 1
+            <if test="orgid != null and orgid !=''"> 
+                and A.orgid = #{orgid}
+            </if>
+            <if test="orgname != null and orgname !=''">
+                and A.orgname = #{orgname}
+            </if>
+
+    </select>
+
+    <!-- 조직관리 > 부서/사용자관리 > 부서 등록 -->
+    <insert id="insertOrganizationBIA" parameterType="com.anylogic.ssystem.bms.com.model.InsertOrganizationBIAReqVO">
+        INSERT INTO
+        sbms.sbms_user.com_organizationinfo(
+            <trim suffixOverrides=",">
+            <if test="orgid != null and orgid !=''">
+                orgid,
+            </if>
+            <if test="orgname != null and orgname !=''">
+                orgname,
+            </if>
+            <if test="parentorgid != null and parentorgid !=''">
+                parentorgid,
+            </if>
+            <if test="orgtype != null and orgtype !=''">
+                orgtype,
+            </if>
+            <if test="orgorder != null and orgorder !=''">
+                orgorder,
+            </if>
+            <if test="toporgid != null and toporgid !=''">
+                toporgid,
+            </if>
+            <if test="displayname != null and displayname !=''">
+                displayname,
+            </if>
+            <if test="descriptionid != null and descriptionid !=''">
+                descriptionid,
+            </if>
+            <if test="whencreated != null and whencreated !=''">
+                whencreated,
+            </if>
+            <if test="whendeleted != null and whendeleted !=''">
+                whendeleted,
+            </if>
+            <if test="isdeleted != null and isdeleted !=''">
+                isdeleted,
+            </if>
+            <if test="chiefid != null and chiefid !=''">
+                chiefid,
+            </if>
+            <if test="chiefposition != null and chiefposition !=''">
+                chiefposition,
+            </if>
+            <if test="suborgtype != null and suborgtype !=''">
+                suborgtype,
+            </if>
+            <if test="orgkind != null and orgkind !=''">
+                orgkind,
+            </if>
+            <if test="relaytype != null and relaytype !=''">
+                relaytype,
+            </if>
+            <if test="inid != null and inid !=''">
+                inid,
+            </if>
+            <if test="indt != null and indt !=''">
+                indt,
+            </if>
+            <if test="upid != null and upid !=''">
+                upid,
+            </if>
+            <if test="updt != null and updt !=''">
+                updt,
+            </if>
+            <if test="docdeptid != null and docdeptid !=''">
+                docdeptid,
+            </if>
+            <if test="presedeptid != null and presedeptid !=''">
+                presedeptid,
+            </if>
+            <if test="transdeptid != null and transdeptid !=''">
+                transdeptid,
+            </if>
+            <if test="orgdepth != null and orgdepth !=''">
+                orgdepth,
+            </if>
+            <if test="docsysteminfo != null and docsysteminfo !=''">
+                docsysteminfo,
+            </if>
+            <if test="readtype != null and readtype !=''">
+                readtype,
+            </if>
+            <if test="belonguserid != null and belonguserid !=''">
+                belonguserid,
+            </if>
+            </trim>
+        )
+        VALUES(
+            <trim suffixOverrides=",">
+            <if test="orgid != null and orgid !=''">
+                #{orgid},
+            </if>
+            <if test="orgname != null and orgname !=''">
+                #{orgname},
+            </if>
+            <if test="parentorgid != null and parentorgid !=''">
+                #{parentorgid},
+            </if>
+            <if test="orgtype != null and orgtype !=''">
+                #{orgtype},
+            </if>
+            <if test="orgorder != null and orgorder !=''">
+                #{orgorder},
+            </if>
+            <if test="toporgid != null and toporgid !=''">
+                #{toporgid},
+            </if>
+            <if test="displayname != null and displayname !=''">
+                #{displayname},
+            </if>
+            <if test="descriptionid != null and descriptionid !=''">
+                #{descriptionid},
+            </if>
+            <if test="whencreated != null and whencreated !=''">
+                #{whencreated},
+            </if>
+            <if test="whendeleted != null and whendeleted !=''">
+                #{whendeleted},
+            </if>
+            <if test="isdeleted != null and isdeleted !=''">
+                #{isdeleted},
+            </if>
+            <if test="chiefid != null and chiefid !=''">
+                #{chiefid},
+            </if>
+            <if test="chiefposition != null and chiefposition !=''">
+                #{chiefposition},
+            </if>
+            <if test="suborgtype != null and suborgtype !=''">
+                #{suborgtype},
+            </if>
+            <if test="orgkind != null and orgkind !=''">
+                #{orgkind},
+            </if>
+            <if test="relaytype != null and relaytype !=''">
+                #{relaytype},
+            </if>
+            <if test="inid != null and inid !=''">
+                #{inid},
+            </if>
+            <if test="indt != null and indt !=''">
+                #{indt},
+            </if>
+            <if test="upid != null and upid !=''">
+                #{upid},
+            </if>
+            <if test="updt != null and updt !=''">
+                #{updt},
+            </if>
+            <if test="docdeptid != null and docdeptid !=''">
+                #{docdeptid},
+            </if>
+            <if test="presedeptid != null and presedeptid !=''">
+                #{presedeptid},
+            </if>
+            <if test="transdeptid != null and transdeptid !=''">
+                #{transdeptid},
+            </if>
+            <if test="orgdepth != null and orgdepth !=''">
+                #{orgdepth},
+            </if>
+            <if test="docsysteminfo != null and docsysteminfo !=''">
+                #{docsysteminfo},
+            </if>
+            <if test="readtype != null and readtype !=''">
+                #{readtype},
+            </if>
+            <if test="belonguserid != null and belonguserid !=''">
+                #{belonguserid},
+            </if>
+            </trim>
+        )
+    </insert>
+
+    <!-- 조직관리 > 부서/사용자관리 > 부서 수정 -->
+    <update id="updateOrganizationBIA" parameterType="com.anylogic.ssystem.bms.com.model.UpdateOrganizationBIAReqVO">
+        UPDATE sbms.sbms_user.com_organizationinfo
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="orgname != null and orgname !=''">
+                orgname = #{orgname},
+            </if>
+            <if test="parentorgid != null and parentorgid !=''">
+                parentorgid = #{parentorgid},
+            </if>
+            <if test="orgtype != null and orgtype !=''">
+                orgtype = #{orgtype},
+            </if>
+            <if test="orgorder != null">
+                orgorder = #{orgorder},
+            </if>
+            <if test="toporgid != null and toporgid !=''">
+                toporgid = #{toporgid},
+            </if>
+            <if test="displayname != null and displayname !=''">
+                displayname = #{displayname},
+            </if>
+            <if test="descriptionid != null and descriptionid !=''">
+                descriptionid = #{descriptionid},
+            </if>
+            <if test="whencreated != null and whencreated !=''">
+                whencreated = #{whencreated},
+            </if>
+            <if test="whendeleted != null and whendeleted !=''">
+                whendeleted = #{whendeleted},
+            </if>
+            <if test="isdeleted != null and isdeleted !=''">
+                isdeleted = #{isdeleted},
+            </if>
+            <if test="chiefid != null and chiefid !=''">
+                chiefid = #{chiefid},
+            </if>
+            <if test="chiefposition != null and chiefposition !=''">
+                chiefposition = #{chiefposition},
+            </if>
+            <if test="suborgtype != null and suborgtype !=''">
+                suborgtype = #{suborgtype},
+            </if>
+            <if test="orgkind != null and orgkind !=''">
+                orgkind = #{orgkind},
+            </if>
+            <if test="relaytype != null and relaytype !=''">
+                relaytype = #{relaytype},
+            </if>
+            <if test="inid != null and inid !=''">
+                inid = #{inid},
+            </if>
+            <if test="indt != null and indt !=''">
+                indt = #{indt},
+            </if>
+            <if test="upid != null and upid !=''">
+                upid = #{upid},
+            </if>
+            <if test="updt != null and updt !=''">
+                updt = #{updt},
+            </if>
+            <if test="docdeptid != null and docdeptid !=''">
+                docdeptid = #{docdeptid},
+            </if>
+            <if test="presedeptid != null and presedeptid !=''">
+                presedeptid = #{presedeptid},
+            </if>
+            <if test="transdeptid != null and transdeptid !=''">
+                transdeptid = #{transdeptid},
+            </if>
+            <if test="orgdepth != null and orgdepth !=''">
+                orgdepth = #{orgdepth},
+            </if>
+            <if test="docsysteminfo != null and docsysteminfo !=''">
+                docsysteminfo = #{docsysteminfo},
+            </if>
+            <if test="readtype != null and readtype !=''">
+                readtype = #{readtype},
+            </if>
+            <if test="belonguserid != null and belonguserid !=''">
+                belonguserid = #{belonguserid},
+            </if>
+        </trim>
+        WHERE 1 = 1
+            and orgid = #{orgid}
+    </update>
+
+
+    <!-- ============================================== 서명인관리  ============================================== -->
+
+    <!--  조직관리 > 서명인관리 > 서명인 목록 조회 -->
+    <select id="selectSignList" parameterType="com.anylogic.ssystem.bms.com.model.SelectSignListReqVO" resultMap="selectSignListMap">
+        SELECT
+            A.orgid as "orgid"
+            , A.orgname as "orgname"
+            , A.parentorgid as "parentorgid"
+            , A.orgtype as "orgtype"
+            , A.orgorder as "orgorder"
+            , A.toporgid as "toporgid"
+            , A.displayname as "displayname"
+            , A.descriptionid as "descriptionid"
+            , A.whencreated as "whencreated"
+            , A.whendeleted as "whendeleted"
+            , A.isdeleted as "isdeleted"
+            , A.chiefid as "chiefid"
+            , A.chiefposition as "chiefposition"
+            , A.suborgtype as "suborgtype"
+            , A.orgkind as "orgkind"
+            , A.relaytype as "relaytype"
+            , A.docdeptid as "docdeptid"
+            , A.presedeptid as "presedeptid"
+            , A.transdeptid as "transdeptid"
+            , A.orgdepth as "orgdepth"
+            , A.docsysteminfo as "docsysteminfo"
+            , A.readtype as "readtype"
+            , A.belonguserid as "belonguserid"
+            , B.seq as "seq"
+            , B.managegubun as "managegubun"
+            , B.fileid as "fileid"
+            , B.etc as "etc"
+            , B.isuse as "isuse"
+            , B.isdefault as "isdefault"
+            , B.inid as "inid"
+            , B.indt as "indt"
+            , B.upid as "upid"
+            , B.updt as "updt"
+            , C.username as "username"
+        FROM  sbms.sbms_user.com_organizationinfo  A
+            LEFT OUTER JOIN  sbms.sbms_user.com_org_detail_info  B
+                ON ( A.orgid  =  B.orgid  )
+            LEFT OUTER JOIN  sbms.sbms_user.com_userinfo  C
+                ON ( A.chiefid  =  C.userid  )
+        WHERE 1 = 1
+            <if test="orgid != null and orgid !=''">
+                and A.orgid = #{orgid}
+            </if>
+            <if test="chiefid != null and chiefid !=''">
+                and chiefid like CONCAT('%', #{chiefid}, '%')
+            </if>
+            <if test="username != null and username !=''">
+                and username like CONCAT('%', #{username}, '%')
+            </if>
+            <if test="orgname != null and orgname !=''">
+                and orgname like CONCAT('%', #{orgname}, '%')
+            </if>
+            <if test="startDt != null and startDt !=''">
+                and B.indt <![CDATA[>=]]> #{startDt}
+            </if>
+            <if test="endDt != null and endDt !=''">
+                and B.indt <![CDATA[<=]]> #{endDt}
+            </if>
+            <if test="managegubun != null and managegubun !=''">
+                and managegubun = #{managegubun}
+            </if>
+            and ( managegubun = 'ORGEA' or managegubun = 'ORGEB' )
+        ORDER BY indt DESC
+    </select>
+
+    <!-- 조직관리 > 서명인관리 > 서명인 상세 조회 -->
+    <select id="getSignDetail" parameterType="com.anylogic.ssystem.bms.com.model.GetSignDetailReqVO" resultMap="getSignDetailMap">
+        SELECT
+            A.orgid as "orgid"
+            , A.orgname as "orgname"
+            , A.parentorgid as "parentorgid"
+            , A.orgtype as "orgtype"
+            , A.orgorder as "orgorder"
+            , A.toporgid as "toporgid"
+            , A.displayname as "displayname"
+            , A.descriptionid as "descriptionid"
+            , A.whencreated as "whencreated"
+            , A.whendeleted as "whendeleted"
+            , A.isdeleted as "isdeleted"
+            , A.chiefid as "chiefid"
+            , A.chiefposition as "chiefposition"
+            , A.suborgtype as "suborgtype"
+            , A.orgkind as "orgkind"
+            , A.relaytype as "relaytype"
+            , A.docdeptid as "docdeptid"
+            , A.presedeptid as "presedeptid"
+            , A.transdeptid as "transdeptid"
+            , A.orgdepth as "orgdepth"
+            , A.docsysteminfo as "docsysteminfo"
+            , A.readtype as "readtype"
+            , A.belonguserid as "belonguserid"
+            , B.seq as "seq"
+            , B.managegubun as "managegubun"
+            , B.fileid as "fileid"
+            , B.etc as "etc"
+            , B.isuse as "isuse"
+            , B.isdefault as "isdefault"
+            , B.inid as "inid"
+            , B.indt as "indt"
+            , B.upid as "upid"
+            , B.updt as "updt"
+            , C.cfilename as "cfilename"
+            , C.sfilename as "sfilename"
+            , C.filesize as "filesize"
+            , C.saveid as "saveid"
+            , C.filewidth as "filewidth"
+            , C.fileheight as "fileheight"
+            , D.username as "username"
+        FROM  sbms.sbms_user.com_organizationinfo  A
+            LEFT OUTER JOIN  sbms.sbms_user.com_org_detail_info  B
+                ON ( A.orgid  =  B.orgid  )
+            LEFT OUTER JOIN  sbms.sbms_user.com_image  C
+                ON ( B.fileid  =  C.fileid  )
+            LEFT OUTER JOIN  sbms.sbms_user.com_userinfo  D
+                ON ( A.chiefid  =  D.userid  )
+        WHERE 1 = 1
+        <if test="orgid != null and orgid !=''">
+            and A.orgid = #{orgid}
+        </if>
+        <if test="seq != null and seq != ''">
+            and seq = #{seq}
+        </if>
+        <if test="managegubun != null and managegubun != ''">
+            and B.managegubun = #{managegubun}
+        </if>
+    </select>
+
+    <!--  조직관리 > 서명인관리 > 서명인 상세 > 서명인 이미지 목록 조회 -->
+    <select id="getSignDetailSelectFile" parameterType="com.anylogic.ssystem.bms.com.model.GetSignDetailSelectFileReqVO" resultMap="getSignDetailSelectFileMap">
+        SELECT
+            fileid as "fileid"
+            , cfilename as "cfilename"
+            , sfilename as "sfilename"
+            , filesize as "filesize"
+            , saveid as "saveid"
+            , filewidth as "filewidth"
+            , fileheight as "fileheight"
+            , inid as "inid"
+            , indt as "indt"
+            , upid as "upid"
+            , updt as "updt"
+            , fileurl as "fileurl"
+            , filepath as "filepath"
+        FROM  sbms.sbms_user.com_image
+        WHERE 1 = 1
+            <if test="fileid != null and fileid !=''">
+                and fileid = #{fileid}
+            </if>
+    </select>
+
+
+    <!-- ========================================== 로고관리 ========================================== -->
+
+    <!--  조직관리 > 심볼/로고관리 > 심볼/로고 목록 조회 -->
+    <select id="selectLogoList" parameterType="com.anylogic.ssystem.bms.com.model.SelectLogoListReqVO" resultMap="selectLogoListMap">
+        SELECT
+            A.orgid as "orgid"
+            , A.orgname as "orgname"
+            , A.parentorgid as "parentorgid"
+            , A.orgtype as "orgtype"
+            , A.orgorder as "orgorder"
+            , A.toporgid as "toporgid"
+            , A.displayname as "displayname"
+            , A.descriptionid as "descriptionid"
+            , A.whencreated as "whencreated"
+            , A.whendeleted as "whendeleted"
+            , A.isdeleted as "isdeleted"
+            , A.chiefid as "chiefid"
+            , A.chiefposition as "chiefposition"
+            , A.suborgtype as "suborgtype"
+            , A.orgkind as "orgkind"
+            , A.relaytype as "relaytype"
+            , A.docdeptid as "docdeptid"
+            , A.presedeptid as "presedeptid"
+            , A.transdeptid as "transdeptid"
+            , A.orgdepth as "orgdepth"
+            , A.docsysteminfo as "docsysteminfo"
+            , A.readtype as "readtype"
+            , A.belonguserid as "belonguserid"
+            , B.seq as "seq"
+            , B.managegubun as "managegubun"
+            , B.fileid as "fileid"
+            , B.etc as "etc"
+            , B.isuse as "isuse"
+            , B.isdefault as "isdefault"
+            , B.inid as "inid"
+            , B.indt as "indt"
+            , B.upid as "upid"
+            , B.updt as "updt"
+            , C.username as "username"
+                FROM  sbms.sbms_user.com_organizationinfo  A
+                    LEFT OUTER JOIN  sbms.sbms_user.com_org_detail_info  B
+                ON ( A.orgid  =  B.orgid  )
+                    LEFT OUTER JOIN  sbms.sbms_user.com_userinfo  C
+                ON ( A.chiefid  =  C.userid  )
+        WHERE 1 = 1
+            <if test="orgid != null and orgid !=''">
+                and A.orgid = #{orgid}
+            </if>
+            <if test="chiefid != null and chiefid !=''">
+                and chiefid like CONCAT('%', #{chiefid}, '%')
+            </if>
+            <if test="username != null and username !=''">
+                and username like CONCAT('%', #{username}, '%')
+            </if>
+            <if test="orgname != null and orgname !=''">
+                and orgname like CONCAT('%', #{orgname}, '%')
+            </if>
+            <if test="startDt != null and startDt !=''">
+                and B.indt <![CDATA[>=]]> #{startDt}
+            </if>
+            <if test="endDt != null and endDt !=''">
+                and B.indt <![CDATA[<=]]> #{endDt}
+            </if>
+            <if test="managegubun != null and managegubun !=''">
+                and managegubun = #{managegubun}
+            </if>
+            and ( managegubun = 'ORGE4' or managegubun = 'ORGE5' )
+        ORDER BY indt DESC
+    </select>
+
+    <!--  조직관리 > 심볼/로고관리 > 심볼/로고 상세 조회 -->
+    <select id="getLogoDetail" parameterType="com.anylogic.ssystem.bms.com.model.GetLogoDetailReqVO" resultMap="getLogoDetailMap">
+        SELECT
+            A.orgid as "orgid"
+            , A.orgname as "orgname"
+            , A.parentorgid as "parentorgid"
+            , A.orgtype as "orgtype"
+            , A.orgorder as "orgorder"
+            , A.toporgid as "toporgid"
+            , A.displayname as "displayname"
+            , A.descriptionid as "descriptionid"
+            , A.whencreated as "whencreated"
+            , A.whendeleted as "whendeleted"
+            , A.isdeleted as "isdeleted"
+            , A.chiefid as "chiefid"
+            , A.chiefposition as "chiefposition"
+            , A.suborgtype as "suborgtype"
+            , A.orgkind as "orgkind"
+            , A.relaytype as "relaytype"
+            , A.docdeptid as "docdeptid"
+            , A.presedeptid as "presedeptid"
+            , A.transdeptid as "transdeptid"
+            , A.orgdepth as "orgdepth"
+            , A.docsysteminfo as "docsysteminfo"
+            , A.readtype as "readtype"
+            , A.belonguserid as "belonguserid"
+            , B.seq as "seq"
+            , B.managegubun as "managegubun"
+            , B.fileid as "fileid"
+            , B.etc as "etc"
+            , B.isuse as "isuse"
+            , B.isdefault as "isdefault"
+            , B.inid as "inid"
+            , B.indt as "indt"
+            , B.upid as "upid"
+            , B.updt as "updt"
+            , C.cfilename as "cfilename"
+            , C.sfilename as "sfilename"
+            , C.filesize as "filesize"
+            , C.saveid as "saveid"
+            , C.filewidth as "filewidth"
+            , C.fileheight as "fileheight"
+            , D.username as "username"
+                FROM  sbms.sbms_user.com_organizationinfo  A
+                    LEFT OUTER JOIN  sbms.sbms_user.com_org_detail_info  B
+            ON ( A.orgid  =  B.orgid  )
+                LEFT OUTER JOIN  sbms.sbms_user.com_image  C
+            ON ( B.fileid  =  C.fileid  )
+                LEFT OUTER JOIN  sbms.sbms_user.com_userinfo  D
+            ON ( A.chiefid  =  D.userid  )
+        WHERE 1 = 1
+        <if test="orgid != null and orgid !=''">
+            and A.orgid = #{orgid}
+        </if>
+        <if test="seq != null and seq != ''">
+            and seq = #{seq}
+        </if>
+        <if test="managegubun != null and managegubun != ''">
+            and B.managegubun = #{managegubun}
+        </if>
+    </select>
+
+    <!--  조직관리 > 심볼/로고관리 > 심볼/로고 상세 조회 > 심볼/로고 이미지 목록 조회 -->
+    <select id="getLogoDetailSelectFile" parameterType="com.anylogic.ssystem.bms.com.model.GetLogoDetailSelectFileReqVO" resultMap="getLogoDetailSelectFileMap">
+        SELECT
+            fileid as "fileid"
+            , cfilename as "cfilename"
+            , sfilename as "sfilename"
+            , filesize as "filesize"
+            , saveid as "saveid"
+            , filewidth as "filewidth"
+            , fileheight as "fileheight"
+            , inid as "inid"
+            , indt as "indt"
+            , upid as "upid"
+            , updt as "updt"
+            , fileurl as "fileurl"
+            , filepath as "filepath"
+        FROM  sbms.sbms_user.com_image
+        WHERE 1 = 1
+        <if test="fileid != null and fileid !=''">
+            and fileid = #{fileid}
+        </if>
+    </select>
+
+</mapper>

@@ -1,0 +1,790 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.anylogic.ssystem.bms.dct.mapper.BmsDctMgmtRegiMapper">
+
+    <resultMap id="selectMgmtRegiListMap" type="com.anylogic.ssystem.bms.dct.model.SelectMgmtRegiListResVO">
+        <id column="mgmtid" property="mgmtid" />                      <!-- 비밀관리 ID -->
+        <result column="mgmtno" property="mgmtno" />                  <!-- 관리번호 -->
+        <result column="docid" property="docid" />                    <!-- 비밀 ID -->
+        <result column="seclevel" property="seclevel" />              <!-- 비밀등급 -->
+        <result column="regirecvtype" property="regirecvtype" />      <!-- 생산/접수 형태 -->
+        <result column="regirecvdt" property="regirecvdt" />          <!-- 생산/접수 일자 -->
+        <result column="secttl" property="secttl" />                  <!-- 비밀제목 -->
+        <result column="sectype" property="sectype" />                <!-- 비밀형태 -->
+        <result column="secstatus" property="secstatus" />            <!-- 비밀상태 -->
+        <result column="copyno" property="copyno" />                  <!-- 사본번호 -->
+        <result column="notiprotterm" property="notiprotterm" />      <!-- 예고문보호기간 -->
+        <result column="notiprsrvterm" property="notiprsrvterm" />    <!-- 예고문보존기간 -->
+        <result column="authorname" property="authorname" />          <!-- 처리담당자명 -->
+        <result column="deptname" property="deptname" />          <!-- 부서명 -->
+        <result column="cnsrvflag" property="cnsrvflag" />            <!-- 존안여부 -->
+        <result column="cnsrvdt" property="cnsrvdt" />                <!-- 존안일자 -->
+        <result column="rfidtagflag" property="rfidtagflag" />        <!-- RFID사용여부 -->
+        <result column="delflag" property="delflag" />                <!-- 삭선여부 -->
+        <result column="indt" property="indt" />                      <!-- 등록일시 -->
+        <result column="cnsrvterm" property="cnsrvterm" />            <!-- 존안보존일자 -->
+        <result column="aggregatemgmtid" property="aggregatemgmtid" /><!-- 합철 관련 MGMT ID -->
+        <result column="destructconfirm" property="destructconfirm" /><!--  -->
+        <result column="docno" property="docno" /><!--  -->
+        <result column="prsrvterm" property="prsrvterm" /><!--  -->
+        <result column="orgnreclass" property="orgnreclass" /><!--  -->
+        <result column="copyreclass" property="copyreclass" /><!--  -->
+        <result column="secgubun" property="secgubun" /><!--  -->
+        <result column="auth" property="auth" /><!--  -->
+        <result column="paperrecgubun" property="paperrecgubun" /><!--  -->
+    </resultMap>
+
+    <resultMap id="selectOtherDeptMap" type="com.anylogic.ssystem.bms.dct.model.SelectOtherDeptResVO">
+        <id column="orgid" property="orgid" />
+        <result column="orgname" property="orgname" />
+    </resultMap>
+
+    <resultMap id="getMgmtRegiMap" type="com.anylogic.ssystem.bms.dct.model.GetMgmtRegiResVO">
+        <id column="mgmtid" property="mgmtid" />                      <!-- 비밀관리 ID -->
+        <result column="mgmtno" property="mgmtno" />                  <!-- 관리번호 -->
+        <result column="docid" property="docid" />                    <!-- 비밀 ID -->
+        <result column="seclevel" property="seclevel" />              <!-- 비밀등급 -->
+        <result column="mgmtseq" property="mgmtseq" />                <!-- 비밀일련번호 -->
+        <result column="regirecvyear" property="regirecvyear" />      <!-- 생산/접수 연도 -->
+        <result column="regirecvgubun" property="regirecvgubun" />    <!-- 생산/접수 구분 -->
+        <result column="regirecvdt" property="regirecvdt" />          <!-- 생산/접수 일자 -->
+        <result column="regirecvsendid" property="regirecvsendid" />  <!-- 생산/접수 발신처 ID -->
+        <result column="regirecvsendname" property="regirecvsendname" /><!-- 생산/접수 발신처명 -->
+        <result column="regirecvtype" property="regirecvtype" />      <!-- 생산/접수 형태 -->
+        <result column="secttl" property="secttl" />                  <!-- 비밀제목 -->
+        <result column="sectype" property="sectype" />                <!-- 비밀형태 -->
+        <result column="attchcnt" property="attchcnt" />              <!-- 첨부물개수 -->
+        <result column="copyno" property="copyno" />                  <!-- 사본번호 -->
+        <result column="notiprotterm" property="notiprotterm" />      <!-- 예고문보호기간 -->
+        <result column="notiprsrvterm" property="notiprsrvterm" />    <!-- 예고문보존기간 -->
+        <result column="deptid" property="deptid" />                  <!-- 처리부서 ID -->
+        <result column="deptname" property="deptname" />              <!-- 처리부서명 -->
+        <result column="readrangetype" property="readrangetype" />    <!-- 비밀형태 -->
+        <result column="secstatus" property="secstatus" />            <!-- 열람범위 -->
+        <result column="authorid" property="authorid" />              <!-- 처리담당자 ID -->
+        <result column="authorname" property="authorname" />          <!-- 처리담당자명 -->
+        <result column="authordutyname" property="authordutyname" />  <!-- 처리담당자 직위직급명 -->
+        <result column="authorposid" property="authorposid" />        <!-- 처리담당자 직위 ID -->
+        <result column="authorgrdid" property="authorgrdid" />        <!-- 처리담당자 직급 ID -->
+        <result column="reclassdt" property="reclassdt" />            <!-- 재분류일자 -->
+        <result column="reclasscont" property="reclasscont" />        <!-- 재분류내용 -->
+        <result column="reclassbasis" property="reclassbasis" />      <!-- 재분류근거 -->
+        <result column="reclassmgtno" property="reclassmgtno" />      <!-- 재분류이전 관리번호 -->
+        <result column="reclassmgmtid" property="reclassmgmtid" />    <!-- 재분류이전 관리 ID -->
+        <result column="reclasslevel" property="reclasslevel" />      <!-- 재분류코드 -->
+        <result column="transdt" property="transdt" />                <!-- 이관일자 -->
+        <result column="transbasis" property="transbasis" />          <!-- 이관근거 -->
+        <result column="destructdt" property="destructdt" />          <!-- 파기일자 -->
+        <result column="destructbasis" property="destructbasis" />    <!-- 파기근거 -->
+        <result column="cnsrvflag" property="cnsrvflag" />            <!-- 존안여부 -->
+        <result column="cnsrvdt" property="cnsrvdt" />                <!-- 존안일자 -->
+        <result column="cnsrvbasis" property="cnsrvbasis" />          <!-- 존안근거 -->
+        <result column="custdyplace" property="custdyplace" />        <!-- 보관장소 -->
+        <result column="rfidtagflag" property="rfidtagflag" />        <!-- RFID사용여부 -->
+        <result column="delflag" property="delflag" />                <!-- 삭선여부 -->
+        <result column="rgstid" property="rgstid" />                  <!-- 등재자 ID -->
+        <result column="rgstname" property="rgstname" />              <!-- 등재자명 -->
+        <result column="rgstdt" property="rgstdt" />                  <!-- 등재일시 -->
+        <result column="updtid" property="updtid" />                  <!-- 수정자 ID -->
+        <result column="updtname" property="updtname" />              <!-- 수정자명 -->
+        <result column="updtdt" property="updtdt" />                  <!-- 수정일시 -->
+        <result column="legacymgmtno" property="legacymgmtno" />      <!-- 이전시스템 관리번호 -->
+        <result column="note" property="note" />                      <!-- 비고 -->
+        <result column="legacydocno" property="legacydocno" />        <!-- 이전시스템 문서번호 -->
+        <result column="indt" property="indt" />                      <!-- 등록일시 -->
+        <result column="sectypeetc" property="sectypeetc" />          <!-- 등록구분기타 -->
+        <result column="realtitle" property="realtitle" />            <!-- 실제목 -->
+        <result column="cnsrvterm" property="cnsrvterm" />            <!-- 존안보존일자 -->
+        <result column="aggregatemgmtid" property="aggregatemgmtid" /><!-- 합철 관련 MGMT ID -->
+        <result column="aggregatedt" property="aggregatedt" />        <!-- 합철 일자 -->
+        <result column="destructconfirm" property="destructconfirm" /><!--  -->
+        <result column="destructconfirmdt" property="destructconfirmdt" /><!--  -->
+        <result column="transwaitdt" property="transwaitdt" />        <!--  -->
+        <result column="docno" property="docno" />
+        <result column="locker" property="locker" />
+    </resultMap>
+
+    <resultMap id="getMgmtidByDocidMap" type="com.anylogic.ssystem.bms.dct.model.GetMgmtidByDocidResVO">
+        <result column="mgmtid" property="mgmtid" />
+    </resultMap>
+
+
+    <!--  비밀관리기록부 등록 -->
+    <insert id="insertMgmtRegi" parameterType="com.anylogic.ssystem.bms.dct.model.InsertMgmtRegiReqVO">
+        INSERT INTO
+        sbms.sbms_user.bms_dct_mgmt_regi(
+            <trim suffixOverrides=",">
+            <if test="mgmtid != null and mgmtid !=''">
+                mgmtid,
+            </if>
+            <if test="mgmtno != null and mgmtno !=''">
+                mgmtno,
+            </if>
+            <if test="docid != null and docid !=''">
+                docid,
+            </if>
+            <if test="seclevel != null and seclevel !=''">
+                seclevel,
+            </if>
+            <if test="mgmtseq != null and mgmtseq !=''">
+                mgmtseq,
+            </if>
+            <if test="regirecvyear != null and regirecvyear !=''">
+                regirecvyear,
+            </if>
+            <if test="regirecvgubun != null and regirecvgubun !=''">
+                regirecvgubun,
+            </if>
+            <if test="regirecvdt != null and regirecvdt !=''">
+                regirecvdt,
+            </if>
+            <if test="regirecvsendid != null and regirecvsendid !=''">
+                regirecvsendid,
+            </if>
+            <if test="regirecvsendname != null and regirecvsendname !=''">
+                regirecvsendname,
+            </if>
+            <if test="regirecvtype != null and regirecvtype !=''">
+                regirecvtype,
+            </if>
+            <if test="secttl != null and secttl !=''">
+                secttl,
+            </if>
+            <if test="sectype != null and sectype !=''">
+                sectype,
+            </if>
+            <if test="attchcnt != null and attchcnt !=''">
+                attchcnt,
+            </if>
+            <if test="copyno != null and copyno !=''">
+                copyno,
+            </if>
+            <if test="notiprotterm != null and notiprotterm !=''">
+                notiprotterm,
+            </if>
+            <if test="notiprsrvterm != null and notiprsrvterm !=''">
+                notiprsrvterm,
+            </if>
+            <if test="deptid != null and deptid !=''">
+                deptid,
+            </if>
+            <if test="deptname != null and deptname !=''">
+                deptname,
+            </if>
+            <if test="readrangetype != null and readrangetype !=''">
+                readrangetype,
+            </if>
+            <if test="secstatus != null and secstatus !=''">
+                secstatus,
+            </if>
+            <if test="authorid != null and authorid !=''">
+                authorid,
+            </if>
+            <if test="authorname != null and authorname !=''">
+                authorname,
+            </if>
+            <if test="authordutyname != null and authordutyname !=''">
+                authordutyname,
+            </if>
+            <if test="authorposid != null and authorposid !=''">
+                authorposid,
+            </if>
+            <if test="authorgrdid != null and authorgrdid !=''">
+                authorgrdid,
+            </if>
+            <if test="reclassdt != null and reclassdt !=''">
+                reclassdt,
+            </if>
+            <if test="reclasscont != null and reclasscont !=''">
+                reclasscont,
+            </if>
+            <if test="reclassbasis != null and reclassbasis !=''">
+                reclassbasis,
+            </if>
+            <if test="reclassmgtno != null and reclassmgtno !=''">
+                reclassmgtno,
+            </if>
+            <if test="reclassmgmtid != null and reclassmgmtid !=''">
+                reclassmgmtid,
+            </if>
+            <if test="reclasslevel != null and reclasslevel !=''">
+                reclasslevel,
+            </if>
+            <if test="transdt != null and transdt !=''">
+                transdt,
+            </if>
+            <if test="transbasis != null and transbasis !=''">
+                transbasis,
+            </if>
+            <if test="destructdt != null and destructdt !=''">
+                destructdt,
+            </if>
+            <if test="destructbasis != null and destructbasis !=''">
+                destructbasis,
+            </if>
+            <if test="cnsrvflag != null and cnsrvflag !=''">
+                cnsrvflag,
+            </if>
+            <if test="cnsrvdt != null and cnsrvdt !=''">
+                cnsrvdt,
+            </if>
+            <if test="cnsrvbasis != null and cnsrvbasis !=''">
+                cnsrvbasis,
+            </if>
+            <if test="custdyplace != null and custdyplace !=''">
+                custdyplace,
+            </if>
+            <if test="rfidtagflag != null and rfidtagflag !=''">
+                rfidtagflag,
+            </if>
+            <if test="delflag != null and delflag !=''">
+                delflag,
+            </if>
+            <if test="rgstid != null and rgstid !=''">
+                rgstid,
+            </if>
+            <if test="rgstname != null and rgstname !=''">
+                rgstname,
+            </if>
+            <if test="rgstdt != null and rgstdt !=''">
+                rgstdt,
+            </if>
+            <if test="updtid != null and updtid !=''">
+                updtid,
+            </if>
+            <if test="updtname != null and updtname !=''">
+                updtname,
+            </if>
+            <if test="updtdt != null and updtdt !=''">
+                updtdt,
+            </if>
+            <if test="legacymgmtno != null and legacymgmtno !=''">
+                legacymgmtno,
+            </if>
+            <if test="note != null and note !=''">
+                note,
+            </if>
+            <if test="legacydocno != null and legacydocno !=''">
+                legacydocno,
+            </if>
+            <if test="indt != null and indt !=''">
+                indt,
+            </if>
+            <if test="sectypeetc != null and sectypeetc !=''">
+                sectypeetc,
+            </if>
+            <if test="realtitle != null and realtitle !=''">
+                realtitle,
+            </if>
+            <if test="cnsrvterm != null and cnsrvterm !=''">
+                cnsrvterm,
+            </if>
+            <if test="aggregatemgmtid != null and aggregatemgmtid !=''">
+                aggregatemgmtid,
+            </if>
+            <if test="aggregatedt != null and aggregatedt !=''">
+                aggregatedt,
+            </if>
+            <if test="destructconfirm != null and destructconfirm !=''">
+                destructconfirm,
+            </if>
+            <if test="destructconfirmdt != null and destructconfirmdt !=''">
+                destructconfirmdt,
+            </if>
+            <if test="transwaitdt != null and transwaitdt !=''">
+                transwaitdt,
+            </if>
+            </trim>
+        )
+        VALUES(
+            <trim suffixOverrides=",">
+            <if test="mgmtid != null and mgmtid !=''">
+                #{mgmtid},
+            </if>
+            <if test="mgmtno != null and mgmtno !=''">
+                #{mgmtno},
+            </if>
+            <if test="docid != null and docid !=''">
+                #{docid},
+            </if>
+            <if test="seclevel != null and seclevel !=''">
+                #{seclevel},
+            </if>
+            <if test="mgmtseq != null and mgmtseq !=''">
+                #{mgmtseq},
+            </if>
+            <if test="regirecvyear != null and regirecvyear !=''">
+                #{regirecvyear},
+            </if>
+            <if test="regirecvgubun != null and regirecvgubun !=''">
+                #{regirecvgubun},
+            </if>
+            <if test="regirecvdt != null and regirecvdt !=''">
+                #{regirecvdt},
+            </if>
+            <if test="regirecvsendid != null and regirecvsendid !=''">
+                #{regirecvsendid},
+            </if>
+            <if test="regirecvsendname != null and regirecvsendname !=''">
+                #{regirecvsendname},
+            </if>
+            <if test="regirecvtype != null and regirecvtype !=''">
+                #{regirecvtype},
+            </if>
+            <if test="secttl != null and secttl !=''">
+                #{secttl},
+            </if>
+            <if test="sectype != null and sectype !=''">
+                #{sectype},
+            </if>
+            <if test="attchcnt != null and attchcnt !=''">
+                #{attchcnt},
+            </if>
+            <if test="copyno != null and copyno !=''">
+                #{copyno},
+            </if>
+            <if test="notiprotterm != null and notiprotterm !=''">
+                #{notiprotterm},
+            </if>
+            <if test="notiprsrvterm != null and notiprsrvterm !=''">
+                #{notiprsrvterm},
+            </if>
+            <if test="deptid != null and deptid !=''">
+                #{deptid},
+            </if>
+            <if test="deptname != null and deptname !=''">
+                #{deptname},
+            </if>
+            <if test="readrangetype != null and readrangetype !=''">
+                #{readrangetype},
+            </if>
+            <if test="secstatus != null and secstatus !=''">
+                #{secstatus},
+            </if>
+            <if test="authorid != null and authorid !=''">
+                #{authorid},
+            </if>
+            <if test="authorname != null and authorname !=''">
+                #{authorname},
+            </if>
+            <if test="authordutyname != null and authordutyname !=''">
+                #{authordutyname},
+            </if>
+            <if test="authorposid != null and authorposid !=''">
+                #{authorposid},
+            </if>
+            <if test="authorgrdid != null and authorgrdid !=''">
+                #{authorgrdid},
+            </if>
+            <if test="reclassdt != null and reclassdt !=''">
+                #{reclassdt},
+            </if>
+            <if test="reclasscont != null and reclasscont !=''">
+                #{reclasscont},
+            </if>
+            <if test="reclassbasis != null and reclassbasis !=''">
+                #{reclassbasis},
+            </if>
+            <if test="reclassmgtno != null and reclassmgtno !=''">
+                #{reclassmgtno},
+            </if>
+            <if test="reclassmgmtid != null and reclassmgmtid !=''">
+                #{reclassmgmtid},
+            </if>
+            <if test="reclasslevel != null and reclasslevel !=''">
+                #{reclasslevel},
+            </if>
+            <if test="transdt != null and transdt !=''">
+                #{transdt},
+            </if>
+            <if test="transbasis != null and transbasis !=''">
+                #{transbasis},
+            </if>
+            <if test="destructdt != null and destructdt !=''">
+                #{destructdt},
+            </if>
+            <if test="destructbasis != null and destructbasis !=''">
+                #{destructbasis},
+            </if>
+            <if test="cnsrvflag != null and cnsrvflag !=''">
+                #{cnsrvflag},
+            </if>
+            <if test="cnsrvdt != null and cnsrvdt !=''">
+                #{cnsrvdt},
+            </if>
+            <if test="cnsrvbasis != null and cnsrvbasis !=''">
+                #{cnsrvbasis},
+            </if>
+            <if test="custdyplace != null and custdyplace !=''">
+                #{custdyplace},
+            </if>
+            <if test="rfidtagflag != null and rfidtagflag !=''">
+                #{rfidtagflag},
+            </if>
+            <if test="delflag != null and delflag !=''">
+                #{delflag},
+            </if>
+            <if test="rgstid != null and rgstid !=''">
+                #{rgstid},
+            </if>
+            <if test="rgstname != null and rgstname !=''">
+                #{rgstname},
+            </if>
+            <if test="rgstdt != null and rgstdt !=''">
+                #{rgstdt},
+            </if>
+            <if test="updtid != null and updtid !=''">
+                #{updtid},
+            </if>
+            <if test="updtname != null and updtname !=''">
+                #{updtname},
+            </if>
+            <if test="updtdt != null and updtdt !=''">
+                #{updtdt},
+            </if>
+            <if test="legacymgmtno != null and legacymgmtno !=''">
+                #{legacymgmtno},
+            </if>
+            <if test="note != null and note !=''">
+                #{note},
+            </if>
+            <if test="legacydocno != null and legacydocno !=''">
+                #{legacydocno},
+            </if>
+            <if test="indt != null and indt !=''">
+                #{indt},
+            </if>
+            <if test="sectypeetc != null and sectypeetc !=''">
+                #{sectypeetc},
+            </if>
+            <if test="realtitle != null and realtitle !=''">
+                #{realtitle},
+            </if>
+            <if test="cnsrvterm != null and cnsrvterm !=''">
+                #{cnsrvterm},
+            </if>
+            <if test="aggregatemgmtid != null and aggregatemgmtid !=''">
+                #{aggregatemgmtid},
+            </if>
+            <if test="aggregatedt != null and aggregatedt !=''">
+                #{aggregatedt},
+            </if>
+            <if test="destructconfirm != null and destructconfirm !=''">
+                #{destructconfirm},
+            </if>
+            <if test="destructconfirmdt != null and destructconfirmdt !=''">
+                #{destructconfirmdt},
+            </if>
+            <if test="transwaitdt != null and transwaitdt !=''">
+                #{transwaitdt},
+            </if>
+            </trim>
+        )
+    </insert>
+
+    <!-- 비밀관리기록부 목록 조회 -->
+    <select id="selectMgmtRegiList" parameterType="com.anylogic.ssystem.bms.dct.model.SelectMgmtRegiListReqVO" resultMap="selectMgmtRegiListMap">
+        SELECT
+            a.authorid as "authorid",
+            a.paperrecgubun as "paperrecgubun",
+            b.mgmtid as "mgmtid",
+            b.mgmtno as "mgmtno",
+            b.docid as "docid",
+            b.seclevel as "seclevel",
+            b.regirecvtype as "regirecvtype",
+            b.regirecvdt as "regirecvdt",
+            b.secttl as "secttl",
+            b.sectype as "sectype",
+            b.secstatus as "secstatus",
+            c.copyno as "copyno",
+            b.notiprotterm as "notiprotterm",
+            b.notiprsrvterm as "notiprsrvterm",
+            b.authorname as "authorname",
+            b.deptname as "deptname",
+            b.cnsrvflag as "cnsrvflag",
+            b.cnsrvdt as "cnsrvdt",
+            b.rfidtagflag as "rfidtagflag",
+            b.delflag as "delflag",
+            b.indt as "indt",
+            b.cnsrvterm as "cnsrvterm",
+            b.aggregatemgmtid as "aggregatemgmtid",
+            b.destructconfirm as "destructconfirm",
+            c.docno as "docno",
+            c.prsrvterm as "prsrvterm",
+            c.orgnreclass as "orgnreclass",
+            c.copyreclass as "copyreclass",
+            c.secgubun as "secgubun",
+            CASE
+                WHEN b.docid NOT IN (SELECT docid FROM sbms_user.bms_dct_rdoc_rcvs WHERE userid = #{authorid}) THEN '미보유'
+                ELSE '보유'
+            END AS "auth"
+        FROM sbms.sbms_user.bms_dct_mgmt_regi b
+        INNER JOIN sbms.sbms_user.bms_dct_rdoc a ON b.docid = a.docid
+        INNER JOIN sbms.sbms_user.bms_dct_attr c ON c.docid = a.docid
+        WHERE a.state NOT IN ('DRDS1', 'DRDS2')
+        <if test="userreqtype != null and userreqtype == '개인'">
+            and b.docid IN (SELECT docid FROM sbms_user.bms_dct_rdoc_rcvs WHERE userid = #{authorid}) and b.authorid = #{authorid}
+        </if>
+        <if test="userreqtype != null and userreqtype == '부서'">
+            and b.authorid != #{authorid}
+            and b.deptid = #{deptid}
+        </if>
+        <if test="userreqtype != null and userreqtype == '타부서'">
+            and b.deptid = #{deptid}
+        </if>
+        <if test="kind != null and kind !=''">
+            <choose>
+                <when test="kind == 1">
+                    AND (c.copyno LIKE '%원%' OR c.copyno IS NULL)
+                </when>
+                <when test="kind == 2">
+                    AND c.copyno NOT LIKE '%원%'
+                </when>
+            </choose>
+        </if>
+        <if test="regirecvtype != null and regirecvtype !=''">
+            and b.regirecvtype = #{regirecvtype}
+        </if>
+        <if test="seclevel != null and seclevel !=''">
+            and b.seclevel = #{seclevel}
+        </if>
+        <if test="docno != null and docno !=''">
+            and c.docno like CONCAT('%', #{docno}, '%')
+        </if>
+        <if test="mgmtno != null and mgmtno !=''">
+            and b.mgmtno like CONCAT('%', #{mgmtno}, '%')
+        </if>
+        <if test="secttl != null and secttl !=''">
+            and b.secttl like CONCAT('%', #{secttl}, '%')
+        </if>
+        <if test="copyno != null and copyno !=''">
+            and c.copyno like CONCAT('%', #{copyno}, '%')
+        </if>
+        <if test="authorname != null and authorname !=''">
+            and b.authorname like CONCAT('%', #{authorname}, '%')
+        </if>
+        <if test="deptname != null and deptname !=''">
+            and b.deptname like CONCAT('%', #{deptname}, '%')
+        </if>
+        <if test="delline != null and delline !=''">
+            <choose>
+                <when test="delline == 1">
+                    AND (COALESCE(b.delflag, '') = 'Y'
+                    OR COALESCE(b.cnsrvflag, '') = 'Y')
+                </when>
+                <when test="delline == 2">
+                    AND COALESCE(b.delflag, '') != 'Y'
+                    AND COALESCE(b.cnsrvflag, '') != 'Y'
+                </when>
+            </choose>
+        </if>
+        <if test="startDt != null and startDt !=''">
+            and b.indt <![CDATA[>=]]> #{startDt}
+        </if>
+        <if test="endDt != null and endDt !=''">
+            and b.indt <![CDATA[<=]]> #{endDt}
+        </if>
+        ORDER BY b.indt DESC
+    </select>
+
+    <!-- 타부서 목록 조회 (본인 부서 제외) -->
+    <select id="selectOtherDept" parameterType="com.anylogic.ssystem.bms.dct.model.SelectOtherDeptReqVO" resultMap="selectOtherDeptMap">
+        SELECT orgid, orgname
+        FROM  sbms.sbms_user.com_organizationinfo
+        WHERE orgid != #{mydeptid} AND orgtype IS NULL
+    </select>
+
+    <!-- 비밀관리기록부 팝업 조회 (재분류/파기/이관/존안 정보) -->
+    <select id="getMgmtRegi" parameterType="com.anylogic.ssystem.bms.dct.model.GetMgmtRegiReqVO" resultMap="getMgmtRegiMap">
+        SELECT
+            x.mgmtid as "mgmtid"
+            , x.mgmtno as "mgmtno"
+            , x.docid as "docid"
+            , x.seclevel as "seclevel"
+            , x.mgmtseq as "mgmtseq"
+            , x.regirecvyear as "regirecvyear"
+            , x.regirecvgubun as "regirecvgubun"
+            , x.regirecvdt as "regirecvdt"
+            , x.regirecvsendid as "regirecvsendid"
+            , x.regirecvsendname as "regirecvsendname"
+            , x.regirecvtype as "regirecvtype"
+            , x.secttl as "secttl"
+            , x.sectype as "sectype"
+            , x.attchcnt as "attchcnt"
+            , x.copyno as "copyno"
+            , x.notiprotterm as "notiprotterm"
+            , x.notiprsrvterm as "notiprsrvterm"
+            , x.deptid as "deptid"
+            , x.deptname as "deptname"
+            , x.readrangetype as "readrangetype"
+            , x.secstatus as "secstatus"
+            , x.authorid as "authorid"
+            , x.authorname as "authorname"
+            , x.authordutyname as "authordutyname"
+            , x.authorposid as "authorposid"
+            , x.authorgrdid as "authorgrdid"
+            , x.reclassdt as "reclassdt"
+            , x.reclasscont as "reclasscont"
+            , x.reclassbasis as "reclassbasis"
+            , x.reclassmgtno as "reclassmgtno"
+            , x.reclassmgmtid as "reclassmgmtid"
+            , x.reclasslevel as "reclasslevel"
+            , x.transdt as "transdt"
+            , x.transbasis as "transbasis"
+            , x.destructdt as "destructdt"
+            , x.destructbasis as "destructbasis"
+            , x.cnsrvflag as "cnsrvflag"
+            , x.cnsrvdt as "cnsrvdt"
+            , x.cnsrvbasis as "cnsrvbasis"
+            , x.custdyplace as "custdyplace"
+            , x.rfidtagflag as "rfidtagflag"
+            , x.delflag as "delflag"
+            , x.rgstid as "rgstid"
+            , x.rgstname as "rgstname"
+            , x.rgstdt as "rgstdt"
+            , x.updtid as "updtid"
+            , x.updtname as "updtname"
+            , x.updtdt as "updtdt"
+            , x.legacymgmtno as "legacymgmtno"
+            , x.note as "note"
+            , x.legacydocno as "legacydocno"
+            , x.indt as "indt"
+            , x.sectypeetc as "sectypeetc"
+            , x.realtitle as "realtitle"
+            , x.cnsrvterm as "cnsrvterm"
+            , x.aggregatemgmtid as "aggregatemgmtid"
+            , x.aggregatedt as "aggregatedt"
+            , x.destructconfirm as "destructconfirm"
+            , x.destructconfirmdt as "destructconfirmdt"
+            , x.transwaitdt as "transwaitdt"
+            , CASE
+                  WHEN x.regirecvtype = '2' THEN y.locker
+                  ELSE NULL
+            END AS locker
+        FROM  sbms.sbms_user.bms_dct_mgmt_regi x
+        LEFT JOIN sbms.sbms_user.bms_dct_attr_add y ON x.docid = y.docid
+        WHERE mgmtid = #{mgmtid}
+    </select>
+
+    <!-- 인계인수 대상 목록 조회 -->
+    <select id="selectMgmtRegiNonPageList" parameterType="com.anylogic.ssystem.bms.dct.model.GetMgmtRegiReqVO" resultMap="getMgmtRegiMap">
+        SELECT
+            a.mgmtid as "mgmtid"
+            , a.mgmtno as "mgmtno"
+            , a.docid as "docid"
+            , a.seclevel as "seclevel"
+            , a.mgmtseq as "mgmtseq"
+            , a.regirecvyear as "regirecvyear"
+            , a.regirecvgubun as "regirecvgubun"
+            , a.regirecvdt as "regirecvdt"
+            , a.regirecvsendid as "regirecvsendid"
+            , a.regirecvsendname as "regirecvsendname"
+            , a.regirecvtype as "regirecvtype"
+            , a.secttl as "secttl"
+            , a.sectype as "sectype"
+            , a.attchcnt as "attchcnt"
+            , a.copyno as "copyno"
+            , a.notiprotterm as "notiprotterm"
+            , a.notiprsrvterm as "notiprsrvterm"
+            , a.deptid as "deptid"
+            , a.deptname as "deptname"
+            , a.readrangetype as "readrangetype"
+            , a.secstatus as "secstatus"
+            , a.authorid as "authorid"
+            , a.authorname as "authorname"
+            , a.authordutyname as "authordutyname"
+            , a.authorposid as "authorposid"
+            , a.authorgrdid as "authorgrdid"
+            , a.reclassdt as "reclassdt"
+            , a.reclasscont as "reclasscont"
+            , a.reclassbasis as "reclassbasis"
+            , a.reclassmgtno as "reclassmgtno"
+            , a.reclassmgmtid as "reclassmgmtid"
+            , a.reclasslevel as "reclasslevel"
+            , a.transdt as "transdt"
+            , a.transbasis as "transbasis"
+            , a.destructdt as "destructdt"
+            , a.destructbasis as "destructbasis"
+            , a.cnsrvflag as "cnsrvflag"
+            , a.cnsrvdt as "cnsrvdt"
+            , a.cnsrvbasis as "cnsrvbasis"
+            , a.custdyplace as "custdyplace"
+            , a.rfidtagflag as "rfidtagflag"
+            , a.delflag as "delflag"
+            , a.rgstid as "rgstid"
+            , a.rgstname as "rgstname"
+            , a.rgstdt as "rgstdt"
+            , a.updtid as "updtid"
+            , a.updtname as "updtname"
+            , a.updtdt as "updtdt"
+            , a.legacymgmtno as "legacymgmtno"
+            , a.note as "note"
+            , a.legacydocno as "legacydocno"
+            , a.indt as "indt"
+            , a.sectypeetc as "sectypeetc"
+            , a.realtitle as "realtitle"
+            , a.cnsrvterm as "cnsrvterm"
+            , a.aggregatemgmtid as "aggregatemgmtid"
+            , a.aggregatedt as "aggregatedt"
+            , a.destructconfirm as "destructconfirm"
+            , a.destructconfirmdt as "destructconfirmdt"
+            , a.transwaitdt as "transwaitdt"
+            , b.docno as "docno"
+        FROM  sbms.sbms_user.bms_dct_mgmt_regi a
+        INNER JOIN sbms.sbms_user.bms_dct_attr b
+            on a.docid = b.docid
+        WHERE 1=1
+        <if test="mgmtid != null and mgmtid !=''">
+            and a.mgmtid = #{mgmtid}
+        </if>
+        <if test="authorid != null and authorid !=''">
+            and a.authorid = #{authorid}
+        </if>
+        <if test="regirecvgubun != null and regirecvgubun !=''">
+            and a.regirecvgubun = #{regirecvgubun}
+        </if>
+        <if test="seclevel != null and seclevel !=''">
+            and a.seclevel IN
+            <foreach item="item" collection="seclevel" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        order by a.regirecvdt desc
+
+    </select>
+
+    <!--  DOCID로 MGMTID 조회 -->
+    <select id="getMgmtidByDocid" parameterType="com.anylogic.ssystem.bms.dct.model.GetMgmtidByDocidReqVO" resultMap="getMgmtidByDocidMap">
+        SELECT mgmtid
+        FROM  sbms.sbms_user.bms_dct_mgmt_regi
+        WHERE docid = #{docid}
+        ORDER BY rgstdt DESC
+        LIMIT 1
+    </select>
+
+    <!-- 인계인수 건수별 팝업 조회 (미완료/생산/접수/일반) -->
+    <select id="selectMgmtRegiCnt" parameterType="com.anylogic.ssystem.bms.dct.model.SelectMgmtRegiListReqVO" resultType="java.lang.Integer">
+        SELECT
+            <trim suffixOverrides=",">
+                <if test="countName == 'totalCount'">
+                    COUNT(*),
+                </if>
+                <if test="countName == 'create5LevelCount'">
+                    COUNT(CASE WHEN b.seclevel = '5' THEN 1 END),
+                </if>
+                <if test="countName == 'createOtherCount'">
+                    COUNT(CASE WHEN b.regirecvgubun = '1' AND b.seclevel IN ('2','3','4') THEN 1 END),
+                </if>
+                <if test="countName == 'receiptCount'">
+                    COUNT(CASE WHEN b.regirecvgubun = '2' AND b.seclevel IN ('2','3','4') THEN 1 END),
+                </if>
+            </trim>
+        FROM sbms.sbms_user.bms_dct_mgmt_regi b
+            INNER JOIN sbms.sbms_user.bms_dct_rdoc a ON b.docid = a.docid
+            INNER JOIN sbms.sbms_user.bms_dct_attr c ON c.docid = a.docid
+        WHERE a.state NOT IN ('DRDS1', 'DRDS2')
+            AND b.docid IN (SELECT docid FROM sbms_user.bms_dct_rdoc_rcvs WHERE userid = #{authorid})
+            AND b.authorid = #{authorid}
+    </select>
+
+</mapper>

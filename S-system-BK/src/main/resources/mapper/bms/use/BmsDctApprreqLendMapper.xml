@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.anylogic.ssystem.bms.use.mapper.BmsDctApprreqLendMapper">
+
+    <!-- 반출 요청내용 등록 -->
+    <insert id="insertUseTakeOut" parameterType="com.anylogic.ssystem.bms.use.model.InsertUseTakeOutReqVO">
+        INSERT INTO
+        sbms.sbms_user.bms_dct_apprreq_lend(
+            <trim suffixOverrides=",">
+            <if test="apprreqid != null and apprreqid !=''">
+                apprreqid,
+            </if>
+            <if test="mgmtid != null and mgmtid !=''">
+                mgmtid,
+            </if>
+            <if test="lendgubun != null and lendgubun !=''">
+                lendgubun,
+            </if>
+            <if test="reqlenddt != null and reqlenddt !=''">
+                reqlenddt,
+            </if>
+            <if test="reqbackdt != null and reqbackdt !=''">
+                reqbackdt,
+            </if>
+            <if test="grantlenddt != null and grantlenddt !=''">
+                grantlenddt,
+            </if>
+            <if test="grantbackdt != null and grantbackdt !=''">
+                grantbackdt,
+            </if>
+            <if test="grantflag != null and grantflag !=''">
+                grantflag,
+            </if>
+            <if test="lendtype != null and lendtype !=''">
+                lendtype,
+            </if>
+            <if test="lendcharge != null and lendcharge !=''">
+                lendcharge,
+            </if>
+            <if test="carrypcid != null and carrypcid !=''">
+                carrypcid,
+            </if>
+            <if test="isorgdoc != null and isorgdoc !=''">
+                isorgdoc,
+            </if>
+            </trim>
+        )
+        VALUES(
+            <trim suffixOverrides=",">
+            <if test="apprreqid != null and apprreqid !=''">
+                #{apprreqid},
+            </if>
+            <if test="mgmtid != null and mgmtid !=''">
+                #{mgmtid},
+            </if>
+            <if test="lendgubun != null and lendgubun !=''">
+                #{lendgubun},
+            </if>
+            <if test="reqlenddt != null and reqlenddt !=''">
+                #{reqlenddt},
+            </if>
+            <if test="reqbackdt != null and reqbackdt !=''">
+                #{reqbackdt},
+            </if>
+            <if test="grantlenddt != null and grantlenddt !=''">
+                #{grantlenddt},
+            </if>
+            <if test="grantbackdt != null and grantbackdt !=''">
+                #{grantbackdt},
+            </if>
+            <if test="grantflag != null and grantflag !=''">
+                #{grantflag},
+            </if>
+            <if test="lendtype != null and lendtype !=''">
+                #{lendtype},
+            </if>
+            <if test="lendcharge != null and lendcharge !=''">
+                #{lendcharge},
+            </if>
+            <if test="carrypcid != null and carrypcid !=''">
+                #{carrypcid},
+            </if>
+            <if test="isorgdoc != null and isorgdoc !=''">
+                #{isorgdoc},
+            </if>
+            </trim>
+        )
+    </insert>
+
+    <!-- 각 요청서 승인/반려 처리 - 승인한 반출정보 수정 -->
+    <update id="updateUseReqMapLend" parameterType="java.util.Map">
+        UPDATE sbms.sbms_user.bms_dct_apprreq_lend
+        SET
+            grantlenddt = REPLACE(#{grantlenddt},'-','') || '000000'
+          ,grantbackdt = REPLACE(#{grantbackdt},'-','') || '235959'
+          ,grantflag = #{grantflag}
+        WHERE apprreqid = #{apprreqid}
+          AND mgmtid = #{mgmtid}
+    </update>
+
+    <!-- 반출실행 - 반출일자 수정 -->
+    <update id="updateLenddt" parameterType="java.util.Map">
+        UPDATE sbms.sbms_user.bms_dct_apprreq_lend
+        SET
+            lenddt = TO_CHAR(CURRENT_TIMESTAMP, 'YYYYMMDDHH24MISS')
+        WHERE apprreqid = #{apprreqid}
+    </update>
+
+    <!-- 반납실행 - 반납일자 수정 -->
+    <update id="updateLendBackdt" parameterType="java.util.Map">
+        UPDATE sbms.sbms_user.bms_dct_apprreq_lend
+        SET
+            backdt = TO_CHAR(CURRENT_TIMESTAMP, 'YYYYMMDDHH24MISS')
+        WHERE apprreqid = #{apprreqid}
+    </update>
+
+    <!-- 각 요청서 상세화면 조회 - 반출할 문서 정보 -->
+    <select id="selectUseReqLendMapList" parameterType="java.util.Map" resultType="java.util.HashMap">
+        SELECT
+            b.apprreqid as "apprreqid"
+             , m.mgmtid as "mgmtid"
+             , m.mgmtno as "mgmtno"
+             , m.secttl as "secttl"
+             , TO_CHAR(TO_TIMESTAMP(b.reqlenddt, 'YYYYMMDDHH24MISS'), 'YYYY.MM.DD') as "reqlenddt"
+             , TO_CHAR(TO_TIMESTAMP(b.reqbackdt, 'YYYYMMDDHH24MISS'), 'YYYY.MM.DD') as "reqbackdt"
+             , TO_CHAR(TO_TIMESTAMP(COALESCE(NULLIF(TRIM(b.grantlenddt),''),b.reqlenddt), 'YYYYMMDDHH24MISS'), 'YYYY-MM-DD') as "grantlenddt"
+             , TO_CHAR(TO_TIMESTAMP(COALESCE(NULLIF(TRIM(b.grantbackdt),''),b.reqbackdt), 'YYYYMMDDHH24MISS'), 'YYYY-MM-DD') as "grantbackdt"
+             , (
+            SELECT
+                array_agg(
+                        jsonb_build_object(
+                                'flepath', COALESCE(NULLIF(fle.flepath, ''), ''),
+                                'sfilename', COALESCE(NULLIF(fle.sfilename, ''), ''),
+                                'gubun', COALESCE(NULLIF(fle.gubun, ''), '')
+                            )
+                    )
+            FROM sbms.sbms_user.bms_dct_file fle
+                     INNER JOIN sbms.sbms_user.bms_dct_apprreq_lend_fle f ON (fle.fleid = f.fleid) WHERE f.apprreqid = #{apprreqid} AND f.mgmtid = m.mgmtid
+        ) AS "fileInfoList"
+             , m.docid as "docid"
+             , m.deptname as "deptname"
+             , m.authorid as "authorid"
+             , m.authorname as "authorname"
+             , m.authordutyname as "authordutyname"
+             , m.regirecvtype as "regirecvtype"
+             , COALESCE(NULLIF(b.lenddt, ''), '') AS "lenddt"
+             , COALESCE(NULLIF(b.backdt, ''), '') AS "backdt"
+             , COALESCE(TO_CHAR(TO_TIMESTAMP(c.authexpiredt, 'YYYYMMDDHH24MISS'), 'YYYY-MM-DD'), NULL) AS "readauthexpiredt"
+             , CASE
+                   WHEN m.regirecvtype = '2' THEN d.locker
+                   ELSE NULL
+            END AS locker
+             , CASE
+                   WHEN m.regirecvtype = '2' THEN d.unitnum
+                   ELSE NULL
+            END AS unitnum
+             , CASE
+                   WHEN m.regirecvtype = '2' THEN d.mediatype
+                   ELSE NULL
+            END AS mediatype
+             , CASE
+                   WHEN m.regirecvtype = '2' THEN d.doctype
+                   ELSE NULL
+            END AS doctype
+        FROM sbms.sbms_user.bms_dct_mgmt_regi m
+                 LEFT OUTER JOIN sbms.sbms_user.bms_dct_apprreq_lend b on (m.mgmtid = b.mgmtid)
+                 LEFT OUTER JOIN (
+            SELECT DISTINCT ON (docid) docid, authexpiredt
+            FROM sbms.sbms_user.bms_dct_auth_card
+            WHERE reqid = (
+                SELECT reqid
+                FROM sbms.sbms_user.bms_dct_apprreq
+                WHERE apprreqid = #{apprreqid}
+                ) AND authgubun = '01' AND authgrantflag = 'Y'
+        ) c ON m.docid = c.docid
+                 LEFT JOIN sbms.sbms_user.bms_dct_attr_add d ON m.docid = d.docid
+        WHERE b.apprreqid = #{apprreqid}
+    </select>
+
+</mapper>

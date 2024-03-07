@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.anylogic.ssystem.bms.dct.mapper.BmsDctSndrcvRegiMapper">
+
+    <!-- 비밀수발대장 등록 -->
+    <insert id="insertSendRecv" parameterType="com.anylogic.ssystem.bms.dct.model.InsertSendRecvReqVO">
+        INSERT INTO
+        sbms.sbms_user.bms_dct_sndrcv_regi(
+            <trim suffixOverrides=",">
+            <if test="sndrcvseq != null and sndrcvseq !=''">
+                sndrcvseq,
+            </if>
+            <if test="orgid != null and orgid !=''">
+                orgid,
+            </if>
+            <if test="orgname != null and orgname !=''">
+                orgname,
+            </if>
+            <if test="sndrcvgubun != null and sndrcvgubun !=''">
+                sndrcvgubun,
+            </if>
+            <if test="docnodeptid != null and docnodeptid !=''">
+                docnodeptid,
+            </if>
+            <if test="docnodeptname != null and docnodeptname !=''">
+                docnodeptname,
+            </if>
+            <if test="docnoseq != null and docnoseq !=''">
+                docnoseq,
+            </if>
+            <if test="sndrcvttl != null and sndrcvttl !=''">
+                sndrcvttl,
+            </if>
+            <if test="seclevel != null and seclevel !=''">
+                seclevel,
+            </if>
+            <if test="copyno != null and copyno !=''">
+                copyno,
+            </if>
+            <if test="qty != null and qty !=''">
+                qty,
+            </if>
+            <if test="sndrcvdt != null and sndrcvdt !=''">
+                sndrcvdt,
+            </if>
+            <if test="snddeptid != null and snddeptid !=''">
+                snddeptid,
+            </if>
+            <if test="snddeptname != null and snddeptname !=''">
+                snddeptname,
+            </if>
+            <if test="snduserid != null and snduserid !=''">
+                snduserid,
+            </if>
+            <if test="sndusername != null and sndusername !=''">
+                sndusername,
+            </if>
+            <if test="rcvdeptid != null and rcvdeptid !=''">
+                rcvdeptid,
+            </if>
+            <if test="rcvdeptname != null and rcvdeptname !=''">
+                rcvdeptname,
+            </if>
+            <if test="rcvuserid != null and rcvuserid !=''">
+                rcvuserid,
+            </if>
+            <if test="rcvusername != null and rcvusername !=''">
+                rcvusername,
+            </if>
+            <if test="rgstid != null and rgstid !=''">
+                rgstid,
+            </if>
+            <if test="rgstname != null and rgstname !=''">
+                rgstname,
+            </if>
+            <if test="rgstdt != null and rgstdt !=''">
+                rgstdt,
+            </if>
+            <if test="updtid != null and updtid !=''">
+                updtid,
+            </if>
+            <if test="updtname != null and updtname !=''">
+                updtname,
+            </if>
+            <if test="updtdt != null and updtdt !=''">
+                updtdt,
+            </if>
+            <if test="mgmtno != null and mgmtno !=''">
+                mgmtno,
+            </if>
+            <if test="docid != null and docid !=''">
+                docid,
+            </if>
+            </trim>
+        )
+        VALUES(
+            <trim suffixOverrides=",">
+            <if test="sndrcvseq != null and sndrcvseq !=''">
+                #{sndrcvseq},
+<!--                nextval('sbms.sbms_user.sndrcv_regi_seq'),-->
+            </if>
+            <if test="orgid != null and orgid !=''">
+                #{orgid},
+            </if>
+            <if test="orgname != null and orgname !=''">
+                #{orgname},
+            </if>
+            <if test="sndrcvgubun != null and sndrcvgubun !=''">
+                #{sndrcvgubun},
+            </if>
+            <if test="docnodeptid != null and docnodeptid !=''">
+                #{docnodeptid},
+            </if>
+            <if test="docnodeptname != null and docnodeptname !=''">
+                #{docnodeptname},
+            </if>
+            <if test="docnoseq != null and docnoseq !=''">
+                #{docnoseq},
+            </if>
+            <if test="sndrcvttl != null and sndrcvttl !=''">
+                #{sndrcvttl},
+            </if>
+            <if test="seclevel != null and seclevel !=''">
+                #{seclevel},
+            </if>
+            <if test="copyno != null and copyno !=''">
+                #{copyno},
+            </if>
+            <if test="qty != null and qty !=''">
+                #{qty}
+            </if>
+            <if test="sndrcvdt != null and sndrcvdt !=''">
+                #{sndrcvdt},
+            </if>
+            <if test="snddeptid != null and snddeptid !=''">
+                #{snddeptid},
+            </if>
+            <if test="snddeptname != null and snddeptname !=''">
+                #{snddeptname},
+            </if>
+            <if test="snduserid != null and snduserid !=''">
+                #{snduserid},
+            </if>
+            <if test="sndusername != null and sndusername !=''">
+                #{sndusername},
+            </if>
+            <if test="rcvdeptid != null and rcvdeptid !=''">
+                #{rcvdeptid},
+            </if>
+            <if test="rcvdeptname != null and rcvdeptname !=''">
+                #{rcvdeptname},
+            </if>
+            <if test="rcvuserid != null and rcvuserid !=''">
+                #{rcvuserid},
+            </if>
+            <if test="rcvusername != null and rcvusername !=''">
+                #{rcvusername},
+            </if>
+            <if test="rgstid != null and rgstid !=''">
+                #{rgstid},
+            </if>
+            <if test="rgstname != null and rgstname !=''">
+                #{rgstname},
+            </if>
+            <if test="rgstdt != null and rgstdt !=''">
+                #{rgstdt},
+            </if>
+            <if test="updtid != null and updtid !=''">
+                #{updtid},
+            </if>
+            <if test="updtname != null and updtname !=''">
+                #{updtname},
+            </if>
+            <if test="updtdt != null and updtdt !=''">
+                #{updtdt},
+            </if>
+            <if test="mgmtno != null and mgmtno !=''">
+                #{mgmtno},
+            </if>
+            <if test="docid != null and docid !=''">
+                #{docid},
+            </if>
+            </trim>
+        )
+    </insert>
+
+    <!-- sndrcv_regi_seq 조회 -->
+    <select id="getSndrcvseq" resultType="String">
+        SELECT
+        nextval('sbms.sbms_user.sndrcv_regi_seq')
+    </select>
+
+</mapper>

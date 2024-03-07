@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.anylogic.ssystem.bms.com.mapper.ComOrgDetailMapper">
+
+    <!-- 조직관리 > 부서/사용자관리 > 부서 디테일 삭제 -->
+    <delete id="deleteOrganizationDetail" parameterType="com.anylogic.ssystem.bms.com.model.DeleteOrganizationDetailReqVO">
+        DELETE FROM sbms.sbms_user.com_org_detail
+        WHERE 1 = 1
+            and orgid = #{orgid}
+    </delete>
+
+    <!--  조직관리 > 부서/사용자관리 > 부서 디테일 등록 -->
+    <insert id="insertOrganizationDetail" parameterType="com.anylogic.ssystem.bms.com.model.InsertOrganizationDetailReqVO">
+        INSERT INTO
+        sbms.sbms_user.com_org_detail(
+            <trim suffixOverrides=",">
+            <if test="orgid != null and orgid !=''">
+                orgid,
+            </if>
+            <if test="description != null and description !=''">
+                description,
+            </if>
+            <if test="homepage != null and homepage !=''">
+                homepage,
+            </if>
+            <if test="zipcode != null and zipcode !=''">
+                zipcode,
+            </if>
+            <if test="address != null and address !=''">
+                address,
+            </if>
+            <if test="addressdetail != null and addressdetail !=''">
+                addressdetail,
+            </if>
+            <if test="telephone != null and telephone !=''">
+                telephone,
+            </if>
+            <if test="fax != null and fax !=''">
+                fax,
+            </if>
+            </trim>
+        )
+        VALUES(
+            <trim suffixOverrides=",">
+            <if test="orgid != null and orgid !=''">
+                #{orgid},
+            </if>
+            <if test="description != null and description !=''">
+                #{description},
+            </if>
+            <if test="homepage != null and homepage !=''">
+                #{homepage},
+            </if>
+            <if test="zipcode != null and zipcode !=''">
+                #{zipcode},
+            </if>
+            <if test="address != null and address !=''">
+                #{address},
+            </if>
+            <if test="addressdetail != null and addressdetail !=''">
+                #{addressdetail},
+            </if>
+            <if test="telephone != null and telephone !=''">
+                #{telephone},
+            </if>
+            <if test="fax != null and fax !=''">
+                #{fax},
+            </if>
+            </trim>
+        )
+    </insert>
+
+    <!--  조직관리 > 부서/사용자관리 > 부서 디테일 수정 -->
+    <update id="updateOrganizationDetail" parameterType="com.anylogic.ssystem.bms.com.model.UpdateOrganizationDetailReqVO">
+        UPDATE sbms.sbms_user.com_org_detail
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="description != null and description !=''">
+                description = #{description},
+            </if>
+            <if test="homepage != null and homepage !=''">
+                homepage = #{homepage},
+            </if>
+            <if test="zipcode != null and zipcode !=''">
+                zipcode = #{zipcode},
+            </if>
+            <if test="address != null and address !=''">
+                address = #{address},
+            </if>
+            <if test="addressdetail != null and addressdetail !=''">
+                addressdetail = #{addressdetail},
+            </if>
+            <if test="telephone != null">
+                telephone = #{telephone},
+            </if>
+            <if test="fax != null">
+                fax = #{fax},
+            </if>
+        </trim>
+        WHERE 1 = 1
+            and orgid = #{orgid}
+    </update>
+
+</mapper>

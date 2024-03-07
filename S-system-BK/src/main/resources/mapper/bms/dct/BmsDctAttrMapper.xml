@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.anylogic.ssystem.bms.dct.mapper.BmsDctAttrMapper">
+
+    <resultMap id="getDctAttrMap" type="com.anylogic.ssystem.bms.dct.model.GetDctAttrResVO">
+        <id column="docid" property="docid" />                        <!-- 비밀 ID -->
+        <result column="secgubun" property="secgubun" />              <!-- 비밀구분 -->
+        <result column="seclevel" property="seclevel" />              <!-- 비밀등급 -->
+        <result column="orgnprotdt" property="orgnprotdt" />          <!-- 원본보호기간 -->
+        <result column="orgnnextlevel" property="orgnnextlevel" />    <!-- 원본차기비밀등급 -->
+        <result column="orgnreclass" property="orgnreclass" />        <!-- 원본재분류 -->
+        <result column="orgnprotcond" property="orgnprotcond" />      <!-- 원본보호조건 -->
+        <result column="copyprotdt" property="copyprotdt" />          <!-- 사본보호기간 -->
+        <result column="copynextlevel" property="copynextlevel" />    <!-- 사본차기비밀등급 -->
+        <result column="copyreclass" property="copyreclass" />        <!-- 사본재분류 -->
+        <result column="copyprotcond" property="copyprotcond" />      <!-- 사본보호조건 -->
+        <result column="prsrvterm" property="prsrvterm" />            <!-- 보존기간 -->
+        <result column="docno" property="docno" />                    <!-- 문서번호 -->
+        <result column="mgmtno" property="mgmtno" />                  <!-- 관리번호 -->
+        <result column="copyno" property="copyno" />                  <!-- 사본번호 -->
+        <result column="createdeptid" property="createdeptid" />      <!-- 생산부서코드 -->
+        <result column="createdeptname" property="createdeptname" />  <!-- 생산부서명 -->
+        <result column="docpagenum" property="docpagenum" />          <!-- 쪽수 -->
+        <result column="specialyn" property="specialyn" />            <!-- 특별관리여부 -->
+        <result column="binderyn" property="binderyn" />              <!-- 참고철 바인더 여부 -->
+        <result column="secretdocyn" property="secretdocyn" />        <!-- 가제목 사용여부 -->
+        <result column="waryn" property="waryn" />                    <!-- 전시여부 -->
+        <result column="isnewrule" property="isnewrule" />            <!-- 신규 -->
+        <result column="istransrule" property="istransrule" />        <!-- 이관여부 -->
+        <result column="orgncreateyear" property="orgncreateyear" />  <!--  -->
+        <result column="wargubun" property="wargubun" />              <!--  -->
+    </resultMap>
+
+    <resultMap id="getDctAttrAddMap" type="com.anylogic.ssystem.bms.dct.model.GetDctAttrAddResVO">
+        <id column="docid" property="docid" />                        <!-- 비밀 ID -->
+        <result column="mediatype" property="mediatype" />  <!--  -->
+        <result column="doctype" property="doctype" />              <!--  -->
+        <result column="locker" property="locker" />              <!--  -->
+        <result column="unitnum" property="unitnum" />              <!--  -->
+        <result column="proddocnum" property="proddocnum" />              <!--  -->
+    </resultMap>
+
+    <!--  비밀속성 등록 -->
+    <insert id="insertAttribute" parameterType="com.anylogic.ssystem.bms.dct.model.InsertAttributeReqVO">
+        INSERT INTO
+        sbms.sbms_user.bms_dct_attr(
+            <trim suffixOverrides=",">
+            <if test="docid != null and docid !=''">
+                docid,
+            </if>
+            <if test="secgubun != null and secgubun !=''">
+                secgubun,
+            </if>
+            <if test="seclevel != null and seclevel !=''">
+                seclevel,
+            </if>
+            <if test="orgnprotdt != null and orgnprotdt !=''">
+                orgnprotdt,
+            </if>
+            <if test="orgnnextlevel != null and orgnnextlevel !=''">
+                orgnnextlevel,
+            </if>
+            <if test="orgnreclass != null and orgnreclass !=''">
+                orgnreclass,
+            </if>
+            <if test="orgnprotcond != null and orgnprotcond !=''">
+                orgnprotcond,
+            </if>
+            <if test="copyprotdt != null and copyprotdt !=''">
+                copyprotdt,
+            </if>
+            <if test="copynextlevel != null and copynextlevel !=''">
+                copynextlevel,
+            </if>
+            <if test="copyreclass != null and copyreclass !=''">
+                copyreclass,
+            </if>
+            <if test="copyprotcond != null and copyprotcond !=''">
+                copyprotcond,
+            </if>
+            <if test="prsrvterm != null and prsrvterm !=''">
+                prsrvterm,
+            </if>
+            <if test="docno != null and docno !=''">
+                docno,
+            </if>
+            <if test="mgmtno != null and mgmtno !=''">
+                mgmtno,
+            </if>
+            <if test="copyno != null and copyno !=''">
+                copyno,
+            </if>
+            <if test="createdeptid != null and createdeptid !=''">
+                createdeptid,
+            </if>
+            <if test="createdeptname != null and createdeptname !=''">
+                createdeptname,
+            </if>
+            <if test="docpagenum != null and docpagenum !=''">
+                docpagenum,
+            </if>
+            <if test="specialyn != null and specialyn !=''">
+                specialyn,
+            </if>
+            <if test="binderyn != null and binderyn !=''">
+                binderyn,
+            </if>
+            <if test="secretdocyn != null and secretdocyn !=''">
+                secretdocyn,
+            </if>
+            <if test="waryn != null and waryn !=''">
+                waryn,
+            </if>
+            <if test="isnewrule != null and isnewrule !=''">
+                isnewrule,
+            </if>
+            <if test="istransrule != null and istransrule !=''">
+                istransrule,
+            </if>
+            <if test="orgncreateyear != null and orgncreateyear !=''">
+                orgncreateyear,
+            </if>
+            <if test="wargubun != null and wargubun !=''">
+                wargubun,
+            </if>
+            </trim>
+        )
+        VALUES(
+            <trim suffixOverrides=",">
+            <if test="docid != null and docid !=''">
+                #{docid},
+            </if>
+            <if test="secgubun != null and secgubun !=''">
+                #{secgubun},
+            </if>
+            <if test="seclevel != null and seclevel !=''">
+                #{seclevel},
+            </if>
+            <if test="orgnprotdt != null and orgnprotdt !=''">
+                #{orgnprotdt},
+            </if>
+            <if test="orgnnextlevel != null and orgnnextlevel !=''">
+                #{orgnnextlevel},
+            </if>
+            <if test="orgnreclass != null and orgnreclass !=''">
+                #{orgnreclass},
+            </if>
+            <if test="orgnprotcond != null and orgnprotcond !=''">
+                #{orgnprotcond},
+            </if>
+            <if test="copyprotdt != null and copyprotdt !=''">
+                #{copyprotdt},
+            </if>
+            <if test="copynextlevel != null and copynextlevel !=''">
+                #{copynextlevel},
+            </if>
+            <if test="copyreclass != null and copyreclass !=''">
+                #{copyreclass},
+            </if>
+            <if test="copyprotcond != null and copyprotcond !=''">
+                #{copyprotcond},
+            </if>
+            <if test="prsrvterm != null and prsrvterm !=''">
+                #{prsrvterm},
+            </if>
+            <if test="docno != null and docno !=''">
+                #{docno},
+            </if>
+            <if test="mgmtno != null and mgmtno !=''">
+                #{mgmtno},
+            </if>
+            <if test="copyno != null and copyno !=''">
+                #{copyno},
+            </if>
+            <if test="createdeptid != null and createdeptid !=''">
+                #{createdeptid},
+            </if>
+            <if test="createdeptname != null and createdeptname !=''">
+                #{createdeptname},
+            </if>
+            <if test="docpagenum != null and docpagenum !=''">
+                #{docpagenum},
+            </if>
+            <if test="specialyn != null and specialyn !=''">
+                #{specialyn},
+            </if>
+            <if test="binderyn != null and binderyn !=''">
+                #{binderyn},
+            </if>
+            <if test="secretdocyn != null and secretdocyn !=''">
+                #{secretdocyn},
+            </if>
+            <if test="waryn != null and waryn !=''">
+                #{waryn},
+            </if>
+            <if test="isnewrule != null and isnewrule !=''">
+                #{isnewrule},
+            </if>
+            <if test="istransrule != null and istransrule !=''">
+                #{istransrule},
+            </if>
+            <if test="orgncreateyear != null and orgncreateyear !=''">
+                #{orgncreateyear},
+            </if>
+            <if test="wargubun != null and wargubun !=''">
+                #{wargubun},
+            </if>
+            </trim>
+        )
+        ON CONFLICT (docid)
+        DO UPDATE
+        SET
+        secgubun = #{secgubun},
+        seclevel = #{seclevel},
+        prsrvterm = #{prsrvterm},
+        orgnprotdt = #{orgnprotdt},
+        orgnnextlevel = #{orgnnextlevel},
+        orgnreclass = #{orgnreclass},
+        copyprotdt = #{copyprotdt},
+        copynextlevel = #{copynextlevel},
+        copyreclass = #{copyreclass},
+        docno = #{docno}
+    </insert>
+
+    <!-- 비전자 비밀속성 관리정보 등록 -->
+    <insert id="insertAttrAdd" parameterType="com.anylogic.ssystem.bms.dct.model.InsertAttrAddReqVO">
+        INSERT INTO sbms.sbms_user.bms_dct_attr_add
+            (docid, realexist, doctype, mediatype, locker, unitnum, proddocnum)
+        VALUES (#{docid},#{realexist},#{doctype},#{mediatype},#{locker}, #{unitnum}, #{proddocnum})
+    </insert>
+
+    <!--  비밀 속성 상세 조회 -->
+    <select id="getDctAttr" parameterType="com.anylogic.ssystem.bms.dct.model.GetDctAttrReqVO" resultMap="getDctAttrMap">
+        SELECT
+            docid as "docid" 
+            , secgubun as "secgubun" 
+            , seclevel as "seclevel" 
+            , orgnprotdt as "orgnprotdt" 
+            , orgnnextlevel as "orgnnextlevel" 
+            , orgnreclass as "orgnreclass" 
+            , orgnprotcond as "orgnprotcond" 
+            , copyprotdt as "copyprotdt" 
+            , copynextlevel as "copynextlevel" 
+            , copyreclass as "copyreclass" 
+            , copyprotcond as "copyprotcond" 
+            , prsrvterm as "prsrvterm" 
+            , docno as "docno" 
+            , mgmtno as "mgmtno" 
+            , copyno as "copyno" 
+            , createdeptid as "createdeptid" 
+            , createdeptname as "createdeptname" 
+            , docpagenum as "docpagenum" 
+            , specialyn as "specialyn" 
+            , binderyn as "binderyn" 
+            , secretdocyn as "secretdocyn" 
+            , waryn as "waryn" 
+            , isnewrule as "isnewrule" 
+            , istransrule as "istransrule" 
+            , orgncreateyear as "orgncreateyear" 
+            , wargubun as "wargubun" 
+        FROM  sbms.sbms_user.bms_dct_attr
+        WHERE 1 = 1
+            <if test="docid != null and docid !=''"> 
+                and docid = #{docid}
+            </if>
+    </select>
+
+    <!-- 비전자 비밀 속성 상세 조회 -->
+    <select id="getDctAttrAdd" parameterType="com.anylogic.ssystem.bms.dct.model.GetDctAttrAddReqVO" resultMap="getDctAttrAddMap">
+        SELECT
+        docid as "docid"
+        , mediatype as "mediatype"
+        , doctype as "doctype"
+        , locker as "locker"
+        , unitnum as "unitnum"
+        , proddocnum as "proddocnum"
+        FROM  sbms.sbms_user.bms_dct_attr_add
+        WHERE 1 = 1
+        <if test="docid != null and docid !=''">
+            and docid = #{docid}
+        </if>
+    </select>
+
+    <!-- 비밀속성 수정 -->
+    <update id="updateDctAttr" parameterType="com.anylogic.ssystem.bms.dct.model.UpdateDctAttrReqVO">
+        UPDATE sbms.sbms_user.bms_dct_attr
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="mgmtno != null and mgmtno !=''">
+                mgmtno = #{mgmtno},
+            </if>
+            <if test="copyno != null and copyno !=''">
+                copyno = #{copyno},
+            </if>
+        </trim>
+        WHERE 1 = 1
+        and docid = #{docid}
+    </update>
+
+</mapper>

@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.anylogic.ssystem.bms.dct.mapper.BmsDctFileMapper">
+
+    <resultMap id="selectDctFileMap" type="com.anylogic.ssystem.bms.dct.model.SelectDctFileResVO">
+        <id column="docid" property="docid" />                        <!-- 비밀 ID -->
+        <id column="fleid" property="fleid" />                        <!-- 첨부 ID -->
+        <result column="sfilename" property="sfilename" />            <!-- 파일고유이름 -->
+        <result column="gubun" property="gubun" />                    <!-- 구분 -->
+        <result column="flettl" property="flettl" />                  <!-- 첨부명 -->
+        <result column="flesize" property="flesize" />                <!-- 첨부크기 -->
+        <result column="fleorder" property="fleorder" />              <!-- 첨부순서 -->
+        <result column="flepath" property="flepath" />              <!-- 파일경로 -->
+        <result column="fleurl" property="fleurl" />              <!-- 파일url -->
+        <result column="indt" property="indt" />                      <!-- 등록일 -->
+        <result column="inid" property="inid" />                      <!-- 등록자 ID -->
+        <result column="markflag" property="markflag" />              <!-- 비밀등급표시여부 -->
+        <result column="origubun" property="origubun" />              <!-- 기존 문서의 구분 -->
+        <result column="oridocid" property="oridocid" />              <!-- 기존 문서의 비밀 ID -->
+        <result column="isviewtype" property="isviewtype" />          <!-- 비전자 첨부구분 -->
+        <result column="rownum" property="rownum" />
+    </resultMap>
+
+
+    <!-- 파일 등록 -->
+    <insert id="insertFile" parameterType="com.anylogic.ssystem.bms.dct.model.InsertFileReqVO">
+        INSERT INTO
+        sbms.sbms_user.bms_dct_file(
+            <trim suffixOverrides=",">
+            <if test="docid != null and docid !=''">
+                docid,
+            </if>
+            <if test="fleid != null and fleid !=''">
+                fleid,
+            </if>
+            <if test="sfilename != null and sfilename !=''">
+                sfilename,
+            </if>
+            <if test="gubun != null and gubun !=''">
+                gubun,
+            </if>
+            <if test="flettl != null and flettl !=''">
+                flettl,
+            </if>
+            <if test="flesize != null and flesize !=''">
+                flesize,
+            </if>
+                fleorder,
+            <if test="indt != null and indt !=''">
+                indt,
+            </if>
+            <if test="inid != null and inid !=''">
+                inid,
+            </if>
+            <if test="markflag != null and markflag !=''">
+                markflag,
+            </if>
+            <if test="origubun != null and origubun !=''">
+                origubun,
+            </if>
+            <if test="oridocid != null and oridocid !=''">
+                oridocid,
+            </if>
+            <if test="isviewtype != null and isviewtype !=''">
+                isviewtype,
+            </if>
+            <if test="flepath != null and flepath !=''">
+                flepath,
+            </if>
+            <if test="fleurl != null and fleurl !=''">
+                fleurl,
+            </if>
+            </trim>
+        )
+        VALUES(
+            <trim suffixOverrides=",">
+            <if test="docid != null and docid !=''">
+                #{docid},
+            </if>
+            <if test="fleid != null and fleid !=''">
+                #{fleid},
+            </if>
+            <if test="sfilename != null and sfilename !=''">
+                #{sfilename},
+            </if>
+            <if test="gubun != null and gubun !=''">
+                #{gubun},
+            </if>
+            <if test="flettl != null and flettl !=''">
+                #{flettl},
+            </if>
+            <if test="flesize != null and flesize !=''">
+                #{flesize},
+            </if>
+                #{fleorder},
+            <if test="indt != null and indt !=''">
+                #{indt},
+            </if>
+            <if test="inid != null and inid !=''">
+                #{inid},
+            </if>
+            <if test="markflag != null and markflag !=''">
+                #{markflag},
+            </if>
+            <if test="origubun != null and origubun !=''">
+                #{origubun},
+            </if>
+            <if test="oridocid != null and oridocid !=''">
+                #{oridocid},
+            </if>
+            <if test="isviewtype != null and isviewtype !=''">
+                #{isviewtype},
+            </if>
+            <if test="flepath != null and flepath !=''">
+                #{flepath},
+            </if>
+            <if test="fleurl != null and fleurl !=''">
+                #{fleurl},
+            </if>
+            </trim>
+        )
+        ON CONFLICT (docid, fleid)
+        DO UPDATE
+        SET
+        sfilename = #{sfilename},
+        gubun = #{gubun},
+        flettl = #{flettl},
+        flesize = #{flesize},
+        fleorder = #{fleorder},
+        isviewtype = #{isviewtype},
+        fleurl = #{fleurl},
+        flepath = #{flepath}
+    </insert>
+
+    <!-- 기안문, 붙임 파일 조회 -->
+    <select id="selectDctFile" parameterType="com.anylogic.ssystem.bms.dct.model.SelectDctFileReqVO" resultMap="selectDctFileMap">
+        SELECT
+            docid as "docid" 
+            , fleid as "fleid" 
+            , sfilename as "sfilename" 
+            , gubun as "gubun" 
+            , flettl as "flettl" 
+            , flesize as "flesize" 
+            , fleorder as "fleorder"
+            , flepath as "flepath"
+            , fleurl as "fleurl"
+            , indt as "indt"
+            , inid as "inid"
+            , markflag as "markflag" 
+            , origubun as "origubun" 
+            , oridocid as "oridocid" 
+            , isviewtype as "isviewtype" 
+        FROM  sbms.sbms_user.bms_dct_file
+        WHERE 1=1
+            and gubun != 'DFT03'
+            <if test="docid != null and docid !=''"> 
+                and docid = #{docid}
+            </if>
+        ORDER BY
+            CASE
+                WHEN gubun = 'DFT01' THEN inid
+                ELSE fleid
+            END
+    </select>
+
+    <!-- 발송 실패 오프라인 인쇄시 파일 조회 -->
+    <select id="selectSendFileList" parameterType="com.anylogic.ssystem.bms.dct.model.SelectDctFileReqVO" resultMap="selectDctFileMap">
+        WITH RankedFiles AS (
+            SELECT
+            docid as "docid"
+            , fleid as "fleid"
+            , sfilename as "sfilename"
+            , gubun as "gubun"
+            , flettl as "flettl"
+            , flesize as "flesize"
+            , fleorder as "fleorder"
+            , flepath as "flepath"
+            , fleurl as "fleurl"
+            , indt as "indt"
+            , inid as "inid"
+            , markflag as "markflag"
+            , origubun as "origubun"
+            , oridocid as "oridocid"
+            , isviewtype as "isviewtype"
+            , ROW_NUMBER() OVER (ORDER BY indt DESC, gubun) AS rownum
+            FROM  sbms.sbms_user.bms_dct_file
+            WHERE 1=1
+            <if test="docid != null and docid !=''">
+                and docid = #{docid}
+            </if>
+        )
+        SELECT *
+        FROM RankedFiles
+        WHERE (gubun = 'DFT01' AND rownum = 1) OR gubun = 'DFT02'
+    </select>
+
+    <!-- 붙임 파일만 조회 -->
+    <select id="selectDctFileDFT02" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT
+            docid as "docid"
+            , fleid as "fleid"
+            , sfilename as "sfilename"
+            , gubun as "gubun"
+            , flettl as "flettl"
+            , flesize as "flesize"
+            , fleorder as "fleorder"
+            , flepath as "flepath"
+            , fleurl as "fleurl"
+            , indt as "indt"
+            , inid as "inid"
+            , markflag as "markflag"
+            , origubun as "origubun"
+            , oridocid as "oridocid"
+            , isviewtype as "isviewtype"
+        FROM  sbms.sbms_user.bms_dct_file
+        WHERE 1=1
+          and gubun = 'DFT02'
+          <if test="docid != null and docid !=''">
+            and docid = #{docid}
+            and indt = (SELECT MAX(indt) FROM sbms.sbms_user.bms_dct_file WHERE docid = #{docid})
+          </if>
+        ORDER BY fleid
+    </select>
+
+    <!-- 파일 조회 (범용) -->
+    <select id="selectCommonDctFile" parameterType="com.anylogic.ssystem.bms.dct.model.SelectDctFileReqVO" resultMap="selectDctFileMap">
+        SELECT
+        docid as "docid"
+        , fleid as "fleid"
+        , sfilename as "sfilename"
+        , gubun as "gubun"
+        , flettl as "flettl"
+        , flesize as "flesize"
+        , fleorder as "fleorder"
+        , flepath as "flepath"
+        , fleurl as "fleurl"
+        , indt as "indt"
+        , inid as "inid"
+        , markflag as "markflag"
+        , origubun as "origubun"
+        , oridocid as "oridocid"
+        , isviewtype as "isviewtype"
+        FROM  sbms.sbms_user.bms_dct_file
+        WHERE 1=1
+        <if test="gubun != null and gubun !=''">
+            and gubun = #{gubun}
+        </if>
+        <if test="docid != null and docid !=''">
+            and docid = #{docid}
+            and indt = (SELECT MAX(indt) FROM sbms.sbms_user.bms_dct_file WHERE docid = #{docid})
+        </if>
+        ORDER BY fleid
+    </select>
+
+</mapper>

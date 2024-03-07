@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.anylogic.ssystem.bms.com.mapper.ComLoginLogMapper">
+
+    <resultMap id="selectSystemLoginLogMap" type="com.anylogic.ssystem.bms.com.model.SelectSystemLoginLogResVO">
+        <id column="opid" property="opid" />                          <!--  -->
+        <result column="userid" property="userid" />                  <!--  -->
+        <result column="logtime" property="logtime" />                <!--  -->
+        <result column="gubun" property="gubun" />                    <!--  -->
+        <result column="ip" property="ip" />                          <!--  -->
+        <result column="neu02rserialnolong" property="neu02rserialnolong" /><!--  -->
+        <result column="neu02rserialnoshort" property="neu02rserialnoshort" /><!--  -->
+        <result column="kdnid" property="kdnid" />                    <!--  -->
+        <result column="loginid" property="loginid" />                <!-- 로그인아이디 -->
+        <result column="username" property="username" />              <!-- 사용자명 -->
+        <result column="deptid" property="deptid" />                  <!-- 부서아이디 -->
+        <result column="deptname" property="deptname" />              <!-- 부서명 -->
+        <result column="residentno" property="residentno" />          <!-- 지역번호 -->
+        <result column="position" property="position" />              <!-- 직위 -->
+        <result column="grade" property="grade" />                    <!-- 직급 -->
+        <result column="password" property="password" />              <!-- 비밀번호 -->
+        <result column="userorder" property="userorder" />            <!-- 사용자순서 -->
+        <result column="imgubun" property="imgubun" />                <!-- 임용구분 -->
+        <result column="isdeleted" property="isdeleted" />            <!-- 존폐여부 -->
+        <result column="isconcurrent" property="isconcurrent" />      <!-- 겸직여부 -->
+        <result column="positiondetail" property="positiondetail" />  <!-- 직위상세 -->
+        <result column="approvalpassword" property="approvalpassword" /><!-- 승인비밀번호 -->
+        <result column="inid" property="inid" />                      <!-- 등록자아이디 -->
+        <result column="indt" property="indt" />                      <!-- 등록일시 -->
+        <result column="upid" property="upid" />                      <!-- 수정자아이디 -->
+        <result column="updt" property="updt" />                      <!-- 수정일시 -->
+    </resultMap>
+
+
+    <!-- 시스템관리 > 시스템접속로그 > 시스템접속로그 목록 조회 -->
+    <select id="selectSystemLoginLog" parameterType="com.anylogic.ssystem.bms.com.model.SelectSystemLoginLogReqVO" resultMap="selectSystemLoginLogMap">
+        SELECT
+            A.opid as "opid"
+            , A.userid as "userid"
+            , A.logtime as "logtime"
+            , A.gubun as "gubun"
+            , A.ip as "ip"
+            , A.neu02rserialnolong as "neu02rserialnolong"
+            , A.neu02rserialnoshort as "neu02rserialnoshort"
+            , A.kdnid as "kdnid"
+            , B.loginid as "loginid"
+            , B.username as "username"
+            , B.deptid as "deptid"
+            , B.deptname as "deptname"
+            , B.residentno as "residentno"
+            , B.position as "position"
+            , B.grade as "grade"
+            , B.password as "password"
+            , B.userorder as "userorder"
+            , B.imgubun as "imgubun"
+            , B.isdeleted as "isdeleted"
+            , B.isconcurrent as "isconcurrent"
+            , B.positiondetail as "positiondetail"
+            , B.approvalpassword as "approvalpassword"
+            , B.inid as "inid"
+            , B.indt as "indt"
+            , B.upid as "upid"
+            , B.updt as "updt"
+        FROM  sbms.sbms_user.com_login_log  A
+            LEFT OUTER JOIN  sbms.sbms_user.com_userinfo  B
+                ON ( A.userid  =  B.userid  )
+        WHERE 1 = 1
+            <if test="userid != null and userid !=''">
+                and A.userid like CONCAT('%', #{userid}, '%')
+            </if>
+            <if test="username != null and username !=''">
+                and username like CONCAT('%', #{username}, '%')
+            </if>
+            <if test="deptname != null and deptname !=''">
+                and deptname like CONCAT('%', #{deptname}, '%')
+            </if>
+            <if test="startDt != null and startDt !=''">
+                and logtime <![CDATA[>=]]> #{startDt}
+            </if>
+            <if test="endDt != null and endDt !=''">
+                and logtime <![CDATA[<=]]> #{endDt}
+            </if>
+        ORDER BY opid DESC
+        <if test="limitSize != null and limitSize != 0">
+            <choose>
+                <when test="limitSize == 1">
+                    LIMIT 1
+                </when>
+                <otherwise>
+                    LIMIT #{limitSize}
+                </otherwise>
+            </choose>
+        </if>
+    </select>
+
+    <!-- 로그인시 시스템접속로그 등록 -->
+    <insert id="insertSystemLoginLog" parameterType="com.anylogic.ssystem.bms.com.model.InsertSystemLoginLogReqVO">
+        INSERT INTO
+        sbms.sbms_user.com_login_log(
+        <trim suffixOverrides=",">
+            <if test="opid != null and opid !=''">
+                opid,
+            </if>
+            <if test="userid != null and userid !=''">
+                userid,
+            </if>
+            <if test="logtime != null and logtime !=''">
+                logtime,
+            </if>
+            <if test="gubun != null and gubun !=''">
+                gubun,
+            </if>
+            <if test="ip != null and ip !=''">
+                ip,
+            </if>
+            <if test="kdnid != null and kdnid !=''">
+                kdnid,
+            </if>
+        </trim>
+        )
+        VALUES(
+        <trim suffixOverrides=",">
+            <if test="opid != null and opid !=''">
+                #{opid},
+            </if>
+            <if test="userid != null and userid !=''">
+                #{userid},
+            </if>
+            <if test="logtime != null and logtime !=''">
+                #{logtime},
+            </if>
+            <if test="gubun != null and gubun !=''">
+                #{gubun},
+            </if>
+            <if test="ip != null and ip !=''">
+                #{ip},
+            </if>
+            <if test="kdnid != null and kdnid !=''">
+                #{kdnid},
+            </if>
+        </trim>
+        )
+    </insert>
+
+    <!-- 시스템접속로그 삭제 -->
+    <delete id="deleteSystemLoginLog" parameterType="com.anylogic.ssystem.bms.com.model.InsertSystemLoginLogReqVO">
+        DELETE FROM sbms.sbms_user.com_login_log
+        WHERE 1 = 1
+            and opid = #{opid}
+    </delete>
+
+</mapper>

@@ -1,0 +1,424 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.anylogic.ssystem.bms.dct.mapper.BmsDctApprRecvMapper">
+
+    <resultMap id="getDctRecvMap" type="com.anylogic.ssystem.bms.dct.model.GetDctRecvResVO">
+        <id column="docid" property="docid" />                        <!-- 비밀 ID -->
+        <id column="receiverid" property="receiverid" />              <!-- 수신처 ID -->
+        <id column="tempflag" property="tempflag" />                  <!-- 임시 FLAG -->
+        <result column="seq" property="seq" />                        <!-- 일련번호 -->
+        <result column="gubun" property="gubun" />                    <!-- 구분 -->
+        <result column="deptid" property="deptid" />                  <!-- 부서 ID -->
+        <result column="deptname" property="deptname" />              <!-- 부서 이름 -->
+        <result column="refdeptid" property="refdeptid" />            <!-- 참조부서 ID -->
+        <result column="refdeptname" property="refdeptname" />        <!-- 참조부서 이름 -->
+        <result column="zipcode" property="zipcode" />                <!-- 우편번호 -->
+        <result column="address" property="address" />                <!-- 주소정보 -->
+        <result column="phonenumber" property="phonenumber" />        <!-- 전화번호 -->
+        <result column="faxnumber" property="faxnumber" />            <!-- FAX번호 -->
+        <result column="recsymbol" property="recsymbol" />            <!-- 수신자 기호 -->
+        <result column="indt" property="indt" />                      <!-- 등록일 -->
+        <result column="inid" property="inid" />                      <!-- 등록자 ID -->
+        <result column="actdt" property="actdt" />                    <!-- 처리일 -->
+        <result column="actstatus" property="actstatus" />            <!-- 처리상태 -->
+        <result column="actername" property="actername" />            <!-- 처리자 이름 -->
+        <result column="acterdeptname" property="acterdeptname" />    <!-- 처리자 부서이름 -->
+        <result column="acterphonenumber" property="acterphonenumber" /><!-- 처리자 전화번호 -->
+        <result column="systemtype" property="systemtype" />          <!-- 시스템유형 -->
+        <result column="relaytype" property="relaytype" />            <!-- 유통망 종류 -->
+        <result column="deptorgflag" property="deptorgflag" />        <!-- 부서조직 구분 -->
+        <result column="distdeptid" property="distdeptid" />          <!-- 배포처 ID -->
+        <result column="distdeptname" property="distdeptname" />      <!-- 배포처명 -->
+        <result column="distname" property="distname" />      <!--  -->
+        <result column="distplflag" property="distplflag" />          <!-- 친전여부 -->
+        <result column="seq2" property="seq2" />                      <!-- 일련번호2 -->
+        <result column="distactstatus" property="distactstatus" />    <!-- 배부처리상태 -->
+        <result column="addsendcnt" property="addsendcnt" />          <!-- 추가발송횟수 -->
+        <result column="distactdt" property="distactdt" />            <!-- 배부처리일자 -->
+        <result column="copyprotflag" property="copyprotflag" />      <!--  -->
+        <result column="copyprotdt" property="copyprotdt" />          <!--  -->
+        <result column="copynextlevel" property="copynextlevel" />    <!--  -->
+        <result column="copyreclass" property="copyreclass" />        <!--  -->
+        <result column="copyprotcond" property="copyprotcond" />      <!--  -->
+        <result column="seq3" property="seq3" />                      <!--  -->
+        <result column="readflag" property="readflag" />              <!--  -->
+        <result column="readerid" property="readerid" />              <!--  -->
+        <result column="readdt" property="readdt" />                  <!--  -->
+        <result column="recvdata" property="recvdata" />                  <!--  -->
+    </resultMap>
+
+
+    <!--  수신처 등록 -->
+    <insert id="insertRecv" parameterType="com.anylogic.ssystem.bms.dct.model.InsertRecvReqVO">
+        INSERT INTO
+        sbms.sbms_user.bms_dct_appr_recv(
+        <trim suffixOverrides=",">
+            <if test="docid != null and docid !=''">
+                docid,
+            </if>
+            <if test="receiverid != null and receiverid !=''">
+                receiverid,
+            </if>
+            <if test="tempflag != null and tempflag !=''">
+                tempflag,
+            </if>
+            <if test="seq != null and seq !=''">
+                seq,
+            </if>
+            <if test="gubun != null and gubun !=''">
+                gubun,
+            </if>
+            <if test="deptid != null and deptid !=''">
+                deptid,
+            </if>
+            <if test="deptname != null and deptname !=''">
+                deptname,
+            </if>
+            <if test="refdeptid != null and refdeptid !=''">
+                refdeptid,
+            </if>
+            <if test="refdeptname != null and refdeptname !=''">
+                refdeptname,
+            </if>
+            <if test="zipcode != null and zipcode !=''">
+                zipcode,
+            </if>
+            <if test="address != null and address !=''">
+                address,
+            </if>
+            <if test="phonenumber != null and phonenumber !=''">
+                phonenumber,
+            </if>
+            <if test="faxnumber != null and faxnumber !=''">
+                faxnumber,
+            </if>
+            <if test="recsymbol != null and recsymbol !=''">
+                recsymbol,
+            </if>
+            <if test="indt != null and indt !=''">
+                indt,
+            </if>
+            <if test="inid != null and inid !=''">
+                inid,
+            </if>
+            <if test="actdt != null and actdt !=''">
+                actdt,
+            </if>
+            <if test="actstatus != null and actstatus !=''">
+                actstatus,
+            </if>
+            <if test="actername != null and actername !=''">
+                actername,
+            </if>
+            <if test="acterdeptname != null and acterdeptname !=''">
+                acterdeptname,
+            </if>
+            <if test="acterphonenumber != null and acterphonenumber !=''">
+                acterphonenumber,
+            </if>
+            <if test="systemtype != null and systemtype !=''">
+                systemtype,
+            </if>
+            <if test="relaytype != null and relaytype !=''">
+                relaytype,
+            </if>
+            <if test="deptorgflag != null and deptorgflag !=''">
+                deptorgflag,
+            </if>
+            <if test="distdeptid != null and distdeptid !=''">
+                distdeptid,
+            </if>
+            <if test="sendOrgNameData != null and sendOrgNameData !=''">
+                distdeptname,
+            </if>
+            <if test="sendNameData != null and sendNameData !=''">
+                distname,
+            </if>
+            <if test="distplflag != null and distplflag !=''">
+                distplflag,
+            </if>
+            <if test="seq2 != null and seq2 !=''">
+                seq2,
+            </if>
+            <if test="distactstatus != null and distactstatus !=''">
+                distactstatus,
+            </if>
+            <if test="addsendcnt != null and addsendcnt !=''">
+                addsendcnt,
+            </if>
+            <if test="distactdt != null and distactdt !=''">
+                distactdt,
+            </if>
+            <if test="copyprotflag != null and copyprotflag !=''">
+                copyprotflag,
+            </if>
+            <if test="copyprotdt != null and copyprotdt !=''">
+                copyprotdt,
+            </if>
+            <if test="copynextlevel != null and copynextlevel !=''">
+                copynextlevel,
+            </if>
+            <if test="copyreclass != null and copyreclass !=''">
+                copyreclass,
+            </if>
+            <if test="copyprotcond != null and copyprotcond !=''">
+                copyprotcond,
+            </if>
+            <if test="seq3 != null and seq3 !=''">
+                seq3,
+            </if>
+            <if test="readflag != null and readflag !=''">
+                readflag,
+            </if>
+            <if test="readerid != null and readerid !=''">
+                readerid,
+            </if>
+            <if test="readdt != null and readdt !=''">
+                readdt,
+            </if>
+        </trim>
+        )
+        VALUES(
+        <trim suffixOverrides=",">
+            <if test="docid != null and docid !=''">
+                #{docid},
+            </if>
+            <if test="receiverid != null and receiverid !=''">
+                #{receiverid},
+            </if>
+            <if test="tempflag != null and tempflag !=''">
+                #{tempflag},
+            </if>
+            <if test="seq != null and seq !=''">
+                #{seq},
+            </if>
+            <if test="gubun != null and gubun !=''">
+                #{gubun},
+            </if>
+            <if test="deptid != null and deptid !=''">
+                #{deptid},
+            </if>
+            <if test="deptname != null and deptname !=''">
+                #{deptname},
+            </if>
+            <if test="refdeptid != null and refdeptid !=''">
+                #{refdeptid},
+            </if>
+            <if test="refdeptname != null and refdeptname !=''">
+                #{refdeptname},
+            </if>
+            <if test="zipcode != null and zipcode !=''">
+                #{zipcode},
+            </if>
+            <if test="address != null and address !=''">
+                #{address},
+            </if>
+            <if test="phonenumber != null and phonenumber !=''">
+                #{phonenumber},
+            </if>
+            <if test="faxnumber != null and faxnumber !=''">
+                #{faxnumber},
+            </if>
+            <if test="recsymbol != null and recsymbol !=''">
+                #{recsymbol},
+            </if>
+            <if test="indt != null and indt !=''">
+                #{indt},
+            </if>
+            <if test="inid != null and inid !=''">
+                #{inid},
+            </if>
+            <if test="actdt != null and actdt !=''">
+                #{actdt},
+            </if>
+            <if test="actstatus != null and actstatus !=''">
+                #{actstatus},
+            </if>
+            <if test="actername != null and actername !=''">
+                #{actername},
+            </if>
+            <if test="acterdeptname != null and acterdeptname !=''">
+                #{acterdeptname},
+            </if>
+            <if test="acterphonenumber != null and acterphonenumber !=''">
+                #{acterphonenumber},
+            </if>
+            <if test="systemtype != null and systemtype !=''">
+                #{systemtype},
+            </if>
+            <if test="relaytype != null and relaytype !=''">
+                #{relaytype},
+            </if>
+            <if test="deptorgflag != null and deptorgflag !=''">
+                #{deptorgflag},
+            </if>
+            <if test="distdeptid != null and distdeptid !=''">
+                #{distdeptid},
+            </if>
+            <if test="sendOrgNameData != null and sendOrgNameData !=''">
+                #{sendOrgNameData},
+            </if>
+            <if test="sendNameData != null and sendNameData !=''">
+                #{sendNameData},
+            </if>
+            <if test="distplflag != null and distplflag !=''">
+                #{distplflag},
+            </if>
+            <if test="seq2 != null and seq2 !=''">
+                #{seq2},
+            </if>
+            <if test="distactstatus != null and distactstatus !=''">
+                #{distactstatus},
+            </if>
+            <if test="addsendcnt != null and addsendcnt !=''">
+                #{addsendcnt},
+            </if>
+            <if test="distactdt != null and distactdt !=''">
+                #{distactdt},
+            </if>
+            <if test="copyprotflag != null and copyprotflag !=''">
+                #{copyprotflag},
+            </if>
+            <if test="copyprotdt != null and copyprotdt !=''">
+                #{copyprotdt},
+            </if>
+            <if test="copynextlevel != null and copynextlevel !=''">
+                #{copynextlevel},
+            </if>
+            <if test="copyreclass != null and copyreclass !=''">
+                #{copyreclass},
+            </if>
+            <if test="copyprotcond != null and copyprotcond !=''">
+                #{copyprotcond},
+            </if>
+            <if test="seq3 != null and seq3 !=''">
+                #{seq3},
+            </if>
+            <if test="readflag != null and readflag !=''">
+                #{readflag},
+            </if>
+            <if test="readerid != null and readerid !=''">
+                #{readerid},
+            </if>
+            <if test="readdt != null and readdt !=''">
+                #{readdt},
+            </if>
+        </trim>
+        )
+        ON CONFLICT (docid, receiverid, tempflag)
+        DO UPDATE
+            SET
+                distdeptname = #{sendOrgNameData},
+                distname = #{sendNameData}
+    </insert>
+
+    <!-- 수신처 목록 조회 -->
+    <select id="getDctRecv" parameterType="com.anylogic.ssystem.bms.dct.model.GetDctRecvReqVO" resultMap="getDctRecvMap">
+        SELECT
+        docid as "docid"
+        , receiverid as "receiverid"
+        , tempflag as "tempflag"
+        , seq as "seq"
+        , gubun as "gubun"
+        , deptid as "deptid"
+        , deptname as "deptname"
+        , refdeptid as "refdeptid"
+        , refdeptname as "refdeptname"
+        , zipcode as "zipcode"
+        , address as "address"
+        , phonenumber as "phonenumber"
+        , faxnumber as "faxnumber"
+        , recsymbol as "recsymbol"
+        , indt as "indt"
+        , inid as "inid"
+        , actdt as "actdt"
+        , actstatus as "actstatus"
+        , actername as "actername"
+        , acterdeptname as "acterdeptname"
+        , acterphonenumber as "acterphonenumber"
+        , systemtype as "systemtype"
+        , relaytype as "relaytype"
+        , deptorgflag as "deptorgflag"
+        , distdeptid as "distdeptid"
+        , distdeptname as "distdeptname"
+        , distname as "distname"
+        , distplflag as "distplflag"
+        , seq2 as "seq2"
+        , distactstatus as "distactstatus"
+        , addsendcnt as "addsendcnt"
+        , distactdt as "distactdt"
+        , copyprotflag as "copyprotflag"
+        , copyprotdt as "copyprotdt"
+        , copynextlevel as "copynextlevel"
+        , copyreclass as "copyreclass"
+        , copyprotcond as "copyprotcond"
+        , seq3 as "seq3"
+        , readflag as "readflag"
+        , readerid as "readerid"
+        , readdt as "readdt"
+        , (case when exists(select oridocid from sbms.sbms_user.bms_dct_rdoc where docid = #{docid})
+            then (select string_agg(deptname, ', ') from sbms.sbms_user.bms_dct_appr_recv where docid = (select MAX(oridocid) from sbms.sbms_user.bms_dct_rdoc where docid = #{docid}))
+            else ''
+            end) as "recvdata"
+        FROM  sbms.sbms_user.bms_dct_appr_recv
+        WHERE 1 = 1
+        <if test="docid != null and docid !=''">
+            and docid = #{docid}
+        </if>
+    </select>
+
+    <!-- 원본 문서의 수신처 목록 조회 -->
+    <select id="getDctOriRecv" parameterType="com.anylogic.ssystem.bms.dct.model.GetDctRecvReqVO" resultMap="getDctRecvMap">
+        SELECT
+        docid as "docid"
+        , receiverid as "receiverid"
+        , tempflag as "tempflag"
+        , seq as "seq"
+        , gubun as "gubun"
+        , deptid as "deptid"
+        , deptname as "deptname"
+        , refdeptid as "refdeptid"
+        , refdeptname as "refdeptname"
+        , zipcode as "zipcode"
+        , address as "address"
+        , phonenumber as "phonenumber"
+        , faxnumber as "faxnumber"
+        , recsymbol as "recsymbol"
+        , indt as "indt"
+        , inid as "inid"
+        , actdt as "actdt"
+        , actstatus as "actstatus"
+        , actername as "actername"
+        , acterdeptname as "acterdeptname"
+        , acterphonenumber as "acterphonenumber"
+        , systemtype as "systemtype"
+        , relaytype as "relaytype"
+        , deptorgflag as "deptorgflag"
+        , distdeptid as "distdeptid"
+        , distdeptname as "distdeptname"
+        , distplflag as "distplflag"
+        , seq2 as "seq2"
+        , distactstatus as "distactstatus"
+        , addsendcnt as "addsendcnt"
+        , distactdt as "distactdt"
+        , copyprotflag as "copyprotflag"
+        , copyprotdt as "copyprotdt"
+        , copynextlevel as "copynextlevel"
+        , copyreclass as "copyreclass"
+        , copyprotcond as "copyprotcond"
+        , seq3 as "seq3"
+        , readflag as "readflag"
+        , readerid as "readerid"
+        , readdt as "readdt"
+        FROM  sbms.sbms_user.bms_dct_appr_recv
+        WHERE 1 = 1
+        <if test="docid != null and docid !=''">
+            and docid = (
+            SELECT oridocid
+            FROM sbms.sbms_user.bms_dct_rdoc
+            WHERE docid = #{docid}
+            )
+        </if>
+    </select>
+
+</mapper>

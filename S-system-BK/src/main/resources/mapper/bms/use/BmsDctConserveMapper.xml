@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.anylogic.ssystem.bms.use.mapper.BmsDctConserveMapper">
+
+    <resultMap id="mgmtRegiMap" type="com.anylogic.ssystem.bms.dct.model.SelectMgmtRegiListResVO">
+        <id column="mgmtid" property="mgmtid" />                      <!-- 비밀관리 ID -->
+        <result column="mgmtno" property="mgmtno" />                  <!-- 관리번호 -->
+        <result column="docid" property="docid" />                    <!-- 비밀 ID -->
+        <result column="seclevel" property="seclevel" />              <!-- 비밀등급 -->
+        <result column="regirecvdt" property="regirecvdt" />          <!-- 생산/접수 일자 -->
+        <result column="regirecvtype" property="regirecvtype" />      <!-- 생산/접수 형태 -->
+        <result column="secttl" property="secttl" />                  <!-- 비밀제목 -->
+        <result column="sectype" property="sectype" />                <!-- 비밀형태 -->
+        <result column="copyno" property="copyno" />                  <!-- 사본번호 -->
+        <result column="docno" property="docno" />                  <!-- 문서번호 -->
+        <result column="notiprotterm" property="notiprotterm" />      <!-- 예고문보호기간 -->
+        <result column="notiprsrvterm" property="notiprsrvterm" />    <!-- 예고문보존기간 -->
+        <result column="secstatus" property="secstatus" />            <!-- 열람범위 -->
+        <result column="authorname" property="authorname" />          <!-- 처리담당자명 -->
+        <result column="cnsrvflag" property="cnsrvflag" />            <!-- 존안여부 -->
+        <result column="cnsrvdt" property="cnsrvdt" />                <!-- 존안일자 -->
+        <result column="rfidtagflag" property="rfidtagflag" />        <!-- RFID사용여부 -->
+        <result column="delflag" property="delflag" />                <!-- 삭선여부 -->
+        <result column="note" property="note" />                      <!-- 비고 -->
+        <result column="indt" property="indt" />                      <!-- 등록일시 -->
+        <result column="cnsrvdt" property="cnsrvdt" />                      <!-- 존안일시 -->
+        <result column="grantcnsrvdt" property="grantcnsrvdt" />        <!-- 승인존안기간 -->
+        <result column="auth" property="auth" />
+        <result column="readauthexpiredt" property="readauthexpiredt" />
+        <result column="transdt" property="transdt" />
+        <result column="cnsrvterm" property="cnsrvterm" />            <!-- 존안보존일자 -->
+        <result column="aggregatemgmtid" property="aggregatemgmtid" /><!-- 합철 관련 MGMT ID -->
+        <result column="destructconfirm" property="destructconfirm" /><!--  -->
+        <result column="paperrecgubun" property="paperrecgubun" /><!--  -->
+    </resultMap>
+
+    <!-- 존안 비밀관리기록부 목록 조회 -->
+    <select id="selectUseConserveMgmtList" parameterType="com.anylogic.ssystem.bms.use.model.SelectUserReqestsListReqVO" resultMap="mgmtRegiMap">
+        SELECT
+            a.mgmtid as "mgmtid"
+            , case when a.regirecvtype = '1' then '전자' else '비전자' end as "regirecvtype"
+            , a.mgmtno as "mgmtno"
+            , a.docid as "docid"
+            , a.secttl as "secttl"
+            , c.copyno as "copyno"
+            , c.docno as "docno"
+            , a.authorid as "authorid"
+            , a.authorname as "authorname"
+            , a.deptname as "deptname"
+            , a.note as "note"
+            , a.secstatus as "secstatus"
+            , c.seclevel as "seclevel"
+            , a.indt as "indt"
+            , a.cnsrvdt as "cnsrvdt"
+            , cnsrv.grantcnsrvdt as "grantcnsrvdt"
+            , d.paperrecgubun AS paperrecgubun
+            , CASE
+                WHEN a.docid NOT IN (SELECT docid FROM sbms_user.bms_dct_rdoc_rcvs WHERE userid = #{loginuserid}) THEN '미보유'
+                ELSE '보유'
+            END AS "auth"
+            , COALESCE(TO_CHAR(TO_TIMESTAMP(authcard.authexpiredt, 'YYYYMMDDHH24MISS'), 'YYYY.MM.DD'), '미보유') AS "readauthexpiredt"
+        FROM sbms.sbms_user.bms_dct_mgmt_regi a
+        INNER JOIN sbms.sbms_user.bms_dct_attr c ON c.docid = a.docid
+        INNER JOIN sbms.sbms_user.bms_dct_rdoc d ON d.docid = a.docid
+        LEFT OUTER JOIN (
+            SELECT b.*
+            FROM sbms.sbms_user.bms_dct_apprreq_cnsrv b
+            JOIN sbms.sbms_user.bms_dct_apprreq c ON (b.apprreqid = c.apprreqid)
+            WHERE c.reqstatus = '3' AND c.grantflag = 'Y'
+        ) cnsrv ON a.mgmtid = cnsrv.mgmtid
+        LEFT OUTER JOIN (
+            SELECT DISTINCT ON (c.docid) c.docid, c.authexpiredt
+            FROM sbms.sbms_user.bms_dct_auth_card c
+            WHERE  c.reqid = #{loginuserid} AND c.authgubun = '01' AND c.authgrantflag = 'Y'
+        ) authcard ON a.docid = authcard.docid
+        WHERE a.secstatus = 'MGT32' and a.cnsrvflag = 'Y' <!-- 존안실행 -->
+        <if test="kind != null and kind !=''">
+            <choose>
+                <when test="kind == 1">
+                    AND (c.copyno LIKE '%원%' OR c.copyno IS NULL)
+                </when>
+                <when test="kind == 2">
+                    AND c.copyno NOT LIKE '%원%'
+                </when>
+            </choose>
+        </if>
+        <if test="regirecvtype != null and regirecvtype !=''">
+            and a.regirecvtype = #{regirecvtype}
+        </if>
+        <if test="seclevel != null and seclevel !=''">
+            and a.seclevel = #{seclevel}
+        </if>
+        <if test="docno != null and docno !=''">
+            and c.docno like CONCAT('%', #{docno}, '%')
+        </if>
+        <if test="mgmtno != null and mgmtno !=''">
+            and a.mgmtno like CONCAT('%', #{mgmtno}, '%')
+        </if>
+        <if test="secttl != null and secttl !=''">
+            and a.secttl like CONCAT('%', #{secttl}, '%')
+        </if>
+        <if test="copyno != null and copyno !=''">
+            and c.copyno like CONCAT('%', #{copyno}, '%')
+        </if>
+        <if test="authorname != null and authorname !=''">
+            and a.authorname like CONCAT('%', #{authorname}, '%')
+        </if>
+        <if test="deptname != null and deptname !=''">
+            and a.deptname like CONCAT('%', #{deptname}, '%')
+        </if>
+        <if test="startDt != null and startDt !=''">
+            and cnsrv.grantcnsrvdt <![CDATA[>=]]> #{startDt}
+        </if>
+        <if test="endDt != null and endDt !=''">
+            and cnsrv.grantcnsrvdt <![CDATA[<=]]> #{endDt}
+        </if>
+            ORDER BY a.indt DESC
+    </select>
+
+    <!-- 이관 비밀관리기록부 목록 조회 -->
+    <select id="selectUseTransMgmtList" parameterType="com.anylogic.ssystem.bms.use.model.SelectUserReqestsListReqVO" resultMap="mgmtRegiMap">
+        SELECT
+        a.mgmtid as "mgmtid"
+        , case when a.regirecvtype = '1' then '전자' else '비전자' end as "regirecvtype"
+        , a.mgmtno as "mgmtno"
+        , a.docid as "docid"
+        , a.secttl as "secttl"
+        , c.copyno as "copyno"
+        , c.docno as "docno"
+        , a.authorid as "authorid"
+        , a.authorname as "authorname"
+        , a.deptname as "deptname"
+        , a.note as "note"
+        , a.secstatus as "secstatus"
+        , c.seclevel as "seclevel"
+        , a.transdt as "transdt"
+        , d.paperrecgubun AS paperrecgubun
+        , CASE
+            WHEN a.docid NOT IN (SELECT docid FROM sbms_user.bms_dct_rdoc_rcvs WHERE userid = #{loginuserid}) THEN '미보유'
+            ELSE '보유'
+        END AS "auth"
+        , COALESCE(TO_CHAR(TO_TIMESTAMP(authcard.authexpiredt, 'YYYYMMDDHH24MISS'), 'YYYY.MM.DD'), '미보유') AS "readauthexpiredt"
+        FROM sbms.sbms_user.bms_dct_mgmt_regi a
+        INNER JOIN sbms.sbms_user.bms_dct_attr c ON c.docid = a.docid
+        INNER JOIN sbms.sbms_user.bms_dct_rdoc d ON d.docid = a.docid
+        LEFT OUTER JOIN (
+            SELECT DISTINCT ON (c.docid) c.docid, c.authexpiredt
+            FROM sbms.sbms_user.bms_dct_auth_card c
+            WHERE  c.reqid = #{loginuserid} AND c.authgubun = '01' AND c.authgrantflag = 'Y'
+        ) authcard ON a.docid = authcard.docid
+        WHERE a.secstatus = 'MGT82' <!-- 내부이관실행 -->
+        <if test="kind != null and kind !=''">
+            <choose>
+                <when test="kind == 1">
+                    AND (c.copyno LIKE '%원%' OR c.copyno IS NULL)
+                </when>
+                <when test="kind == 2">
+                    AND c.copyno NOT LIKE '%원%'
+                </when>
+            </choose>
+        </if>
+        <if test="regirecvtype != null and regirecvtype !=''">
+            and a.regirecvtype = #{regirecvtype}
+        </if>
+        <if test="seclevel != null and seclevel !=''">
+            and a.seclevel = #{seclevel}
+        </if>
+        <if test="docno != null and docno !=''">
+            and c.docno like CONCAT('%', #{docno}, '%')
+        </if>
+        <if test="mgmtno != null and mgmtno !=''">
+            and a.mgmtno like CONCAT('%', #{mgmtno}, '%')
+        </if>
+        <if test="secttl != null and secttl !=''">
+            and a.secttl like CONCAT('%', #{secttl}, '%')
+        </if>
+        <if test="copyno != null and copyno !=''">
+            and c.copyno like CONCAT('%', #{copyno}, '%')
+        </if>
+        <if test="authorname != null and authorname !=''">
+            and a.authorname like CONCAT('%', #{authorname}, '%')
+        </if>
+        <if test="deptname != null and deptname !=''">
+            and a.deptname like CONCAT('%', #{deptname}, '%')
+        </if>
+        <if test="startDt != null and startDt !=''">
+            and a.transdt <![CDATA[>=]]> #{startDt}
+        </if>
+        <if test="endDt != null and endDt !=''">
+            and a.transdt <![CDATA[<=]]> #{endDt}
+        </if>
+            ORDER BY a.transdt DESC
+    </select>
+
+</mapper>

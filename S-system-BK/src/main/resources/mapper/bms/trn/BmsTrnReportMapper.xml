@@ -1,0 +1,1066 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.anylogic.ssystem.bms.trn.mapper.BmsTrnReportMapper">
+
+    <resultMap id="selectTransProcToDoListMap" type="com.anylogic.ssystem.bms.trn.model.SelectTransProcToDoListResVO">
+        <id column="transferid" property="transferid" />              <!-- 인계인수 일련번호 -->
+        <result column="title" property="title" />                    <!-- 제목 -->
+        <result column="reason" property="reason" />                  <!-- 인계인수사유 -->
+        <result column="objgubun" property="objgubun" />              <!-- 인계인수 대상구분 -->
+        <result column="reqdate" property="reqdate" />                <!-- 요청일자 -->
+        <result column="reqterm" property="reqterm" />                <!-- 요청기한 -->
+        <result column="requsername" property="requsername" />        <!-- 기안자명 -->
+        <result column="requserid" property="requserid" />            <!-- 기안자 ID -->
+        <result column="reqdeptname" property="reqdeptname" />        <!-- 기안자 부서명 -->
+        <result column="reqdeptid" property="reqdeptid" />            <!-- 기안자 부서 ID -->
+        <result column="reqposition" property="reqposition" />        <!-- 기안자 직위직급 -->
+        <result column="apprstatus" property="apprstatus" />          <!-- 최종결재완료여부 -->
+        <result column="status" property="status" />                  <!-- 진행상태 -->
+        <result column="inid" property="inid" />                      <!-- 등록자 ID -->
+        <result column="indt" property="indt" />                      <!-- 등록일 -->
+        <result column="isattach" property="isattach" />              <!-- 첨부여부 -->
+        <result column="ismanage" property="ismanage" />              <!-- 비밀관리자 여부 -->
+        <result column="isinside" property="isinside" />              <!-- 동일부서 여부 -->
+        <result column="managedeptid" property="managedeptid" />      <!-- 대리인계 부서 ID -->
+        <result column="ischiefyn" property="ischiefyn" />            <!-- 부서장 인계인수 여부 -->
+        <result column="manageuserid" property="manageuserid" />      <!-- 대리인계 사용자 ID -->
+        <result column="incmemo" property="incmemo" />                <!--  -->
+        <result column="objectid" property="objectid" />              <!--  -->
+        <result column="objectname" property="objectname" />          <!--  -->
+        <result column="objecttype" property="objecttype" />          <!--  -->
+        <result column="pjtcardid" property="pjtcardid" />            <!--  -->
+        <result column="pjtcardname" property="pjtcardname" />        <!--  -->
+        <result column="paperflag" property="paperflag" />            <!--  -->
+        <result column="procdate" property="procdate" />              <!--  -->
+        <result column="rfidflag" property="rfidflag" />              <!--  -->
+        <result column="rfiddate" property="rfiddate" />              <!--  -->
+        <result column="mgmtno" property="mgmtno" />                  <!--  -->
+        <result column="seclevel" property="seclevel" />              <!--  -->
+        <result column="reportdt" property="reportdt" />              <!--  -->
+        <result column="docnoseq" property="docnoseq" />              <!--  -->
+        <result column="prerfidflag" property="prerfidflag" />        <!--  -->
+        <result column="prerfiddate" property="prerfiddate" />        <!--  -->
+        <result column="secstatus" property="secstatus" />            <!--  -->
+        <result column="apprseq" property="apprseq" />                <!--  -->
+        <result column="apprusername" property="apprusername" />      <!--  -->
+        <result column="appruserid" property="appruserid" />          <!--  -->
+        <result column="apprdeptname" property="apprdeptname" />      <!--  -->
+        <result column="apprdeptid" property="apprdeptid" />          <!--  -->
+        <result column="apprposition" property="apprposition" />      <!--  -->
+        <result column="apprcode" property="apprcode" />              <!--  -->
+        <result column="apprdate" property="apprdate" />              <!--  -->
+        <result column="apprreason" property="apprreason" />          <!--  -->
+        <result column="state" property="state" />                    <!--  -->
+        <result column="electsignid" property="electsignid" />        <!--  -->
+    </resultMap>
+
+    <resultMap id="selectTrnReqListMap" type="com.anylogic.ssystem.bms.trn.model.SelectTrnReqListResVO">
+        <id column="transferid" property="transferid" />              <!-- 인계인수 일련번호 -->
+        <result column="title" property="title" />                    <!-- 제목 -->
+        <result column="reason" property="reason" />                  <!-- 인계인수사유 -->
+        <result column="objgubun" property="objgubun" />              <!-- 인계인수 대상구분 -->
+        <result column="reqdate" property="reqdate" />                <!-- 요청일자 -->
+        <result column="reqterm" property="reqterm" />                <!-- 요청기한 -->
+        <result column="requsername" property="requsername" />        <!-- 기안자명 -->
+        <result column="requserid" property="requserid" />            <!-- 기안자 ID -->
+        <result column="reqdeptname" property="reqdeptname" />        <!-- 기안자 부서명 -->
+        <result column="reqdeptid" property="reqdeptid" />            <!-- 기안자 부서 ID -->
+        <result column="reqposition" property="reqposition" />        <!-- 기안자 직위직급 -->
+        <result column="apprstatus" property="apprstatus" />          <!-- 최종결재완료여부 -->
+        <result column="status" property="status" />                  <!-- 진행상태 -->
+        <result column="inid" property="inid" />                      <!-- 등록자 ID -->
+        <result column="indt" property="indt" />                      <!-- 등록일 -->
+        <result column="isattach" property="isattach" />              <!-- 첨부여부 -->
+        <result column="ismanage" property="ismanage" />              <!-- 비밀관리자 여부 -->
+        <result column="isinside" property="isinside" />              <!-- 동일부서 여부 -->
+        <result column="managedeptid" property="managedeptid" />      <!-- 대리인계 부서 ID -->
+        <result column="ischiefyn" property="ischiefyn" />            <!-- 부서장 인계인수 여부 -->
+        <result column="manageuserid" property="manageuserid" />      <!-- 대리인계 사용자 ID -->
+        <result column="incmemo" property="incmemo" />                <!--  -->
+        <result column="objectid" property="objectid" />              <!--  -->
+        <result column="objectname" property="objectname" />          <!--  -->
+        <result column="objecttype" property="objecttype" />          <!--  -->
+        <result column="pjtcardid" property="pjtcardid" />            <!--  -->
+        <result column="pjtcardname" property="pjtcardname" />        <!--  -->
+        <result column="paperflag" property="paperflag" />            <!--  -->
+        <result column="procdate" property="procdate" />              <!--  -->
+        <result column="rfidflag" property="rfidflag" />              <!--  -->
+        <result column="rfiddate" property="rfiddate" />              <!--  -->
+        <result column="mgmtno" property="mgmtno" />                  <!--  -->
+        <result column="seclevel" property="seclevel" />              <!--  -->
+        <result column="reportdt" property="reportdt" />              <!--  -->
+        <result column="docnoseq" property="docnoseq" />              <!--  -->
+        <result column="prerfidflag" property="prerfidflag" />        <!--  -->
+        <result column="prerfiddate" property="prerfiddate" />        <!--  -->
+        <result column="secstatus" property="secstatus" />            <!--  -->
+        <result column="apprseq" property="apprseq" />                <!--  -->
+        <result column="apprusername" property="apprusername" />      <!--  -->
+        <result column="appruserid" property="appruserid" />          <!--  -->
+        <result column="apprdeptname" property="apprdeptname" />      <!--  -->
+        <result column="apprdeptid" property="apprdeptid" />          <!--  -->
+        <result column="apprposition" property="apprposition" />      <!--  -->
+        <result column="apprcode" property="apprcode" />              <!--  -->
+        <result column="apprdate" property="apprdate" />              <!--  -->
+        <result column="apprreason" property="apprreason" />          <!--  -->
+        <result column="state" property="state" />                    <!--  -->
+        <result column="electsignid" property="electsignid" />        <!--  -->
+        <result column="docno" property="docno" />        <!--  -->
+        <result column="copyno" property="copyno" />        <!--  -->
+        <result column="mgmtid" property="mgmtid" />        <!--  -->
+    </resultMap>
+
+    <resultMap id="bmsTrnCompleteListMap" type="com.anylogic.ssystem.bms.trn.model.BmsTrnCompleteListResVO">
+        <id column="transferid" property="transferid" />              <!-- 인계인수 일련번호 -->
+        <result column="title" property="title" />                    <!-- 제목 -->
+        <result column="reason" property="reason" />                  <!-- 인계인수사유 -->
+        <result column="objgubun" property="objgubun" />              <!-- 인계인수 대상구분 -->
+        <result column="reqdate" property="reqdate" />                <!-- 요청일자 -->
+        <result column="reqterm" property="reqterm" />                <!-- 요청기한 -->
+        <result column="requsername" property="requsername" />        <!-- 기안자명 -->
+        <result column="requserid" property="requserid" />            <!-- 기안자 ID -->
+        <result column="reqdeptname" property="reqdeptname" />        <!-- 기안자 부서명 -->
+        <result column="reqdeptid" property="reqdeptid" />            <!-- 기안자 부서 ID -->
+        <result column="reqposition" property="reqposition" />        <!-- 기안자 직위직급 -->
+        <result column="apprstatus" property="apprstatus" />          <!-- 최종결재완료여부 -->
+        <result column="status" property="status" />                  <!-- 진행상태 -->
+        <result column="inid" property="inid" />                      <!-- 등록자 ID -->
+        <result column="indt" property="indt" />                      <!-- 등록일 -->
+        <result column="isattach" property="isattach" />              <!-- 첨부여부 -->
+        <result column="ismanage" property="ismanage" />              <!-- 비밀관리자 여부 -->
+        <result column="isinside" property="isinside" />              <!-- 동일부서 여부 -->
+        <result column="managedeptid" property="managedeptid" />      <!-- 대리인계 부서 ID -->
+        <result column="ischiefyn" property="ischiefyn" />            <!-- 부서장 인계인수 여부 -->
+        <result column="manageuserid" property="manageuserid" />      <!-- 대리인계 사용자 ID -->
+        <result column="incmemo" property="incmemo" />                <!--  -->
+        <result column="objectid" property="objectid" />              <!--  -->
+        <result column="objectname" property="objectname" />          <!--  -->
+        <result column="objecttype" property="objecttype" />          <!--  -->
+        <result column="pjtcardid" property="pjtcardid" />            <!--  -->
+        <result column="pjtcardname" property="pjtcardname" />        <!--  -->
+        <result column="paperflag" property="paperflag" />            <!--  -->
+        <result column="procdate" property="procdate" />              <!--  -->
+        <result column="rfidflag" property="rfidflag" />              <!--  -->
+        <result column="rfiddate" property="rfiddate" />              <!--  -->
+        <result column="mgmtno" property="mgmtno" />                  <!--  -->
+        <result column="seclevel" property="seclevel" />              <!--  -->
+        <result column="reportdt" property="reportdt" />              <!--  -->
+        <result column="docnoseq" property="docnoseq" />              <!--  -->
+        <result column="prerfidflag" property="prerfidflag" />        <!--  -->
+        <result column="prerfiddate" property="prerfiddate" />        <!--  -->
+        <result column="secstatus" property="secstatus" />            <!--  -->
+        <result column="apprseq" property="apprseq" />                <!--  -->
+        <result column="apprusername" property="apprusername" />      <!--  -->
+        <result column="appruserid" property="appruserid" />          <!--  -->
+        <result column="apprdeptname" property="apprdeptname" />      <!--  -->
+        <result column="apprdeptid" property="apprdeptid" />          <!--  -->
+        <result column="apprposition" property="apprposition" />      <!--  -->
+        <result column="apprcode" property="apprcode" />              <!--  -->
+        <result column="apprdate" property="apprdate" />              <!--  -->
+        <result column="apprreason" property="apprreason" />          <!--  -->
+        <result column="state" property="state" />                    <!--  -->
+        <result column="electsignid" property="electsignid" />        <!--  -->
+    </resultMap>
+
+    <resultMap id="bmsTrnCurrentListMap" type="com.anylogic.ssystem.bms.trn.model.BmsTrnCurrentListResVO">
+        <id column="transferid" property="transferid" />              <!-- 인계인수 일련번호 -->
+        <result column="title" property="title" />                    <!-- 제목 -->
+        <result column="reason" property="reason" />                  <!-- 인계인수사유 -->
+        <result column="objgubun" property="objgubun" />              <!-- 인계인수 대상구분 -->
+        <result column="reqdate" property="reqdate" />                <!-- 요청일자 -->
+        <result column="reqterm" property="reqterm" />                <!-- 요청기한 -->
+        <result column="requsername" property="requsername" />        <!-- 기안자명 -->
+        <result column="requserid" property="requserid" />            <!-- 기안자 ID -->
+        <result column="reqdeptname" property="reqdeptname" />        <!-- 기안자 부서명 -->
+        <result column="reqdeptid" property="reqdeptid" />            <!-- 기안자 부서 ID -->
+        <result column="reqposition" property="reqposition" />        <!-- 기안자 직위직급 -->
+        <result column="apprstatus" property="apprstatus" />          <!-- 최종결재완료여부 -->
+        <result column="status" property="status" />                  <!-- 진행상태 -->
+        <result column="inid" property="inid" />                      <!-- 등록자 ID -->
+        <result column="indt" property="indt" />                      <!-- 등록일 -->
+        <result column="isattach" property="isattach" />              <!-- 첨부여부 -->
+        <result column="ismanage" property="ismanage" />              <!-- 비밀관리자 여부 -->
+        <result column="isinside" property="isinside" />              <!-- 동일부서 여부 -->
+        <result column="managedeptid" property="managedeptid" />      <!-- 대리인계 부서 ID -->
+        <result column="ischiefyn" property="ischiefyn" />            <!-- 부서장 인계인수 여부 -->
+        <result column="manageuserid" property="manageuserid" />      <!-- 대리인계 사용자 ID -->
+        <result column="incmemo" property="incmemo" />                <!--  -->
+        <result column="objectid" property="objectid" />              <!--  -->
+        <result column="objectname" property="objectname" />          <!--  -->
+        <result column="objecttype" property="objecttype" />          <!--  -->
+        <result column="pjtcardid" property="pjtcardid" />            <!--  -->
+        <result column="pjtcardname" property="pjtcardname" />        <!--  -->
+        <result column="paperflag" property="paperflag" />            <!--  -->
+        <result column="procdate" property="procdate" />              <!--  -->
+        <result column="rfidflag" property="rfidflag" />              <!--  -->
+        <result column="rfiddate" property="rfiddate" />              <!--  -->
+        <result column="mgmtno" property="mgmtno" />                  <!--  -->
+        <result column="seclevel" property="seclevel" />              <!--  -->
+        <result column="reportdt" property="reportdt" />              <!--  -->
+        <result column="docnoseq" property="docnoseq" />              <!--  -->
+        <result column="prerfidflag" property="prerfidflag" />        <!--  -->
+        <result column="prerfiddate" property="prerfiddate" />        <!--  -->
+        <result column="secstatus" property="secstatus" />            <!--  -->
+        <result column="apprseq" property="apprseq" />                <!--  -->
+        <result column="apprusername" property="apprusername" />      <!--  -->
+        <result column="appruserid" property="appruserid" />          <!--  -->
+        <result column="apprdeptname" property="apprdeptname" />      <!--  -->
+        <result column="apprdeptid" property="apprdeptid" />          <!--  -->
+        <result column="apprposition" property="apprposition" />      <!--  -->
+        <result column="apprcode" property="apprcode" />              <!--  -->
+        <result column="apprdate" property="apprdate" />              <!--  -->
+        <result column="apprreason" property="apprreason" />          <!--  -->
+        <result column="state" property="state" />                    <!--  -->
+        <result column="electsignid" property="electsignid" />        <!--  -->
+    </resultMap>
+
+
+    <!-- 인계인수 > 처리할 인계인수서 > 처리할 인계인수서 목록 조회 -->
+    <select id="selectTransProcToDoList" parameterType="com.anylogic.ssystem.bms.trn.model.SelectTransProcToDoListReqVO" resultMap="selectTransProcToDoListMap">
+        SELECT
+            DISTINCT ON (A.indt)
+            A.transferid as "transferid" 
+            , A.title as "title" 
+            , A.reason as "reason" 
+            , A.objgubun as "objgubun" 
+            , A.reqdate as "reqdate" 
+            , A.reqterm as "reqterm" 
+            , A.requsername as "requsername" 
+            , A.requserid as "requserid" 
+            , A.reqdeptname as "reqdeptname" 
+            , A.reqdeptid as "reqdeptid" 
+            , A.reqposition as "reqposition" 
+            , A.apprstatus as "apprstatus" 
+            , A.status as "status" 
+            , A.inid as "inid" 
+            , A.indt as "indt" 
+            , A.isattach as "isattach" 
+            , A.ismanage as "ismanage" 
+            , A.isinside as "isinside" 
+            , A.managedeptid as "managedeptid" 
+            , A.ischiefyn as "ischiefyn" 
+            , A.manageuserid as "manageuserid" 
+            , A.incmemo as "incmemo" 
+            , B.transferid as "transferid"
+            , B.objectid as "objectid" 
+            , B.objectname as "objectname" 
+            , B.objecttype as "objecttype" 
+            , B.pjtcardid as "pjtcardid" 
+            , B.pjtcardname as "pjtcardname" 
+            , B.paperflag as "paperflag" 
+            , B.procdate as "procdate" 
+            , B.rfidflag as "rfidflag" 
+            , B.rfiddate as "rfiddate" 
+            , B.mgmtno as "mgmtno" 
+            , B.seclevel as "seclevel" 
+            , B.reportdt as "reportdt" 
+            , B.docnoseq as "docnoseq" 
+            , B.prerfidflag as "prerfidflag" 
+            , B.prerfiddate as "prerfiddate" 
+            , B.secstatus as "secstatus" 
+            , C.apprseq as "apprseq"
+            , C.apprusername as "apprusername" 
+            , C.appruserid as "appruserid" 
+            , C.apprdeptname as "apprdeptname" 
+            , C.apprdeptid as "apprdeptid" 
+            , C.apprposition as "apprposition" 
+            , C.apprcode as "apprcode" 
+            , C.apprdate as "apprdate" 
+            , C.apprreason as "apprreason" 
+            , C.state as "state" 
+            , C.electsignid as "electsignid"
+            , C.apprstatus as "apprstatus"
+        FROM  sbms.sbms_user.bms_trn_report  A
+            LEFT OUTER JOIN  sbms.sbms_user.bms_trn_object  B
+                ON ( A.transferid  =  B.transferid  )
+            LEFT OUTER JOIN  sbms.sbms_user.bms_trn_step  C
+                ON ( A.transferid  =  C.transferid  )
+        WHERE 1 = 1
+            AND C.appruserid = #{appruserid}
+            AND C.apprstatus = 'APR01'
+            AND NOT EXISTS ( SELECT * FROM sbms.sbms_user.bms_trn_step D
+                                WHERE D.transferid = C.transferid
+                                AND D.apprstatus = 'APR01'
+                                AND D.apprseq <![CDATA[<]]> C.apprseq )
+            <if test="title != null and title !=''"> 
+                and title like CONCAT('%', #{title}, '%') 
+            </if>
+            <if test="reqdeptname != null and reqdeptname !=''"> 
+                and reqdeptname like CONCAT('%', #{reqdeptname}, '%') 
+            </if>
+            <if test="requsername != null and requsername !=''"> 
+                and requsername like CONCAT('%', #{requsername}, '%') 
+            </if>
+            <if test="apprdeptname != null and apprdeptname !=''"> 
+                and apprdeptname like CONCAT('%', #{apprdeptname}, '%') 
+            </if>
+            <if test="apprusername != null and apprusername !=''"> 
+                and apprusername like CONCAT('%', #{apprusername}, '%') 
+            </if>
+            <if test="transferid != null and transferid !=''"> 
+                and A.transferid like CONCAT('%', #{transferid}, '%')
+            </if>
+            <if test="status != null and status !=''"> 
+                and A.status = #{status}
+            </if>
+            <if test="apprstatus != null and apprstatus !=''"> 
+                and A.apprstatus = #{apprstatus}
+            </if>
+            <if test="appruserid != null and appruserid !=''">
+                and C.appruserid = #{appruserid}
+            </if>
+            <if test="startDt != null and startDt !=''"> 
+                and A.reqdate <![CDATA[>=]]> #{startDt}
+            </if>
+            <if test="endDt != null and endDt !=''"> 
+                and A.reqdate <![CDATA[<=]]> #{endDt}
+            </if>
+            ORDER BY A.indt DESC
+    </select>
+
+    <!-- 처리할 인계인수서 승인 처리 -->
+    <update id="updateTrnRepotBIA1" parameterType="com.anylogic.ssystem.bms.trn.model.UpdateTrnRepotBIA1ReqVO">
+        UPDATE sbms.sbms_user.bms_trn_report
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="title != null and title !=''">
+                title = #{title},
+            </if>
+            <if test="reason != null and reason !=''">
+                reason = #{reason},
+            </if>
+            <if test="objgubun != null and objgubun !=''">
+                objgubun = #{objgubun},
+            </if>
+            <if test="reqdate != null and reqdate !=''">
+                reqdate = #{reqdate},
+            </if>
+            <if test="reqterm != null and reqterm !=''">
+                reqterm = #{reqterm},
+            </if>
+            <if test="requsername != null and requsername !=''">
+                requsername = #{requsername},
+            </if>
+            <if test="requserid != null and requserid !=''">
+                requserid = #{requserid},
+            </if>
+            <if test="reqdeptname != null and reqdeptname !=''">
+                reqdeptname = #{reqdeptname},
+            </if>
+            <if test="reqdeptid != null and reqdeptid !=''">
+                reqdeptid = #{reqdeptid},
+            </if>
+            <if test="reqposition != null and reqposition !=''">
+                reqposition = #{reqposition},
+            </if>
+            <if test="apprstatus != null and apprstatus !=''">
+                apprstatus = #{apprstatus},
+            </if>
+            <if test="status != null and status !=''">
+                status = #{status},
+            </if>
+            <if test="inid != null and inid !=''">
+                inid = #{inid},
+            </if>
+            <if test="indt != null and indt !=''">
+                indt = #{indt},
+            </if>
+            <if test="isattach != null and isattach !=''">
+                isattach = #{isattach},
+            </if>
+            <if test="ismanage != null and ismanage !=''">
+                ismanage = #{ismanage},
+            </if>
+            <if test="isinside != null and isinside !=''">
+                isinside = #{isinside},
+            </if>
+            <if test="managedeptid != null and managedeptid !=''">
+                managedeptid = #{managedeptid},
+            </if>
+            <if test="ischiefyn != null and ischiefyn !=''">
+                ischiefyn = #{ischiefyn},
+            </if>
+            <if test="manageuserid != null and manageuserid !=''">
+                manageuserid = #{manageuserid},
+            </if>
+            <if test="incmemo != null and incmemo !=''">
+                incmemo = #{incmemo},
+            </if>
+        </trim>
+        WHERE 1 = 1
+            <if test="transferid != null and transferid !=''">
+                and transferid = #{transferid}
+            </if>
+    </update>
+
+    <!--  처리할 인계인수서 반려 처리 -->
+    <update id="updateTrnRepotBIA2" parameterType="com.anylogic.ssystem.bms.trn.model.UpdateTrnRepotBIA2ReqVO">
+        UPDATE sbms.sbms_user.bms_trn_report
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="title != null and title !=''">
+                title = #{title},
+            </if>
+            <if test="reason != null and reason !=''">
+                reason = #{reason},
+            </if>
+            <if test="objgubun != null and objgubun !=''">
+                objgubun = #{objgubun},
+            </if>
+            <if test="reqdate != null and reqdate !=''">
+                reqdate = #{reqdate},
+            </if>
+            <if test="reqterm != null and reqterm !=''">
+                reqterm = #{reqterm},
+            </if>
+            <if test="requsername != null and requsername !=''">
+                requsername = #{requsername},
+            </if>
+            <if test="requserid != null and requserid !=''">
+                requserid = #{requserid},
+            </if>
+            <if test="reqdeptname != null and reqdeptname !=''">
+                reqdeptname = #{reqdeptname},
+            </if>
+            <if test="reqdeptid != null and reqdeptid !=''">
+                reqdeptid = #{reqdeptid},
+            </if>
+            <if test="reqposition != null and reqposition !=''">
+                reqposition = #{reqposition},
+            </if>
+            <if test="apprstatus != null and apprstatus !=''">
+                apprstatus = #{apprstatus},
+            </if>
+            <if test="status != null and status !=''">
+                status = #{status},
+            </if>
+            <if test="inid != null and inid !=''">
+                inid = #{inid},
+            </if>
+            <if test="indt != null and indt !=''">
+                indt = #{indt},
+            </if>
+            <if test="isattach != null and isattach !=''">
+                isattach = #{isattach},
+            </if>
+            <if test="ismanage != null and ismanage !=''">
+                ismanage = #{ismanage},
+            </if>
+            <if test="isinside != null and isinside !=''">
+                isinside = #{isinside},
+            </if>
+            <if test="managedeptid != null and managedeptid !=''">
+                managedeptid = #{managedeptid},
+            </if>
+            <if test="ischiefyn != null and ischiefyn !=''">
+                ischiefyn = #{ischiefyn},
+            </if>
+            <if test="manageuserid != null and manageuserid !=''">
+                manageuserid = #{manageuserid},
+            </if>
+            <if test="incmemo != null and incmemo !=''">
+                incmemo = #{incmemo},
+            </if>
+        </trim>
+        WHERE 1 = 1
+            <if test="transferid != null and transferid !=''">
+                and transferid = #{transferid}
+            </if>
+    </update>
+
+    <!-- 인계인수 > 요청한 인계인수서 > 요청한 인계인수서 목록 조회 -->
+    <select id="selectTrnReqList" parameterType="com.anylogic.ssystem.bms.trn.model.SelectTrnReqListReqVO" resultMap="selectTrnReqListMap">
+        SELECT
+            DISTINCT ON (A.indt)
+            A.transferid as "transferid" 
+            , A.title as "title" 
+            , A.reason as "reason" 
+            , A.objgubun as "objgubun" 
+            , A.reqdate as "reqdate" 
+            , A.reqterm as "reqterm" 
+            , A.requsername as "requsername" 
+            , A.requserid as "requserid" 
+            , A.reqdeptname as "reqdeptname" 
+            , A.reqdeptid as "reqdeptid" 
+            , A.reqposition as "reqposition" 
+            , A.apprstatus as "apprstatus" 
+            , A.status as "status" 
+            , A.inid as "inid" 
+            , A.indt as "indt" 
+            , A.isattach as "isattach" 
+            , A.ismanage as "ismanage" 
+            , A.isinside as "isinside" 
+            , A.managedeptid as "managedeptid" 
+            , A.ischiefyn as "ischiefyn" 
+            , A.manageuserid as "manageuserid" 
+            , A.incmemo as "incmemo" 
+            , B.transferid as "transferid"
+            , B.objectid as "objectid" 
+            , B.objectname as "objectname" 
+            , B.objecttype as "objecttype" 
+            , B.pjtcardid as "pjtcardid" 
+            , B.pjtcardname as "pjtcardname" 
+            , B.paperflag as "paperflag" 
+            , B.procdate as "procdate" 
+            , B.rfidflag as "rfidflag" 
+            , B.rfiddate as "rfiddate" 
+            , B.mgmtno as "mgmtno" 
+            , B.seclevel as "seclevel" 
+            , B.reportdt as "reportdt" 
+            , B.docnoseq as "docnoseq" 
+            , B.prerfidflag as "prerfidflag" 
+            , B.prerfiddate as "prerfiddate" 
+            , B.secstatus as "secstatus" 
+            , C.apprseq as "apprseq"
+            , C.apprusername as "apprusername" 
+            , C.appruserid as "appruserid" 
+            , C.apprdeptname as "apprdeptname" 
+            , C.apprdeptid as "apprdeptid" 
+            , C.apprposition as "apprposition" 
+            , C.apprcode as "apprcode" 
+            , C.apprdate as "apprdate" 
+            , C.apprreason as "apprreason" 
+            , C.state as "state" 
+            , C.electsignid as "electsignid" 
+        FROM  sbms.sbms_user.bms_trn_report  A
+            INNER JOIN  sbms.sbms_user.bms_trn_object  B
+                ON ( A.transferid  =  B.transferid  )
+            INNER JOIN  sbms.sbms_user.bms_trn_step  C
+                ON ( A.transferid  =  C.transferid  )
+        WHERE 1 = 1
+            and A.requserid = #{requserid}
+<!--            and A.status = 'TRS01' &lt;!&ndash; 결재중 &ndash;&gt;-->
+<!--            and C.apprstatus = 'APR01' &lt;!&ndash; 요청 &ndash;&gt;-->
+            <if test="transferid != null and transferid !=''">
+                and A.transferid = #{transferid}
+            </if>
+            <if test="title != null and title !=''"> 
+                and title like CONCAT('%', #{title}, '%') 
+            </if>
+            <if test="reqdeptname != null and reqdeptname !=''"> 
+                and reqdeptname like CONCAT('%', #{reqdeptname}, '%') 
+            </if>
+            <if test="requsername != null and requsername !=''"> 
+                and requsername like CONCAT('%', #{requsername}, '%') 
+            </if>
+            <if test="apprdeptname != null and apprdeptname !=''"> 
+                and apprdeptname like CONCAT('%', #{apprdeptname}, '%') 
+            </if>
+            <if test="apprusername != null and apprusername !=''"> 
+                and apprusername like CONCAT('%', #{apprusername}, '%') 
+            </if>
+            <if test="transferid != null and transferid !=''"> 
+                and A.transferid like CONCAT('%', #{transferid}, '%')
+            </if>
+            <if test="status != null and status !=''"> 
+                and status = #{status}
+            </if>
+            <if test="appruserid != null and appruserid !=''">
+                and C.appruserid = #{appruserid}
+            </if>
+            <if test="startDt != null and startDt !=''">
+                and A.reqdate <![CDATA[>=]]> #{startDt}
+            </if>
+            <if test="endDt != null and endDt !=''">
+                and A.reqdate <![CDATA[<=]]> #{endDt}
+            </if>
+            ORDER BY A.indt DESC
+
+    </select>
+
+    <!-- 인계인수 > 처리한 인계인수서 > 처리한 인계인수서 목록 조회 -->
+    <select id="bmsTrnCompleteList" parameterType="com.anylogic.ssystem.bms.trn.model.BmsTrnCompleteListReqVO" resultMap="bmsTrnCompleteListMap">
+        SELECT
+            DISTINCT ON (A.transferid)
+            A.transferid as "transferid" 
+            , A.title as "title" 
+            , A.reason as "reason" 
+            , A.objgubun as "objgubun" 
+            , A.reqdate as "reqdate" 
+            , A.reqterm as "reqterm" 
+            , A.requsername as "requsername" 
+            , A.requserid as "requserid" 
+            , A.reqdeptname as "reqdeptname" 
+            , A.reqdeptid as "reqdeptid" 
+            , A.reqposition as "reqposition" 
+            , A.apprstatus as "apprstatus" 
+            , A.status as "status" 
+            , A.inid as "inid" 
+            , A.indt as "indt" 
+            , A.isattach as "isattach" 
+            , A.ismanage as "ismanage" 
+            , A.isinside as "isinside" 
+            , A.managedeptid as "managedeptid" 
+            , A.ischiefyn as "ischiefyn" 
+            , A.manageuserid as "manageuserid" 
+            , A.incmemo as "incmemo" 
+            , B.transferid as "transferid"
+            , B.objectid as "objectid" 
+            , B.objectname as "objectname" 
+            , B.objecttype as "objecttype" 
+            , B.pjtcardid as "pjtcardid" 
+            , B.pjtcardname as "pjtcardname" 
+            , B.paperflag as "paperflag" 
+            , B.procdate as "procdate" 
+            , B.rfidflag as "rfidflag" 
+            , B.rfiddate as "rfiddate" 
+            , B.mgmtno as "mgmtno" 
+            , B.seclevel as "seclevel" 
+            , B.reportdt as "reportdt" 
+            , B.docnoseq as "docnoseq" 
+            , B.prerfidflag as "prerfidflag" 
+            , B.prerfiddate as "prerfiddate" 
+            , B.secstatus as "secstatus" 
+            , C.transferid as "transferid"
+            , C.apprseq as "apprseq" 
+            , C.apprusername as "apprusername" 
+            , C.appruserid as "appruserid" 
+            , C.apprdeptname as "apprdeptname" 
+            , C.apprdeptid as "apprdeptid" 
+            , C.apprposition as "apprposition" 
+            , C.apprcode as "apprcode" 
+            , C.apprdate as "apprdate" 
+            , C.apprreason as "apprreason" 
+            , C.state as "state" 
+            , C.electsignid as "electsignid" 
+        FROM  sbms.sbms_user.bms_trn_report  A
+            LEFT OUTER JOIN  sbms.sbms_user.bms_trn_object  B
+                ON ( A.transferid  =  B.transferid  )
+            LEFT OUTER JOIN  sbms.sbms_user.bms_trn_step  C
+                ON ( A.transferid  =  C.transferid  )
+        WHERE 1 = 1
+            and A.apprstatus IN
+            <foreach item="item" collection="apprstatusList" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+            and C.state = #{state}
+            <if test="title != null and title !=''"> 
+                and title like CONCAT('%', #{title}, '%') 
+            </if>
+            <if test="reqdeptname != null and reqdeptname !=''"> 
+                and reqdeptname like CONCAT('%', #{reqdeptname}, '%') 
+            </if>
+            <if test="requsername != null and requsername !=''"> 
+                and requsername like CONCAT('%', #{requsername}, '%') 
+            </if>
+            <if test="apprdeptname != null and apprdeptname !=''"> 
+                and apprdeptname like CONCAT('%', #{apprdeptname}, '%') 
+            </if>
+            <if test="apprusername != null and apprusername !=''"> 
+                and apprusername like CONCAT('%', #{apprusername}, '%') 
+            </if>
+            <if test="transferid != null and transferid !=''"> 
+                and A.transferid like CONCAT('%', #{transferid}, '%')
+            </if>
+            <if test="status != null and status !=''"> 
+                and status = #{status}
+            </if>
+            <if test="apprstatusList != null and !apprstatusList.isEmpty()">
+                and A.apprstatus IN
+                <foreach item="item" collection="apprstatusList" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="appruserid != null and appruserid !=''">
+                and C.appruserid = #{appruserid}
+            </if>
+            <if test="inid != null and inid !=''">
+                and A.inid = #{inid}
+            </if>
+            <if test="startDt != null and startDt !=''">
+                and A.reqdate <![CDATA[>=]]> #{startDt}
+            </if>
+            <if test="endDt != null and endDt !=''">
+                and A.reqdate <![CDATA[<=]]> #{endDt}
+            </if>
+        ORDER BY A.transferid DESC
+
+    </select>
+
+    <!-- 인계인수 > 인수현황함 > 인수현황함 목록 조회 -->
+    <select id="bmsTrnCurrentList" parameterType="com.anylogic.ssystem.bms.trn.model.BmsTrnCurrentListReqVO" resultMap="bmsTrnCurrentListMap">
+        SELECT
+            DISTINCT ON (A.transferid)
+            A.transferid as "transferid" 
+            , A.title as "title" 
+            , A.reason as "reason" 
+            , A.objgubun as "objgubun" 
+            , A.reqdate as "reqdate" 
+            , A.reqterm as "reqterm" 
+            , A.requsername as "requsername" 
+            , A.requserid as "requserid" 
+            , A.reqdeptname as "reqdeptname" 
+            , A.reqdeptid as "reqdeptid" 
+            , A.reqposition as "reqposition" 
+            , A.apprstatus as "apprstatus" 
+            , A.status as "status" 
+            , A.inid as "inid" 
+            , A.indt as "indt" 
+            , A.isattach as "isattach" 
+            , A.ismanage as "ismanage" 
+            , A.isinside as "isinside" 
+            , A.managedeptid as "managedeptid" 
+            , A.ischiefyn as "ischiefyn" 
+            , A.manageuserid as "manageuserid" 
+            , A.incmemo as "incmemo" 
+            , B.transferid as "transferid"
+            , B.objectid as "objectid" 
+            , B.objectname as "objectname" 
+            , B.objecttype as "objecttype" 
+            , B.pjtcardid as "pjtcardid" 
+            , B.pjtcardname as "pjtcardname" 
+            , B.paperflag as "paperflag" 
+            , B.procdate as "procdate" 
+            , B.rfidflag as "rfidflag" 
+            , B.rfiddate as "rfiddate" 
+            , B.mgmtno as "mgmtno" 
+            , B.seclevel as "seclevel" 
+            , B.reportdt as "reportdt" 
+            , B.docnoseq as "docnoseq" 
+            , B.prerfidflag as "prerfidflag" 
+            , B.prerfiddate as "prerfiddate" 
+            , B.secstatus as "secstatus" 
+            , C.apprseq as "apprseq"
+            , C.apprusername as "apprusername" 
+            , C.appruserid as "appruserid" 
+            , C.apprdeptname as "apprdeptname" 
+            , C.apprdeptid as "apprdeptid" 
+            , C.apprposition as "apprposition" 
+            , C.apprcode as "apprcode" 
+            , C.apprdate as "apprdate" 
+            , C.apprreason as "apprreason" 
+            , C.state as "state" 
+            , C.electsignid as "electsignid" 
+        FROM  sbms.sbms_user.bms_trn_report  A
+            LEFT OUTER JOIN  sbms.sbms_user.bms_trn_object  B
+                ON ( A.transferid  =  B.transferid  )
+            LEFT OUTER JOIN  sbms.sbms_user.bms_trn_step  C
+                ON ( A.transferid  =  C.transferid  )
+        WHERE A.status IN ('TRS03','TRS04') and C.appruserid = #{appruserid}
+        and C.apprcode = 'ARC05'
+            <if test="title != null and title !=''"> 
+                and title like CONCAT('%', #{title}, '%') 
+            </if>
+            <if test="reqdeptname != null and reqdeptname !=''"> 
+                and reqdeptname like CONCAT('%', #{reqdeptname}, '%') 
+            </if>
+            <if test="requsername != null and requsername !=''"> 
+                and requsername like CONCAT('%', #{requsername}, '%') 
+            </if>
+            <if test="apprdeptname != null and apprdeptname !=''"> 
+                and apprdeptname like CONCAT('%', #{apprdeptname}, '%') 
+            </if>
+            <if test="apprusername != null and apprusername !=''"> 
+                and apprusername like CONCAT('%', #{apprusername}, '%') 
+            </if>
+            <if test="transferid != null and transferid !=''"> 
+                and transferid like CONCAT('%', #{transferid}, '%') 
+            </if>
+            <if test="status != null and status !=''"> 
+                and status = #{status}
+            </if>
+            <if test="apprstatus != null and apprstatus !=''"> 
+                and apprstatus = #{apprstatus}
+            </if>
+            <if test="startDt != null and startDt !=''"> 
+                and reqdate <![CDATA[>=]]> #{startDt}
+            </if>
+            <if test="endDt != null and endDt !=''"> 
+                and reqdate <![CDATA[<=]]> #{endDt}
+            </if>
+            ORDER BY A.transferid DESC
+    </select>
+
+    <!--  인계인수서 등록 -->
+    <insert id="insertTrnReport" parameterType="com.anylogic.ssystem.bms.trn.model.InsertTrnStepReqVO">
+        INSERT INTO
+        sbms.sbms_user.bms_trn_report(
+        <trim suffixOverrides=",">
+            <if test="transferid != null and transferid !=''">
+                transferid,
+            </if>
+            <if test="title != null and title !=''">
+                title,
+            </if>
+            <if test="reason != null and reason !=''">
+                reason,
+            </if>
+            <if test="objgubun != null and objgubun !=''">
+                objgubun,
+            </if>
+            <if test="reqdate != null and reqdate !=''">
+                reqdate,
+            </if>
+            <if test="reqterm != null and reqterm !=''">
+                reqterm,
+            </if>
+            <if test="requsername != null and requsername !=''">
+                requsername,
+            </if>
+            <if test="requserid != null and requserid !=''">
+                requserid,
+            </if>
+            <if test="reqdeptname != null and reqdeptname !=''">
+                reqdeptname,
+            </if>
+            <if test="reqdeptid != null and reqdeptid !=''">
+                reqdeptid,
+            </if>
+            <if test="reqposition != null and reqposition !=''">
+                reqposition,
+            </if>
+            <if test="apprstatus != null and apprstatus !=''">
+                apprstatus,
+            </if>
+            <if test="status != null and status !=''">
+                status,
+            </if>
+            <if test="inid != null and inid !=''">
+                inid,
+            </if>
+            <if test="indt != null and indt !=''">
+                indt,
+            </if>
+            <if test="isattach != null and isattach !=''">
+                isattach,
+            </if>
+            <if test="ismanage != null and ismanage !=''">
+                ismanage,
+            </if>
+            <if test="isinside != null and isinside !=''">
+                isinside,
+            </if>
+            <if test="managedeptid != null and managedeptid !=''">
+                managedeptid,
+            </if>
+            <if test="ischiefyn != null and ischiefyn !=''">
+                ischiefyn,
+            </if>
+            <if test="manageuserid != null and manageuserid !=''">
+                manageuserid,
+            </if>
+            <if test="incmemo != null and incmemo !=''">
+                incmemo,
+            </if>
+        </trim>
+        )
+        VALUES (
+            <trim suffixOverrides=",">
+            <if test="transferid != null and transferid !=''">
+                #{transferid},
+            </if>
+            <if test="title != null and title !=''">
+                #{title},
+            </if>
+            <if test="reason != null and reason !=''">
+                #{reason},
+            </if>
+            <if test="objgubun != null and objgubun !=''">
+                #{objgubun},
+            </if>
+            <if test="reqdate != null and reqdate !=''">
+                #{reqdate},
+            </if>
+            <if test="reqterm != null and reqterm !=''">
+                #{reqterm},
+            </if>
+            <if test="requsername != null and requsername !=''">
+                #{requsername},
+            </if>
+            <if test="requserid != null and requserid !=''">
+                #{requserid},
+            </if>
+            <if test="reqdeptname != null and reqdeptname !=''">
+                #{reqdeptname},
+            </if>
+            <if test="reqdeptid != null and reqdeptid !=''">
+                #{reqdeptid},
+            </if>
+            <if test="reqposition != null and reqposition !=''">
+                #{reqposition},
+            </if>
+            <if test="apprstatus != null and apprstatus !=''">
+                #{apprstatus},
+            </if>
+            <if test="status != null and status !=''">
+                #{status},
+            </if>
+            <if test="inid != null and inid !=''">
+                #{inid},
+            </if>
+            <if test="indt != null and indt !=''">
+                #{indt},
+            </if>
+            <if test="isattach != null and isattach !=''">
+                #{isattach},
+            </if>
+            <if test="ismanage != null and ismanage !=''">
+                #{ismanage},
+            </if>
+            <if test="isinside != null and isinside !=''">
+                #{isinside},
+            </if>
+            <if test="managedeptid != null and managedeptid !=''">
+                #{managedeptid},
+            </if>
+            <if test="ischiefyn != null and ischiefyn !=''">
+                #{ischiefyn},
+            </if>
+            <if test="manageuserid != null and manageuserid !=''">
+                #{manageuserid},
+            </if>
+            <if test="incmemo != null and incmemo !=''">
+                #{incmemo},
+            </if>
+            </trim>
+        )
+        ON CONFLICT (transferid)
+        DO UPDATE
+        SET
+        title = #{title},
+        reason = #{reason},
+        apprstatus = #{apprstatus},
+        status = #{status},
+        indt = #{indt}
+    </insert>
+
+    <!-- 인계자 & 인수자 정보 조회 -->
+    <select id="selectTrnOverList" parameterType="com.anylogic.ssystem.bms.trn.model.SelectTrnReqListReqVO" resultMap="selectTrnReqListMap">
+        SELECT
+        DISTINCT ON (C.apprseq)
+        A.transferid as "transferid"
+        , A.title as "title"
+        , A.reason as "reason"
+        , A.objgubun as "objgubun"
+        , A.reqdate as "reqdate"
+        , A.reqterm as "reqterm"
+        , A.requsername as "requsername"
+        , A.requserid as "requserid"
+        , A.reqdeptname as "reqdeptname"
+        , A.reqdeptid as "reqdeptid"
+        , A.reqposition as "reqposition"
+        , A.status as "status"
+        , A.inid as "inid"
+        , A.indt as "indt"
+        , A.isattach as "isattach"
+        , A.ismanage as "ismanage"
+        , A.isinside as "isinside"
+        , A.managedeptid as "managedeptid"
+        , A.ischiefyn as "ischiefyn"
+        , A.manageuserid as "manageuserid"
+        , A.incmemo as "incmemo"
+        , B.transferid as "transferid"
+        , B.objectid as "objectid"
+        , B.objectname as "objectname"
+        , B.objecttype as "objecttype"
+        , B.pjtcardid as "pjtcardid"
+        , B.pjtcardname as "pjtcardname"
+        , B.paperflag as "paperflag"
+        , B.procdate as "procdate"
+        , B.rfidflag as "rfidflag"
+        , B.rfiddate as "rfiddate"
+        , B.mgmtno as "mgmtno"
+        , B.seclevel as "seclevel"
+        , B.reportdt as "reportdt"
+        , B.docnoseq as "docnoseq"
+        , B.prerfidflag as "prerfidflag"
+        , B.prerfiddate as "prerfiddate"
+        , B.secstatus as "secstatus"
+        , C.apprseq as "apprseq"
+        , C.apprusername as "apprusername"
+        , C.appruserid as "appruserid"
+        , C.apprdeptname as "apprdeptname"
+        , C.apprdeptid as "apprdeptid"
+        , C.apprposition as "apprposition"
+        , C.apprstatus as "apprstatus"
+        , C.apprcode as "apprcode"
+        , C.apprdate as "apprdate"
+        , C.apprreason as "apprreason"
+        , C.state as "state"
+        , C.electsignid as "electsignid"
+        FROM  sbms.sbms_user.bms_trn_report  A
+        INNER JOIN  sbms.sbms_user.bms_trn_object  B
+        ON ( A.transferid  =  B.transferid  )
+        INNER JOIN  sbms.sbms_user.bms_trn_step  C
+        ON ( A.transferid  =  C.transferid  )
+        WHERE 1 = 1
+        <if test="transferid != null and transferid !=''">
+            and A.transferid = #{transferid}
+        </if>
+        <if test="title != null and title !=''">
+            and title like CONCAT('%', #{title}, '%')
+        </if>
+        <if test="reqdeptname != null and reqdeptname !=''">
+            and reqdeptname like CONCAT('%', #{reqdeptname}, '%')
+        </if>
+        <if test="requsername != null and requsername !=''">
+            and requsername like CONCAT('%', #{requsername}, '%')
+        </if>
+        <if test="apprdeptname != null and apprdeptname !=''">
+            and apprdeptname like CONCAT('%', #{apprdeptname}, '%')
+        </if>
+        <if test="apprusername != null and apprusername !=''">
+            and apprusername like CONCAT('%', #{apprusername}, '%')
+        </if>
+        <if test="transferid != null and transferid !=''">
+            and A.transferid like CONCAT('%', #{transferid}, '%')
+        </if>
+        <if test="status != null and status !=''">
+            and status = #{status}
+        </if>
+        <if test="appruserid != null and appruserid !=''">
+            and C.appruserid = #{appruserid}
+        </if>
+        <if test="startDt != null and startDt !=''">
+            and reqdate like CONCAT('%', #{startDt}, '%')
+        </if>
+        <if test="endDt != null and endDt !=''">
+            and reqdate like CONCAT('%', #{endDt}, '%')
+        </if>
+        ORDER BY C.apprseq ASC
+    </select>
+
+    <!-- 인계인수 대상 목록 조회 -->
+    <select id="selectTrnObjectList" parameterType="com.anylogic.ssystem.bms.trn.model.SelectTrnReqListReqVO" resultMap="selectTrnReqListMap">
+        SELECT
+            a.transferid as "transferid"
+            , a.objectid as "objectid"
+            , a.objectname as "objectname"
+            , a.objecttype as "objecttype"
+            , a.pjtcardid as "pjtcardid"
+            , a.pjtcardname as "pjtcardname"
+            , a.paperflag as "paperflag"
+            , a.procdate as "procdate"
+            , a.rfidflag as "rfidflag"
+            , a.rfiddate as "rfiddate"
+            , a.mgmtno as "mgmtno"
+            , a.seclevel as "seclevel"
+            , a.reportdt as "reportdt"
+            , a.docnoseq as "docnoseq"
+            , a.prerfidflag as "prerfidflag"
+            , a.prerfiddate as "prerfiddate"
+            , a.secstatus as "secstatus"
+            , b.docno as "docno"
+            , b.copyno as "copyno"
+            , c.mgmtid as "mgmtid"
+        FROM  sbms.sbms_user.bms_trn_object a
+            INNER JOIN sbms.sbms_user.bms_dct_attr b ON a.objectid = b.docid
+            INNER JOIN sbms.sbms_user.bms_dct_mgmt_regi c ON a.objectid = c.docid
+        WHERE 1 = 1
+            <if test="transferid != null and transferid !=''">
+                and a.transferid = #{transferid}
+            </if>
+            <if test="objectid != null and objectid !=''">
+                and objectid = #{objectid}
+            </if>
+            <if test="objectname != null and objectname !=''">
+                and objectname like CONCAT('%', #{objectname}, '%')
+            </if>
+            <if test="startDt != null and startDt !=''">
+                and reportdt like CONCAT('%', #{startDt}, '%')
+            </if>
+            <if test="endDt != null and endDt !=''">
+                and reportdt like CONCAT('%', #{endDt}, '%')
+            </if>
+        ORDER BY docnoseq ASC
+    </select>
+
+
+</mapper>

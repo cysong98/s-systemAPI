@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.anylogic.ssystem.bms.use.mapper.BmsDctApprreqReclassMapper">
+
+    <!--  재분류 요청내용 등록 -->
+    <insert id="insertComingReclassApproveBIA" parameterType="com.anylogic.ssystem.bms.use.model.InsertComingReclassApproveBIAReqVO">
+        INSERT INTO
+        sbms.sbms_user.bms_dct_apprreq_reclass(
+            <trim suffixOverrides=",">
+            <if test="apprreqid != null and apprreqid !=''">
+                apprreqid,
+            </if>
+            <if test="mgmtid != null and mgmtid !=''">
+                mgmtid,
+            </if>
+            <if test="reclassgubun != null and reclassgubun !=''">
+                reclassgubun,
+            </if>
+            <if test="reqseclevel != null and reqseclevel !=''">
+                reqseclevel,
+            </if>
+            <if test="reqnotiprotterm != null and reqnotiprotterm !=''">
+                reqnotiprotterm,
+            </if>
+            <if test="reqnotiprotlevel != null and reqnotiprotlevel !=''">
+                reqnotiprotlevel,
+            </if>
+            <if test="reqnotiact != null and reqnotiact !=''">
+                reqnotiact,
+            </if>
+            <if test="reqprsrvterm != null and reqprsrvterm !=''">
+                reqprsrvterm,
+            </if>
+            <if test="grantseclevel != null and grantseclevel !=''">
+                grantseclevel,
+            </if>
+            <if test="grantnotiprotterm != null and grantnotiprotterm !=''">
+                grantnotiprotterm,
+            </if>
+            <if test="grantnotiprotlevel != null and grantnotiprotlevel !=''">
+                grantnotiprotlevel,
+            </if>
+            <if test="grantnotiact != null and grantnotiact !=''">
+                grantnotiact,
+            </if>
+            <if test="grantnotiprsrvterm != null and grantnotiprsrvterm !=''">
+                grantnotiprsrvterm,
+            </if>
+            <if test="grantflag != null and grantflag !=''">
+                grantflag,
+            </if>
+            </trim>
+        )
+        VALUES(
+            <trim suffixOverrides=",">
+            <if test="apprreqid != null and apprreqid !=''">
+                #{apprreqid},
+            </if>
+            <if test="mgmtid != null and mgmtid !=''">
+                #{mgmtid},
+            </if>
+            <if test="reclassgubun != null and reclassgubun !=''">
+                #{reclassgubun},
+            </if>
+            <if test="reqseclevel != null and reqseclevel !=''">
+                #{reqseclevel},
+            </if>
+            <if test="reqnotiprotterm != null and reqnotiprotterm !=''">
+                #{reqnotiprotterm},
+            </if>
+            <if test="reqnotiprotlevel != null and reqnotiprotlevel !=''">
+                #{reqnotiprotlevel},
+            </if>
+            <if test="reqnotiact != null and reqnotiact !=''">
+                #{reqnotiact},
+            </if>
+            <if test="reqprsrvterm != null and reqprsrvterm !=''">
+                #{reqprsrvterm},
+            </if>
+            <if test="grantseclevel != null and grantseclevel !=''">
+                #{grantseclevel},
+            </if>
+            <if test="grantnotiprotterm != null and grantnotiprotterm !=''">
+                #{grantnotiprotterm},
+            </if>
+            <if test="grantnotiprotlevel != null and grantnotiprotlevel !=''">
+                #{grantnotiprotlevel},
+            </if>
+            <if test="grantnotiact != null and grantnotiact !=''">
+                #{grantnotiact},
+            </if>
+            <if test="grantnotiprsrvterm != null and grantnotiprsrvterm !=''">
+                #{grantnotiprsrvterm},
+            </if>
+            <if test="grantflag != null and grantflag !=''">
+                #{grantflag},
+            </if>
+            </trim>
+        )
+    </insert>
+
+    <!-- 각 요청서 승인/반려 처리 - 승인한 재분류정보 수정 -->
+    <update id="updateUseReqMapReclass" parameterType="java.util.Map">
+        UPDATE sbms.sbms_user.bms_dct_apprreq_reclass a
+        SET
+            grantseclevel = #{grantseclevel}
+          ,grantnotiprotterm = CASE
+                                   WHEN CHAR_LENGTH(#{grantnotiprotterm}) = 8 THEN #{grantnotiprotterm} || '235959'
+                                   ELSE #{grantnotiprotterm}
+            END
+          ,grantnotiprotlevel = #{grantseclevel}
+          ,grantnotiact = #{grantnotiact}
+          ,grantnotiprsrvterm = #{grantnotiprsrvterm}
+          ,grantflag = #{grantflag}
+        WHERE apprreqid = #{apprreqid}
+          AND mgmtid = #{mgmtid}
+    </update>
+
+    <!-- 비밀관리기록부 상태값 수정 -->
+    <update id="updateUseReqMgmtRegiSecStatus" parameterType="java.util.Map">
+        update sbms.sbms_user.bms_dct_mgmt_regi
+        set secstatus = #{secstatus}
+        where mgmtid = #{mgmtid}
+    </update>
+
+    <select id="selectUseReqReclassMapList" parameterType="java.util.Map" resultType="java.util.HashMap">
+        SELECT
+            b.apprreqid as "apprreqid",
+            a.mgmtid as "mgmtid",
+            a.mgmtno as "mgmtno",
+            a.secttl as "secttl",
+            c.copyno as "copyno",
+            CASE
+                WHEN c.copyno LIKE '%원%' THEN
+                        CASE
+                            WHEN c.prsrvterm = '001' THEN '1년'
+                            WHEN c.prsrvterm = '003' THEN '3년'
+                            WHEN c.prsrvterm = '005' THEN '5년'
+                            WHEN c.prsrvterm = '010' THEN '10년'
+                            WHEN c.prsrvterm = '030' THEN '30년'
+                            WHEN c.prsrvterm = '040' THEN '준영구'
+                            WHEN c.prsrvterm = '050' THEN '영구'
+                            ELSE ''
+                            END || ' 보존 ' ||
+                        TO_CHAR(TO_TIMESTAMP(SUBSTR(c.orgnprotdt,1,8), 'YYYYMMDDHH24MISS'), 'YYYY.MM.DD') || ' ' ||
+                        CASE
+                            WHEN a.seclevel = '2' THEN 'II급'
+                            WHEN a.seclevel = '3' THEN 'III급'
+                            WHEN a.seclevel = '5' THEN '일반'
+                            ELSE ''
+                            END || '(으)로 ' ||
+                        CASE
+                            WHEN c.orgnreclass = '20' THEN '존안'
+                            WHEN c.orgnreclass = '21' THEN '재분류'
+                            WHEN c.orgnreclass = '22' THEN '이관'
+                            WHEN c.orgnreclass = '23' THEN '파기'
+                            ELSE ''
+                            END
+                ELSE
+                        CASE
+                            WHEN c.prsrvterm = '001' THEN '1년'
+                            WHEN c.prsrvterm = '003' THEN '3년'
+                            WHEN c.prsrvterm = '005' THEN '5년'
+                            WHEN c.prsrvterm = '010' THEN '10년'
+                            WHEN c.prsrvterm = '030' THEN '30년'
+                            WHEN c.prsrvterm = '040' THEN '준영구'
+                            WHEN c.prsrvterm = '050' THEN '영구'
+                            ELSE ''
+                            END || ' 보존 ' ||
+                        TO_CHAR(TO_TIMESTAMP(SUBSTR(c.copyprotdt,1,8), 'YYYYMMDDHH24MISS'), 'YYYY.MM.DD') || ' ' ||
+                        CASE
+                            WHEN a.seclevel = '2' THEN 'II급'
+                            WHEN a.seclevel = '3' THEN 'III급'
+                            WHEN a.seclevel = '5' THEN '일반'
+                            ELSE ''
+                            END || '(으)로 ' ||
+                        CASE
+                            WHEN c.copyreclass = '20' THEN '존안'
+                            WHEN c.copyreclass = '21' THEN '재분류'
+                            WHEN c.copyreclass = '22' THEN '이관'
+                            WHEN c.copyreclass = '23' THEN '파기'
+                            ELSE ''
+                            END
+                END AS orgnattrinfo,
+            CASE
+                WHEN b.reqprsrvterm = '001' THEN '1년'
+                WHEN b.reqprsrvterm = '003' THEN '3년'
+                WHEN b.reqprsrvterm = '005' THEN '5년'
+                WHEN b.reqprsrvterm = '010' THEN '10년'
+                WHEN b.reqprsrvterm = '030' THEN '30년'
+                WHEN b.reqprsrvterm = '040' THEN '준영구'
+                WHEN b.reqprsrvterm = '050' THEN '영구'
+                ELSE ''
+                END || ' 보존 ' ||
+            TO_CHAR(TO_TIMESTAMP(SUBSTR(b.reqnotiprotterm,1,8), 'YYYYMMDDHH24MISS'), 'YYYY.MM.DD') || ' ' ||
+            CASE
+                WHEN b.reqnotiprotlevel = '2' THEN 'II급'
+                WHEN b.reqnotiprotlevel = '3' THEN 'III급'
+                WHEN b.reqnotiprotlevel = '5' THEN '일반'
+                ELSE ''
+                END || '(으)로 ' ||
+            CASE
+                WHEN b.reqnotiact = '20' THEN '존안'
+                WHEN b.reqnotiact = '21' THEN '재분류'
+                WHEN b.reqnotiact = '22' THEN '이관'
+                WHEN b.reqnotiact = '23' THEN '파기'
+                ELSE ''
+                END AS reqattrinfo,
+            a.deptname as "deptname",
+            a.authorid as "authorid",
+            a.authorname as "authorname",
+            a.docid as "docid",
+            a.regirecvtype as "regirecvtype",
+            COALESCE(NULLIF(b.grantseclevel, ''), b.reqseclevel) AS "grantseclevel",
+            COALESCE(NULLIF(b.grantnotiprotterm, ''), b.reqnotiprotterm) AS "grantnotiprotterm",
+            COALESCE(NULLIF(b.grantnotiprotlevel, ''), b.reqnotiprotlevel) AS "grantnotiprotlevel",
+            COALESCE(NULLIF(b.grantnotiact, ''), b.reqnotiact) AS "grantnotiact",
+            COALESCE(NULLIF(b.grantnotiprsrvterm, ''), b.reqprsrvterm) AS "grantnotiprsrvterm"
+        FROM sbms.sbms_user.bms_dct_mgmt_regi a
+                 LEFT OUTER JOIN sbms.sbms_user.bms_dct_apprreq_reclass b ON (a.mgmtid = b.mgmtid)
+                 LEFT OUTER JOIN sbms.sbms_user.bms_dct_attr c ON (a.docid = c.docid)
+        WHERE b.apprreqid = #{apprreqid};
+    </select>
+
+</mapper>

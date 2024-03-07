@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.anylogic.ssystem.bms.use.mapper.BmsDctApprreqLendFleMapper">
+
+    <!-- 반출 요청내용 파일정보 등록 -->
+    <insert id="insertPrtFile" parameterType="com.anylogic.ssystem.bms.use.model.InsertPrtFileReqVO">
+        INSERT INTO
+        sbms.sbms_user.bms_dct_apprreq_lend_fle(
+            <trim suffixOverrides=",">
+            <if test="apprreqid != null and apprreqid !=''">
+                apprreqid,
+            </if>
+            <if test="mgmtid != null and mgmtid !=''">
+                mgmtid,
+            </if>
+                fleorder,
+            <if test="gubun != null and gubun !=''">
+                gubun,
+            </if>
+            <if test="fleid != null and fleid !=''">
+                fleid,
+            </if>
+            <if test="sfilename != null and sfilename !=''">
+                sfilename,
+            </if>
+            <if test="flettl != null and flettl !=''">
+                flettl,
+            </if>
+            <if test="flesize != null and flesize !=''">
+                flesize,
+            </if>
+            <if test="grantflag != null and grantflag !=''">
+                grantflag,
+            </if>
+            </trim>
+        )
+        VALUES(
+            <trim suffixOverrides=",">
+            <if test="apprreqid != null and apprreqid !=''">
+                #{apprreqid},
+            </if>
+            <if test="mgmtid != null and mgmtid !=''">
+                #{mgmtid},
+            </if>
+                #{fleorder},
+            <if test="gubun != null and gubun !=''">
+                #{gubun},
+            </if>
+            <if test="fleid != null and fleid !=''">
+                #{fleid},
+            </if>
+            <if test="sfilename != null and sfilename !=''">
+                #{sfilename},
+            </if>
+            <if test="flettl != null and flettl !=''">
+                #{flettl},
+            </if>
+            <if test="flesize != null and flesize !=''">
+                #{flesize},
+            </if>
+            <if test="grantflag != null and grantflag !=''">
+                #{grantflag},
+            </if>
+            </trim>
+        )
+    </insert>
+
+</mapper>

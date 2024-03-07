@@ -1,0 +1,113 @@
+/*
+   AnyX Platform version 2.0
+
+   Copyright ⓒ 2022 anylogic corp. All rights reserved.
+
+   This is a proprietary software of anylogic corp, and you may not use this file except in
+   compliance with license agreement with anylogic corp. Any redistribution or use of this
+   software, with or without modification shall be strictly prohibited without prior written
+   approval of anylogic corp, and the copyright notice above does not evidence any actual or
+   intended publication of such software.
+*/
+
+
+
+package com.anylogic.ssystem.bms.use.model;
+
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.ToString;
+import java.io.Serializable;
+import java.lang.String;
+
+import com.anylogic.ssystem.common.model.AnyXCommonVO;
+
+
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+@Getter
+@Setter
+@ApiModel
+public class SelectUseReqListReqVO extends AnyXCommonVO implements Serializable {
+    @ApiModelProperty("결재처리구분")
+    @Size(max=1)
+    private String apprgubun;                    // 결재처리구분
+
+    @ApiModelProperty("요청제목")
+    @Size(max=110)
+    private String reqttl;                       // 요청제목
+
+    @ApiModelProperty("요청일자")
+    @Size(max=14)
+    private String startDt;                      // 요청일자
+
+    @ApiModelProperty("상태")
+    @Size(max=1)
+    private String reqstatus;                      // 상태
+
+    @ApiModelProperty("요청일자")
+    @Size(max=14)
+    private String endDt;                        // 요청일자
+
+    @ApiModelProperty("현재페이지")
+    private int pageNum;                         //  현재페이지
+
+    @ApiModelProperty("페이지당열갯수")
+    private int pageSize;                      //  페이지당열갯수
+
+    @ApiModelProperty("정렬유형")
+    @Size(max=5)
+    private String sortDirection;                //  정렬유형
+
+    @ApiModelProperty("정렬항목")
+    @Size(max=50)
+    private String sortItem;                     //  정렬항목 
+
+    @ApiModelProperty("정렬테이블")
+    @Size(max=50)
+    private String sortIndicator;                //  정렬테이블
+
+    @ApiModelProperty("결재자 ID")
+    @Size(max=35)
+    private String apprid;                    // 결재자 ID
+
+    @ApiModelProperty("요청타입")
+    @Size(max=2)
+    private String reqtype;                    // 요청타입
+
+    @ApiModelProperty("요청서리스트타입")
+    @Size(max=10)
+    private String pagereqtype;
+
+    @ApiModelProperty("요청자 ID")
+    @Size(max=35)
+    private String reqid;                    // 요청자 ID
+
+    @ApiModelProperty("부서명")
+    @Size(max=100)
+    private String deptname;
+
+    @ApiModelProperty("직위")
+    @Size(max=100)
+    private String position;
+
+    @ApiModelProperty("직급")
+    @Size(max=100)
+    private String grade;
+
+    @ApiModelProperty("요청자명")
+    @Size(max=100)
+    private String reqname;                       // 요청자명
+
+}
+

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.anylogic.ssystem.bms.com.mapper.BmsComFaqAuthorMapper">
+
+    <resultMap id="selectFaqAuthorMap" type="com.anylogic.ssystem.bms.com.model.SelectFaqAuthorResVO">
+        <id column="faqid" property="faqid" />                        <!-- FAQ아이디 -->
+        <result column="deptid" property="deptid" />                  <!-- 부서아이디 -->
+        <result column="deptname" property="deptname" />              <!-- 부서명 -->
+    </resultMap>
+
+    <!-- 게시판관리 > FAQ 관리 > FAQ AUTHOR 조회 -->
+    <select id="selectFaqAuthor" parameterType="com.anylogic.ssystem.bms.com.model.SelectFaqAuthorReqVO" resultMap="selectFaqAuthorMap">
+        SELECT
+            faqid as "faqid"
+            , deptid as "deptid"
+            , deptname as "deptname"
+        FROM  sbms.sbms_user.bms_com_faq_author
+        WHERE 1 = 1
+        <if test="faqid != null and faqid !=''">
+            and faqid = #{faqid}
+        </if>
+    </select>
+
+    <!-- 부서ID로 FAQ ID 조회 -->
+    <select id="selectFaqAuthorByDeptid" parameterType="com.anylogic.ssystem.bms.com.model.SelectFaqAuthorReqVO" resultMap="selectFaqAuthorMap">
+        SELECT DISTINCT
+            faqid as "faqid"
+        FROM  sbms.sbms_user.bms_com_faq_author
+        WHERE 1 = 1
+        <if test="deptid != null and deptid !=''">
+            and deptid = #{deptid}
+        </if>
+    </select>
+
+    <!-- 게시판관리 > FAQ 관리 > FAQ AUTHOR 삭제 -->
+    <delete id="deleteFaqAuthor" parameterType="com.anylogic.ssystem.bms.com.model.DeleteFaqAuthorReqVO">
+        DELETE FROM sbms.sbms_user.bms_com_faq_author
+        WHERE 1 = 1
+            and faqid = #{faqid}
+    </delete>
+
+    <!-- 게시판관리 > FAQ 관리 > FAQ AUTHOR 등록 -->
+    <insert id="insertFaqAuthor" parameterType="com.anylogic.ssystem.bms.com.model.InsertFaqAuthorReqVO">
+        INSERT INTO
+        sbms.sbms_user.bms_com_faq_author(
+            <trim suffixOverrides=",">
+            <if test="faqid != null and faqid !=''">
+                faqid,
+            </if>
+            <if test="deptid != null and deptid !=''">
+                deptid,
+            </if>
+            <if test="deptname != null and deptname !=''">
+                deptname,
+            </if>
+            </trim>
+        )
+        VALUES(
+            <trim suffixOverrides=",">
+            <if test="faqid != null and faqid !=''">
+                #{faqid},
+            </if>
+            <if test="deptid != null and deptid !=''">
+                #{deptid},
+            </if>
+            <if test="deptname != null and deptname !=''">
+                #{deptname},
+            </if>
+            </trim>
+        )
+    </insert>
+
+    <!-- 게시판관리 > FAQ 관리 > FAQ AUTHOR 수정 -->
+    <update id="updateFaqAuthor" parameterType="com.anylogic.ssystem.bms.com.model.UpdateFaqAuthorReqVO">
+        UPDATE sbms.sbms_user.bms_com_faq_author
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="deptid != null and deptid !=''">
+                deptid = #{deptid},
+            </if>
+            <if test="deptname != null and deptname !=''">
+                deptname = #{deptname},
+            </if>
+        </trim>
+        WHERE 1 = 1
+            and faqid = #{faqid}
+            and deptid = #{deptid}
+    </update>
+
+
+</mapper>

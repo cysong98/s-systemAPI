@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.anylogic.ssystem.bms.dct.mapper.BmsDctEnfRecvMapper">
+
+    <!-- 시행 부서 등록 -->
+    <insert id="insertEnforceRecv" parameterType="com.anylogic.ssystem.bms.dct.model.InsertEnforceRecvReqVO">
+        INSERT INTO
+        sbms.sbms_user.bms_dct_enf_recv(
+            <trim suffixOverrides=",">
+            <if test="docid != null and docid !=''">
+                docid,
+            </if>
+            <if test="recvdeptnameOld != null and recvdeptnameOld !=''">
+                recvdeptname_old,
+            </if>
+            <if test="viadeptname != null and viadeptname !=''">
+                viadeptname,
+            </if>
+            <if test="recvdeptname != null and recvdeptname !=''">
+                recvdeptname,
+            </if>
+            <if test="distsdeptname != null and distsdeptname !=''">
+                distsdeptname,
+            </if>
+            <if test="distctrlflag != null and distctrlflag !=''">
+                distctrlflag,
+            </if>
+            <if test="sendhisid != null and sendhisid !=''">
+                sendhisid,
+            </if>
+            </trim>
+        )
+        VALUES(
+            <trim suffixOverrides=",">
+            <if test="docid != null and docid !=''">
+                #{docid},
+            </if>
+            <if test="recvdeptnameOld != null and recvdeptnameOld !=''">
+                #{recvdeptnameOld},
+            </if>
+            <if test="viadeptname != null and viadeptname !=''">
+                #{viadeptname},
+            </if>
+            <if test="recvdeptname != null and recvdeptname !=''">
+                #{recvdeptname},
+            </if>
+            <if test="distsdeptname != null and distsdeptname !=''">
+                #{distsdeptname},
+            </if>
+            <if test="distctrlflag != null and distctrlflag !=''">
+                #{distctrlflag},
+            </if>
+            <if test="sendhisid != null and sendhisid !=''">
+                #{sendhisid},
+            </if>
+            </trim>
+        )
+    </insert>
+
+</mapper>

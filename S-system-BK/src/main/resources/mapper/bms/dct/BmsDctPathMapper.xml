@@ -1,0 +1,470 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.anylogic.ssystem.bms.dct.mapper.BmsDctPathMapper">
+
+    <resultMap id="selectDctPathMap" type="com.anylogic.ssystem.bms.dct.model.SelectDctPathResVO">
+        <id column="docid" property="docid" />                        <!-- 비밀 ID -->
+        <id column="pathorder" property="pathorder" />                <!-- 경로순서 -->
+        <result column="state" property="state" />                    <!-- 상황 -->
+        <result column="objid" property="objid" />                    <!-- 객체 ID -->
+        <result column="objtype" property="objtype" />                <!-- 객체 유형 -->
+        <result column="objname" property="objname" />                <!-- 객체 이름 -->
+        <result column="deptid" property="deptid" />                  <!-- 부서 ID -->
+        <result column="deptname" property="deptname" />              <!-- 부서 이름 -->
+        <result column="dutyname" property="dutyname" />              <!-- 직위직급 이름 -->
+        <result column="dutynamedesc" property="dutynamedesc" />      <!-- 직위직급 이름 상세 -->
+        <result column="positionid" property="positionid" />          <!-- 직위 ID -->
+        <result column="gradeid" property="gradeid" />                <!-- 직급 ID -->
+        <result column="asktype" property="asktype" />                <!-- 요청유형 -->
+        <result column="acttype" property="acttype" />                <!-- 처리유형 -->
+        <result column="readopinion" property="readopinion" />        <!-- 열람의견 -->
+        <result column="actapprdt" property="actapprdt" />            <!-- 처리경로시간 -->
+        <result column="mainver" property="mainver" />                <!-- 메인버전 -->
+        <result column="subver" property="subver" />                  <!-- 서브버전 -->
+        <result column="readdt" property="readdt" />                  <!-- 열람일시 -->
+        <result column="absreason" property="absreason" />            <!-- 부재사유 -->
+        <result column="inid" property="inid" />                      <!-- 등록자 ID -->
+        <result column="indt" property="indt" />                      <!-- 등록일 -->
+        <result column="starred" property="starred" />                <!-- 중요여부 -->
+        <result column="appname" property="appname" />                <!-- 전결이름 -->
+        <result column="updateflag" property="updateflag" />          <!-- 수정 FLAG -->
+        <result column="repathorder" property="repathorder" />        <!-- 재검토경로순서 -->
+        <result column="deputyflag" property="deputyflag" />          <!-- 대리지정 FLAG -->
+        <result column="oriobjid" property="oriobjid" />              <!-- 원 객체 ID -->
+        <result column="oriobjname" property="oriobjname" />          <!-- 원 객체이름 -->
+        <result column="orideptid" property="orideptid" />            <!-- 원 부서 ID -->
+        <result column="orideptname" property="orideptname" />        <!-- 원 부서이름 -->
+        <result column="oridutyname" property="oridutyname" />        <!-- 원 직위직급이름 -->
+        <result column="oridutynamedesc" property="oridutynamedesc" /><!-- 원 직위직급이름상세 -->
+        <result column="oripositionid" property="oripositionid" />    <!-- 원 직위 ID -->
+        <result column="origradeid" property="origradeid" />          <!-- 원 직급 ID -->
+        <result column="historyflag" property="historyflag" />        <!-- 이력정보 FLAG -->
+        <result column="reportdt" property="reportdt" />              <!-- 보고일자 -->
+        <result column="proposer" property="proposer" />              <!-- 발의자 -->
+        <result column="electsignid" property="electsignid" />        <!-- 전자서명 ID -->
+        <result column="opinion" property="opinion" />
+    </resultMap>
+
+
+    <!--  결재 경로 등록 -->
+    <insert id="insertPath" parameterType="com.anylogic.ssystem.bms.dct.model.InsertPathReqVO">
+        INSERT INTO
+        sbms.sbms_user.bms_dct_path(
+            <trim suffixOverrides=",">
+            <if test="docid != null and docid !=''">
+                docid,
+            </if>
+            <if test="pathorder != null and pathorder !=''">
+                pathorder,
+            </if>
+            <if test="state != null and state !=''">
+                state,
+            </if>
+            <if test="objid != null and objid !=''">
+                objid,
+            </if>
+            <if test="objtype != null and objtype !=''">
+                objtype,
+            </if>
+            <if test="objname != null and objname !=''">
+                objname,
+            </if>
+            <if test="deptid != null and deptid !=''">
+                deptid,
+            </if>
+            <if test="deptname != null and deptname !=''">
+                deptname,
+            </if>
+            <if test="dutyname != null and dutyname !=''">
+                dutyname,
+            </if>
+            <if test="dutynamedesc != null and dutynamedesc !=''">
+                dutynamedesc,
+            </if>
+            <if test="positionid != null and positionid !=''">
+                positionid,
+            </if>
+            <if test="gradeid != null and gradeid !=''">
+                gradeid,
+            </if>
+            <if test="asktype != null and asktype !=''">
+                asktype,
+            </if>
+            <if test="acttype != null and acttype !=''">
+                acttype,
+            </if>
+            <if test="readopinion != null and readopinion !=''">
+                readopinion,
+            </if>
+            <if test="actapprdt != null and actapprdt !=''">
+                actapprdt,
+            </if>
+            <if test="mainver != null and mainver !=''">
+                mainver,
+            </if>
+            <if test="subver != null and subver !=''">
+                subver,
+            </if>
+            <if test="readdt != null and readdt !=''">
+                readdt,
+            </if>
+            <if test="absreason != null and absreason !=''">
+                absreason,
+            </if>
+            <if test="inid != null and inid !=''">
+                inid,
+            </if>
+            <if test="indt != null and indt !=''">
+                indt,
+            </if>
+            <if test="starred != null and starred !=''">
+                starred,
+            </if>
+            <if test="appname != null and appname !=''">
+                appname,
+            </if>
+            <if test="updateflag != null and updateflag !=''">
+                updateflag,
+            </if>
+            <if test="repathorder != null and repathorder !=''">
+                repathorder,
+            </if>
+            <if test="deputyflag != null and deputyflag !=''">
+                deputyflag,
+            </if>
+            <if test="oriobjid != null and oriobjid !=''">
+                oriobjid,
+            </if>
+            <if test="oriobjname != null and oriobjname !=''">
+                oriobjname,
+            </if>
+            <if test="orideptid != null and orideptid !=''">
+                orideptid,
+            </if>
+            <if test="orideptname != null and orideptname !=''">
+                orideptname,
+            </if>
+            <if test="oridutyname != null and oridutyname !=''">
+                oridutyname,
+            </if>
+            <if test="oridutynamedesc != null and oridutynamedesc !=''">
+                oridutynamedesc,
+            </if>
+            <if test="oripositionid != null and oripositionid !=''">
+                oripositionid,
+            </if>
+            <if test="origradeid != null and origradeid !=''">
+                origradeid,
+            </if>
+            <if test="historyflag != null and historyflag !=''">
+                historyflag,
+            </if>
+            <if test="reportdt != null and reportdt !=''">
+                reportdt,
+            </if>
+            <if test="proposer != null and proposer !=''">
+                proposer,
+            </if>
+            <if test="electsignid != null and electsignid !=''">
+                electsignid,
+            </if>
+            </trim>
+        )
+        VALUES(
+            <trim suffixOverrides=",">
+            <if test="docid != null and docid !=''">
+                #{docid},
+            </if>
+            <if test="pathorder != null and pathorder !=''">
+                #{pathorder},
+            </if>
+            <if test="state != null and state !=''">
+                #{state},
+            </if>
+            <if test="objid != null and objid !=''">
+                #{objid},
+            </if>
+            <if test="objtype != null and objtype !=''">
+                #{objtype},
+            </if>
+            <if test="objname != null and objname !=''">
+                #{objname},
+            </if>
+            <if test="deptid != null and deptid !=''">
+                #{deptid},
+            </if>
+            <if test="deptname != null and deptname !=''">
+                #{deptname},
+            </if>
+            <if test="dutyname != null and dutyname !=''">
+                #{dutyname},
+            </if>
+            <if test="dutynamedesc != null and dutynamedesc !=''">
+                #{dutynamedesc},
+            </if>
+            <if test="positionid != null and positionid !=''">
+                #{positionid},
+            </if>
+            <if test="gradeid != null and gradeid !=''">
+                #{gradeid},
+            </if>
+            <if test="asktype != null and asktype !=''">
+                #{asktype},
+            </if>
+            <if test="acttype != null and acttype !=''">
+                #{acttype},
+            </if>
+            <if test="readopinion != null and readopinion !=''">
+                #{readopinion},
+            </if>
+            <if test="actapprdt != null and actapprdt !=''">
+                #{actapprdt},
+            </if>
+            <if test="mainver != null and mainver !=''">
+                #{mainver},
+            </if>
+            <if test="subver != null and subver !=''">
+                #{subver},
+            </if>
+            <if test="readdt != null and readdt !=''">
+                #{readdt},
+            </if>
+            <if test="absreason != null and absreason !=''">
+                #{absreason},
+            </if>
+            <if test="inid != null and inid !=''">
+                #{inid},
+            </if>
+            <if test="indt != null and indt !=''">
+                #{indt},
+            </if>
+            <if test="starred != null and starred !=''">
+                #{starred},
+            </if>
+            <if test="appname != null and appname !=''">
+                #{appname},
+            </if>
+            <if test="updateflag != null and updateflag !=''">
+                #{updateflag},
+            </if>
+            <if test="repathorder != null and repathorder !=''">
+                #{repathorder},
+            </if>
+            <if test="deputyflag != null and deputyflag !=''">
+                #{deputyflag},
+            </if>
+            <if test="oriobjid != null and oriobjid !=''">
+                #{oriobjid},
+            </if>
+            <if test="oriobjname != null and oriobjname !=''">
+                #{oriobjname},
+            </if>
+            <if test="orideptid != null and orideptid !=''">
+                #{orideptid},
+            </if>
+            <if test="orideptname != null and orideptname !=''">
+                #{orideptname},
+            </if>
+            <if test="oridutyname != null and oridutyname !=''">
+                #{oridutyname},
+            </if>
+            <if test="oridutynamedesc != null and oridutynamedesc !=''">
+                #{oridutynamedesc},
+            </if>
+            <if test="oripositionid != null and oripositionid !=''">
+                #{oripositionid},
+            </if>
+            <if test="origradeid != null and origradeid !=''">
+                #{origradeid},
+            </if>
+            <if test="historyflag != null and historyflag !=''">
+                #{historyflag},
+            </if>
+            <if test="reportdt != null and reportdt !=''">
+                #{reportdt},
+            </if>
+            <if test="proposer != null and proposer !=''">
+                #{proposer},
+            </if>
+            <if test="electsignid != null and electsignid !=''">
+                #{electsignid},
+            </if>
+            </trim>
+        )
+    </insert>
+
+    <!-- 결재선 경로 조회 -->
+    <select id="selectDctPath" parameterType="com.anylogic.ssystem.bms.dct.model.SelectDctPathReqVO" resultMap="selectDctPathMap">
+        SELECT
+            A.docid as "docid"
+            , A.pathorder as "pathorder"
+            , A.state as "state"
+            , A.objid as "objid"
+            , A.objtype as "objtype"
+            , A.objname as "objname"
+            , A.deptid as "deptid"
+            , A.deptname as "deptname"
+            , A.dutyname as "dutyname"
+            , A.dutynamedesc as "dutynamedesc"
+            , A.positionid as "positionid"
+            , A.gradeid as "gradeid"
+            , A.asktype as "asktype"
+            , A.acttype as "acttype"
+            , A.readopinion as "readopinion"
+            , A.actapprdt as "actapprdt"
+            , A.mainver as "mainver"
+            , A.subver as "subver"
+            , A.readdt as "readdt"
+            , A.absreason as "absreason"
+            , A.inid as "inid"
+            , A.indt as "indt"
+            , A.starred as "starred"
+            , A.appname as "appname"
+            , A.updateflag as "updateflag"
+            , A.repathorder as "repathorder"
+            , A.deputyflag as "deputyflag"
+            , A.oriobjid as "oriobjid"
+            , A.oriobjname as "oriobjname"
+            , A.orideptid as "orideptid"
+            , A.orideptname as "orideptname"
+            , A.oridutyname as "oridutyname"
+            , A.oridutynamedesc as "oridutynamedesc"
+            , A.oripositionid as "oripositionid"
+            , A.origradeid as "origradeid"
+            , A.historyflag as "historyflag"
+            , A.reportdt as "reportdt"
+            , A.proposer as "proposer"
+            , A.electsignid as "electsignid"
+            , B.opinion as "opinion"
+        FROM  sbms.sbms_user.bms_dct_path A
+        LEFT OUTER JOIN sbms.sbms_user.bms_dct_opinion B
+          ON (A.docid = B.docid and A.pathorder = B.pathorder)
+        WHERE 1 = 1
+            <if test="docid != null and docid !=''"> 
+                and A.docid = #{docid}
+            </if>
+        ORDER BY pathorder ASC
+    </select>
+
+    <!--  결재 경로 수정 -->
+    <update id="updatePath" parameterType="com.anylogic.ssystem.bms.dct.model.UpdatePathReqVO">
+        UPDATE sbms.sbms_user.bms_dct_path
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="state != null and state !=''">
+                state = #{state},
+            </if>
+            <if test="objid != null and objid !=''">
+                objid = #{objid},
+            </if>
+            <if test="objtype != null and objtype !=''">
+                objtype = #{objtype},
+            </if>
+            <if test="objname != null and objname !=''">
+                objname = #{objname},
+            </if>
+            <if test="deptid != null and deptid !=''">
+                deptid = #{deptid},
+            </if>
+            <if test="deptname != null and deptname !=''">
+                deptname = #{deptname},
+            </if>
+            <if test="dutyname != null and dutyname !=''">
+                dutyname = #{dutyname},
+            </if>
+            <if test="dutynamedesc != null and dutynamedesc !=''">
+                dutynamedesc = #{dutynamedesc},
+            </if>
+            <if test="positionid != null and positionid !=''">
+                positionid = #{positionid},
+            </if>
+            <if test="gradeid != null and gradeid !=''">
+                gradeid = #{gradeid},
+            </if>
+            <if test="asktype != null and asktype !=''">
+                asktype = #{asktype},
+            </if>
+            <if test="acttype != null and acttype !=''">
+                acttype = #{acttype},
+            </if>
+            <if test="readopinion != null and readopinion !=''">
+                readopinion = #{readopinion},
+            </if>
+            <if test="actapprdt != null and actapprdt !=''">
+                actapprdt = #{actapprdt},
+            </if>
+            <if test="mainver != null and mainver !=''">
+                mainver = #{mainver},
+            </if>
+            <if test="subver != null and subver !=''">
+                subver = #{subver},
+            </if>
+            <if test="readdt != null and readdt !=''">
+                readdt = #{readdt},
+            </if>
+            <if test="absreason != null and absreason !=''">
+                absreason = #{absreason},
+            </if>
+            <if test="inid != null and inid !=''">
+                inid = #{inid},
+            </if>
+            <if test="indt != null and indt !=''">
+                indt = #{indt},
+            </if>
+            <if test="starred != null and starred !=''">
+                starred = #{starred},
+            </if>
+            <if test="appname != null and appname !=''">
+                appname = #{appname},
+            </if>
+            <if test="updateflag != null and updateflag !=''">
+                updateflag = #{updateflag},
+            </if>
+            <if test="repathorder != null and repathorder !=''">
+                repathorder = #{repathorder},
+            </if>
+            <if test="deputyflag != null and deputyflag !=''">
+                deputyflag = #{deputyflag},
+            </if>
+            <if test="oriobjid != null and oriobjid !=''">
+                oriobjid = #{oriobjid},
+            </if>
+            <if test="oriobjname != null and oriobjname !=''">
+                oriobjname = #{oriobjname},
+            </if>
+            <if test="orideptid != null and orideptid !=''">
+                orideptid = #{orideptid},
+            </if>
+            <if test="orideptname != null and orideptname !=''">
+                orideptname = #{orideptname},
+            </if>
+            <if test="oridutyname != null and oridutyname !=''">
+                oridutyname = #{oridutyname},
+            </if>
+            <if test="oridutynamedesc != null and oridutynamedesc !=''">
+                oridutynamedesc = #{oridutynamedesc},
+            </if>
+            <if test="oripositionid != null and oripositionid !=''">
+                oripositionid = #{oripositionid},
+            </if>
+            <if test="origradeid != null and origradeid !=''">
+                origradeid = #{origradeid},
+            </if>
+            <if test="historyflag != null and historyflag !=''">
+                historyflag = #{historyflag},
+            </if>
+            <if test="reportdt != null and reportdt !=''">
+                reportdt = #{reportdt},
+            </if>
+            <if test="proposer != null and proposer !=''">
+                proposer = #{proposer},
+            </if>
+            <if test="electsignid != null and electsignid !=''">
+                electsignid = #{electsignid},
+            </if>
+        </trim>
+        WHERE 1=1
+          and docid = #{docid}
+          and objid = #{objid}
+    </update>
+
+</mapper>

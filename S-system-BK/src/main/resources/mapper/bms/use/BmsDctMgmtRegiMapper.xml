@@ -1,0 +1,1215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.anylogic.ssystem.bms.use.mapper.BmsDctMgmtRegiMapper">
+
+    <resultMap id="selectAlertMap" type="com.anylogic.ssystem.bms.use.model.SelectAlertResVO">
+        <result column="alertcontent" property="alertcontent" />
+    </resultMap>
+
+    <resultMap id="selectUseDigitalViewMap" type="com.anylogic.ssystem.bms.use.model.SelectUseDigitalViewResVO">
+        <id column="mgmtid" property="mgmtid" />
+        <result column="mgmtno" property="mgmtno" />
+        <result column="docid" property="docid" />
+        <result column="regirecvtype" property="regirecvtype" />
+        <result column="indt" property="indt" />
+        <result column="secttl" property="secttl" />
+        <result column="copyno" property="copyno" />
+        <result column="authorid" property="authorid" />
+        <result column="authorname" property="authorname" />
+        <result column="deptname" property="deptname" />
+        <result column="read" property="read" />
+        <result column="reader" property="reader" />
+        <result column="readauthexpiredt" property="readauthexpiredt" />
+        <result column="paperrecgubun" property="paperrecgubun" />
+    </resultMap>
+
+    <resultMap id="selectReUseMap" type="com.anylogic.ssystem.bms.use.model.SelectReUseResVO">
+        <id column="mgmtid" property="mgmtid" />
+        <result column="mgmtno" property="mgmtno" />
+        <result column="docid" property="docid" />
+        <result column="regirecvtype" property="regirecvtype" />
+        <result column="indt" property="indt" />
+        <result column="secttl" property="secttl" />
+        <result column="copyno" property="copyno" />
+        <result column="authorid" property="authorid" />
+        <result column="authorname" property="authorname" />
+        <result column="deptname" property="deptname" />
+        <result column="reuse" property="reuse" />
+        <result column="reader" property="reader" />
+        <result column="readauthexpiredt" property="readauthexpiredt" />
+        <result column="grantreuseenddt" property="grantreuseenddt" />
+        <result column="paperrecgubun" property="paperrecgubun" />
+    </resultMap>
+
+    <resultMap id="selectUsePrintMap" type="com.anylogic.ssystem.bms.use.model.SelectUsePrintResVO">
+        <id column="mgmtid" property="mgmtid" />
+        <result column="mgmtno" property="mgmtno" />
+        <result column="docid" property="docid" />
+        <result column="regirecvtype" property="regirecvtype" />
+        <result column="indt" property="indt" />
+        <result column="secttl" property="secttl" />
+        <result column="copyno" property="copyno" />
+        <result column="authorid" property="authorid" />
+        <result column="authorname" property="authorname" />
+        <result column="deptname" property="deptname" />
+        <result column="print" property="print" />
+        <result column="reader" property="reader" />
+        <result column="readauthexpiredt" property="readauthexpiredt" />
+        <result column="grantdestructdt" property="grantdestructdt" />
+        <result column="paperrecgubun" property="paperrecgubun" />
+    </resultMap>
+
+    <resultMap id="selectUseTakeOutMap" type="com.anylogic.ssystem.bms.use.model.SelectUseTakeOutResVO">
+        <id column="mgmtid" property="mgmtid" />
+        <result column="mgmtno" property="mgmtno" />
+        <result column="docid" property="docid" />
+        <result column="regirecvtype" property="regirecvtype" />
+        <result column="indt" property="indt" />
+        <result column="secttl" property="secttl" />
+        <result column="copyno" property="copyno" />
+        <result column="authorid" property="authorid" />
+        <result column="authorname" property="authorname" />
+        <result column="deptname" property="deptname" />
+        <result column="lend" property="lend" />
+        <result column="reader" property="reader" />
+        <result column="readauthexpiredt" property="readauthexpiredt" />
+        <result column="grantbackdt" property="grantbackdt" />
+        <result column="paperrecgubun" property="paperrecgubun" />
+    </resultMap>
+
+    <resultMap id="selectComingListMap" type="com.anylogic.ssystem.bms.use.model.SelectComingListResVO">
+        <id column="mgmtid" property="mgmtid" />                      <!-- 비밀관리 ID -->
+        <result column="mgmtno" property="mgmtno" />                  <!-- 관리번호 -->
+        <result column="docid" property="docid" />                    <!-- 비밀 ID -->
+        <result column="regirecvtype" property="regirecvtype" />      <!-- 생산/접수 형태 -->
+        <result column="secttl" property="secttl" />                  <!-- 비밀제목 -->
+        <result column="seclevel" property="seclevel" />                  <!-- 비밀제목 -->
+        <result column="copyno" property="copyno" />                  <!-- 사본번호 -->
+        <result column="secstatus" property="secstatus" />            <!-- 열람범위 -->
+        <result column="authorname" property="authorname" />          <!-- 처리담당자명 -->
+        <result column="indt" property="indt" />                      <!-- 등록일시 -->
+        <result column="protdt" property="protdt" />
+        <result column="orgnreclass" property="orgnreclass" />
+        <result column="copyreclass" property="copyreclass" />
+        <result column="docno" property="docno" />
+        <result column="paperrecgubun" property="paperrecgubun" />
+    </resultMap>
+
+    <resultMap id="getDctMgmtRegiMap" type="com.anylogic.ssystem.bms.use.model.GetDctMgmtRegiResVO">
+        <id column="mgmtid" property="mgmtid" />                      <!-- 비밀관리 ID -->
+        <result column="mgmtno" property="mgmtno" />                  <!-- 관리번호 -->
+        <result column="docid" property="docid" />                    <!-- 비밀 ID -->
+        <result column="seclevel" property="seclevel" />              <!-- 비밀등급 -->
+        <result column="mgmtseq" property="mgmtseq" />                <!-- 비밀일련번호 -->
+        <result column="regirecvyear" property="regirecvyear" />      <!-- 생산/접수 연도 -->
+        <result column="regirecvgubun" property="regirecvgubun" />    <!-- 생산/접수 구분 -->
+        <result column="regirecvdt" property="regirecvdt" />          <!-- 생산/접수 일자 -->
+        <result column="regirecvsendid" property="regirecvsendid" />  <!-- 생산/접수 발신처 ID -->
+        <result column="regirecvsendname" property="regirecvsendname" /><!-- 생산/접수 발신처명 -->
+        <result column="regirecvtype" property="regirecvtype" />      <!-- 생산/접수 형태 -->
+        <result column="secttl" property="secttl" />                  <!-- 비밀제목 -->
+        <result column="sectype" property="sectype" />                <!-- 비밀형태 -->
+        <result column="attchcnt" property="attchcnt" />              <!-- 첨부물개수 -->
+        <result column="copyno" property="copyno" />                  <!-- 사본번호 -->
+        <result column="notiprotterm" property="notiprotterm" />      <!-- 예고문보호기간 -->
+        <result column="notiprsrvterm" property="notiprsrvterm" />    <!-- 예고문보존기간 -->
+        <result column="deptid" property="deptid" />                  <!-- 처리부서 ID -->
+        <result column="deptname" property="deptname" />              <!-- 처리부서명 -->
+        <result column="readrangetype" property="readrangetype" />    <!-- 비밀형태 -->
+        <result column="secstatus" property="secstatus" />            <!-- 열람범위 -->
+        <result column="authorid" property="authorid" />              <!-- 처리담당자 ID -->
+        <result column="authorname" property="authorname" />          <!-- 처리담당자명 -->
+        <result column="authordutyname" property="authordutyname" />  <!-- 처리담당자 직위직급명 -->
+        <result column="authorposid" property="authorposid" />        <!-- 처리담당자 직위 ID -->
+        <result column="authorgrdid" property="authorgrdid" />        <!-- 처리담당자 직급 ID -->
+        <result column="reclassdt" property="reclassdt" />            <!-- 재분류일자 -->
+        <result column="reclasscont" property="reclasscont" />        <!-- 재분류내용 -->
+        <result column="reclassbasis" property="reclassbasis" />      <!-- 재분류근거 -->
+        <result column="reclassmgtno" property="reclassmgtno" />      <!-- 재분류이전 관리번호 -->
+        <result column="reclassmgmtid" property="reclassmgmtid" />    <!-- 재분류이전 관리 ID -->
+        <result column="reclasslevel" property="reclasslevel" />      <!-- 재분류코드 -->
+        <result column="transdt" property="transdt" />                <!-- 이관일자 -->
+        <result column="transbasis" property="transbasis" />          <!-- 이관근거 -->
+        <result column="destructdt" property="destructdt" />          <!-- 파기일자 -->
+        <result column="destructbasis" property="destructbasis" />    <!-- 파기근거 -->
+        <result column="cnsrvflag" property="cnsrvflag" />            <!-- 존안여부 -->
+        <result column="cnsrvdt" property="cnsrvdt" />                <!-- 존안일자 -->
+        <result column="cnsrvbasis" property="cnsrvbasis" />          <!-- 존안근거 -->
+        <result column="custdyplace" property="custdyplace" />        <!-- 보관장소 -->
+        <result column="rfidtagflag" property="rfidtagflag" />        <!-- RFID사용여부 -->
+        <result column="delflag" property="delflag" />                <!-- 삭선여부 -->
+        <result column="rgstid" property="rgstid" />                  <!-- 등재자 ID -->
+        <result column="rgstname" property="rgstname" />              <!-- 등재자명 -->
+        <result column="rgstdt" property="rgstdt" />                  <!-- 등재일시 -->
+        <result column="updtid" property="updtid" />                  <!-- 수정자 ID -->
+        <result column="updtname" property="updtname" />              <!-- 수정자명 -->
+        <result column="updtdt" property="updtdt" />                  <!-- 수정일시 -->
+        <result column="legacymgmtno" property="legacymgmtno" />      <!-- 이전시스템 관리번호 -->
+        <result column="note" property="note" />                      <!-- 비고 -->
+        <result column="legacydocno" property="legacydocno" />        <!-- 이전시스템 문서번호 -->
+        <result column="indt" property="indt" />                      <!-- 등록일시 -->
+        <result column="sectypeetc" property="sectypeetc" />          <!-- 등록구분기타 -->
+        <result column="realtitle" property="realtitle" />            <!-- 실제목 -->
+        <result column="cnsrvterm" property="cnsrvterm" />            <!-- 존안보존일자 -->
+        <result column="aggregatemgmtid" property="aggregatemgmtid" /><!-- 합철 관련 MGMT ID -->
+        <result column="aggregatedt" property="aggregatedt" />        <!-- 합철 일자 -->
+        <result column="destructconfirm" property="destructconfirm" /><!--  -->
+        <result column="destructconfirmdt" property="destructconfirmdt" /><!--  -->
+        <result column="transwaitdt" property="transwaitdt" />        <!--  -->
+        <result column="readauthexpiredt" property="readauthexpiredt" />        <!--  -->
+        <result column="locker" property="locker" />        <!--  -->
+        <result column="unitnum" property="unitnum" />        <!--  -->
+        <result column="mediatype" property="mediatype" />        <!--  -->
+        <result column="doctype" property="doctype" />        <!--  -->
+    </resultMap>
+
+    <resultMap id="getDctMgmtRegiAttrMap" type="com.anylogic.ssystem.bms.use.model.GetDctMgmtRegiAttrResVO">
+        <id column="mgmtid" property="mgmtid" />                      <!-- 비밀관리 ID -->
+        <result column="mgmtno" property="mgmtno" />                  <!-- 관리번호 -->
+        <result column="docid" property="docid" />                    <!-- 비밀 ID -->
+        <result column="seclevel" property="seclevel" />              <!-- 비밀등급 -->
+        <result column="mgmtseq" property="mgmtseq" />                <!-- 비밀일련번호 -->
+        <result column="regirecvyear" property="regirecvyear" />      <!-- 생산/접수 연도 -->
+        <result column="regirecvgubun" property="regirecvgubun" />    <!-- 생산/접수 구분 -->
+        <result column="regirecvdt" property="regirecvdt" />          <!-- 생산/접수 일자 -->
+        <result column="regirecvsendid" property="regirecvsendid" />  <!-- 생산/접수 발신처 ID -->
+        <result column="regirecvsendname" property="regirecvsendname" /><!-- 생산/접수 발신처명 -->
+        <result column="regirecvtype" property="regirecvtype" />      <!-- 생산/접수 형태 -->
+        <result column="secttl" property="secttl" />                  <!-- 비밀제목 -->
+        <result column="sectype" property="sectype" />                <!-- 비밀형태 -->
+        <result column="attchcnt" property="attchcnt" />              <!-- 첨부물개수 -->
+        <result column="copyno" property="copyno" />                  <!-- 사본번호 -->
+        <result column="notiprotterm" property="notiprotterm" />      <!-- 예고문보호기간 -->
+        <result column="notiprsrvterm" property="notiprsrvterm" />    <!-- 예고문보존기간 -->
+        <result column="deptid" property="deptid" />                  <!-- 처리부서 ID -->
+        <result column="deptname" property="deptname" />              <!-- 처리부서명 -->
+        <result column="readrangetype" property="readrangetype" />    <!-- 비밀형태 -->
+        <result column="secstatus" property="secstatus" />            <!-- 열람범위 -->
+        <result column="authorid" property="authorid" />              <!-- 처리담당자 ID -->
+        <result column="authorname" property="authorname" />          <!-- 처리담당자명 -->
+        <result column="authordutyname" property="authordutyname" />  <!-- 처리담당자 직위직급명 -->
+        <result column="authorposid" property="authorposid" />        <!-- 처리담당자 직위 ID -->
+        <result column="authorgrdid" property="authorgrdid" />        <!-- 처리담당자 직급 ID -->
+        <result column="reclassdt" property="reclassdt" />            <!-- 재분류일자 -->
+        <result column="reclasscont" property="reclasscont" />        <!-- 재분류내용 -->
+        <result column="reclassbasis" property="reclassbasis" />      <!-- 재분류근거 -->
+        <result column="reclassmgtno" property="reclassmgtno" />      <!-- 재분류이전 관리번호 -->
+        <result column="reclassmgmtid" property="reclassmgmtid" />    <!-- 재분류이전 관리 ID -->
+        <result column="reclasslevel" property="reclasslevel" />      <!-- 재분류코드 -->
+        <result column="transdt" property="transdt" />                <!-- 이관일자 -->
+        <result column="transbasis" property="transbasis" />          <!-- 이관근거 -->
+        <result column="destructdt" property="destructdt" />          <!-- 파기일자 -->
+        <result column="destructbasis" property="destructbasis" />    <!-- 파기근거 -->
+        <result column="cnsrvflag" property="cnsrvflag" />            <!-- 존안여부 -->
+        <result column="cnsrvdt" property="cnsrvdt" />                <!-- 존안일자 -->
+        <result column="cnsrvbasis" property="cnsrvbasis" />          <!-- 존안근거 -->
+        <result column="custdyplace" property="custdyplace" />        <!-- 보관장소 -->
+        <result column="rfidtagflag" property="rfidtagflag" />        <!-- RFID사용여부 -->
+        <result column="delflag" property="delflag" />                <!-- 삭선여부 -->
+        <result column="rgstid" property="rgstid" />                  <!-- 등재자 ID -->
+        <result column="rgstname" property="rgstname" />              <!-- 등재자명 -->
+        <result column="rgstdt" property="rgstdt" />                  <!-- 등재일시 -->
+        <result column="updtid" property="updtid" />                  <!-- 수정자 ID -->
+        <result column="updtname" property="updtname" />              <!-- 수정자명 -->
+        <result column="updtdt" property="updtdt" />                  <!-- 수정일시 -->
+        <result column="legacymgmtno" property="legacymgmtno" />      <!-- 이전시스템 관리번호 -->
+        <result column="note" property="note" />                      <!-- 비고 -->
+        <result column="legacydocno" property="legacydocno" />        <!-- 이전시스템 문서번호 -->
+        <result column="indt" property="indt" />                      <!-- 등록일시 -->
+        <result column="sectypeetc" property="sectypeetc" />          <!-- 등록구분기타 -->
+        <result column="realtitle" property="realtitle" />            <!-- 실제목 -->
+        <result column="cnsrvterm" property="cnsrvterm" />            <!-- 존안보존일자 -->
+        <result column="aggregatemgmtid" property="aggregatemgmtid" /><!-- 합철 관련 MGMT ID -->
+        <result column="aggregatedt" property="aggregatedt" />        <!-- 합철 일자 -->
+        <result column="destructconfirm" property="destructconfirm" /><!--  -->
+        <result column="destructconfirmdt" property="destructconfirmdt" /><!--  -->
+        <result column="transwaitdt" property="transwaitdt" />        <!--  -->
+        <result column="secgubun" property="secgubun" />              <!-- 비밀구분 -->
+        <result column="orgnprotdt" property="orgnprotdt" />          <!-- 원본보호기간 -->
+        <result column="orgnnextlevel" property="orgnnextlevel" />    <!-- 원본차기비밀등급 -->
+        <result column="orgnreclass" property="orgnreclass" />        <!-- 원본재분류 -->
+        <result column="orgnprotcond" property="orgnprotcond" />      <!-- 원본보호조건 -->
+        <result column="copyprotdt" property="copyprotdt" />          <!-- 사본보호기간 -->
+        <result column="copynextlevel" property="copynextlevel" />    <!-- 사본차기비밀등급 -->
+        <result column="copyreclass" property="copyreclass" />        <!-- 사본재분류 -->
+        <result column="copyprotcond" property="copyprotcond" />      <!-- 사본보호조건 -->
+        <result column="prsrvterm" property="prsrvterm" />            <!-- 보존기간 -->
+        <result column="docno" property="docno" />                    <!-- 문서번호 -->
+        <result column="createdeptid" property="createdeptid" />      <!-- 생산부서코드 -->
+        <result column="createdeptname" property="createdeptname" />  <!-- 생산부서명 -->
+        <result column="docpagenum" property="docpagenum" />          <!-- 쪽수 -->
+        <result column="specialyn" property="specialyn" />            <!-- 특별관리여부 -->
+        <result column="binderyn" property="binderyn" />              <!-- 참고철 바인더 여부 -->
+        <result column="secretdocyn" property="secretdocyn" />        <!-- 가제목 사용여부 -->
+        <result column="waryn" property="waryn" />                    <!-- 전시여부 -->
+        <result column="isnewrule" property="isnewrule" />            <!-- 신규 -->
+        <result column="istransrule" property="istransrule" />        <!-- 이관여부 -->
+        <result column="orgncreateyear" property="orgncreateyear" />  <!--  -->
+        <result column="wargubun" property="wargubun" />              <!--  -->
+        <result column="readauthexpiredt" property="readauthexpiredt" />              <!--  -->
+    </resultMap>
+
+    <resultMap id="getDctMgmtRegiPrintMap" type="com.anylogic.ssystem.bms.use.model.GetDctMgmtRegiPrintResVO">
+        <id column="mgmtid" property="mgmtid" />                      <!-- 비밀관리 ID -->
+        <result column="mgmtno" property="mgmtno" />                  <!-- 관리번호 -->
+        <result column="docid" property="docid" />                    <!-- 비밀 ID -->
+        <result column="seclevel" property="seclevel" />              <!-- 비밀등급 -->
+        <result column="mgmtseq" property="mgmtseq" />                <!-- 비밀일련번호 -->
+        <result column="regirecvyear" property="regirecvyear" />      <!-- 생산/접수 연도 -->
+        <result column="regirecvgubun" property="regirecvgubun" />    <!-- 생산/접수 구분 -->
+        <result column="regirecvdt" property="regirecvdt" />          <!-- 생산/접수 일자 -->
+        <result column="regirecvsendid" property="regirecvsendid" />  <!-- 생산/접수 발신처 ID -->
+        <result column="regirecvsendname" property="regirecvsendname" /><!-- 생산/접수 발신처명 -->
+        <result column="regirecvtype" property="regirecvtype" />      <!-- 생산/접수 형태 -->
+        <result column="secttl" property="secttl" />                  <!-- 비밀제목 -->
+        <result column="sectype" property="sectype" />                <!-- 비밀형태 -->
+        <result column="attchcnt" property="attchcnt" />              <!-- 첨부물개수 -->
+        <result column="copyno" property="copyno" />                  <!-- 사본번호 -->
+        <result column="notiprotterm" property="notiprotterm" />      <!-- 예고문보호기간 -->
+        <result column="notiprsrvterm" property="notiprsrvterm" />    <!-- 예고문보존기간 -->
+        <result column="deptid" property="deptid" />                  <!-- 처리부서 ID -->
+        <result column="deptname" property="deptname" />              <!-- 처리부서명 -->
+        <result column="readrangetype" property="readrangetype" />    <!-- 비밀형태 -->
+        <result column="secstatus" property="secstatus" />            <!-- 열람범위 -->
+        <result column="authorid" property="authorid" />              <!-- 처리담당자 ID -->
+        <result column="authorname" property="authorname" />          <!-- 처리담당자명 -->
+        <result column="authordutyname" property="authordutyname" />  <!-- 처리담당자 직위직급명 -->
+        <result column="authorposid" property="authorposid" />        <!-- 처리담당자 직위 ID -->
+        <result column="authorgrdid" property="authorgrdid" />        <!-- 처리담당자 직급 ID -->
+        <result column="reclassdt" property="reclassdt" />            <!-- 재분류일자 -->
+        <result column="reclasscont" property="reclasscont" />        <!-- 재분류내용 -->
+        <result column="reclassbasis" property="reclassbasis" />      <!-- 재분류근거 -->
+        <result column="reclassmgtno" property="reclassmgtno" />      <!-- 재분류이전 관리번호 -->
+        <result column="reclassmgmtid" property="reclassmgmtid" />    <!-- 재분류이전 관리 ID -->
+        <result column="reclasslevel" property="reclasslevel" />      <!-- 재분류코드 -->
+        <result column="transdt" property="transdt" />                <!-- 이관일자 -->
+        <result column="transbasis" property="transbasis" />          <!-- 이관근거 -->
+        <result column="destructdt" property="destructdt" />          <!-- 파기일자 -->
+        <result column="destructbasis" property="destructbasis" />    <!-- 파기근거 -->
+        <result column="cnsrvflag" property="cnsrvflag" />            <!-- 존안여부 -->
+        <result column="cnsrvdt" property="cnsrvdt" />                <!-- 존안일자 -->
+        <result column="cnsrvbasis" property="cnsrvbasis" />          <!-- 존안근거 -->
+        <result column="custdyplace" property="custdyplace" />        <!-- 보관장소 -->
+        <result column="rfidtagflag" property="rfidtagflag" />        <!-- RFID사용여부 -->
+        <result column="delflag" property="delflag" />                <!-- 삭선여부 -->
+        <result column="rgstid" property="rgstid" />                  <!-- 등재자 ID -->
+        <result column="rgstname" property="rgstname" />              <!-- 등재자명 -->
+        <result column="rgstdt" property="rgstdt" />                  <!-- 등재일시 -->
+        <result column="updtid" property="updtid" />                  <!-- 수정자 ID -->
+        <result column="updtname" property="updtname" />              <!-- 수정자명 -->
+        <result column="updtdt" property="updtdt" />                  <!-- 수정일시 -->
+        <result column="legacymgmtno" property="legacymgmtno" />      <!-- 이전시스템 관리번호 -->
+        <result column="note" property="note" />                      <!-- 비고 -->
+        <result column="legacydocno" property="legacydocno" />        <!-- 이전시스템 문서번호 -->
+        <result column="indt" property="indt" />                      <!-- 등록일시 -->
+        <result column="sectypeetc" property="sectypeetc" />          <!-- 등록구분기타 -->
+        <result column="realtitle" property="realtitle" />            <!-- 실제목 -->
+        <result column="cnsrvterm" property="cnsrvterm" />            <!-- 존안보존일자 -->
+        <result column="aggregatemgmtid" property="aggregatemgmtid" /><!-- 합철 관련 MGMT ID -->
+        <result column="aggregatedt" property="aggregatedt" />        <!-- 합철 일자 -->
+        <result column="destructconfirm" property="destructconfirm" /><!--  -->
+        <result column="destructconfirmdt" property="destructconfirmdt" /><!--  -->
+        <result column="transwaitdt" property="transwaitdt" />        <!--  -->
+        <result column="readauthexpiredt" property="readauthexpiredt" />        <!--  -->
+        <result column="locker" property="locker" />        <!--  -->
+        <result column="unitnum" property="unitnum" />        <!--  -->
+        <result column="mediatype" property="mediatype" />        <!--  -->
+        <result column="doctype" property="doctype" />        <!--  -->
+        <collection property="attachfileList" resultMap="attachfileMap"/>
+    </resultMap>
+
+    <resultMap id="attachfileMap" type="com.anylogic.ssystem.bms.use.model.GetDctMgmtRegiPrintResVO">
+        <result column="docid" property="docid" />                        <!-- 문서 ID -->
+        <result column="fleid" property="fleid" />                        <!-- 첨부 ID -->
+        <result column="sfilename" property="sfilename" />            <!-- 파일고유이름 -->
+        <result column="gubun" property="gubun" />                    <!-- 구분 -->
+        <result column="flettl" property="flettl" />                  <!-- 첨부명 -->
+        <result column="flesize" property="flesize" />                <!-- 첨부크기 -->
+        <result column="fleorder" property="fleorder" />              <!-- 첨부순서 -->
+        <result column="inid" property="inid" />                      <!-- 등록자 ID -->
+        <result column="markflag" property="markflag" />              <!-- 비밀등급표시여부 -->
+        <result column="origubun" property="origubun" />              <!-- 기존 문서의 구분 -->
+        <result column="oridocid" property="oridocid" />              <!-- 기존 문서의 비밀 ID -->
+        <result column="isviewtype" property="isviewtype" />          <!-- 비전자 첨부구분 -->
+        <result column="fleurl" property="fleurl" />              <!-- 파일url -->
+        <result column="flepath" property="flepath" />              <!-- 파일경로 -->
+    </resultMap>
+
+
+    <!-- 예고문 도래 알림 목록 조회 -->
+    <select id="selectAlert" parameterType="com.anylogic.ssystem.bms.use.model.SelectAlertReqVO" resultMap="selectAlertMap">
+        SELECT
+            CASE
+                -- 재분류
+                WHEN (
+                    (A.copyno LIKE '%원%' AND B.orgnreclass = '21'AND A.authorid = #{loginuserid} AND A.secstatus NOT IN ('MGT20', 'MGT21', 'MGT22') AND to_timestamp(B.orgnprotdt, 'YYYYMMDDHH24MISS') <![CDATA[<]]> CURRENT_DATE) OR
+                    (A.copyno NOT LIKE '%원%' AND B.copyreclass = '21' AND A.authorid = #{loginuserid} AND A.secstatus NOT IN ('MGT20', 'MGT21', 'MGT22') AND to_timestamp(B.copyprotdt, 'YYYYMMDDHH24MISS') <![CDATA[<]]> CURRENT_DATE)
+                ) THEN
+                    '&lt;span style="font-weight: bold; color: #090959;"&gt;' || A.authorname || '님의 ' || A.mgmtno || ' 문서 &lt;/span&gt; &lt;br&gt; 보호기간이 만료되었습니다. 재분류를 검토하여주십시오'
+                WHEN (
+                    (A.copyno LIKE '%원%' AND B.orgnreclass = '21' AND A.authorid = #{loginuserid} AND A.secstatus NOT IN ('MGT20', 'MGT21', 'MGT22') AND to_timestamp(B.orgnprotdt, 'YYYYMMDDHH24MISS') BETWEEN CURRENT_DATE AND CURRENT_DATE + INTERVAL '14 days') OR
+                    (A.copyno NOT LIKE '%원%' AND B.copyreclass = '21' AND A.authorid = #{loginuserid} AND A.secstatus NOT IN ('MGT20', 'MGT21', 'MGT22') AND to_timestamp(B.copyprotdt, 'YYYYMMDDHH24MISS') BETWEEN CURRENT_DATE AND CURRENT_DATE + INTERVAL '14 days')
+                ) THEN
+                    '&lt;span style="font-weight: bold; color: #090959;"&gt;' || A.authorname || '님의 ' || A.mgmtno || ' 문서 &lt;/span&gt; &lt;br&gt; 보호기간이 2주일 이내로 만료됩니다. 재분류를 검토하여주십시오'
+                -- 파기
+                WHEN (
+                    A.copyno NOT LIKE '%원%' AND B.copyreclass = '23' AND A.authorid = #{loginuserid} AND A.secstatus NOT IN ('MGT40', 'MGT41', 'MGT42') AND to_timestamp(B.copyprotdt, 'YYYYMMDDHH24MISS') <![CDATA[<]]> CURRENT_DATE
+                ) THEN
+                    '&lt;span style="font-weight: bold; color: #090959;"&gt;' || A.authorname || '님의 ' || A.mgmtno || ' 문서 &lt;/span&gt; &lt;br&gt; 보호기간이 만료되었습니다. 파기를 검토하여주십시오'
+                -- 이관
+                WHEN (
+                    A.copyno LIKE '%원%' AND B.orgnreclass = '22' AND A.seclevel != '5' and A.authorid = #{loginuserid} AND A.secstatus NOT IN ('MGT60', 'MGT61', 'MGT62','MGT70', 'MGT71', 'MGT72','MGT80', 'MGT81', 'MGT82') AND to_timestamp(B.orgnprotdt, 'YYYYMMDDHH24MISS') <![CDATA[<]]> CURRENT_DATE
+                ) THEN
+                    '&lt;span style="font-weight: bold; color: #090959;"&gt;' || A.authorname || '님의 ' || A.mgmtno || ' 문서 &lt;/span&gt; &lt;br&gt; 보호기간이 만료되었습니다. 이관을 검토하여주십시오'
+                WHEN (
+                    TO_TIMESTAMP(A.indt, 'YYYYMMDDHH24MISS') <![CDATA[<]]> CURRENT_DATE - INTERVAL '30 years' AND A.authorid = #{loginuserid} AND A.secstatus NOT IN ('MGT60', 'MGT61', 'MGT62','MGT70', 'MGT71', 'MGT72','MGT80', 'MGT81', 'MGT82')
+                ) THEN
+                    '&lt;span style="font-weight: bold; color: #090959;"&gt;' || A.authorname || '님의 ' || A.mgmtno || ' 문서 &lt;/span&gt; &lt;br&gt; 생산 이후 30년이 경과되었습니다. 이관을 검토하여주십시오'
+            END AS alertcontent
+        FROM  sbms.sbms_user.bms_dct_mgmt_regi A
+        INNER JOIN sbms.sbms_user.bms_dct_attr B ON (A.docid = B.docid)
+    </select>
+
+    <!-- 비밀문서사용요청 > 열람요청 > 열람요청 목록 조회 -->
+    <select id="selectUseDigitalView" parameterType="com.anylogic.ssystem.bms.use.model.SelectUserReqestsListReqVO" resultMap="selectUseDigitalViewMap">
+        SELECT
+            CASE
+                WHEN y.reqstatus IN ('4', '5') THEN '회수'
+                WHEN y.grantflag = 'Y' AND NOT EXISTS (SELECT 1 FROM sbms.sbms_user.bms_dct_apprreq_path p WHERE p.apprreqid = y.apprreqid AND p.apprstatus = 'APP10') THEN '승인'
+                WHEN y.grantflag = 'Y' AND EXISTS (SELECT 1 FROM sbms.sbms_user.bms_dct_apprreq_path p WHERE p.apprreqid = y.apprreqid AND p.apprstatus = 'APP10') THEN '승인대기'
+                WHEN y.grantflag = 'N' AND NOT EXISTS (SELECT 1 FROM sbms.sbms_user.bms_dct_apprreq_path p WHERE p.apprreqid = y.apprreqid AND p.apprgubun = '2' AND p.apprstatus = 'APP20') THEN '승인대기'
+                ELSE ''
+            END AS read,
+            CASE
+                WHEN z.docid IS NULL THEN 'x'
+                WHEN z.docid IS NOT NULL AND z.docid != '' THEN '열람권자'
+            END AS reader,
+            COALESCE(TO_CHAR(TO_TIMESTAMP(q.authexpiredt, 'YYYYMMDDHH24MISS'), 'YYYY.MM.DD'), NULL) AS "readauthexpiredt",
+            x.mgmtid AS mgmtid,
+            x.mgmtno AS mgmtno,
+            x.docid AS docid,
+            x.indt AS indt,
+            x.secttl AS secttl,
+            r.copyno AS copyno,
+            x.authorid AS authorid,
+            x.authorname AS authorname,
+            x.deptname AS deptname,
+            c.paperrecgubun AS paperrecgubun,
+            CASE WHEN x.regirecvtype = '1' THEN '전자' ELSE '비전자' END AS regirecvtype
+        FROM sbms.sbms_user.bms_dct_mgmt_regi x
+        INNER JOIN sbms.sbms_user.bms_dct_attr r ON r.docid = x.docid
+        INNER JOIN sbms.sbms_user.bms_dct_rdoc c ON c.docid = x.docid
+        LEFT OUTER JOIN (
+            SELECT DISTINCT ON (b.mgmtid) b.mgmtid, a.reqstatus, b.grantflag, a.apprreqid
+            FROM sbms.sbms_user.bms_dct_apprreq a
+            INNER JOIN sbms.sbms_user.bms_dct_apprreq_read b ON (a.apprreqid = b.apprreqid)
+            WHERE a.reqid = #{loginuserid}
+            ORDER BY b.mgmtid, a.reqstatus ASC, b.grantflag DESC
+        ) y ON x.mgmtid = y.mgmtid
+        LEFT OUTER JOIN (
+            SELECT DISTINCT ON (a.docid) a.docid
+            FROM sbms.sbms_user.bms_dct_rdoc_rcvs a
+            INNER JOIN sbms.sbms_user.bms_dct_mgmt_regi b ON (a.docid = b.docid)
+            WHERE a.userid = #{loginuserid}
+        ) z ON x.docid = z.docid
+        LEFT OUTER JOIN (
+            SELECT DISTINCT ON (b.docid) b.docid, b.authexpiredt
+            FROM sbms.sbms_user.bms_dct_auth_card b
+            WHERE  b.reqid = #{loginuserid} AND b.authgubun = '01' AND b.authgrantflag = 'Y'
+        ) q ON x.docid = q.docid
+        WHERE COALESCE(x.delflag, '') != 'Y' AND COALESCE(x.cnsrvflag , '') != 'Y'
+        AND c.state NOT IN ('DRDS1', 'DRDS2')
+        <if test="userreqtype != null and userreqtype == '개인'">
+            AND x.authorid = #{loginuserid}
+        </if>
+        <if test="userreqtype != null and userreqtype == '부서'">
+            AND x.authorid != #{loginuserid}
+            AND x.deptid = #{deptid}
+        </if>
+        <if test="userreqtype != null and userreqtype == '타부서'">
+            AND x.deptid = #{deptid}
+        </if>
+        <if test="kind != null and kind !=''">
+            <choose>
+                <when test="kind == 1">
+                    AND (r.copyno LIKE '%원%' OR r.copyno IS NULL)
+                </when>
+                <when test="kind == 2">
+                    AND r.copyno NOT LIKE '%원%'
+                </when>
+            </choose>
+        </if>
+        <if test="regirecvtype != null and regirecvtype !=''">
+            and x.regirecvtype = #{regirecvtype}
+        </if>
+        <if test="mgmtno != null and mgmtno !=''">
+            and x.mgmtno like CONCAT('%', #{mgmtno}, '%')
+        </if>
+        <if test="secttl != null and secttl !=''">
+            and x.secttl like CONCAT('%', #{secttl}, '%')
+        </if>
+        <if test="copyno != null and copyno !=''">
+            and r.copyno like CONCAT('%', #{copyno}, '%')
+        </if>
+        <if test="authorname != null and authorname !=''">
+            and x.authorname like CONCAT('%', #{authorname}, '%')
+        </if>
+        <if test="startDt != null and startDt !=''">
+            AND x.indt <![CDATA[>=]]> #{startDt}
+        </if>
+        <if test="endDt != null and endDt !=''">
+            AND x.indt <![CDATA[<=]]> #{endDt}
+        </if>
+        ORDER BY x.indt DESC
+    </select>
+
+    <!--  비밀문서사용요청 > 재사용요청 > 재사용요청 목록 조회 -->
+    <select id="selectReUse" parameterType="com.anylogic.ssystem.bms.use.model.SelectUserReqestsListReqVO" resultMap="selectReUseMap">
+        SELECT
+            CASE
+                WHEN y.reqstatus IN ('4', '5') THEN '회수'
+                WHEN y.grantflag = 'Y' AND NOT EXISTS (SELECT 1 FROM sbms.sbms_user.bms_dct_apprreq_path p WHERE p.apprreqid = y.apprreqid AND p.apprstatus = 'APP10') THEN '승인'
+                WHEN y.grantflag = 'Y' AND EXISTS (SELECT 1 FROM sbms.sbms_user.bms_dct_apprreq_path p WHERE p.apprreqid = y.apprreqid AND p.apprstatus = 'APP10') THEN '승인대기'
+                WHEN y.grantflag = 'N' AND NOT EXISTS (SELECT 1 FROM sbms.sbms_user.bms_dct_apprreq_path p WHERE p.apprreqid = y.apprreqid AND p.apprgubun = '2' AND p.apprstatus = 'APP20') THEN '승인대기'
+                ELSE ''
+            END AS reuse,
+            CASE
+                WHEN z.docid IS NULL THEN 'x'
+                WHEN z.docid IS NOT NULL AND z.docid != '' THEN '열람권자'
+            END AS reader,
+            CASE
+                WHEN y.reqstatus = '3' THEN COALESCE(TO_CHAR(TO_TIMESTAMP(y.grantreuseenddt, 'YYYYMMDDHH24MISS'), 'YYYY.MM.DD'), NULL)
+                ELSE NULL
+            END AS "grantreuseenddt",
+            COALESCE(TO_CHAR(TO_TIMESTAMP(q.authexpiredt, 'YYYYMMDDHH24MISS'), 'YYYY.MM.DD'), NULL) AS "readauthexpiredt",
+            x.mgmtid AS "mgmtid",
+            x.mgmtno AS "mgmtno",
+            x.docid AS "docid",
+            x.indt AS "indt",
+            x.secttl AS "secttl",
+            r.copyno AS "copyno",
+            x.authorid AS "authorid",
+            x.authorname AS "authorname",
+            x.deptname AS deptname,
+            c.paperrecgubun AS paperrecgubun,
+            CASE WHEN x.regirecvtype = '1' THEN '전자' ELSE '비전자' END AS "regirecvtype"
+        FROM sbms.sbms_user.bms_dct_mgmt_regi x
+        INNER JOIN sbms.sbms_user.bms_dct_attr r ON r.docid = x.docid
+        INNER JOIN sbms.sbms_user.bms_dct_rdoc c ON c.docid = x.docid
+        LEFT OUTER JOIN (
+            SELECT DISTINCT ON (b.mgmtid) b.mgmtid, a.reqstatus, b.grantflag, b.grantreuseenddt, a.apprreqid
+            FROM sbms.sbms_user.bms_dct_apprreq a
+            INNER JOIN sbms.sbms_user.bms_dct_apprreq_reuse b ON (a.apprreqid = b.apprreqid)
+            WHERE a.reqid = #{loginuserid}
+            ORDER BY b.mgmtid, a.reqstatus ASC, b.grantflag DESC
+        ) y ON x.mgmtid = y.mgmtid
+        LEFT OUTER JOIN (
+            SELECT DISTINCT ON (a.docid) a.docid
+            FROM sbms.sbms_user.bms_dct_rdoc_rcvs a
+            INNER JOIN sbms.sbms_user.bms_dct_mgmt_regi b ON (a.docid = b.docid)
+            WHERE a.userid = #{loginuserid}
+        ) z ON x.docid = z.docid
+        LEFT OUTER JOIN (
+            SELECT DISTINCT ON (b.docid) b.docid, b.authexpiredt
+            FROM sbms.sbms_user.bms_dct_auth_card b
+            WHERE  b.reqid = #{loginuserid} AND b.authgubun = '01' AND b.authgrantflag = 'Y'
+        ) q ON x.docid = q.docid
+        WHERE COALESCE(x.delflag, '') != 'Y' AND COALESCE(x.cnsrvflag , '') != 'Y'
+        AND c.state NOT IN ('DRDS1', 'DRDS2')
+        <if test="userreqtype != null and userreqtype == '개인'">
+            AND x.authorid = #{loginuserid}
+        </if>
+        <if test="userreqtype != null and userreqtype == '부서'">
+            AND x.authorid != #{loginuserid}
+            AND x.deptid = #{deptid}
+        </if>
+        <if test="userreqtype != null and userreqtype == '타부서'">
+            AND x.deptid = #{deptid}
+        </if>
+        <if test="kind != null and kind !=''">
+            <choose>
+                <when test="kind == 1">
+                    AND (r.copyno LIKE '%원%' OR r.copyno IS NULL)
+                </when>
+                <when test="kind == 2">
+                    AND r.copyno NOT LIKE '%원%'
+                </when>
+            </choose>
+        </if>
+        <if test="regirecvtype != null and regirecvtype !=''">
+            and x.regirecvtype = #{regirecvtype}
+        </if>
+        <if test="mgmtno != null and mgmtno !=''">
+            and x.mgmtno like CONCAT('%', #{mgmtno}, '%')
+        </if>
+        <if test="secttl != null and secttl !=''">
+            and x.secttl like CONCAT('%', #{secttl}, '%')
+        </if>
+        <if test="copyno != null and copyno !=''">
+            and r.copyno like CONCAT('%', #{copyno}, '%')
+        </if>
+        <if test="authorname != null and authorname !=''">
+            and x.authorname like CONCAT('%', #{authorname}, '%')
+        </if>
+        <if test="startDt != null and startDt !=''">
+            AND x.indt <![CDATA[>=]]> #{startDt}
+        </if>
+        <if test="endDt != null and endDt !=''">
+            AND x.indt <![CDATA[<=]]> #{endDt}
+        </if>
+        ORDER BY x.indt DESC
+    </select>
+
+    <!--  비밀문서사용요청 > 인쇄요청 > 인쇄요청 목록 조회 -->
+    <select id="selectUsePrint" parameterType="com.anylogic.ssystem.bms.use.model.SelectUserReqestsListReqVO" resultMap="selectUsePrintMap">
+        SELECT
+            CASE
+                WHEN y.reqstatus IN ('4', '5') THEN '회수'
+                WHEN y.grantflag = 'Y' AND NOT EXISTS (SELECT 1 FROM sbms.sbms_user.bms_dct_apprreq_path p WHERE p.apprreqid = y.apprreqid AND p.apprstatus = 'APP10') THEN '승인'
+                WHEN y.grantflag = 'Y' AND EXISTS (SELECT 1 FROM sbms.sbms_user.bms_dct_apprreq_path p WHERE p.apprreqid = y.apprreqid AND p.apprstatus = 'APP10') THEN '승인대기'
+                WHEN y.grantflag = 'N' AND NOT EXISTS (SELECT 1 FROM sbms.sbms_user.bms_dct_apprreq_path p WHERE p.apprreqid = y.apprreqid AND p.apprgubun = '2' AND p.apprstatus = 'APP20') THEN '승인대기'
+                ELSE ''
+            END AS print,
+            CASE
+                WHEN z.docid IS NULL THEN 'x'
+                WHEN z.docid IS NOT NULL AND z.docid != '' THEN '열람권자'
+            END AS reader,
+            CASE
+                WHEN y.reqstatus IN ('2', '3') AND y.grantflag = 'Y' AND NOT EXISTS (SELECT 1 FROM sbms.sbms_user.bms_dct_apprreq_path p WHERE p.apprreqid = y.apprreqid AND p.apprstatus = 'APP10')
+                    THEN COALESCE(TO_CHAR(TO_TIMESTAMP(y.grantdestructdt, 'YYYYMMDDHH24MISS'), 'YYYY.MM.DD'), NULL)
+                ELSE NULL
+            END AS "grantdestructdt",
+            COALESCE(TO_CHAR(TO_TIMESTAMP(y.grantdestructdt, 'YYYYMMDDHH24MISS'), 'YYYY.MM.DD'), NULL) AS "grantdestructdt",
+            COALESCE(TO_CHAR(TO_TIMESTAMP(q.authexpiredt, 'YYYYMMDDHH24MISS'), 'YYYY.MM.DD'), NULL) AS "readauthexpiredt",
+            x.mgmtid AS "mgmtid",
+            x.mgmtno AS "mgmtno",
+            x.docid AS "docid",
+            x.indt AS "indt",
+            x.secttl AS "secttl",
+            r.copyno AS "copyno",
+            x.authorid AS "authorid",
+            x.authorname AS "authorname",
+            x.deptname AS deptname,
+            c.paperrecgubun AS paperrecgubun,
+            CASE WHEN x.regirecvtype = '1' THEN '전자' ELSE '비전자' END AS "regirecvtype"
+        FROM sbms.sbms_user.bms_dct_mgmt_regi x
+        INNER JOIN sbms.sbms_user.bms_dct_attr r ON r.docid = x.docid
+        INNER JOIN sbms.sbms_user.bms_dct_rdoc c ON c.docid = x.docid
+        LEFT OUTER JOIN (
+            SELECT DISTINCT ON (b.mgmtid) b.mgmtid, a.reqstatus, b.grantflag, b.grantdestructdt, a.apprreqid
+            FROM sbms.sbms_user.bms_dct_apprreq a
+            INNER JOIN sbms.sbms_user.bms_dct_apprreq_prt b ON (a.apprreqid = b.apprreqid)
+            WHERE a.reqid = #{loginuserid}
+            ORDER BY b.mgmtid, a.reqstatus ASC, b.grantflag DESC
+        ) y ON x.mgmtid = y.mgmtid
+        LEFT OUTER JOIN (
+            SELECT DISTINCT ON (a.docid) a.docid
+            FROM sbms.sbms_user.bms_dct_rdoc_rcvs a
+            INNER JOIN sbms.sbms_user.bms_dct_mgmt_regi b ON (a.docid = b.docid)
+            WHERE a.userid = #{loginuserid}
+        ) z ON x.docid = z.docid
+        LEFT OUTER JOIN (
+            SELECT DISTINCT ON (b.docid) b.docid, b.authexpiredt
+            FROM sbms.sbms_user.bms_dct_auth_card b
+            WHERE  b.reqid = #{loginuserid} AND b.authgubun = '01' AND b.authgrantflag = 'Y'
+        ) q ON x.docid = q.docid
+        WHERE COALESCE(x.delflag, '') != 'Y' AND COALESCE(x.cnsrvflag , '') != 'Y'
+        AND c.state NOT IN ('DRDS1', 'DRDS2')
+        <if test="userreqtype != null and userreqtype == '개인'">
+            AND x.authorid = #{loginuserid}
+        </if>
+        <if test="userreqtype != null and userreqtype == '부서'">
+            AND x.authorid != #{loginuserid}
+            AND x.deptid = #{deptid}
+        </if>
+        <if test="userreqtype != null and userreqtype == '타부서'">
+            AND x.deptid = #{deptid}
+        </if>
+        <if test="kind != null and kind !=''">
+            <choose>
+                <when test="kind == 1">
+                    AND (r.copyno LIKE '%원%' OR r.copyno IS NULL)
+                </when>
+                <when test="kind == 2">
+                    AND r.copyno NOT LIKE '%원%'
+                </when>
+            </choose>
+        </if>
+        <if test="regirecvtype != null and regirecvtype !=''">
+            and x.regirecvtype = #{regirecvtype}
+        </if>
+        <if test="mgmtno != null and mgmtno !=''">
+            and x.mgmtno like CONCAT('%', #{mgmtno}, '%')
+        </if>
+        <if test="secttl != null and secttl !=''">
+            and x.secttl like CONCAT('%', #{secttl}, '%')
+        </if>
+        <if test="copyno != null and copyno !=''">
+            and r.copyno like CONCAT('%', #{copyno}, '%')
+        </if>
+        <if test="authorname != null and authorname !=''">
+            and x.authorname like CONCAT('%', #{authorname}, '%')
+        </if>
+        <if test="startDt != null and startDt !=''">
+            AND x.indt <![CDATA[>=]]> #{startDt}
+        </if>
+        <if test="endDt != null and endDt !=''">
+            AND x.indt <![CDATA[<=]]> #{endDt}
+        </if>
+        ORDER BY x.indt DESC
+    </select>
+
+    <!--  비밀문서사용요청 > 반출요청 > 반출요청 목록 조회 -->
+    <select id="selectUseTakeOut" parameterType="com.anylogic.ssystem.bms.use.model.SelectUserReqestsListReqVO" resultMap="selectUseTakeOutMap">
+        SELECT
+            CASE
+                WHEN y.reqstatus IN ('4', '5') THEN '회수'
+                WHEN y.grantflag = 'Y' AND NOT EXISTS (SELECT 1 FROM sbms.sbms_user.bms_dct_apprreq_path p WHERE p.apprreqid = y.apprreqid AND p.apprstatus = 'APP10') THEN '승인'
+                WHEN y.grantflag = 'Y' AND EXISTS (SELECT 1 FROM sbms.sbms_user.bms_dct_apprreq_path p WHERE p.apprreqid = y.apprreqid AND p.apprstatus = 'APP10') THEN '승인대기'
+                WHEN y.grantflag = 'N' AND NOT EXISTS (SELECT 1 FROM sbms.sbms_user.bms_dct_apprreq_path p WHERE p.apprreqid = y.apprreqid AND p.apprgubun = '2' AND p.apprstatus = 'APP20') THEN '승인대기'
+                ELSE ''
+            END AS lend,
+            CASE
+                WHEN z.docid IS NULL THEN 'x'
+                WHEN z.docid IS NOT NULL AND z.docid != '' THEN '열람권자'
+            END AS reader,
+            CASE
+                WHEN y.reqstatus IN ('7','8','9') THEN COALESCE(TO_CHAR(TO_TIMESTAMP(y.grantbackdt, 'YYYYMMDDHH24MISS'), 'YYYY.MM.DD'), NULL)
+                ELSE NULL
+            END AS "grantbackdt",
+            COALESCE(TO_CHAR(TO_TIMESTAMP(q.authexpiredt, 'YYYYMMDDHH24MISS'), 'YYYY.MM.DD'), NULL) AS "readauthexpiredt",
+            x.mgmtid AS "mgmtid",
+            x.mgmtno AS "mgmtno",
+            x.docid AS "docid",
+            x.indt AS "indt",
+            x.secttl AS "secttl",
+            r.copyno AS "copyno",
+            x.authorid AS "authorid",
+            x.authorname AS "authorname",
+            x.deptname AS deptname,
+            c.paperrecgubun AS paperrecgubun,
+            CASE WHEN x.regirecvtype = '1' THEN '전자' ELSE '비전자' END AS "regirecvtype"
+        FROM sbms.sbms_user.bms_dct_mgmt_regi x
+        INNER JOIN sbms.sbms_user.bms_dct_attr r ON r.docid = x.docid
+        INNER JOIN sbms.sbms_user.bms_dct_rdoc c ON c.docid = x.docid
+        LEFT OUTER JOIN (
+            SELECT DISTINCT ON (b.mgmtid) b.mgmtid, a.reqstatus, b.grantflag, b.grantbackdt, a.apprreqid
+            FROM sbms.sbms_user.bms_dct_apprreq a
+            INNER JOIN sbms.sbms_user.bms_dct_apprreq_lend b ON (a.apprreqid = b.apprreqid)
+            WHERE a.reqid = #{loginuserid}
+            ORDER BY b.mgmtid, a.reqstatus ASC, b.grantflag DESC
+        ) y ON x.mgmtid = y.mgmtid
+        LEFT OUTER JOIN (
+            SELECT DISTINCT ON (a.docid) a.docid
+            FROM sbms.sbms_user.bms_dct_rdoc_rcvs a
+            INNER JOIN sbms.sbms_user.bms_dct_mgmt_regi b ON (a.docid = b.docid)
+            WHERE a.userid = #{loginuserid}
+        ) z ON x.docid = z.docid
+        LEFT OUTER JOIN (
+            SELECT DISTINCT ON (b.docid) b.docid, b.authexpiredt
+            FROM sbms.sbms_user.bms_dct_auth_card b
+            WHERE  b.reqid = #{loginuserid} AND b.authgubun = '01' AND b.authgrantflag = 'Y'
+        ) q ON x.docid = q.docid
+        WHERE COALESCE(x.delflag, '') != 'Y' AND COALESCE(x.cnsrvflag , '') != 'Y'
+        AND c.state NOT IN ('DRDS1', 'DRDS2')
+        <if test="userreqtype != null and userreqtype == '개인'">
+            AND x.authorid = #{loginuserid}
+        </if>
+        <if test="userreqtype != null and userreqtype == '부서'">
+            AND x.authorid != #{loginuserid}
+            AND x.deptid = #{deptid}
+        </if>
+        <if test="userreqtype != null and userreqtype == '타부서'">
+            AND x.deptid = #{deptid}
+        </if>
+        <if test="kind != null and kind !=''">
+            <choose>
+                <when test="kind == 1">
+                    AND (r.copyno LIKE '%원%' OR r.copyno IS NULL)
+                </when>
+                <when test="kind == 2">
+                    AND r.copyno NOT LIKE '%원%'
+                </when>
+            </choose>
+        </if>
+        <if test="regirecvtype != null and regirecvtype !=''">
+            and x.regirecvtype = #{regirecvtype}
+        </if>
+        <if test="mgmtno != null and mgmtno !=''">
+            and x.mgmtno like CONCAT('%', #{mgmtno}, '%')
+        </if>
+        <if test="secttl != null and secttl !=''">
+            and x.secttl like CONCAT('%', #{secttl}, '%')
+        </if>
+        <if test="copyno != null and copyno !=''">
+            and r.copyno like CONCAT('%', #{copyno}, '%')
+        </if>
+        <if test="authorname != null and authorname !=''">
+            and x.authorname like CONCAT('%', #{authorname}, '%')
+        </if>
+        <if test="startDt != null and startDt !=''">
+            AND x.indt <![CDATA[>=]]> #{startDt}
+        </if>
+        <if test="endDt != null and endDt !=''">
+            AND x.indt <![CDATA[<=]]> #{endDt}
+        </if>
+        ORDER BY x.indt DESC
+    </select>
+
+    <!-- 예고문도래목록 목록 조회 -->
+    <select id="selectComingList" parameterType="com.anylogic.ssystem.bms.use.model.SelectComingListReqVO" resultMap="selectComingListMap">
+        SELECT
+          A. mgmtid as "mgmtid"
+        , A. mgmtno as "mgmtno"
+        , A. docid as "docid"
+        , A. regirecvtype as "regirecvtype"
+        , A. indt as "indt"
+        , A. secttl as "secttl"
+        , A. seclevel as "seclevel"
+        , A. copyno as "copyno"
+        , A. authorname as "authorname"
+        , A. secstatus as "secstatus"
+        , B. orgnreclass as "orgnreclass"
+        , B. copyreclass as "copyreclass"
+        , B. docno as "docno"
+        , C.paperrecgubun as "paperrecgubun"
+        , CASE
+            WHEN A.copyno LIKE '%원%' THEN B.orgnprotdt
+            ELSE B.copyprotdt
+        END as "protdt"
+        FROM  sbms.sbms_user.bms_dct_mgmt_regi A
+        LEFT OUTER JOIN sbms.sbms_user.bms_dct_attr B ON (A.docid = B.docid)
+        INNER JOIN sbms.sbms_user.bms_dct_rdoc C ON (A.docid = C.docid)
+        WHERE
+            CASE
+                    WHEN #{choicedDay} = '4' THEN
+                    TRUE  <!-- 날짜 상관없이 전체 예고문 조회 -->
+                    WHEN #{choicedDay} = '0' THEN
+                        to_timestamp(
+                            CASE
+                                WHEN A.copyno LIKE '%원%' THEN B.orgnprotdt
+                                ELSE B.copyprotdt
+                            END , 'YYYYMMDDHH24MISS') <![CDATA[<]]> CURRENT_DATE <!-- 만료된 예고문 조회 -->
+                    WHEN #{choicedDay} = '1' THEN
+                         CURRENT_DATE <![CDATA[<=]]> to_timestamp(
+                            CASE
+                                WHEN A.copyno LIKE '%원%' THEN B.orgnprotdt
+                                ELSE B.copyprotdt
+                            END, 'YYYYMMDDHH24MISS')
+                        AND to_timestamp(
+                            CASE
+                                WHEN A.copyno LIKE '%원%' THEN B.orgnprotdt
+                                ELSE B.copyprotdt
+                            END, 'YYYYMMDDHH24MISS') <![CDATA[<=]]> CURRENT_DATE + interval '1 week' <!-- 1주일 이내에 만료될 예고문 조회 -->
+                    WHEN #{choicedDay} = '2' THEN
+                        CURRENT_DATE <![CDATA[<=]]> to_timestamp(
+                            CASE
+                                WHEN A.copyno LIKE '%원%' THEN B.orgnprotdt
+                                ELSE B.copyprotdt
+                            END, 'YYYYMMDDHH24MISS')
+                        AND to_timestamp(
+                            CASE
+                                WHEN A.copyno LIKE '%원%' THEN B.orgnprotdt
+                                ELSE B.copyprotdt
+                            END, 'YYYYMMDDHH24MISS') <![CDATA[<=]]> CURRENT_DATE + interval '15 days' <!-- 15일 이내에 만료될 예고문 조회 -->
+                    WHEN #{choicedDay} = '3' THEN
+                        CURRENT_DATE <![CDATA[<=]]> to_timestamp(
+                            CASE
+                                WHEN A.copyno LIKE '%원%' THEN B.orgnprotdt
+                                ELSE B.copyprotdt
+                            END, 'YYYYMMDDHH24MISS')
+                        AND to_timestamp(
+                            CASE
+                                WHEN A.copyno LIKE '%원%' THEN B.orgnprotdt
+                                ELSE B.copyprotdt
+                            END, 'YYYYMMDDHH24MISS') <![CDATA[<=]]> CURRENT_DATE + interval '30 days' <!-- 30일 이내에 만료될 예고문 조회 -->
+                        OR CURRENT_DATE <![CDATA[>=]]> to_timestamp(
+                            CASE
+                                WHEN A.copyno LIKE '%원%' THEN B.orgnprotdt
+                                ELSE B.copyprotdt
+                        END, 'YYYYMMDDHH24MISS') <!-- 30일 이내에 만료될 예고문 조회시 만료된 예고문도 함께 조회 -->
+            END
+        AND COALESCE(A.delflag, '') != 'Y' AND COALESCE(A.cnsrvflag , '') != 'Y'
+        AND C.state NOT IN ('DRDS1', 'DRDS2')
+        <if test="vgroupid == '5220'"> <!-- 각 부서별 처리과 비밀관리자 -->
+            AND ((A.authorid != #{loginuserid} AND A.deptid = #{loginuserdeptid} AND A.secstatus IN('MGT62','MGT70','MGT71','MGT72', 'MGT80', 'MGT81'))
+                    OR A.authorid = #{loginuserid})
+        </if>
+        <if test="vgroupid == null or vgroupid != '5220'">
+            and A.authorid = #{loginuserid}
+        </if>
+        <if test="kind != null and kind !=''">
+            <choose>
+                <when test="kind == 1">
+                    AND (B.copyno LIKE '%원%' OR B.copyno IS NULL)
+                </when>
+                <when test="kind == 2">
+                    AND B.copyno NOT LIKE '%원%'
+                </when>
+            </choose>
+        </if>
+        <if test="regirecvtype != null and regirecvtype !=''">
+            and A.regirecvtype = #{regirecvtype}
+        </if>
+        <if test="seclevel != null and seclevel !=''">
+            and B.seclevel = #{seclevel}
+        </if>
+        <if test="docno != null and docno !=''">
+            and B.docno like CONCAT('%', #{docno}, '%')
+        </if>
+        <if test="mgmtno != null and mgmtno !=''">
+            and B.mgmtno like CONCAT('%', #{mgmtno}, '%')
+        </if>
+        <if test="secttl != null and secttl !=''">
+            and A.secttl like CONCAT('%', #{secttl}, '%')
+        </if>
+        <if test="copyno != null and copyno !=''">
+            and B.copyno like CONCAT('%', #{copyno}, '%')
+        </if>
+        ORDER BY
+            CASE
+                WHEN A.copyno LIKE '%원%' THEN B.orgnprotdt
+                ELSE B.copyprotdt
+            END ASC,
+            A.indt ASC
+    </select>
+
+    <!-- 각 요청서의 요청내용 > 요청된 문서들 정보 조회 -->
+    <select id="getDctMgmtRegi" parameterType="com.anylogic.ssystem.bms.use.model.GetDctMgmtRegiReqVO" resultMap="getDctMgmtRegiMap">
+        SELECT
+            x.mgmtid as "mgmtid"
+            , x.mgmtno as "mgmtno"
+            , x.docid as "docid"
+            , x.seclevel as "seclevel"
+            , x.mgmtseq as "mgmtseq"
+            , x.regirecvyear as "regirecvyear"
+            , x.regirecvgubun as "regirecvgubun"
+            , x.regirecvdt as "regirecvdt"
+            , x.regirecvsendid as "regirecvsendid"
+            , x.regirecvsendname as "regirecvsendname"
+            , x.regirecvtype as "regirecvtype"
+            , x.secttl as "secttl"
+            , x.sectype as "sectype"
+            , x.attchcnt as "attchcnt"
+            , x.copyno as "copyno"
+            , x.notiprotterm as "notiprotterm"
+            , x.notiprsrvterm as "notiprsrvterm"
+            , x.deptid as "deptid"
+            , x.deptname as "deptname"
+            , x.readrangetype as "readrangetype"
+            , x.secstatus as "secstatus"
+            , x.authorid as "authorid"
+            , x.authorname as "authorname"
+            , x.authordutyname as "authordutyname"
+            , x.authorposid as "authorposid"
+            , x.authorgrdid as "authorgrdid"
+            , x.reclassdt as "reclassdt"
+            , x.reclasscont as "reclasscont"
+            , x.reclassbasis as "reclassbasis"
+            , x.reclassmgtno as "reclassmgtno"
+            , x.reclassmgmtid as "reclassmgmtid"
+            , x.reclasslevel as "reclasslevel"
+            , x.transdt as "transdt"
+            , x.transbasis as "transbasis"
+            , x.destructdt as "destructdt"
+            , x.destructbasis as "destructbasis"
+            , x.cnsrvflag as "cnsrvflag"
+            , x.cnsrvdt as "cnsrvdt"
+            , x.cnsrvbasis as "cnsrvbasis"
+            , x.custdyplace as "custdyplace"
+            , x.rfidtagflag as "rfidtagflag"
+            , x.delflag as "delflag"
+            , x.rgstid as "rgstid"
+            , x.rgstname as "rgstname"
+            , x.rgstdt as "rgstdt"
+            , x.updtid as "updtid"
+            , x.updtname as "updtname"
+            , x.updtdt as "updtdt"
+            , x.legacymgmtno as "legacymgmtno"
+            , x.note as "note"
+            , x.legacydocno as "legacydocno"
+            , x.indt as "indt"
+            , x.sectypeetc as "sectypeetc"
+            , x.realtitle as "realtitle"
+            , x.cnsrvterm as "cnsrvterm"
+            , x.aggregatemgmtid as "aggregatemgmtid"
+            , x.aggregatedt as "aggregatedt"
+            , x.destructconfirm as "destructconfirm"
+            , x.destructconfirmdt as "destructconfirmdt"
+            , x.transwaitdt as "transwaitdt"
+            , COALESCE(TO_CHAR(TO_TIMESTAMP(y.authexpiredt, 'YYYYMMDDHH24MISS'), 'YYYY-MM-DD'), NULL) AS "readauthexpiredt"
+            , CASE
+                WHEN x.regirecvtype = '2' THEN z.locker
+                ELSE NULL
+            END AS locker
+            , CASE
+                WHEN x.regirecvtype = '2' THEN z.unitnum
+                ELSE NULL
+            END AS unitnum
+            , CASE
+                WHEN x.regirecvtype = '2' THEN z.mediatype
+                ELSE NULL
+            END AS mediatype
+            , CASE
+                WHEN x.regirecvtype = '2' THEN z.doctype
+                ELSE NULL
+            END AS doctype
+        FROM  sbms.sbms_user.bms_dct_mgmt_regi x
+        LEFT OUTER JOIN (
+            SELECT DISTINCT ON (docid) docid, authexpiredt
+            FROM sbms.sbms_user.bms_dct_auth_card
+            WHERE reqid = #{loginuserid} AND authgubun = '01' AND authgrantflag = 'Y'
+        ) y ON x.docid = y.docid
+        LEFT JOIN sbms.sbms_user.bms_dct_attr_add z ON x.docid = z.docid
+        WHERE mgmtid IN
+        <foreach item="item" collection="mgmtid" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+    <!-- 각 요청서의 요청내용 > 요청된 문서들 정보 조회 - 예고문정보 포함 -->
+    <select id="getDctMgmtRegiAttr" parameterType="com.anylogic.ssystem.bms.use.model.GetDctMgmtRegiReqVO" resultMap="getDctMgmtRegiAttrMap">
+        SELECT
+        A.mgmtid as "mgmtid"
+        , A.mgmtno as "mgmtno"
+        , A.docid as "docid"
+        , A.seclevel as "seclevel"
+        , A.mgmtseq as "mgmtseq"
+        , A.regirecvyear as "regirecvyear"
+        , A.regirecvgubun as "regirecvgubun"
+        , A.regirecvdt as "regirecvdt"
+        , A.regirecvsendid as "regirecvsendid"
+        , A.regirecvsendname as "regirecvsendname"
+        , A.regirecvtype as "regirecvtype"
+        , A.secttl as "secttl"
+        , A.sectype as "sectype"
+        , A.attchcnt as "attchcnt"
+        , A.copyno as "copyno"
+        , A.notiprotterm as "notiprotterm"
+        , A.notiprsrvterm as "notiprsrvterm"
+        , A.deptid as "deptid"
+        , A.deptname as "deptname"
+        , A.readrangetype as "readrangetype"
+        , A.secstatus as "secstatus"
+        , A.authorid as "authorid"
+        , A.authorname as "authorname"
+        , A.authordutyname as "authordutyname"
+        , A.authorposid as "authorposid"
+        , A.authorgrdid as "authorgrdid"
+        , A.reclassdt as "reclassdt"
+        , A.reclasscont as "reclasscont"
+        , A.reclassbasis as "reclassbasis"
+        , A.reclassmgtno as "reclassmgtno"
+        , A.reclassmgmtid as "reclassmgmtid"
+        , A.reclasslevel as "reclasslevel"
+        , A.transdt as "transdt"
+        , A.transbasis as "transbasis"
+        , A.destructdt as "destructdt"
+        , A.destructbasis as "destructbasis"
+        , A.cnsrvflag as "cnsrvflag"
+        , A.cnsrvdt as "cnsrvdt"
+        , A.cnsrvbasis as "cnsrvbasis"
+        , A.custdyplace as "custdyplace"
+        , A.rfidtagflag as "rfidtagflag"
+        , A.delflag as "delflag"
+        , A.rgstid as "rgstid"
+        , A.rgstname as "rgstname"
+        , A.rgstdt as "rgstdt"
+        , A.updtid as "updtid"
+        , A.updtname as "updtname"
+        , A.updtdt as "updtdt"
+        , A.legacymgmtno as "legacymgmtno"
+        , A.note as "note"
+        , A.legacydocno as "legacydocno"
+        , A.indt as "indt"
+        , A.sectypeetc as "sectypeetc"
+        , A.realtitle as "realtitle"
+        , A.cnsrvterm as "cnsrvterm"
+        , A.aggregatemgmtid as "aggregatemgmtid"
+        , A.aggregatedt as "aggregatedt"
+        , A.destructconfirm as "destructconfirm"
+        , A.destructconfirmdt as "destructconfirmdt"
+        , A.transwaitdt as "transwaitdt"
+        , B.secgubun as "secgubun"
+        , B.orgnprotdt as "orgnprotdt"
+        , B.orgnnextlevel as "orgnnextlevel"
+        , B.orgnreclass as "orgnreclass"
+        , B.orgnprotcond as "orgnprotcond"
+        , B.copyprotdt as "copyprotdt"
+        , B.copynextlevel as "copynextlevel"
+        , B.copyreclass as "copyreclass"
+        , B.copyprotcond as "copyprotcond"
+        , B.prsrvterm as "prsrvterm"
+        , B.docno as "docno"
+        , B.createdeptid as "createdeptid"
+        , B.createdeptname as "createdeptname"
+        , B.docpagenum as "docpagenum"
+        , B.specialyn as "specialyn"
+        , B.binderyn as "binderyn"
+        , B.secretdocyn as "secretdocyn"
+        , B.waryn as "waryn"
+        , B.isnewrule as "isnewrule"
+        , B.istransrule as "istransrule"
+        , B.orgncreateyear as "orgncreateyear"
+        , B.wargubun as "wargubun"
+        , COALESCE(TO_CHAR(TO_TIMESTAMP(C.authexpiredt, 'YYYYMMDDHH24MISS'), 'YYYY-MM-DD'), NULL) AS "readauthexpiredt"
+        FROM  sbms.sbms_user.bms_dct_mgmt_regi A
+        LEFT OUTER JOIN  sbms.sbms_user.bms_dct_attr B ON (A.docid = B.docid)
+        LEFT OUTER JOIN (
+            SELECT DISTINCT ON (docid) docid, authexpiredt
+            FROM sbms.sbms_user.bms_dct_auth_card
+            WHERE reqid = #{loginuserid} AND authgubun = '01' AND authgrantflag = 'Y'
+        ) C ON A.docid = C.docid
+        WHERE A.mgmtid IN
+        <foreach item="item" collection="mgmtid" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+    <!-- 각 요청서의 요청내용 > 요청된 문서들 정보 조회 - 첨부파일 포함  -->
+    <select id="getDctMgmtRegiPrint" parameterType="com.anylogic.ssystem.bms.use.model.GetDctMgmtRegiReqVO" resultMap="getDctMgmtRegiPrintMap">
+        SELECT
+        A.mgmtid as "mgmtid"
+        , A.mgmtno as "mgmtno"
+        , A.docid as "docid"
+        , A.seclevel as "seclevel"
+        , A.mgmtseq as "mgmtseq"
+        , A.regirecvyear as "regirecvyear"
+        , A.regirecvgubun as "regirecvgubun"
+        , A.regirecvdt as "regirecvdt"
+        , A.regirecvsendid as "regirecvsendid"
+        , A.regirecvsendname as "regirecvsendname"
+        , A.regirecvtype as "regirecvtype"
+        , A.secttl as "secttl"
+        , A.sectype as "sectype"
+        , A.attchcnt as "attchcnt"
+        , A.copyno as "copyno"
+        , A.notiprotterm as "notiprotterm"
+        , A.notiprsrvterm as "notiprsrvterm"
+        , A.deptid as "deptid"
+        , A.deptname as "deptname"
+        , A.readrangetype as "readrangetype"
+        , A.secstatus as "secstatus"
+        , A.authorid as "authorid"
+        , A.authorname as "authorname"
+        , A.authordutyname as "authordutyname"
+        , A.authorposid as "authorposid"
+        , A.authorgrdid as "authorgrdid"
+        , A.reclassdt as "reclassdt"
+        , A.reclasscont as "reclasscont"
+        , A.reclassbasis as "reclassbasis"
+        , A.reclassmgtno as "reclassmgtno"
+        , A.reclassmgmtid as "reclassmgmtid"
+        , A.reclasslevel as "reclasslevel"
+        , A.transdt as "transdt"
+        , A.transbasis as "transbasis"
+        , A.destructdt as "destructdt"
+        , A.destructbasis as "destructbasis"
+        , A.cnsrvflag as "cnsrvflag"
+        , A.cnsrvdt as "cnsrvdt"
+        , A.cnsrvbasis as "cnsrvbasis"
+        , A.custdyplace as "custdyplace"
+        , A.rfidtagflag as "rfidtagflag"
+        , A.delflag as "delflag"
+        , A.rgstid as "rgstid"
+        , A.rgstname as "rgstname"
+        , A.rgstdt as "rgstdt"
+        , A.updtid as "updtid"
+        , A.updtname as "updtname"
+        , A.updtdt as "updtdt"
+        , A.legacymgmtno as "legacymgmtno"
+        , A.note as "note"
+        , A.legacydocno as "legacydocno"
+        , A.indt as "indt"
+        , A.sectypeetc as "sectypeetc"
+        , A.realtitle as "realtitle"
+        , A.cnsrvterm as "cnsrvterm"
+        , A.aggregatemgmtid as "aggregatemgmtid"
+        , A.aggregatedt as "aggregatedt"
+        , A.destructconfirm as "destructconfirm"
+        , A.destructconfirmdt as "destructconfirmdt"
+        , A.transwaitdt as "transwaitdt"
+        , B.docid as "docid"
+        , B.fleid as "fleid"
+        , B.sfilename as "sfilename"
+        , B.gubun as "gubun"
+        , B.flettl as "flettl"
+        , B.flesize as "flesize"
+        , B.fleorder as "fleorder"
+        , B.inid as "inid"
+        , B.markflag as "markflag"
+        , B.origubun as "origubun"
+        , B.oridocid as "oridocid"
+        , B.isviewtype as "isviewtype"
+        , B.fleurl as "fleurl"
+        , B.flepath as "flepath"
+        , COALESCE(TO_CHAR(TO_TIMESTAMP(C.authexpiredt, 'YYYYMMDDHH24MISS'), 'YYYY-MM-DD'), NULL) AS "readauthexpiredt"
+        , CASE
+            WHEN A.regirecvtype = '2' THEN D.locker
+            ELSE NULL
+        END AS locker
+        , CASE
+            WHEN A.regirecvtype = '2' THEN D.unitnum
+            ELSE NULL
+        END AS unitnum
+        , CASE
+            WHEN A.regirecvtype = '2' THEN D.mediatype
+            ELSE NULL
+        END AS mediatype
+        , CASE
+            WHEN A.regirecvtype = '2' THEN D.doctype
+            ELSE NULL
+        END AS doctype
+        FROM  sbms.sbms_user.bms_dct_mgmt_regi A
+        LEFT OUTER JOIN (
+            SELECT *
+            FROM (
+                SELECT *,
+                    ROW_NUMBER() OVER (PARTITION BY docid ORDER BY indt DESC) AS row_num
+                FROM sbms.sbms_user.bms_dct_file
+                WHERE gubun = 'DFT01'
+            ) x
+            WHERE x.row_num = 1
+            UNION ALL
+            SELECT *
+            FROM (
+                SELECT *,
+                    ROW_NUMBER() OVER (PARTITION BY docid, sfilename, gubun ORDER BY indt DESC) AS row_num
+                FROM sbms.sbms_user.bms_dct_file
+                WHERE gubun = 'DFT02'
+            ) y
+            WHERE y.row_num = 1
+        ) B ON A.docid = B.docid
+        LEFT OUTER JOIN (
+            SELECT DISTINCT ON (docid) docid, authexpiredt
+            FROM sbms.sbms_user.bms_dct_auth_card
+        WHERE reqid = #{loginuserid} AND authgubun = '01' AND authgrantflag = 'Y'
+        ) C ON A.docid = C.docid
+        LEFT JOIN sbms.sbms_user.bms_dct_attr_add D ON A.docid = D.docid
+        WHERE mgmtid IN
+        <foreach item="item" collection="mgmtid" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+    <!-- 비밀관리기록부 상태값, 업데이트이력 수정 -->
+    <update id="updateComingReqsMgmt" parameterType="com.anylogic.ssystem.bms.use.model.UpdateComingReqsMgmtReqVO">
+        UPDATE sbms.sbms_user.bms_dct_mgmt_regi
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="secstatus != null and secstatus !=''">
+                secstatus = #{secstatus},
+            </if>
+            <if test="updtid != null and updtid !=''">
+                updtid = #{updtid},
+            </if>
+            <if test="updtname != null and updtname !=''">
+                updtname = #{updtname},
+            </if>
+            <if test="updtdt != null and updtdt !=''">
+                updtdt = #{updtdt},
+            </if>
+        </trim>
+        WHERE mgmtid = #{mgmtid}
+    </update>
+
+</mapper>

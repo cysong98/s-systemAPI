@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.anylogic.ssystem.bms.dct.mapper.BmsDctRdocRcvsMapper">
+
+    <resultMap id="selectDctReaderMap" type="com.anylogic.ssystem.bms.dct.model.SelectDctReaderResVO">
+        <id column="docid" property="docid" />                        <!-- 비밀 ID -->
+        <id column="userid" property="userid" />                      <!-- 사용자 ID -->
+        <result column="username" property="username" />              <!-- 사용자 이름 -->
+        <result column="positionid" property="positionid" />          <!-- 직위 ID -->
+        <result column="gradeid" property="gradeid" />                <!-- 직급 ID -->
+        <result column="deptid" property="deptid" />                  <!-- 부서 ID -->
+        <result column="deptname" property="deptname" />              <!-- 부서이름 -->
+        <result column="dutyname" property="dutyname" />              <!-- 직위직급이름 -->
+        <result column="deptnamedesc" property="deptnamedesc" />      <!-- 부서이름상세 -->
+        <result column="isread" property="isread" />                  <!-- 열람여부 -->
+        <result column="indt" property="indt" />                      <!-- 등록일 -->
+        <result column="readdt" property="readdt" />                  <!-- 열람일시 -->
+        <result column="inid" property="inid" />                      <!-- 등록자 ID -->
+        <result column="inseq" property="inseq" />                    <!-- 등록일련번호 -->
+        <result column="type" property="type" />                      <!-- 유형 -->
+        <result column="acceptdt" property="acceptdt" />              <!-- 접수일 -->
+        <result column="begindt" property="begindt" />                <!--  -->
+        <result column="enddt" property="enddt" />                    <!--  -->
+        <result column="reason" property="reason" />                  <!--  -->
+    </resultMap>
+
+    <resultMap id="hasViewingPermissionMap" type="com.anylogic.ssystem.bms.dct.model.HasViewingPermissionResVO">
+        <result column="result" property="result" />
+    </resultMap>
+
+    <!--  열람권자 조회 -->
+    <select id="selectDctReader" parameterType="com.anylogic.ssystem.bms.dct.model.SelectDctReaderReqVO" resultMap="selectDctReaderMap">
+        SELECT
+            docid as "docid" 
+            , userid as "userid" 
+            , username as "username" 
+            , positionid as "positionid" 
+            , gradeid as "gradeid" 
+            , deptid as "deptid" 
+            , deptname as "deptname" 
+            , dutyname as "dutyname" 
+            , deptnamedesc as "deptnamedesc" 
+            , isread as "isread" 
+            , indt as "indt" 
+            , readdt as "readdt" 
+            , inid as "inid" 
+            , inseq as "inseq" 
+            , type as "type" 
+            , acceptdt as "acceptdt" 
+            , begindt as "begindt" 
+            , enddt as "enddt" 
+            , reason as "reason" 
+        FROM  sbms.sbms_user.bms_dct_rdoc_rcvs
+        WHERE 1 = 1
+            <if test="docid != null and docid !=''"> 
+                and docid = #{docid}
+            </if>
+    </select>
+
+    <!-- 재사용/인쇄/반출 시 열람권한 보유중인지 체크 -->
+    <select id="hasViewingPermission" parameterType="com.anylogic.ssystem.bms.dct.model.HasViewingPermissionReqVO" resultMap="hasViewingPermissionMap">
+        SELECT
+            CASE
+                WHEN COUNT(DISTINCT docid) = #{docidscnt} THEN 'true'
+                ELSE 'false'
+                END AS result
+        FROM sbms.sbms_user.bms_dct_rdoc_rcvs
+        WHERE userid = #{userid} AND docid IN
+        <foreach item="docid" collection="docids" open="(" separator="," close=")">
+            #{docid}
+        </foreach>
+    </select>
+
+    <!--  열람권자 등록 -->
+    <insert id="insertDocIdBmsDctRdocRcvsList" parameterType="com.anylogic.ssystem.bms.dct.model.InsertDocIdBmsDctRdocRcvsListReqVO">
+        INSERT INTO
+        sbms.sbms_user.bms_dct_rdoc_rcvs(
+            <trim suffixOverrides=",">
+            <if test="docid != null and docid !=''">
+                docid,
+            </if>
+            <if test="userid != null and userid !=''">
+                userid,
+            </if>
+            <if test="username != null and username !=''">
+                username,
+            </if>
+            <if test="positionid != null and positionid !=''">
+                positionid,
+            </if>
+            <if test="gradeid != null and gradeid !=''">
+                gradeid,
+            </if>
+            <if test="deptid != null and deptid !=''">
+                deptid,
+            </if>
+            <if test="deptname != null and deptname !=''">
+                deptname,
+            </if>
+            <if test="dutyname != null and dutyname !=''">
+                dutyname,
+            </if>
+            <if test="deptnamedesc != null and deptnamedesc !=''">
+                deptnamedesc,
+            </if>
+            <if test="isread != null and isread !=''">
+                isread,
+            </if>
+            <if test="indt != null and indt !=''">
+                indt,
+            </if>
+            <if test="readdt != null and readdt !=''">
+                readdt,
+            </if>
+            <if test="inid != null and inid !=''">
+                inid,
+            </if>
+            <if test="inseq != null and inseq !=''">
+                inseq,
+            </if>
+            <if test="type != null and type !=''">
+                type,
+            </if>
+            <if test="acceptdt != null and acceptdt !=''">
+                acceptdt,
+            </if>
+            <if test="begindt != null and begindt !=''">
+                begindt,
+            </if>
+            <if test="enddt != null and enddt !=''">
+                enddt,
+            </if>
+            <if test="reason != null and reason !=''">
+                reason,
+            </if>
+            </trim>
+        )
+        VALUES(
+            <trim suffixOverrides=",">
+            <if test="docid != null and docid !=''">
+                #{docid},
+            </if>
+            <if test="userid != null and userid !=''">
+                #{userid},
+            </if>
+            <if test="username != null and username !=''">
+                #{username},
+            </if>
+            <if test="positionid != null and positionid !=''">
+                #{positionid},
+            </if>
+            <if test="gradeid != null and gradeid !=''">
+                #{gradeid},
+            </if>
+            <if test="deptid != null and deptid !=''">
+                #{deptid},
+            </if>
+            <if test="deptname != null and deptname !=''">
+                #{deptname},
+            </if>
+            <if test="dutyname != null and dutyname !=''">
+                #{dutyname},
+            </if>
+            <if test="deptnamedesc != null and deptnamedesc !=''">
+                #{deptnamedesc},
+            </if>
+            <if test="isread != null and isread !=''">
+                #{isread},
+            </if>
+            <if test="indt != null and indt !=''">
+                #{indt},
+            </if>
+            <if test="readdt != null and readdt !=''">
+                #{readdt},
+            </if>
+            <if test="inid != null and inid !=''">
+                #{inid},
+            </if>
+            <if test="inseq != null and inseq !=''">
+                #{inseq},
+            </if>
+            <if test="type != null and type !=''">
+                #{type},
+            </if>
+            <if test="acceptdt != null and acceptdt !=''">
+                #{acceptdt},
+            </if>
+            <if test="begindt != null and begindt !=''">
+                #{begindt},
+            </if>
+            <if test="enddt != null and enddt !=''">
+                #{enddt},
+            </if>
+            <if test="reason != null and reason !=''">
+                #{reason},
+            </if>
+            </trim>
+        )
+    </insert>
+
+    <!-- 열람권자 삭제 -->
+    <delete id="deleteDocIdBmsDctRdocRcvsList" parameterType="com.anylogic.ssystem.bms.dct.model.DeleteDocIdBmsDctRdocRcvsListReqVO">
+        DELETE FROM sbms_user.bms_dct_rdoc_rcvs
+        WHERE docid=#{docid} AND userid=#{userid}
+    </delete>
+
+    <!-- 열람권자 수정 -->
+    <update id="updateRdocRcvs" parameterType="com.anylogic.ssystem.bms.dct.model.InsertDocIdBmsDctRdocRcvsListReqVO">
+        UPDATE sbms.sbms_user.bms_dct_rdoc_rcvs
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userid != null and userid !=''">
+                userid = #{userid},
+            </if>
+            <if test="username != null and username !=''">
+                username = #{username},
+            </if>
+            <if test="positionid != null and positionid !=''">
+                positionid = #{positionid},
+            </if>
+            <if test="gradeid != null and gradeid !=''">
+                gradeid = #{gradeid},
+            </if>
+            <if test="deptid != null and deptid !=''">
+                deptid = #{deptid},
+            </if>
+            <if test="deptname != null and deptname !=''">
+                deptname = #{deptname},
+            </if>
+            <if test="dutyname != null and dutyname !=''">
+                dutyname = #{dutyname},
+            </if>
+            <if test="deptnamedesc != null and deptnamedesc !=''">
+                deptnamedesc = #{deptnamedesc},
+            </if>
+            <if test="isread != null and isread !=''">
+                isread = #{isread},
+            </if>
+            <if test="indt != null and indt !=''">
+                indt = #{indt},
+            </if>
+            <if test="readdt != null and readdt !=''">
+                readdt = #{readdt},
+            </if>
+            <if test="inid != null and inid !=''">
+                inid = #{inid},
+            </if>
+            <if test="inseq != null and inseq !=''">
+                inseq = #{inseq},
+            </if>
+            <if test="type != null and type !=''">
+                "type" = #{type},
+            </if>
+            <if test="acceptdt != null and acceptdt !=''">
+                acceptdt = #{acceptdt},
+            </if>
+            <if test="begindt != null and begindt !=''">
+                begindt = #{begindt},
+            </if>
+            <if test="enddt != null and enddt !=''">
+                enddt = #{enddt},
+            </if>
+            <if test="reason != null and reason !=''">
+                reason = #{reason},
+            </if>
+        </trim>
+        WHERE docid = #{docid} AND inseq = '0'
+    </update>
+
+</mapper>

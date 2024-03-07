@@ -1,0 +1,978 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.anylogic.ssystem.bms.use.mapper.BmsDctApprreqMapper">
+
+    <resultMap id="selectApprReqListMap" type="com.anylogic.ssystem.bms.com.model.SelectApprReqListResVO">
+        <result column="reqregdt" property="reqregdt" />              <!-- 요청등록일자 -->
+    </resultMap>
+
+    <resultMap id="checkPrtCntMap" type="com.anylogic.ssystem.bms.use.model.CheckPrtCntResVO">
+        <result column="prtcnt" property="prtcnt" />              <!-- 인쇄부수 -->
+    </resultMap>
+
+    <resultMap id="selectUseReqListMap" type="com.anylogic.ssystem.bms.use.model.SelectUseReqListResVO">
+        <id column="apprreqid" property="apprreqid" />                <!-- 결재요청 ID -->
+        <result column="reqtype" property="reqtype" />                <!-- 요청타입 -->
+        <result column="reqtypenm" property="reqtypenm" />                <!-- 요청타입 -->
+        <result column="reqdt" property="reqdt" />                    <!-- 요청일자 -->
+        <result column="reqttl" property="reqttl" />                  <!-- 요청제목 -->
+        <result column="reqregdt" property="reqregdt" />              <!-- 요청등록일자 -->
+        <result column="reqcontents" property="reqcontents" />        <!-- 요청사유 -->
+        <result column="reqid" property="reqid" />                    <!-- 요청자 ID -->
+        <result column="reqname" property="reqname" />                <!-- 요청자명 -->
+        <result column="reqdeptid" property="reqdeptid" />            <!-- 요청자 부서 ID -->
+        <result column="reqdeptname" property="reqdeptname" />        <!-- 요청자 부서명 -->
+        <result column="reqstatus" property="reqstatus" />            <!-- 진행상태 -->
+        <result column="reqstatusnm" property="reqstatusnm" />            <!-- 진행상태 -->
+        <result column="apprenddt" property="apprenddt" />            <!-- 결재완료일자 -->
+        <result column="adminconfirmdt" property="adminconfirmdt" />  <!-- 비밀관리자 확인일자 -->
+        <result column="grantflag" property="grantflag" />            <!-- 요청승인 여부 -->
+        <result column="reqrfidcheck" property="reqrfidcheck" />      <!-- 요청시현물 확인여부 -->
+        <result column="reqrfidcheckdt" property="reqrfidcheckdt" />  <!-- 요청시현물 확인일시 -->
+        <result column="finalrfidcheck" property="finalrfidcheck" />  <!-- 최종시현물 확인여부 -->
+        <result column="finalrfidcheckdt" property="finalrfidcheckdt" /><!-- 최종시현물 확인일시 -->
+        <result column="reservedate" property="reservedate" />        <!-- 승인예약 요청일 -->
+        <result column="destructreserve" property="destructreserve" /><!-- 파기 설정일 -->
+        <result column="isnewrule" property="isnewrule" />            <!-- 신규 -->
+        <result column="apprreqseq" property="apprreqseq" />          <!-- 요청경로순번 -->
+        <result column="apprtype" property="apprtype" />              <!-- 결재유형 -->
+        <result column="apprgubun" property="apprgubun" />            <!-- 결재처리구분 -->
+        <result column="apprstatus" property="apprstatus" />          <!-- 결재요청상태 -->
+        <result column="apprid" property="apprid" />                  <!-- 결재자 ID -->
+        <result column="apprname" property="apprname" />              <!-- 결재자명 -->
+        <result column="apprdeptid" property="apprdeptid" />          <!-- 결재자부서 ID -->
+        <result column="apprdeptname" property="apprdeptname" />      <!-- 결재자 부서명 -->
+        <result column="apprdutyname" property="apprdutyname" />      <!-- 결재자 직위직급명 -->
+        <result column="apprposid" property="apprposid" />            <!-- 결재자 직위 ID -->
+        <result column="apprgrdid" property="apprgrdid" />            <!-- 결재자 직급 ID -->
+        <result column="appropinion" property="appropinion" />        <!-- 결재자 의견 -->
+        <result column="electsign" property="electsign" />            <!-- 전자서명 -->
+        <result column="rgstid" property="rgstid" />                  <!-- 등록자 ID -->
+        <result column="rgstname" property="rgstname" />              <!-- 등록자명 -->
+        <result column="rgstdt" property="rgstdt" />                  <!-- 등록일시 -->
+        <result column="updtid" property="updtid" />                  <!-- 수정자 ID -->
+        <result column="updtname" property="updtname" />              <!-- 수정자명 -->
+        <result column="updtdt" property="updtdt" />                  <!-- 수정일시 -->
+        <result column="deptname" property="deptname" />
+        <result column="position" property="position" />
+        <result column="grade" property="grade" />
+    </resultMap>
+
+    <resultMap id="selectUseReqViewDetailMap" type="com.anylogic.ssystem.bms.use.model.SelectUseReqViewDetailResVO">
+        <id column="apprreqid" property="apprreqid" />                <!-- 결재요청 ID -->
+        <result column="reqtype" property="reqtype" />                <!-- 요청타입 -->
+        <result column="reqdt" property="reqdt" />                    <!-- 요청일자 -->
+        <result column="reqttl" property="reqttl" />                  <!-- 요청제목 -->
+        <result column="reqregdt" property="reqregdt" />              <!-- 요청등록일자 -->
+        <result column="reqcontents" property="reqcontents" />        <!-- 요청사유 -->
+        <result column="reqid" property="reqid" />                    <!-- 요청자 ID -->
+        <result column="reqname" property="reqname" />                <!-- 요청자명 -->
+        <result column="reqdeptid" property="reqdeptid" />            <!-- 요청자 부서 ID -->
+        <result column="reqdeptname" property="reqdeptname" />        <!-- 요청자 부서명 -->
+        <result column="reqstatus" property="reqstatus" />            <!-- 진행상태 -->
+        <result column="apprenddt" property="apprenddt" />            <!-- 결재완료일자 -->
+        <result column="adminconfirmdt" property="adminconfirmdt" />  <!-- 비밀관리자 확인일자 -->
+        <result column="grantflag" property="grantflag" />            <!-- 요청승인 여부 -->
+        <result column="reqrfidcheck" property="reqrfidcheck" />      <!-- 요청시현물 확인여부 -->
+        <result column="reqrfidcheckdt" property="reqrfidcheckdt" />  <!-- 요청시현물 확인일시 -->
+        <result column="finalrfidcheck" property="finalrfidcheck" />  <!-- 최종시현물 확인여부 -->
+        <result column="finalrfidcheckdt" property="finalrfidcheckdt" /><!-- 최종시현물 확인일시 -->
+        <result column="reservedate" property="reservedate" />        <!-- 승인예약 요청일 -->
+        <result column="destructreserve" property="destructreserve" /><!-- 파기 설정일 -->
+        <result column="isnewrule" property="isnewrule" />            <!-- 신규 -->
+        <result column="mgmtid" property="mgmtid" />                  <!-- 비밀관리 ID -->
+        <result column="reqreadbegindt" property="reqreadbegindt" />  <!-- 요청열람 시작일시 -->
+        <result column="reqreadenddt" property="reqreadenddt" />      <!-- 요청열람 만료일시 -->
+        <result column="grantreadbegindt" property="grantreadbegindt" /><!-- 승인열람 시작일시 -->
+        <result column="grantreadenddt" property="grantreadenddt" />  <!-- 승인열람 만료일시 -->
+        <result column="isread" property="isread" />                  <!-- 열람여부 -->
+        <result column="readdt" property="readdt" />                  <!-- 열람일시 -->
+        <result column="lendgubun" property="lendgubun" />
+        <result column="lendtype" property="lendtype" />
+        <result column="reqlenddt" property="reqlenddt" />
+        <result column="reqbackdt" property="reqbackdt" />
+        <result column="grantlenddt" property="grantlenddt" />
+        <result column="grantbackdt" property="grantbackdt" />
+        <result column="lendcharge" property="lendcharge" />
+        <result column="lendstatus" property="lendstatus" />
+        <result column="ingappcnt" property="ingappcnt" />
+    </resultMap>
+
+    <resultMap id="selectUseReqViewPathListMap" type="com.anylogic.ssystem.bms.use.model.SelectUseReqViewPathListResVO">
+        <id column="apprreqid" property="apprreqid" />                <!-- 결재요청 ID -->
+        <result column="reqtype" property="reqtype" />                <!-- 요청타입 -->
+        <result column="reqdt" property="reqdt" />                    <!-- 요청일자 -->
+        <result column="reqttl" property="reqttl" />                  <!-- 요청제목 -->
+        <result column="reqregdt" property="reqregdt" />              <!-- 요청등록일자 -->
+        <result column="reqcontents" property="reqcontents" />        <!-- 요청사유 -->
+        <result column="reqid" property="reqid" />                    <!-- 요청자 ID -->
+        <result column="reqname" property="reqname" />                <!-- 요청자명 -->
+        <result column="reqdeptid" property="reqdeptid" />            <!-- 요청자 부서 ID -->
+        <result column="reqdeptname" property="reqdeptname" />        <!-- 요청자 부서명 -->
+        <result column="reqstatus" property="reqstatus" />            <!-- 진행상태 -->
+        <result column="apprenddt" property="apprenddt" />            <!-- 결재완료일자 -->
+        <result column="adminconfirmdt" property="adminconfirmdt" />  <!-- 비밀관리자 확인일자 -->
+        <result column="grantflag" property="grantflag" />            <!-- 요청승인 여부 -->
+        <result column="reqrfidcheck" property="reqrfidcheck" />      <!-- 요청시현물 확인여부 -->
+        <result column="reqrfidcheckdt" property="reqrfidcheckdt" />  <!-- 요청시현물 확인일시 -->
+        <result column="finalrfidcheck" property="finalrfidcheck" />  <!-- 최종시현물 확인여부 -->
+        <result column="finalrfidcheckdt" property="finalrfidcheckdt" /><!-- 최종시현물 확인일시 -->
+        <result column="reservedate" property="reservedate" />        <!-- 승인예약 요청일 -->
+        <result column="destructreserve" property="destructreserve" /><!-- 파기 설정일 -->
+        <result column="isnewrule" property="isnewrule" />            <!-- 신규 -->
+        <result column="apprreqseq" property="apprreqseq" />          <!-- 요청경로순번 -->
+        <result column="apprtype" property="apprtype" />              <!-- 결재유형 -->
+        <result column="apprtypenm" property="apprtypenm" />              <!-- 결재유형 -->
+        <result column="apprgubun" property="apprgubun" />            <!-- 결재처리구분 -->
+        <result column="apprstatus" property="apprstatus" />          <!-- 결재요청상태 -->
+        <result column="apprstatusnm" property="apprstatusnm" />          <!-- 결재요청상태 -->
+        <result column="apprid" property="apprid" />                  <!-- 결재자 ID -->
+        <result column="apprname" property="apprname" />              <!-- 결재자명 -->
+        <result column="apprdeptid" property="apprdeptid" />          <!-- 결재자부서 ID -->
+        <result column="apprdeptname" property="apprdeptname" />      <!-- 결재자 부서명 -->
+        <result column="apprdutyname" property="apprdutyname" />      <!-- 결재자 직위직급명 -->
+        <result column="apprposid" property="apprposid" />            <!-- 결재자 직위 ID -->
+        <result column="apprgrdid" property="apprgrdid" />            <!-- 결재자 직급 ID -->
+        <result column="appropinion" property="appropinion" />        <!-- 결재자 의견 -->
+        <result column="electsign" property="electsign" />            <!-- 전자서명 -->
+        <result column="rgstid" property="rgstid" />                  <!-- 등록자 ID -->
+        <result column="rgstname" property="rgstname" />              <!-- 등록자명 -->
+        <result column="rgstdt" property="rgstdt" />                  <!-- 등록일시 -->
+        <result column="updtid" property="updtid" />                  <!-- 수정자 ID -->
+        <result column="updtname" property="updtname" />              <!-- 수정자명 -->
+        <result column="updtdt" property="updtdt" />                  <!-- 수정일시 -->
+        <result column="positionnm" property="positionnm" />    <!-- 직위 -->
+    </resultMap>
+
+    <resultMap id="checkIsReusableMap" type="com.anylogic.ssystem.bms.use.model.CheckIsReusableResVO">
+        <result column="result" property="result" />
+    </resultMap>
+
+    <resultMap id="selectPathInfoMap" type="com.anylogic.ssystem.bms.use.model.SelectPathInfoResVO">
+        <result column="apprname" property="apprname" />
+        <result column="apprtype" property="apprtype" />
+        <result column="apprreqseq" property="apprreqseq" />
+    </resultMap>
+
+
+    <!-- 비밀문서 사용(처리할, 기안한, 처리한, 요청서완료처리) 목록 조회 -->
+    <select id="selectUseReqList" parameterType="com.anylogic.ssystem.bms.use.model.SelectUseReqListReqVO" resultMap="selectUseReqListMap">
+        SELECT
+            A.apprreqid as "apprreqid"
+            , A.reqtype as "reqtype"
+            , case
+                when reqtype = '01' then '열람'
+                when reqtype = '02' then '재사용'
+                when reqtype = '03' then '인쇄'
+                when reqtype = '04' then '대출'
+                when reqtype = '05' then '지출'
+                when reqtype = '06' then '재분류'
+                when reqtype = '07' then '파기'
+                when reqtype = '08' then '존안'
+                when reqtype = '09' then '이관'
+                when reqtype = '10' then '이관대기'
+                when reqtype = '11' then '이관연기'
+                when reqtype = '12' then '내부이관'
+                when reqtype = '13' then '비전자'
+                when reqtype = '14' then '오프라인열람'
+                when reqtype = '15' then '인쇄용프린터'
+                when reqtype = '16' then '추가발송'
+             else '' end "reqtypenm"
+            ,TO_CHAR(TO_TIMESTAMP(A.reqdt, 'YYYYMMDDHH24MISS'), 'YYYY.MM.DD HH24:MI') as "reqdt"
+            , A.reqttl as "reqttl"
+            , A.reqregdt as "reqregdt"
+            , A.reqcontents as "reqcontents"
+            , A.reqid as "reqid"
+            , A.reqname as "reqname"
+            , A.reqdeptid as "reqdeptid"
+            , A.reqdeptname as "reqdeptname"
+            , A.reqstatus as "reqstatus"
+            , case
+                when A.reqstatus = '0' then '임시저장'
+                when A.reqstatus = '1' then '결재중'
+                when A.reqstatus = '2' and NOT EXISTS (SELECT 1 FROM sbms.sbms_user.bms_dct_apprreq_path C WHERE C.apprreqid = A.apprreqid AND C.apprgubun = '2' AND C.apprstatus = 'APP20') then '승인'
+                when A.reqstatus = '2' and EXISTS (SELECT 1 FROM sbms.sbms_user.bms_dct_apprreq_path C WHERE C.apprreqid = A.apprreqid AND C.apprgubun = '2' AND C.apprstatus = 'APP20') then '반려'
+                when A.reqstatus = '3' then '실행완료'
+                when A.reqstatus = '4' then '권한회수'
+                when A.reqstatus = '5' then '요청서회수'
+                when A.reqstatus = '6' then '1인결재'
+                when A.reqstatus = '7' then '반출완료'
+                when A.reqstatus = '8' then '반납요청'
+                when A.reqstatus = '9' then '반납완료'
+              else '' end "reqstatusnm"
+            , A.apprenddt as "apprenddt"
+            , A.adminconfirmdt as "adminconfirmdt"
+            , A.grantflag as "grantflag"
+            , A.reqrfidcheck as "reqrfidcheck"
+            , A.reqrfidcheckdt as "reqrfidcheckdt"
+            , A.finalrfidcheck as "finalrfidcheck"
+            , A.finalrfidcheckdt as "finalrfidcheckdt"
+            , A.reservedate as "reservedate"
+            , A.destructreserve as "destructreserve"
+            , A.isnewrule as "isnewrule"
+            , B.deptname as "deptname"
+            , B.position as "position"
+            , B.grade as "grade"
+            <if test="pagereqtype != null and pagereqtype =='draft'"><!-- 기안한 요청서 -->
+                , C.apprname as "apprname"
+                , C.apprdeptname as "apprdeptname"
+                , C.apprdutyname as "apprdutyname"
+                , C.appropinion as "appropinion"
+                ,TO_CHAR(TO_TIMESTAMP(C.updtdt, 'YYYYMMDDHH24MISS'), 'YYYY.MM.DD HH24:MI') as "updtdt"
+            </if>
+        FROM sbms.sbms_user.bms_dct_apprreq A
+        LEFT OUTER JOIN sbms.sbms_user.com_userinfo B ON (A.reqid = B.userid)
+        <if test="pagereqtype != null and pagereqtype =='draft'"><!-- 기안한 요청서 -->
+            LEFT OUTER JOIN (
+                SELECT *
+                FROM (
+                    SELECT *, ROW_NUMBER() OVER (PARTITION BY apprreqid ORDER BY apprreqseq DESC) as row_num
+                    FROM sbms.sbms_user.bms_dct_apprreq_path
+                    WHERE apprstatus = 'APP20'
+                ) max_appr
+                WHERE row_num = 1
+            ) C ON A.apprreqid = C.apprreqid
+        </if>
+        WHERE 1 = 1
+
+        <if test="pagereqtype != null and pagereqtype =='req'"><!-- 처리할 요청서 -->
+            AND A.apprreqid IN (
+                SELECT B.apprreqid
+                FROM sbms.sbms_user.bms_dct_apprreq_path B
+                WHERE B.apprid = #{apprid} AND B.apprstatus = 'APP10'
+                    AND NOT EXISTS (
+                        SELECT 1
+                        FROM sbms.sbms_user.bms_dct_apprreq_path C
+                        WHERE C.apprreqid = B.apprreqid
+                        AND C.apprstatus = 'APP10'
+                        AND C.apprreqseq <![CDATA[<]]> B.apprreqseq
+                  )
+            )
+            AND NOT EXISTS (SELECT 1 FROM sbms.sbms_user.bms_dct_apprreq_path C WHERE C.apprreqid = A.apprreqid AND C.apprgubun = '2' AND C.apprstatus = 'APP20')
+            AND A.reqtype IN ( '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12')
+            AND A.reqstatus != '5'
+        </if>
+        <if test="pagereqtype != null and pagereqtype =='draft'"><!-- 기안한 요청서 -->
+            AND A.reqid = #{reqid}
+            AND A.reqtype IN ( '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12')
+        </if>
+        <if test="pagereqtype != null and pagereqtype =='proc'"><!-- 처리한 요청서 -->
+            AND A.apprreqid IN (SELECT apprreqid FROM sbms.sbms_user.bms_dct_apprreq_path B WHERE apprid = #{apprid} AND apprstatus = 'APP20')
+            AND A.reqtype IN ( '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12')
+        </if>
+        <if test="pagereqtype != null and pagereqtype =='temp'"><!-- 임시저장함 요청서 -->
+            AND A.reqid = #{reqid}
+            AND A.reqstatus = '0'
+            AND A.reqtype IN ( '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12')
+        </if>
+        <if test="pagereqtype != null and pagereqtype =='complete'"><!-- 요청서 완료처리 -->
+            AND A.reqstatus IN ('2', '6', '7', '8') AND A.grantflag = 'Y'
+            AND A.reqtype IN ('01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12')
+            AND (
+                (A.reqtype = '04' OR A.reqtype = '05') AND
+                (
+                    CASE
+                        WHEN A.reqstatus = '8' THEN A.apprreqid IN (
+                            SELECT apprreqid
+                            FROM sbms.sbms_user.bms_dct_apprreq_lend
+                            WHERE lendcharge = #{reqid} AND grantflag = 'Y'
+                    )
+                        WHEN A.reqstatus != '8' THEN A.apprreqid IN (
+                            SELECT apprreqid
+                            FROM sbms.sbms_user.bms_dct_apprreq_lend
+                            WHERE lendcharge = #{reqid} AND grantflag = 'Y' AND lenddt IS NULL
+                        )
+                    END
+                )
+                OR
+                (
+                    A.reqid = #{reqid} AND A.reqstatus != '8' AND A.reqtype != '10'
+                )
+            )
+
+        </if>
+
+            <if test="reqtype != null and reqtype !=''">
+                and A.reqtype = #{reqtype}
+            </if>
+            <if test="reqttl != null and reqttl !=''">
+                and A.reqttl like CONCAT('%', #{reqttl}, '%')
+            </if>
+            <if test="reqname != null and reqname !=''">
+                and A.reqname like CONCAT('%', #{reqname}, '%')
+            </if>
+            <if test="reqstatus != null and reqstatus !=''">
+                and A.reqstatus = #{reqstatus}
+            </if>
+            <if test="startDt != null and startDt !=''">
+                and A.reqdt <![CDATA[>=]]> CONCAT(REPLACE(#{startDt},'-',''),'000000')
+            </if>
+            <if test="endDt != null and endDt !=''">
+                and A.reqdt <![CDATA[<=]]> CONCAT(REPLACE(#{endDt},'-',''),'235959')
+            </if>
+            ORDER BY A.reqdt DESC
+    </select>
+
+    <!-- 요청서 조회 -->
+    <select id="selectUseReqViewDetail" parameterType="com.anylogic.ssystem.bms.use.model.SelectUseReqViewDetailReqVO" resultMap="selectUseReqViewDetailMap">
+        SELECT
+            A.apprreqid as "apprreqid"
+             , A.reqtype as "reqtype"
+             ,TO_CHAR(TO_TIMESTAMP(A.reqdt, 'YYYYMMDDHH24MISS'), 'YYYY.MM.DD') as "reqdt"
+             , A.reqttl as "reqttl"
+             , A.reqregdt as "reqregdt"
+             , A.reqcontents as "reqcontents"
+             , A.reqid as "reqid"
+             , A.reqname as "reqname"
+             , A.reqdeptid as "reqdeptid"
+             , A.reqdeptname as "reqdeptname"
+             , A.reqstatus as "reqstatus"
+             , A.apprenddt as "apprenddt"
+             , A.adminconfirmdt as "adminconfirmdt"
+             , A.grantflag as "grantflag"
+             , A.reqrfidcheck as "reqrfidcheck"
+             , A.reqrfidcheckdt as "reqrfidcheckdt"
+             , A.finalrfidcheck as "finalrfidcheck"
+             , A.finalrfidcheckdt as "finalrfidcheckdt"
+             , A.reservedate as "reservedate"
+             , A.destructreserve as "destructreserve"
+             , A.isnewrule as "isnewrule"
+        FROM sbms.sbms_user.bms_dct_apprreq A
+        where 1 = 1
+          and A.apprreqid = #{apprreqid}
+    </select>
+
+    <!-- 반출 요청서 조회 -->
+    <select id="selectUseReqViewLendDetail" parameterType="com.anylogic.ssystem.bms.use.model.SelectUseReqViewDetailReqVO" resultMap="selectUseReqViewDetailMap">
+        SELECT
+            A.apprreqid as "apprreqid"
+             , A.reqtype as "reqtype"
+             ,TO_CHAR(TO_TIMESTAMP(A.reqdt, 'YYYYMMDDHH24MISS'), 'YYYY.MM.DD') as "reqdt"
+             , A.reqttl as "reqttl"
+             , A.reqregdt as "reqregdt"
+             , A.reqcontents as "reqcontents"
+             , A.reqid as "reqid"
+             , A.reqname as "reqname"
+             , A.reqdeptid as "reqdeptid"
+             , A.reqdeptname as "reqdeptname"
+             , A.reqstatus as "reqstatus"
+             , A.apprenddt as "apprenddt"
+             , A.adminconfirmdt as "adminconfirmdt"
+             , A.grantflag as "grantflag"
+             , A.reqrfidcheck as "reqrfidcheck"
+             , A.reqrfidcheckdt as "reqrfidcheckdt"
+             , A.finalrfidcheck as "finalrfidcheck"
+             , A.finalrfidcheckdt as "finalrfidcheckdt"
+             , A.reservedate as "reservedate"
+             , A.destructreserve as "destructreserve"
+             , A.isnewrule as "isnewrule"
+             , B."lendgubun"
+             , B."lendtype"
+             , B."reqlenddt"
+             , B."reqbackdt"
+             , B."grantlenddt"
+             , B."grantbackdt"
+             , B."lendcharge"
+             , CASE
+                   WHEN NULLIF(B."lenddt", '') IS NULL AND NULLIF(B."backdt", '') IS NULL THEN '1'
+                   WHEN NULLIF(B."lenddt", '') IS NOT NULL AND NULLIF(B."backdt", '') IS NULL THEN '2'
+                   WHEN NULLIF(B."lenddt", '') IS NOT NULL AND NULLIF(B."backdt", '') IS NOT NULL THEN '3'
+            END AS "lendstatus"
+        FROM sbms.sbms_user.bms_dct_apprreq A
+                 left outer join (select
+                                      case when lendgubun = '1' then '지출' else '대출' end as "lendgubun"
+                                       ,case when lendtype = '1' then '인쇄반출' when lendtype = '2' then '파일반출' else '비전자' end as "lendtype"
+                                       , TO_CHAR(TO_TIMESTAMP(reqlenddt, 'YYYYMMDDHH24MISS'), 'YYYY-MM-DD') as "reqlenddt"
+                                       , TO_CHAR(TO_TIMESTAMP(reqbackdt, 'YYYYMMDDHH24MISS'), 'YYYY-MM-DD') as "reqbackdt"
+                                       , TO_CHAR(TO_TIMESTAMP(COALESCE(NULLIF(grantlenddt,''),reqlenddt),'YYYYMMDDHH24MISS'), 'YYYY-MM-DD') as "grantlenddt"
+                                       , TO_CHAR(TO_TIMESTAMP(COALESCE(NULLIF(grantbackdt,''),reqbackdt),'YYYYMMDDHH24MISS'), 'YYYY-MM-DD') as "grantbackdt"
+                                       , apprreqid
+                                       , lendcharge
+                                       , lenddt
+                                       , backdt
+                                  from sbms.sbms_user.bms_dct_apprreq_lend
+                                  where apprreqid = #{apprreqid} limit 1
+        )B  on (A.apprreqid = B.apprreqid)
+        where A.apprreqid = #{apprreqid}
+    </select>
+
+    <!--  요청서 결재 경로 조회 -->
+    <select id="selectUseReqViewPathList" parameterType="com.anylogic.ssystem.bms.use.model.SelectUseReqViewPathListReqVO" resultMap="selectUseReqViewPathListMap">
+        select
+            A.apprreqid
+             ,A.apprreqseq
+             ,A.apprtype
+             ,CASE
+                  WHEN A.apprtype = '1' THEN '요청'
+                  WHEN A.apprtype = '2' THEN '검토'
+                  WHEN A.apprtype = '3' THEN '승인'
+                  WHEN A.apprtype = '4' THEN '1인결재'
+                  ELSE '' END apprtypenm
+             ,A.apprdeptid
+             ,A.apprdeptname
+             ,A.appropinion
+             ,A.apprname
+             ,A.apprstatus
+             ,CASE
+                  WHEN A.apprstatus = 'APP00' THEN CONCAT(TO_CHAR(TO_TIMESTAMP(A.rgstdt, 'YYYYMMDDHH24MISS'), 'YYYY.MM.DD HH24:MI'), ' 요청')
+                  WHEN A.apprstatus = 'APP10'
+                      AND NOT EXISTS (
+                          SELECT 1
+                          FROM sbms.sbms_user.bms_dct_apprreq_path C
+                          WHERE C.apprreqid = A.apprreqid
+                            AND C.apprgubun = '2'
+                            AND C.apprstatus = 'APP20'
+                      ) THEN '결재대기'
+                  WHEN A.apprstatus = 'APP10'
+                      AND EXISTS (
+                          SELECT 1
+                          FROM sbms.sbms_user.bms_dct_apprreq_path C
+                          WHERE C.apprreqid = A.apprreqid
+                            AND C.apprgubun = '2'
+                            AND C.apprstatus = 'APP20'
+                      ) THEN '반려로 인한 결재취소'
+                  WHEN A.apprstatus = 'APP20' and A.apprgubun = '2' THEN CONCAT(TO_CHAR(TO_TIMESTAMP(A.updtdt, 'YYYYMMDDHH24MISS'), 'YYYY.MM.DD HH24:MI'),' 반려')
+                  WHEN A.apprstatus = 'APP20' and A.apprgubun = '1' THEN CONCAT(TO_CHAR(TO_TIMESTAMP(A.updtdt, 'YYYYMMDDHH24MISS'), 'YYYY.MM.DD HH24:MI'),' 승인')
+                  WHEN A.apprstatus = 'APP30' THEN CONCAT(TO_CHAR(TO_TIMESTAMP(A.rgstdt, 'YYYYMMDDHH24MISS'), 'YYYY.MM.DD HH24:MI'), ' 1인결재')
+                  ELSE '' END "apprstatusnm"
+             ,B.grade || '/' || B.username as "positionnm"
+        from sbms_user.bms_dct_apprreq_path A left outer join sbms_user.com_userinfo B on (A.apprid = B.userid)
+        where apprreqid = #{apprreqid}
+        order by apprreqseq asc
+    </select>
+
+    <!-- 요청서 등록 -->
+    <insert id="insertDctApprReq" parameterType="com.anylogic.ssystem.bms.use.model.InsertDctApprReqReqVO">
+        INSERT INTO
+        sbms.sbms_user.bms_dct_apprreq(
+        <trim suffixOverrides=",">
+            <if test="apprreqid != null and apprreqid !=''">
+                apprreqid,
+            </if>
+            <if test="reqtype != null and reqtype !=''">
+                reqtype,
+            </if>
+            <if test="reqdt != null and reqdt !=''">
+                reqdt,
+            </if>
+            <if test="reqttl != null and reqttl !=''">
+                reqttl,
+            </if>
+            <if test="reqregdt != null and reqregdt !=''">
+                reqregdt,
+            </if>
+            <if test="reqcontents != null and reqcontents !=''">
+                reqcontents,
+            </if>
+            <if test="reqid != null and reqid !=''">
+                reqid,
+            </if>
+            <if test="reqname != null and reqname !=''">
+                reqname,
+            </if>
+            <if test="reqdeptid != null and reqdeptid !=''">
+                reqdeptid,
+            </if>
+            <if test="reqdeptname != null and reqdeptname !=''">
+                reqdeptname,
+            </if>
+            <if test="reqstatus != null and reqstatus !=''">
+                reqstatus,
+            </if>
+            <if test="apprenddt != null and apprenddt !=''">
+                apprenddt,
+            </if>
+            <if test="adminconfirmdt != null and adminconfirmdt !=''">
+                adminconfirmdt,
+            </if>
+            <if test="grantflag != null and grantflag !=''">
+                grantflag,
+            </if>
+            <if test="reqrfidcheck != null and reqrfidcheck !=''">
+                reqrfidcheck,
+            </if>
+            <if test="reqrfidcheckdt != null and reqrfidcheckdt !=''">
+                reqrfidcheckdt,
+            </if>
+            <if test="finalrfidcheck != null and finalrfidcheck !=''">
+                finalrfidcheck,
+            </if>
+            <if test="finalrfidcheckdt != null and finalrfidcheckdt !=''">
+                finalrfidcheckdt,
+            </if>
+            <if test="reservedate != null and reservedate !=''">
+                reservedate,
+            </if>
+            <if test="destructreserve != null and destructreserve !=''">
+                destructreserve,
+            </if>
+            <if test="isnewrule != null and isnewrule !=''">
+                isnewrule,
+            </if>
+        </trim>
+        )
+        VALUES(
+        <trim suffixOverrides=",">
+            <if test="apprreqid != null and apprreqid !=''">
+                #{apprreqid},
+            </if>
+            <if test="reqtype != null and reqtype !=''">
+                #{reqtype},
+            </if>
+            <if test="reqdt != null and reqdt !=''">
+                #{reqdt},
+            </if>
+            <if test="reqttl != null and reqttl !=''">
+                #{reqttl},
+            </if>
+            <if test="reqregdt != null and reqregdt !=''">
+                #{reqregdt},
+            </if>
+            <if test="reqcontents != null and reqcontents !=''">
+                #{reqcontents},
+            </if>
+            <if test="reqid != null and reqid !=''">
+                #{reqid},
+            </if>
+            <if test="reqname != null and reqname !=''">
+                #{reqname},
+            </if>
+            <if test="reqdeptid != null and reqdeptid !=''">
+                #{reqdeptid},
+            </if>
+            <if test="reqdeptname != null and reqdeptname !=''">
+                #{reqdeptname},
+            </if>
+            <if test="reqstatus != null and reqstatus !=''">
+                #{reqstatus},
+            </if>
+            <if test="apprenddt != null and apprenddt !=''">
+                #{apprenddt},
+            </if>
+            <if test="adminconfirmdt != null and adminconfirmdt !=''">
+                #{adminconfirmdt},
+            </if>
+            <if test="grantflag != null and grantflag !=''">
+                #{grantflag},
+            </if>
+            <if test="reqrfidcheck != null and reqrfidcheck !=''">
+                #{reqrfidcheck},
+            </if>
+            <if test="reqrfidcheckdt != null and reqrfidcheckdt !=''">
+                #{reqrfidcheckdt},
+            </if>
+            <if test="finalrfidcheck != null and finalrfidcheck !=''">
+                #{finalrfidcheck},
+            </if>
+            <if test="finalrfidcheckdt != null and finalrfidcheckdt !=''">
+                #{finalrfidcheckdt},
+            </if>
+            <if test="reservedate != null and reservedate !=''">
+                #{reservedate},
+            </if>
+            <if test="destructreserve != null and destructreserve !=''">
+                #{destructreserve},
+            </if>
+            <if test="isnewrule != null and isnewrule !=''">
+                #{isnewrule},
+            </if>
+        </trim>
+        )
+    </insert>
+
+    <!--  요청서 작성일자 조회 -->
+    <select id="getApprReqregdtByid" parameterType="com.anylogic.ssystem.bms.com.model.SelectApprReqListReqVO" resultMap="selectApprReqListMap">
+        SELECT reqregdt as "reqregdt"
+        FROM  sbms.sbms_user.bms_dct_apprreq
+        WHERE apprreqid = #{apprreqid}
+    </select>
+
+    <!-- 재사용 가능 여부 체크 -->
+    <select id="checkIsReusable" parameterType="com.anylogic.ssystem.bms.use.model.CheckIsReusableReqVO" resultMap="checkIsReusableMap">
+        SELECT
+            CASE
+                WHEN COUNT(*) = 0 THEN '권한없음'
+                WHEN MAX(CASE WHEN reuse.apprreqid IS NOT NULL AND TO_TIMESTAMP(reuse.grantreuseenddt, 'YYYYMMDDHH24MISS') <![CDATA[>=]]> CURRENT_TIMESTAMP THEN 1 ELSE 0 END) = 1 THEN '재사용가능'
+                WHEN MAX(CASE WHEN reuse.apprreqid IS NOT NULL AND TO_TIMESTAMP(reuse.grantreuseenddt, 'YYYYMMDDHH24MISS') <![CDATA[<]]> CURRENT_TIMESTAMP THEN 1 ELSE 0 END) = 1 THEN '기간만료'
+                END AS result
+        FROM sbms_user.bms_dct_apprreq appr
+        LEFT OUTER JOIN sbms_user.bms_dct_apprreq_reuse reuse ON (appr.apprreqid = reuse.apprreqid)
+        WHERE
+            reuse.mgmtid = #{mgmtid}
+            AND appr.reqtype = '02'
+            AND appr.reqstatus = '3'
+    </select>
+
+    <!-- 비밀관리기록부 팝업 > 재분류 요청자,확인자 정보 조회 -->
+    <select id="selectReclassPathInfo" parameterType="com.anylogic.ssystem.bms.use.model.SelectPathInfoReqVO" resultMap="selectPathInfoMap">
+        SELECT apprname, apprtype, apprreqseq
+        FROM sbms_user.bms_dct_apprreq_path
+        WHERE apprreqid = (
+            SELECT apprreqid
+            FROM sbms_user.bms_dct_apprreq
+            WHERE apprreqid IN (
+                SELECT apprreqid
+                FROM sbms_user.bms_dct_apprreq_reclass
+                WHERE mgmtid = #{mgmtid}
+            )
+              AND reqstatus = '3'
+              AND grantflag = 'Y'
+        )
+        ORDER BY apprreqseq ASC
+    </select>
+
+    <!-- 비밀관리기록부 팝업 > 파기 요청자,확인자 정보 조회 -->
+    <select id="selectDestructPathInfo" parameterType="com.anylogic.ssystem.bms.use.model.SelectPathInfoReqVO" resultMap="selectPathInfoMap">
+        SELECT apprname, apprtype, apprreqseq
+        FROM sbms_user.bms_dct_apprreq_path
+        WHERE apprreqid = (
+            SELECT apprreqid
+            FROM sbms_user.bms_dct_apprreq
+            WHERE apprreqid IN (
+                SELECT apprreqid
+                FROM sbms_user.bms_dct_apprreq_destruct
+                WHERE mgmtid = #{mgmtid}
+            )
+              AND reqstatus = '3'
+              AND grantflag = 'Y'
+        )
+        ORDER BY apprreqseq ASC
+    </select>
+
+    <!-- 비밀관리기록부 팝업 > 이관 요청자,확인자 정보 조회 -->
+    <select id="selectTransPathInfo" parameterType="com.anylogic.ssystem.bms.use.model.SelectPathInfoReqVO" resultMap="selectPathInfoMap">
+        SELECT apprname, apprtype, apprreqseq
+        FROM sbms_user.bms_dct_apprreq_path
+        WHERE apprreqid = (
+            SELECT apprreqid
+            FROM sbms_user.bms_dct_apprreq
+            WHERE apprreqid IN (
+                SELECT apprreqid
+                FROM sbms_user.bms_dct_apprreq_trans
+                WHERE mgmtid = #{mgmtid}
+                AND secstatus = 'MGT82'
+            )
+              AND reqstatus = '3'
+              AND grantflag = 'Y'
+        )
+        ORDER BY apprreqseq ASC
+    </select>
+
+    <!-- 비밀관리기록부 팝업 > 존안 요청자,확인자 정보 조회 -->
+    <select id="selectCnsrvPathInfo" parameterType="com.anylogic.ssystem.bms.use.model.SelectPathInfoReqVO" resultMap="selectPathInfoMap">
+        SELECT apprname, apprtype, apprreqseq
+        FROM sbms_user.bms_dct_apprreq_path
+        WHERE apprreqid = (
+            SELECT apprreqid
+            FROM sbms_user.bms_dct_apprreq
+            WHERE apprreqid IN (
+                SELECT apprreqid
+                FROM sbms_user.bms_dct_apprreq_cnsrv
+                WHERE mgmtid = #{mgmtid}
+            )
+              AND reqstatus = '3'
+              AND grantflag = 'Y'
+        )
+        ORDER BY apprreqseq ASC
+    </select>
+
+    <!-- 요청서 진행상태 수정 - 최종결재 완료 -->
+    <update id="updateUseReqViewApp" parameterType="com.anylogic.ssystem.bms.use.model.UpdateUseReqViewAppApproveReqVO">
+        UPDATE sbms.sbms_user.bms_dct_apprreq
+        SET reqstatus = '2', grantflag = #{grantflag}, apprenddt = #{apprenddt}
+        WHERE apprreqid = #{apprreqid}
+    </update>
+
+    <!-- 요청서 진행상태 수정 - 실행, 권한회수, 요청서회수  -->
+    <update id="updateUseReqViewAppStatus" parameterType="com.anylogic.ssystem.bms.use.model.UpdateUseReqViewAppApproveReqVO">
+        update sbms.sbms_user.bms_dct_apprreq
+        set reqstatus = #{reqstatus}
+        where apprreqid = #{apprreqid}
+    </update>
+
+    <!--  비밀관리기록부 상태값 수정  -->
+    <update id="updateUseReqViewAppMgmtRegiSecstatus" parameterType="com.anylogic.ssystem.bms.use.model.UpdateUseReqViewAppApproveReqVO">
+        update sbms.sbms_user.bms_dct_mgmt_regi
+        set secstatus = #{secstatus}
+        where mgmtid = #{mgmtid}
+    </update>
+
+    <!-- 인쇄실행 팝업 > 인쇄한 부수 체크 -->
+    <select id="checkPrtCnt" parameterType="com.anylogic.ssystem.bms.use.model.UpdatePrtCntReqVO" resultMap="checkPrtCntMap">
+        SELECT prtcnt
+        FROM sbms.sbms_user.bms_dct_apprreq_prt_fle
+        WHERE apprreqid = #{apprreqid} AND mgmtid = #{mgmtid} AND gubun = #{gubun} AND fleorder = #{fleorder}
+    </select>
+
+    <!-- 인쇄실행 팝업 > 인쇄부수 수정 -->
+    <update id="updatePrtCnt" parameterType="com.anylogic.ssystem.bms.use.model.UpdatePrtCntReqVO">
+        UPDATE sbms.sbms_user.bms_dct_apprreq_prt_fle
+        SET prtcnt = prtcnt+1
+        WHERE apprreqid = #{apprreqid} AND mgmtid = #{mgmtid} AND gubun = #{gubun} AND fleorder = #{fleorder}
+    </update>
+
+    <!-- 인쇄/파쇄 실행완료 -->
+    <update id="updateApprreqDestructReserve" parameterType="com.anylogic.ssystem.bms.use.model.UpdateUseReqPrintApproveReqVO">
+        UPDATE sbms.sbms_user.bms_dct_apprreq
+        SET destructreserve = #{destructreserve}
+        WHERE apprreqid = #{apprreqid}
+    </update>
+
+    <!--  인쇄실행완료시 실제 인쇄부수,날짜 수정 -->
+    <update id="updateUseExecutePrint" parameterType="com.anylogic.ssystem.bms.use.model.UpdateUseReqPrintApproveReqVO">
+        UPDATE sbms.sbms_user.bms_dct_apprreq_prt
+        SET prtcnt = CAST(#{prtcnt} AS numeric)
+          ,prtdt = #{prtdt}
+        WHERE apprreqid = #{apprreqid}
+          AND mgmtid = #{mgmtid}
+    </update>
+
+    <!-- 파쇄실행완료시 실제 파쇄부수,날짜 수정 -->
+    <update id="updateUseExecutePrintDestruct" parameterType="com.anylogic.ssystem.bms.use.model.UpdateUseReqPrintApproveReqVO">
+        UPDATE sbms.sbms_user.bms_dct_apprreq_prt
+        SET destructcnt = CAST(#{destructcnt} AS numeric)
+           ,destructdt = #{destructdt}
+        WHERE apprreqid = #{apprreqid}
+        AND mgmtid = #{mgmtid}
+    </update>
+
+    <!-- 재분류 실행 시 비밀관리기록부 새로 등록 -->
+    <insert id="updateUseReqViewAppReclassCompleteRegiNew" parameterType="com.anylogic.ssystem.bms.use.model.UpdateUseReqViewAppApproveReqVO">
+        insert into sbms.sbms_user.bms_dct_mgmt_regi
+        (
+            mgmtid,
+            mgmtno,
+            docid, seclevel, mgmtseq,
+            regirecvyear, regirecvgubun, regirecvdt, regirecvsendid, regirecvsendname,
+            regirecvtype, secttl, sectype, attchcnt, copyno,
+            notiprotterm, notiprsrvterm, deptid, deptname, readrangetype,
+            secstatus, authorid, authorname, authordutyname, authorposid,
+            authorgrdid, reclassdt, reclasscont, reclassbasis, reclassmgtno,
+            reclassmgmtid, reclasslevel, transdt, transbasis, destructdt,
+            destructbasis, cnsrvflag, cnsrvdt, cnsrvbasis, custdyplace,
+            rfidtagflag, delflag, rgstid, rgstname, rgstdt,
+            updtid, updtname, updtdt, legacymgmtno, note,
+            legacydocno, indt, sectypeetc, realtitle, cnsrvterm,
+            aggregatemgmtid, aggregatedt, destructconfirm, destructconfirmdt, transwaitdt
+        )
+        select
+            'MGT' || sbms.sbms_user.sys_guid() as mgmtid,
+            CONCAT(
+                    CASE
+                        WHEN b.grantseclevel = '1' THEN 'I'
+                        WHEN b.grantseclevel = '2' THEN 'II'
+                        WHEN b.grantseclevel = '3' THEN 'III'
+                        WHEN b.grantseclevel = '5' THEN '일반'
+                        ELSE ''
+                        END,
+                    '-',
+                    EXTRACT(YEAR FROM CURRENT_DATE),
+                    '-',
+                    nextval('sbms.sbms_user.actseq')
+                ) as mgmtno,
+            a.docid, b.grantseclevel as seclevel, a.mgmtseq,
+            a.regirecvyear, a.regirecvgubun, a.regirecvdt, a.regirecvsendid, a.regirecvsendname,
+            a.regirecvtype, a.secttl, a.sectype, a.attchcnt, a.copyno,
+            substr(b.grantnotiprotterm,1,8) as notiprotterm, b.grantnotiprsrvterm as notiprsrvterm, a.deptid, a.deptname, a.readrangetype,
+            'MGT00' as secstatus, a.authorid, a.authorname, a.authordutyname, a.authorposid,
+            a.authorgrdid, a.reclassdt, a.reclasscont, a.reclassbasis, a.mgmtno as reclassmgtno,
+            a.mgmtid as reclassmgmtid, a.reclasslevel, a.transdt, a.transbasis, a.destructdt,
+            a.destructbasis, a.cnsrvflag, a.cnsrvdt, a.cnsrvbasis, a.custdyplace,
+            a.rfidtagflag, '' as delflag, c.reqid as rgstid, c.reqname as rgstname, TO_CHAR(CURRENT_TIMESTAMP, 'YYYYMMDDHH24MISS') as rgstdt,
+            '' as updtid, '' as updtname, '' as updtdt, '' as legacymgmtno, '' as note,
+            '' as legacydocno, a.indt, a.sectypeetc, a.realtitle, a.cnsrvterm,
+            a.aggregatemgmtid, a.aggregatedt, a.destructconfirm, a.destructconfirmdt, a.transwaitdt
+        from sbms.sbms_user.bms_dct_mgmt_regi a
+                 left outer join sbms.sbms_user.bms_dct_apprreq_reclass b on a.mgmtid = b.mgmtid
+                 left outer join sbms.sbms_user.bms_dct_apprreq c on b.apprreqid = c.apprreqid
+        where b.apprreqid = #{apprreqid}
+    </insert>
+
+    <!--  재분류 실행 시 기존 비밀관리기록부에 변경내역 수정 -->
+    <update id="updateUseReqViewAppReclassCompleteRegiDel" parameterType="com.anylogic.ssystem.bms.use.model.UpdateUseReqViewAppApproveReqVO">
+        UPDATE sbms.sbms_user.bms_dct_mgmt_regi AS regi
+        SET
+            reclassdt = TO_CHAR(CURRENT_TIMESTAMP, 'YYYYMMDD'),
+            reclassbasis = req.reqcontents,
+            delflag = 'Y',
+            secstatus = 'MGT22',
+            reclasslevel = reclass.grantseclevel,
+            reclasscont = reclass.grantseclevel
+        FROM sbms.sbms_user.bms_dct_apprreq AS req
+        JOIN sbms.sbms_user.bms_dct_apprreq_reclass AS reclass
+                ON req.apprreqid = reclass.apprreqid
+        WHERE regi.mgmtid IN (
+            SELECT mgmtid
+            FROM sbms.sbms_user.bms_dct_apprreq_reclass
+            WHERE apprreqid = #{apprreqid}
+        ) AND req.apprreqid = #{apprreqid}
+    </update>
+
+    <!-- 재분류 실행 시 비밀속성부 수정 -->
+    <update id="updateUseReqViewAppReclassCompleteAttr" parameterType="com.anylogic.ssystem.bms.use.model.UpdateUseReqViewAppApproveReqVO">
+        UPDATE sbms.sbms_user.bms_dct_attr AS attr
+        SET
+            seclevel = reclass.grantseclevel,
+            orgnprotdt = CASE WHEN POSITION('원' IN attr.copyno) > 0 THEN substr(reclass.grantnotiprotterm, 1, 8) ELSE orgnprotdt END,
+            orgnreclass = CASE WHEN POSITION('원' IN attr.copyno) > 0 THEN reclass.grantnotiact ELSE orgnreclass END,
+            copyprotdt = CASE WHEN POSITION('원' IN attr.copyno) = 0 THEN substr(reclass.grantnotiprotterm, 1, 8) ELSE copyprotdt END,
+            copyreclass = CASE WHEN POSITION('원' IN attr.copyno) = 0 THEN reclass.grantnotiact ELSE copyreclass END,
+            prsrvterm = reclass.grantnotiprsrvterm,
+            mgmtno = regi.mgmtno
+        FROM sbms.sbms_user.bms_dct_apprreq_reclass AS reclass
+        CROSS JOIN (
+            SELECT mgmtno
+            FROM sbms.sbms_user.bms_dct_mgmt_regi
+            WHERE docid = #{docid}
+            ORDER BY rgstdt DESC
+            LIMIT 1
+        ) AS regi
+        WHERE reclass.apprreqid = #{apprreqid}
+          AND reclass.mgmtid = #{mgmtid}
+          AND attr.docid = #{docid}
+    </update>
+
+    <!-- 파기 실행완료 시 기존 비밀관리기록부에 변경내역 수정 -->
+    <update id="updateUseReqViewAppDestructRegi" parameterType="com.anylogic.ssystem.bms.use.model.UpdateUseReqViewAppApproveReqVO">
+        UPDATE sbms.sbms_user.bms_dct_mgmt_regi
+        SET
+            destructdt    = TO_CHAR(CURRENT_TIMESTAMP, 'YYYYMMDDHH24MISS')
+          , destructbasis = (
+                SELECT reqcontents
+                FROM sbms.sbms_user.bms_dct_apprreq
+                WHERE apprreqid = #{apprreqid}
+                    )
+          , delflag       = 'Y'
+          , secstatus     = 'MGT42'
+        WHERE mgmtid IN (
+            SELECT mgmtid
+            FROM sbms.sbms_user.bms_dct_apprreq_destruct
+            WHERE apprreqid = #{apprreqid}
+            )
+    </update>
+
+    <!-- 존안 실행완료 시 기존 비밀관리기록부에 변경내역 수정 -->
+    <update id="updateUseReqViewAppCnsrvRegi" parameterType="com.anylogic.ssystem.bms.use.model.UpdateUseReqViewAppApproveReqVO">
+        UPDATE sbms.sbms_user.bms_dct_mgmt_regi
+        SET
+            cnsrvdt    = TO_CHAR(CURRENT_TIMESTAMP, 'YYYYMMDDHH24MISS')
+          , cnsrvbasis = (
+                SELECT reqcontents
+                FROM sbms.sbms_user.bms_dct_apprreq
+                WHERE apprreqid = #{apprreqid}
+            )
+          , cnsrvflag       = 'Y'
+          , secstatus     = 'MGT32'
+        WHERE mgmtid IN (
+            SELECT mgmtid
+            FROM sbms.sbms_user.bms_dct_apprreq_cnsrv
+            WHERE apprreqid = #{apprreqid}
+        )
+    </update>
+
+    <!-- 내부이관 실행완료 시 기존 비밀관리기록부에 변경내역 수정 -->
+    <update id="updateUseReqViewAppTransRegi" parameterType="com.anylogic.ssystem.bms.use.model.UpdateUseReqViewAppApproveReqVO">
+        UPDATE sbms.sbms_user.bms_dct_mgmt_regi
+        SET
+            transdt    = TO_CHAR(CURRENT_TIMESTAMP, 'YYYYMMDDHH24MISS')
+          , transbasis = (
+            SELECT reqcontents
+            FROM sbms.sbms_user.bms_dct_apprreq
+            WHERE apprreqid = #{apprreqid}
+        )
+          , delflag       = 'Y'
+          , secstatus     = 'MGT82'
+        WHERE mgmtid IN (
+            SELECT mgmtid
+            FROM sbms.sbms_user.bms_dct_apprreq_trans
+            WHERE apprreqid = #{apprreqid}
+        )
+    </update>
+
+    <!-- 이관연기실행, 내부이관실행 시 이관요청 테이블 상태 수정 -->
+    <update id="updateAppTransSecstatus" parameterType="java.util.Map">
+        UPDATE sbms.sbms_user.bms_dct_apprreq_trans
+        SET
+            secstatus = #{secstatus}
+        WHERE apprreqid = #{apprreqid}
+          AND mgmtid = #{mgmtid}
+    </update>
+
+    <!-- 내부이관 실행 시 비밀문서테이블 이관플래그 수정 -->
+    <update id="updateUseReqViewAppRdocTransFlag" parameterType="com.anylogic.ssystem.bms.use.model.UpdateUseReqViewAppApproveReqVO">
+        UPDATE sbms.sbms_user.bms_dct_rdoc
+        SET transflag = #{transflag}
+        WHERE DOCID in (
+            SELECT docid  FROM sbms.sbms_user.bms_dct_mgmt_regi
+            WHERE mgmtid  = #{mgmtid}
+        )
+    </update>
+
+    <!-- (비밀문서사용처리 > 기안한 요청서 > 요청서회수/권한회수된 요청서 삭제) & (재사용/인쇄/반출 실행 시 열람권한이 없다면 요청서 삭제) -->
+    <!-- 요청서 삭제 -->
+    <delete id="deleteUseApprreq" parameterType="java.util.Map">
+        DELETE FROM sbms.sbms_user.bms_dct_apprreq
+        WHERE apprreqid = #{apprreqid}
+    </delete>
+    <!-- 요청서 경로 삭제 -->
+    <delete id="deleteUseApprreqPath" parameterType="java.util.Map">
+        DELETE FROM sbms.sbms_user.bms_dct_apprreq_path
+        WHERE apprreqid = #{apprreqid}
+    </delete>
+    <!-- 권한 삭제 -->
+    <delete id="deleteUseAuthCard" parameterType="java.util.Map">
+        DELETE FROM sbms.sbms_user.bms_dct_auth_card
+        WHERE apprreqid = #{apprreqid}
+    </delete>
+    <!-- 열람 요청서 삭제 -->
+    <delete id="deleteUseApprreqRead" parameterType="java.util.Map">
+        DELETE FROM sbms.sbms_user.bms_dct_apprreq_read
+        WHERE apprreqid = #{apprreqid}
+    </delete>
+    <!-- 재사용 요청서 삭제 -->
+    <delete id="deleteUseApprreqReuse" parameterType="java.util.Map">
+        DELETE FROM sbms.sbms_user.bms_dct_apprreq_reuse
+        WHERE apprreqid = #{apprreqid}
+    </delete>
+    <!-- 인쇄 요청서 파일 삭제 -->
+    <delete id="deleteUseApprreqPrintFle" parameterType="java.util.Map">
+        DELETE FROM sbms.sbms_user.bms_dct_apprreq_prt_fle
+        WHERE apprreqid = #{apprreqid}
+    </delete>
+    <!-- 인쇄 요청서 삭제 -->
+    <delete id="deleteUseApprreqPrint" parameterType="java.util.Map">
+        DELETE FROM sbms.sbms_user.bms_dct_apprreq_prt
+        WHERE apprreqid = #{apprreqid}
+    </delete>
+    <!-- 반출 요청서 파일 삭제 -->
+    <delete id="deleteUseApprreqLendFle" parameterType="java.util.Map">
+        DELETE FROM sbms.sbms_user.bms_dct_apprreq_lend_fle
+        WHERE apprreqid = #{apprreqid}
+    </delete>
+    <!-- 반출 요청서 삭제 -->
+    <delete id="deleteUseApprreqLend" parameterType="java.util.Map">
+        DELETE FROM sbms.sbms_user.bms_dct_apprreq_lend
+        WHERE apprreqid = #{apprreqid}
+    </delete>
+    <!-- 재분류 요청서 삭제 -->
+    <delete id="deleteUseApprreqReclass" parameterType="java.util.Map">
+        DELETE FROM sbms.sbms_user.bms_dct_apprreq_reclass
+        WHERE apprreqid = #{apprreqid}
+    </delete>
+    <!-- 파기 요청서 삭제 -->
+    <delete id="deleteUseApprreqDestruct" parameterType="java.util.Map">
+        DELETE FROM sbms.sbms_user.bms_dct_apprreq_destruct
+        WHERE apprreqid = #{apprreqid}
+    </delete>
+    <!-- 존안 요청서 삭제 -->
+    <delete id="deleteUseApprreqCnsrv" parameterType="java.util.Map">
+        DELETE FROM sbms.sbms_user.bms_dct_apprreq_cnsrv
+        WHERE apprreqid = #{apprreqid}
+    </delete>
+    <!-- 이관대기/이관연기/내부이관 요청서 삭제 -->
+    <delete id="deleteUseApprreqTrans" parameterType="java.util.Map">
+        DELETE FROM sbms.sbms_user.bms_dct_apprreq_trans
+        WHERE apprreqid = #{apprreqid}
+    </delete>
+
+</mapper>

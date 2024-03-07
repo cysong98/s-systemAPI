@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.anylogic.ssystem.bms.use.mapper.BmsDctApprreqCnsrvMapper">
+
+    <!-- 존안 요청내용 등록 -->
+    <insert id="insertComingCnsrvApproveBIA" parameterType="com.anylogic.ssystem.bms.use.model.InsertComingCnsrvApproveBIAReqVO">
+        INSERT INTO
+        sbms.sbms_user.bms_dct_apprreq_cnsrv(
+            <trim suffixOverrides=",">
+            <if test="apprreqid != null and apprreqid !=''">
+                apprreqid,
+            </if>
+            <if test="mgmtid != null and mgmtid !=''">
+                mgmtid,
+            </if>
+            <if test="reqcnsrvdt != null and reqcnsrvdt !=''">
+                reqcnsrvdt,
+            </if>
+            <if test="grantcnsrvdt != null and grantcnsrvdt !=''">
+                grantcnsrvdt,
+            </if>
+            <if test="grantflag != null and grantflag !=''">
+                grantflag,
+            </if>
+            </trim>
+        )
+        VALUES(
+            <trim suffixOverrides=",">
+            <if test="apprreqid != null and apprreqid !=''">
+                #{apprreqid},
+            </if>
+            <if test="mgmtid != null and mgmtid !=''">
+                #{mgmtid},
+            </if>
+            <if test="reqcnsrvdt != null and reqcnsrvdt !=''">
+                #{reqcnsrvdt},
+            </if>
+            <if test="grantcnsrvdt != null and grantcnsrvdt !=''">
+                #{grantcnsrvdt},
+            </if>
+            <if test="grantflag != null and grantflag !=''">
+                #{grantflag},
+            </if>
+            </trim>
+        )
+    </insert>
+
+    <!-- 각 요청서 승인/반려 처리 - 승인한 존안정보 수정 -->
+    <update id="updateUseReqMapCnsrv" parameterType="java.util.Map">
+        UPDATE sbms.sbms_user.bms_dct_apprreq_cnsrv
+        set grantcnsrvdt = REPLACE(#{grantcnsrvdt},'-','') || '235959'
+          ,grantflag = #{grantflag}
+        WHERE apprreqid = #{apprreqid}
+          AND mgmtid = #{mgmtid}
+    </update>
+
+    <!-- 각 요청서 상세화면 조회 - 존안할 문서 정보 -->
+    <select id="selectUseReqCnsrvMapList" parameterType="java.util.Map" resultType="java.util.HashMap">
+        SELECT
+            b.apprreqid as "apprreqid"
+             , a.mgmtid as "mgmtid"
+             , a.mgmtno as "mgmtno"
+             , a.secttl as "secttl"
+             , a.copyno as "copyno"
+             , TO_CHAR(TO_TIMESTAMP(substr(b.reqcnsrvdt,1,8), 'YYYYMMDDHH24MISS'), 'YYYY.MM.DD') as "reqmaxcnsrvdate"
+             , TO_CHAR(TO_TIMESTAMP(COALESCE(NULLIF(TRIM(b.grantcnsrvdt),''),b.reqcnsrvdt), 'YYYYMMDDHH24MISS'), 'YYYY-MM-DD') as "grantcnsrvdt"
+             , a.deptname as "deptname"
+             , a.authorid as "authorid"
+             , a.authorname as "authorname"
+             , a.docid as "docid"
+             , TO_CHAR(TO_TIMESTAMP(substr(a.indt,1,8), 'YYYYMMDDHH24MISS'), 'YYYY.MM.DD') as "indt"
+             , a.regirecvtype as "regirecvtype"
+             , a.regirecvyear as "regirecvyear"
+             , a.notiprsrvterm as "notiprsrvterm"
+        FROM sbms.sbms_user.bms_dct_mgmt_regi a left outer join sbms.sbms_user.bms_dct_apprreq_cnsrv b on (a.mgmtid = b.mgmtid)
+        WHERE b.apprreqid = #{apprreqid}
+    </select>
+
+</mapper>

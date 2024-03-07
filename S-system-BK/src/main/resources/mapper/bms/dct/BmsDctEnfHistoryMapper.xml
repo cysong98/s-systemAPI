@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.anylogic.ssystem.bms.dct.mapper.BmsDctEnfHistoryMapper">
+
+    <!-- 발송 처리 시 시행비밀 이력 등록 -->
+    <insert id="insertEnforceHistory" parameterType="com.anylogic.ssystem.bms.dct.model.InsertEnforceHistoryReqVO">
+        INSERT INTO
+        sbms.sbms_user.bms_dct_enf_history(
+            <trim suffixOverrides=",">
+            <if test="enfdocid != null and enfdocid !=''">
+                enfdocid,
+            </if>
+            <if test="actseq != null and actseq !=''">
+                actseq,
+            </if>
+            <if test="acterid != null and acterid !=''">
+                acterid,
+            </if>
+            <if test="actername != null and actername !=''">
+                actername,
+            </if>
+            <if test="acterdutyname != null and acterdutyname !=''">
+                acterdutyname,
+            </if>
+            <if test="acterpositionid != null and acterpositionid !=''">
+                acterpositionid,
+            </if>
+            <if test="actergradeid != null and actergradeid !=''">
+                actergradeid,
+            </if>
+            <if test="acterdeptid != null and acterdeptid !=''">
+                acterdeptid,
+            </if>
+            <if test="acterdeptname != null and acterdeptname !=''">
+                acterdeptname,
+            </if>
+            <if test="acterdeptnamedesc != null and acterdeptnamedesc !=''">
+                acterdeptnamedesc,
+            </if>
+            <if test="actgubun != null and actgubun !=''">
+                actgubun,
+            </if>
+            <if test="actdt != null and actdt !=''">
+                actdt,
+            </if>
+            <if test="actopinion != null and actopinion !=''">
+                actopinion,
+            </if>
+            <if test="recid != null and recid !=''">
+                recid,
+            </if>
+            <if test="recname != null and recname !=''">
+                recname,
+            </if>
+            <if test="recdutyname != null and recdutyname !=''">
+                recdutyname,
+            </if>
+            <if test="recpositionid != null and recpositionid !=''">
+                recpositionid,
+            </if>
+            <if test="recgradeid != null and recgradeid !=''">
+                recgradeid,
+            </if>
+            <if test="recdeptid != null and recdeptid !=''">
+                recdeptid,
+            </if>
+            <if test="recdeptname != null and recdeptname !=''">
+                recdeptname,
+            </if>
+            <if test="recdeptnamedesc != null and recdeptnamedesc !=''">
+                recdeptnamedesc,
+            </if>
+            <if test="pathhisid != null and pathhisid !=''">
+                pathhisid,
+            </if>
+            <if test="electsignid != null and electsignid !=''">
+                electsignid,
+            </if>
+            </trim>
+        )
+        VALUES(
+            <trim suffixOverrides=",">
+            <if test="enfdocid != null and enfdocid !=''">
+                #{enfdocid},
+            </if>
+            <if test="actseq != null and actseq !=''">
+                #{actseq},
+            </if>
+            <if test="acterid != null and acterid !=''">
+                #{acterid},
+            </if>
+            <if test="actername != null and actername !=''">
+                #{actername},
+            </if>
+            <if test="acterdutyname != null and acterdutyname !=''">
+                #{acterdutyname},
+            </if>
+            <if test="acterpositionid != null and acterpositionid !=''">
+                #{acterpositionid},
+            </if>
+            <if test="actergradeid != null and actergradeid !=''">
+                #{actergradeid},
+            </if>
+            <if test="acterdeptid != null and acterdeptid !=''">
+                #{acterdeptid},
+            </if>
+            <if test="acterdeptname != null and acterdeptname !=''">
+                #{acterdeptname},
+            </if>
+            <if test="acterdeptnamedesc != null and acterdeptnamedesc !=''">
+                #{acterdeptnamedesc},
+            </if>
+            <if test="actgubun != null and actgubun !=''">
+                #{actgubun},
+            </if>
+            <if test="actdt != null and actdt !=''">
+                #{actdt},
+            </if>
+            <if test="actopinion != null and actopinion !=''">
+                #{actopinion},
+            </if>
+            <if test="recid != null and recid !=''">
+                #{recid},
+            </if>
+            <if test="recname != null and recname !=''">
+                #{recname},
+            </if>
+            <if test="recdutyname != null and recdutyname !=''">
+                #{recdutyname},
+            </if>
+            <if test="recpositionid != null and recpositionid !=''">
+                #{recpositionid},
+            </if>
+            <if test="recgradeid != null and recgradeid !=''">
+                #{recgradeid},
+            </if>
+            <if test="recdeptid != null and recdeptid !=''">
+                #{recdeptid},
+            </if>
+            <if test="recdeptname != null and recdeptname !=''">
+                #{recdeptname},
+            </if>
+            <if test="recdeptnamedesc != null and recdeptnamedesc !=''">
+                #{recdeptnamedesc},
+            </if>
+            <if test="pathhisid != null and pathhisid !=''">
+                #{pathhisid},
+            </if>
+            <if test="electsignid != null and electsignid !=''">
+                #{electsignid},
+            </if>
+            </trim>
+        )
+    </insert>
+
+    <!-- 접수 처리 시 시행비밀 이력 등록 -->
+    <insert id="documentProcBIA" parameterType="com.anylogic.ssystem.bms.dct.model.DocumentProcBIAReqVO">
+        INSERT INTO
+        sbms.sbms_user.bms_dct_enf_history(
+        <trim suffixOverrides=",">
+            <if test="enfdocid != null and enfdocid !=''">
+                enfdocid,
+            </if>
+            <if test="actseq != null and actseq !=''">
+                actseq,
+            </if>
+            <if test="acterid != null and acterid !=''">
+                acterid,
+            </if>
+            <if test="actername != null and actername !=''">
+                actername,
+            </if>
+            <if test="acterdutyname != null and acterdutyname !=''">
+                acterdutyname,
+            </if>
+            <if test="acterpositionid != null and acterpositionid !=''">
+                acterpositionid,
+            </if>
+            <if test="actergradeid != null and actergradeid !=''">
+                actergradeid,
+            </if>
+            <if test="acterdeptid != null and acterdeptid !=''">
+                acterdeptid,
+            </if>
+            <if test="acterdeptname != null and acterdeptname !=''">
+                acterdeptname,
+            </if>
+            <if test="acterdeptnamedesc != null and acterdeptnamedesc !=''">
+                acterdeptnamedesc,
+            </if>
+            <if test="actgubun != null and actgubun !=''">
+                actgubun,
+            </if>
+            <if test="actdt != null and actdt !=''">
+                actdt,
+            </if>
+            <if test="actopinion != null and actopinion !=''">
+                actopinion,
+            </if>
+            <if test="recid != null and recid !=''">
+                recid,
+            </if>
+            <if test="recname != null and recname !=''">
+                recname,
+            </if>
+            <if test="recdutyname != null and recdutyname !=''">
+                recdutyname,
+            </if>
+            <if test="recpositionid != null and recpositionid !=''">
+                recpositionid,
+            </if>
+            <if test="recgradeid != null and recgradeid !=''">
+                recgradeid,
+            </if>
+            <if test="recdeptid != null and recdeptid !=''">
+                recdeptid,
+            </if>
+            <if test="recdeptname != null and recdeptname !=''">
+                recdeptname,
+            </if>
+            <if test="recdeptnamedesc != null and recdeptnamedesc !=''">
+                recdeptnamedesc,
+            </if>
+            <if test="pathhisid != null and pathhisid !=''">
+                pathhisid,
+            </if>
+            <if test="electsignid != null and electsignid !=''">
+                electsignid,
+            </if>
+        </trim>
+        )
+        VALUES(
+        <trim suffixOverrides=",">
+            <if test="enfdocid != null and enfdocid !=''">
+                #{enfdocid},
+            </if>
+            <if test="actseq != null and actseq !=''">
+                #{actseq}::double precision,
+            </if>
+            <if test="acterid != null and acterid !=''">
+                #{acterid},
+            </if>
+            <if test="actername != null and actername !=''">
+                #{actername},
+            </if>
+            <if test="acterdutyname != null and acterdutyname !=''">
+                #{acterdutyname},
+            </if>
+            <if test="acterpositionid != null and acterpositionid !=''">
+                #{acterpositionid},
+            </if>
+            <if test="actergradeid != null and actergradeid !=''">
+                #{actergradeid},
+            </if>
+            <if test="acterdeptid != null and acterdeptid !=''">
+                #{acterdeptid},
+            </if>
+            <if test="acterdeptname != null and acterdeptname !=''">
+                #{acterdeptname},
+            </if>
+            <if test="acterdeptnamedesc != null and acterdeptnamedesc !=''">
+                #{acterdeptnamedesc},
+            </if>
+            <if test="actgubun != null and actgubun !=''">
+                #{actgubun},
+            </if>
+            <if test="actdt != null and actdt !=''">
+                #{actdt},
+            </if>
+            <if test="actopinion != null and actopinion !=''">
+                #{actopinion},
+            </if>
+            <if test="recid != null and recid !=''">
+                #{recid},
+            </if>
+            <if test="recname != null and recname !=''">
+                #{recname},
+            </if>
+            <if test="recdutyname != null and recdutyname !=''">
+                #{recdutyname},
+            </if>
+            <if test="recpositionid != null and recpositionid !=''">
+                #{recpositionid},
+            </if>
+            <if test="recgradeid != null and recgradeid !=''">
+                #{recgradeid},
+            </if>
+            <if test="recdeptid != null and recdeptid !=''">
+                #{recdeptid},
+            </if>
+            <if test="recdeptname != null and recdeptname !=''">
+                #{recdeptname},
+            </if>
+            <if test="recdeptnamedesc != null and recdeptnamedesc !=''">
+                #{recdeptnamedesc},
+            </if>
+            <if test="pathhisid != null and pathhisid !=''">
+                #{pathhisid},
+            </if>
+            <if test="electsignid != null and electsignid !=''">
+                #{electsignid},
+            </if>
+        </trim>
+        )
+    </insert>
+
+</mapper>

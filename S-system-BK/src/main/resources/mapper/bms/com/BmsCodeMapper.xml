@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.anylogic.ssystem.bms.com.mapper.BmsCodeMapper">
+
+    <resultMap id="selectCodeListMap" type="com.anylogic.ssystem.bms.com.model.SelectCodeListResVO">
+        <id column="codeid" property="codeid" />                      <!-- 코드 ID -->
+        <id column="tcodeid" property="tcodeid" />                    <!-- 코드분류 ID -->
+        <result column="codename" property="codename" />              <!-- 코드이름 -->
+        <result column="usedflag" property="usedflag" />              <!-- 사용 FLAG -->
+        <result column="description" property="description" />        <!-- 설명 -->
+        <result column="inid" property="inid" />                      <!-- 등록자 ID -->
+        <result column="indt" property="indt" />                      <!-- 등록일 -->
+        <result column="upid" property="upid" />                      <!-- 수정자 ID -->
+        <result column="updt" property="updt" />                      <!-- 수정일 -->
+        <result column="modifyflag" property="modifyflag" />          <!-- 변경 FLAG -->
+        <result column="displayflag" property="displayflag" />        <!-- 화면표시 FLAG -->
+        <result column="ackflag" property="ackflag" />                <!-- 확인 FLAG -->
+        <result column="expackflag" property="expackflag" />          <!-- 추가확인 FLAG -->
+    </resultMap>
+
+    <resultMap id="getCodeDetailMap" type="com.anylogic.ssystem.bms.com.model.GetCodeDetailResVO">
+        <id column="codeid" property="codeid" />                      <!-- 코드 ID -->
+        <id column="tcodeid" property="tcodeid" />                    <!-- 코드분류 ID -->
+        <result column="codename" property="codename" />              <!-- 코드이름 -->
+        <result column="usedflag" property="usedflag" />              <!-- 사용 FLAG -->
+        <result column="description" property="description" />        <!-- 설명 -->
+        <result column="inid" property="inid" />                      <!-- 등록자 ID -->
+        <result column="indt" property="indt" />                      <!-- 등록일 -->
+        <result column="upid" property="upid" />                      <!-- 수정자 ID -->
+        <result column="updt" property="updt" />                      <!-- 수정일 -->
+        <result column="modifyflag" property="modifyflag" />          <!-- 변경 FLAG -->
+        <result column="displayflag" property="displayflag" />        <!-- 화면표시 FLAG -->
+        <result column="ackflag" property="ackflag" />                <!-- 확인 FLAG -->
+        <result column="expackflag" property="expackflag" />          <!-- 추가확인 FLAG -->
+    </resultMap>
+
+
+    <!-- 비전자비밀접수 > 보관함/단번호 조회 -->
+    <select id="selectOfflineCabinetInfo" parameterType="com.anylogic.ssystem.bms.com.model.SelectReceiveMarkCodeListReqVO" resultMap="selectCodeListMap">
+        SELECT
+        codeid as "codeid"
+        , codename as "codename"
+        , tcodeid as "tcodeid"
+        , description as "description"
+        FROM  sbms.sbms_user.bms_code
+        WHERE tcodeid IN ('OFFCAB', 'OFFDAN')
+        <if test="tcodeid != null and tcodeid !=''">
+            and tcodeid = #{tcodeid}
+        </if>
+        ORDER BY codeid ASC
+    </select>
+
+    <!-- 수신지정팝업 > 외부 > 수신자기호 조회 -->
+    <select id="selectReceiveMarkCodeList" parameterType="com.anylogic.ssystem.bms.com.model.SelectReceiveMarkCodeListReqVO" resultMap="selectCodeListMap">
+        SELECT
+        codeid as "codeid"
+        , codename as "codename"
+        , tcodeid as "tcodeid"
+        , usedflag as "usedflag"
+        , description as "description"
+        FROM  sbms.sbms_user.bms_code
+        WHERE tcodeid IN ('SYM00', 'SYM01', 'SYM02', 'SYM03', 'SYM04')
+        <if test="tcodeid != null and tcodeid !=''">
+            and tcodeid = #{tcodeid}
+        </if>
+        <if test="description != null and description !=''">
+            and description like CONCAT('%', #{description}, '%')
+        </if>
+        ORDER BY codeid ASC
+    </select>
+
+    <!-- 시스템관리 > 코드관리 > 코드 목록 조회 -->
+    <select id="selectCodeList" parameterType="com.anylogic.ssystem.bms.com.model.SelectCodeListReqVO" resultMap="selectCodeListMap">
+        SELECT
+            codeid as "codeid" 
+            , codename as "codename" 
+            , tcodeid as "tcodeid" 
+            , usedflag as "usedflag" 
+            , description as "description" 
+            , inid as "inid" 
+            , indt as "indt" 
+            , upid as "upid" 
+            , updt as "updt" 
+            , modifyflag as "modifyflag" 
+            , displayflag as "displayflag" 
+            , ackflag as "ackflag" 
+            , expackflag as "expackflag" 
+        FROM  sbms.sbms_user.bms_code
+        WHERE 1 = 1
+            <if test="codeid != null and codeid !=''">
+                and codeid like CONCAT('%', #{codeid}, '%')
+            </if>
+            <if test="codename != null and codename !=''">
+                and codename like CONCAT('%', #{codename}, '%')
+            </if>
+            <if test="tcodeid != null and tcodeid !=''">
+                and tcodeid = #{tcodeid}
+            </if>
+        ORDER BY codeid ASC
+    </select>
+
+    <!--  시스템관리 > 코드관리 > 코드 삭제 -->
+    <delete id="deleteCode" parameterType="com.anylogic.ssystem.bms.com.model.DeleteCodeReqVO">
+        DELETE FROM sbms.sbms_user.bms_code
+        WHERE 1 = 1
+            <if test="codeid != null and codeid !=''"> 
+                and codeid = #{codeid} 
+            </if>
+    </delete>
+
+    <!--  시스템관리 > 코드관리 > 코드 등록 -->
+    <insert id="insertCode" parameterType="com.anylogic.ssystem.bms.com.model.InsertCodeReqVO">
+        INSERT INTO
+        sbms.sbms_user.bms_code(
+            <trim suffixOverrides=",">
+            <if test="codeid != null and codeid !=''">
+                codeid,
+            </if>
+            <if test="codename != null and codename !=''">
+                codename,
+            </if>
+            <if test="tcodeid != null and tcodeid !=''">
+                tcodeid,
+            </if>
+            <if test="usedflag != null and usedflag !=''">
+                usedflag,
+            </if>
+            <if test="description != null and description !=''">
+                description,
+            </if>
+            <if test="inid != null and inid !=''">
+                inid,
+            </if>
+            <if test="indt != null and indt !=''">
+                indt,
+            </if>
+            <if test="upid != null and upid !=''">
+                upid,
+            </if>
+            <if test="updt != null and updt !=''">
+                updt,
+            </if>
+            <if test="modifyflag != null and modifyflag !=''">
+                modifyflag,
+            </if>
+            <if test="displayflag != null and displayflag !=''">
+                displayflag,
+            </if>
+            <if test="ackflag != null and ackflag !=''">
+                ackflag,
+            </if>
+            <if test="expackflag != null and expackflag !=''">
+                expackflag,
+            </if>
+            </trim>
+        )
+        VALUES(
+            <trim suffixOverrides=",">
+            <if test="codeid != null and codeid !=''">
+                #{codeid},
+            </if>
+            <if test="codename != null and codename !=''">
+                #{codename},
+            </if>
+            <if test="tcodeid != null and tcodeid !=''">
+                #{tcodeid},
+            </if>
+            <if test="usedflag != null and usedflag !=''">
+                #{usedflag},
+            </if>
+            <if test="description != null and description !=''">
+                #{description},
+            </if>
+            <if test="inid != null and inid !=''">
+                #{inid},
+            </if>
+            <if test="indt != null and indt !=''">
+                #{indt},
+            </if>
+            <if test="upid != null and upid !=''">
+                #{upid},
+            </if>
+            <if test="updt != null and updt !=''">
+                #{updt},
+            </if>
+            <if test="modifyflag != null and modifyflag !=''">
+                #{modifyflag},
+            </if>
+            <if test="displayflag != null and displayflag !=''">
+                #{displayflag},
+            </if>
+            <if test="ackflag != null and ackflag !=''">
+                #{ackflag},
+            </if>
+            <if test="expackflag != null and expackflag !=''">
+                #{expackflag},
+            </if>
+            </trim>
+        )
+    </insert>
+
+    <!-- 시스템관리 > 코드관리 > 코드 수정 팝업 > 상세조회 -->
+    <select id="getCodeDetail" parameterType="com.anylogic.ssystem.bms.com.model.GetCodeDetailReqVO" resultMap="getCodeDetailMap">
+        SELECT
+            codeid as "codeid" 
+            , codename as "codename" 
+            , tcodeid as "tcodeid" 
+            , usedflag as "usedflag" 
+            , description as "description" 
+            , inid as "inid" 
+            , indt as "indt" 
+            , upid as "upid" 
+            , updt as "updt" 
+            , modifyflag as "modifyflag" 
+            , displayflag as "displayflag" 
+            , ackflag as "ackflag" 
+            , expackflag as "expackflag" 
+        FROM  sbms.sbms_user.bms_code
+        WHERE 1 = 1
+            <if test="codeid != null and codeid !=''"> 
+                and codeid = #{codeid}
+            </if>
+
+    </select>
+
+    <!--  시스템관리 > 코드관리 > 코드 수정 팝업 > 수정 -->
+    <update id="updateCode" parameterType="com.anylogic.ssystem.bms.com.model.UpdateCodeReqVO">
+        UPDATE sbms.sbms_user.bms_code
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="codename != null">
+                codename = #{codename},
+            </if>
+            <if test="usedflag != null and usedflag !=''">
+                usedflag = #{usedflag},
+            </if>
+            <if test="description != null and description !=''">
+                description = #{description},
+            </if>
+            <if test="inid != null and inid !=''">
+                inid = #{inid},
+            </if>
+            <if test="indt != null and indt !=''">
+                indt = #{indt},
+            </if>
+            <if test="upid != null and upid !=''">
+                upid = #{upid},
+            </if>
+            <if test="updt != null and updt !=''">
+                updt = #{updt},
+            </if>
+            <if test="modifyflag != null and modifyflag !=''">
+                modifyflag = #{modifyflag},
+            </if>
+            <if test="displayflag != null and displayflag !=''">
+                displayflag = #{displayflag},
+            </if>
+            <if test="ackflag != null and ackflag !=''">
+                ackflag = #{ackflag},
+            </if>
+            <if test="expackflag != null and expackflag !=''">
+                expackflag = #{expackflag},
+            </if>
+        </trim>
+        WHERE 1 = 1
+            and codeid = #{codeid}
+            and tcodeid = #{tcodeid}
+    </update>
+
+</mapper>

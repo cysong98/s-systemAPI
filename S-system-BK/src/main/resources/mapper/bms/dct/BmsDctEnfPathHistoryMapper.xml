@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.anylogic.ssystem.bms.dct.mapper.BmsDctEnfPathHistoryMapper">
+
+    <!--  접수 처리 시 시행비밀 경로 이력 등록 -->
+    <insert id="insertEnforcePathHistory" parameterType="com.anylogic.ssystem.bms.dct.model.InsertEnforcePathHistoryReqVO">
+        INSERT INTO
+        sbms.sbms_user.bms_dct_enf_path_history(
+            <trim suffixOverrides=",">
+            <if test="enfdocid != null and enfdocid !=''">
+                enfdocid,
+            </if>
+            <if test="pathhisid != null and pathhisid !=''">
+                pathhisid,
+            </if>
+            <if test="pathhisseq != null and pathhisseq !=''">
+                pathhisseq,
+            </if>
+            <if test="acterid != null and acterid !=''">
+                acterid,
+            </if>
+            <if test="actername != null and actername !=''">
+                actername,
+            </if>
+            <if test="actergubun != null and actergubun !=''">
+                actergubun,
+            </if>
+            <if test="deptid != null and deptid !=''">
+                deptid,
+            </if>
+            <if test="deptname != null and deptname !=''">
+                deptname,
+            </if>
+            <if test="deptnamedesc != null and deptnamedesc !=''">
+                deptnamedesc,
+            </if>
+            <if test="dutyname != null and dutyname !=''">
+                dutyname,
+            </if>
+            <if test="positionid != null and positionid !=''">
+                positionid,
+            </if>
+            <if test="gradeid != null and gradeid !=''">
+                gradeid,
+            </if>
+            <if test="indt != null and indt !=''">
+                indt,
+            </if>
+            </trim>
+        )
+        VALUES(
+            <trim suffixOverrides=",">
+            <if test="enfdocid != null and enfdocid !=''">
+                #{enfdocid},
+            </if>
+            <if test="pathhisid != null and pathhisid !=''">
+                #{pathhisid},
+            </if>
+            <if test="pathhisseq != null and pathhisseq !=''">
+                #{pathhisseq},
+            </if>
+            <if test="acterid != null and acterid !=''">
+                #{acterid},
+            </if>
+            <if test="actername != null and actername !=''">
+                #{actername},
+            </if>
+            <if test="actergubun != null and actergubun !=''">
+                #{actergubun},
+            </if>
+            <if test="deptid != null and deptid !=''">
+                #{deptid},
+            </if>
+            <if test="deptname != null and deptname !=''">
+                #{deptname},
+            </if>
+            <if test="deptnamedesc != null and deptnamedesc !=''">
+                #{deptnamedesc},
+            </if>
+            <if test="dutyname != null and dutyname !=''">
+                #{dutyname},
+            </if>
+            <if test="positionid != null and positionid !=''">
+                #{positionid},
+            </if>
+            <if test="gradeid != null and gradeid !=''">
+                #{gradeid},
+            </if>
+            <if test="indt != null and indt !=''">
+                #{indt},
+            </if>
+            </trim>
+        )
+    </insert>
+
+</mapper>

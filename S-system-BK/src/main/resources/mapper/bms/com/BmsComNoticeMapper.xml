@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.anylogic.ssystem.bms.com.mapper.BmsComNoticeMapper">
+
+    <resultMap id="selectNoticeListMap" type="com.anylogic.ssystem.bms.com.model.SelectNoticeListResVO">
+        <id column="ntcid" property="ntcid" />                        <!-- 공지사항아이디 -->
+        <result column="title" property="title" />                    <!-- 제목 -->
+        <result column="cont" property="cont" />                      <!-- 내용 -->
+        <result column="sdate" property="sdate" />                    <!-- 게시시작일 -->
+        <result column="edate" property="edate" />                    <!-- 게시종료일 -->
+        <result column="deptid" property="deptid" />                  <!-- 부서아이디 -->
+        <result column="deptname" property="deptname" />              <!-- 부서명 -->
+        <result column="selcnt" property="selcnt" />                  <!-- 조회수 -->
+        <result column="repcnt" property="repcnt" />                  <!-- 의견수 -->
+        <result column="inid" property="inid" />                      <!-- 등록자아이디 -->
+        <result column="inname" property="inname" />                  <!-- 등록자명 -->
+        <result column="indt" property="indt" />                      <!-- 등록일시 -->
+        <result column="upid" property="upid" />                      <!-- 수정자아이디 -->
+        <result column="upname" property="upname" />                  <!-- 수정자명 -->
+        <result column="updt" property="updt" />                      <!-- 수정일시 -->
+        <result column="fileyn" property="fileyn" />                  <!-- 첨부파일여부 -->
+        <result column="cnfmyn" property="cnfmyn" />                  <!-- 확인여부 -->
+        <result column="rmk" property="rmk" />                        <!-- 비고 -->
+    </resultMap>
+
+    <resultMap id="getNoticeDetailMap" type="com.anylogic.ssystem.bms.com.model.GetNoticeDetailResVO">
+        <id column="ntcid" property="ntcid" />                        <!-- 공지사항아이디 -->
+        <result column="title" property="title" />                    <!-- 제목 -->
+        <result column="cont" property="cont" />                      <!-- 내용 -->
+        <result column="sdate" property="sdate" />                    <!-- 게시시작일 -->
+        <result column="edate" property="edate" />                    <!-- 게시종료일 -->
+        <result column="deptid" property="deptid" />                  <!-- 부서아이디 -->
+        <result column="deptname" property="deptname" />              <!-- 부서명 -->
+        <result column="selcnt" property="selcnt" />                  <!-- 조회수 -->
+        <result column="repcnt" property="repcnt" />                  <!-- 의견수 -->
+        <result column="inid" property="inid" />                      <!-- 등록자아이디 -->
+        <result column="inname" property="inname" />                  <!-- 등록자명 -->
+        <result column="indt" property="indt" />                      <!-- 등록일시 -->
+        <result column="upid" property="upid" />                      <!-- 수정자아이디 -->
+        <result column="upname" property="upname" />                  <!-- 수정자명 -->
+        <result column="updt" property="updt" />                      <!-- 수정일시 -->
+        <result column="fileyn" property="fileyn" />                  <!-- 첨부파일여부 -->
+        <result column="cnfmyn" property="cnfmyn" />                  <!-- 확인여부 -->
+        <result column="rmk" property="rmk" />                        <!-- 비고 -->
+    </resultMap>
+
+
+    <!-- 게시판관리 > 공지사항 관리 > 공지사항 목록 조회 -->
+    <select id="selectNoticeList" parameterType="com.anylogic.ssystem.bms.com.model.SelectNoticeListReqVO" resultMap="selectNoticeListMap">
+        SELECT
+            ntcid as "ntcid"
+            , title as "title"
+            , cont as "cont"
+            , sdate as "sdate"
+            , edate as "edate"
+            , deptid as "deptid"
+            , deptname as "deptname"
+            , selcnt as "selcnt"
+            , repcnt as "repcnt"
+            , inid as "inid"
+            , inname as "inname"
+            , indt as "indt"
+            , upid as "upid"
+            , upname as "upname"
+            , updt as "updt"
+            , fileyn as "fileyn"
+            , cnfmyn as "cnfmyn"
+            , rmk as "rmk"
+        FROM  sbms.sbms_user.bms_com_notice
+        WHERE 1 = 1
+            <if test="title != null and title !=''">
+                and title like CONCAT('%', #{title}, '%')
+            </if>
+            <if test="inname != null and inname !=''">
+                and inname like CONCAT('%', #{inname}, '%')
+            </if>
+            <if test="startDt != null and startDt !=''">
+                and indt <![CDATA[>=]]> #{startDt}
+            </if>
+            <if test="endDt != null and endDt !=''">
+                and indt <![CDATA[<=]]> #{endDt}
+            </if>
+            <if test="ntcid != null and ntcid !=''">
+                and ntcid = #{ntcid}
+            </if>
+        ORDER BY indt DESC
+    </select>
+
+    <!-- 게시판관리 > 공지사항 관리 > 공지사항 삭제 -->
+    <delete id="deleteNoticeBIA" parameterType="com.anylogic.ssystem.bms.com.model.DeleteNoticeBIAReqVO">
+        DELETE FROM sbms.sbms_user.bms_com_notice
+        WHERE 1 = 1
+            and ntcid = #{ntcid}
+    </delete>
+
+    <!-- 게시판관리 > 공지사항 관리 > 공지사항 상세 조회 -->
+    <select id="getNoticeDetail" parameterType="com.anylogic.ssystem.bms.com.model.GetNoticeDetailReqVO" resultMap="getNoticeDetailMap">
+        SELECT
+            ntcid as "ntcid"
+            , title as "title"
+            , cont as "cont"
+            , sdate as "sdate"
+            , edate as "edate"
+            , deptid as "deptid"
+            , deptname as "deptname"
+            , selcnt as "selcnt"
+            , repcnt as "repcnt"
+            , inid as "inid"
+            , inname as "inname"
+            , indt as "indt"
+            , upid as "upid"
+            , upname as "upname"
+            , updt as "updt"
+            , fileyn as "fileyn"
+            , cnfmyn as "cnfmyn"
+            , rmk as "rmk"
+        FROM  sbms.sbms_user.bms_com_notice
+        WHERE 1 = 1
+            <if test="ntcid != null and ntcid !=''">
+                and ntcid like CONCAT('%', #{ntcid}, '%')
+            </if>
+    </select>
+
+    <!--  게시판관리 > 공지사항 관리 > 공지사항 조회수 증가 -->
+    <update id="addSelCnt" parameterType="com.anylogic.ssystem.bms.com.model.UpdateNoticeBIAReqVO">
+        UPDATE sbms.sbms_user.bms_com_notice
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="selcnt != null and selcnt !=''">
+                selcnt = #{selcnt},
+            </if>
+        </trim>
+        WHERE 1 = 1
+        and ntcid = #{ntcid}
+    </update>
+
+    <!-- 게시판관리 > 공지사항 관리 > 공지사항 등록 -->
+    <insert id="insertNoticeBIA" parameterType="com.anylogic.ssystem.bms.com.model.InsertNoticeBIAReqVO">
+        INSERT INTO
+        sbms.sbms_user.bms_com_notice(
+            <trim suffixOverrides=",">
+            <if test="ntcid != null and ntcid !=''">
+                ntcid,
+            </if>
+            <if test="title != null and title !=''">
+                title,
+            </if>
+            <if test="cont != null and cont !=''">
+                cont,
+            </if>
+            <if test="sdate != null and sdate !=''">
+                sdate,
+            </if>
+            <if test="edate != null and edate !=''">
+                edate,
+            </if>
+            <if test="selcnt != null and selcnt !=''">
+                selcnt,
+            </if>
+            <if test="repcnt != null and repcnt !=''">
+                repcnt,
+            </if>
+            <if test="inid != null and inid !=''">
+                inid,
+            </if>
+            <if test="inname != null and inname !=''">
+                inname,
+            </if>
+            <if test="indt != null and indt !=''">
+                indt,
+            </if>
+            <if test="upid != null and upid !=''">
+                upid,
+            </if>
+            <if test="upname != null and upname !=''">
+                upname,
+            </if>
+            <if test="updt != null and updt !=''">
+                updt,
+            </if>
+            <if test="fileyn != null and fileyn !=''">
+                fileyn,
+            </if>
+            <if test="cnfmyn != null and cnfmyn !=''">
+                cnfmyn,
+            </if>
+            <if test="rmk != null and rmk !=''">
+                rmk,
+            </if>
+            </trim>
+        )
+        VALUES(
+            <trim suffixOverrides=",">
+            <if test="ntcid != null and ntcid !=''">
+                #{ntcid},
+            </if>
+            <if test="title != null and title !=''">
+                #{title},
+            </if>
+            <if test="cont != null and cont !=''">
+                #{cont},
+            </if>
+            <if test="sdate != null and sdate !=''">
+                #{sdate},
+            </if>
+            <if test="edate != null and edate !=''">
+                #{edate},
+            </if>
+            <if test="selcnt != null and selcnt !=''">
+                #{selcnt}::double precision,
+            </if>
+            <if test="repcnt != null and repcnt !=''">
+                #{repcnt}::double precision,
+            </if>
+            <if test="inid != null and inid !=''">
+                #{inid},
+            </if>
+            <if test="inname != null and inname !=''">
+                #{inname},
+            </if>
+            <if test="indt != null and indt !=''">
+                #{indt},
+            </if>
+            <if test="upid != null and upid !=''">
+                #{upid},
+            </if>
+            <if test="upname != null and upname !=''">
+                #{upname},
+            </if>
+            <if test="updt != null and updt !=''">
+                #{updt},
+            </if>
+            <if test="fileyn != null and fileyn !=''">
+                #{fileyn},
+            </if>
+            <if test="cnfmyn != null and cnfmyn !=''">
+                #{cnfmyn},
+            </if>
+            <if test="rmk != null and rmk !=''">
+                #{rmk},
+            </if>
+            </trim>
+        )
+    </insert>
+
+    <!-- 게시판관리 > 공지사항 관리 > 공지사항 수정 -->
+    <update id="updateNoticeBIA" parameterType="com.anylogic.ssystem.bms.com.model.UpdateNoticeBIAReqVO">
+        UPDATE sbms.sbms_user.bms_com_notice
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="title != null and title !=''">
+                title = #{title},
+            </if>
+            <if test="cont != null and cont != ''">
+                cont = #{cont},
+            </if>
+            <if test="sdate != null and sdate !=''">
+                sdate = #{sdate},
+            </if>
+            <if test="edate != null">
+                edate = #{edate},
+            </if>
+            <if test="selcnt != null and selcnt !=''">
+                selcnt = #{selcnt}::double precision,
+            </if>
+            <if test="repcnt != null and repcnt !=''">
+                repcnt = #{repcnt}::double precision,
+            </if>
+            <if test="inid != null and inid !=''">
+                inid = #{inid},
+            </if>
+            <if test="inname != null and inname !=''">
+                inname = #{inname},
+            </if>
+            <if test="indt != null and indt !=''">
+                indt = #{indt},
+            </if>
+            <if test="upid != null and upid !=''">
+                upid = #{upid},
+            </if>
+            <if test="upname != null and upname !=''">
+                upname = #{upname},
+            </if>
+            <if test="updt != null and updt !=''">
+                updt = #{updt},
+            </if>
+            <if test="fileyn != null and fileyn !=''">
+                fileyn = #{fileyn},
+            </if>
+            <if test="cnfmyn != null and cnfmyn !=''">
+                cnfmyn = #{cnfmyn},
+            </if>
+            <if test="rmk != null and rmk !=''">
+                rmk = #{rmk},
+            </if>
+        </trim>
+        WHERE 1 = 1
+            and ntcid = #{ntcid}
+    </update>
+
+</mapper>

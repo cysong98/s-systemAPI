@@ -1,0 +1,490 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.anylogic.ssystem.bms.dct.mapper.BmsDctInvrcptMapper">
+
+    <resultMap id="selectReceiptMap" type="com.anylogic.ssystem.bms.dct.model.SelectReceiptResVO">
+        <id column="docid" property="docid" />                        <!-- 비밀 ID -->
+        <id column="copyno" property="copyno" />                      <!-- 사본번호 -->
+        <id column="receiverid" property="receiverid" />              <!-- 수신처 ID -->
+        <result column="invrcpttl" property="invrcpttl" />            <!-- 송증영수증 제목 -->
+        <result column="seclevel" property="seclevel" />              <!-- 비밀등급 -->
+        <result column="mgmtno" property="mgmtno" />                  <!-- 관리번호 -->
+        <result column="docno" property="docno" />                    <!-- 문서번호 -->
+        <result column="recdeptname" property="recdeptname" />        <!-- 수신부서명 -->
+        <result column="refdeptname" property="refdeptname" />        <!-- 참조부서명 -->
+        <result column="sndminiid" property="sndminiid" />            <!-- 발신자부처 ID -->
+        <result column="sndmininame" property="sndmininame" />        <!-- 발신자 부처명 -->
+        <result column="snddeptid" property="snddeptid" />            <!-- 발신자 부서 ID -->
+        <result column="snddeptname" property="snddeptname" />        <!-- 발신자 부서명 -->
+        <result column="sndid" property="sndid" />                    <!-- 발신자 ID -->
+        <result column="sndname" property="sndname" />                <!-- 발신자명 -->
+        <result column="snddutyname" property="snddutyname" />        <!-- 발신자 직급직위명 -->
+        <result column="snddt" property="snddt" />                    <!-- 발신일자 -->
+        <result column="sndelectsignid" property="sndelectsignid" />  <!-- 발신자전자서명 -->
+        <result column="rcvminiid" property="rcvminiid" />            <!-- 수신사 부처 ID -->
+        <result column="rcvmininame" property="rcvmininame" />        <!-- 수신자 부처명 -->
+        <result column="rcvdeptid" property="rcvdeptid" />            <!-- 수신자 부서 ID -->
+        <result column="rcvdeptname" property="rcvdeptname" />        <!-- 수신자 부서명 -->
+        <result column="rcvid" property="rcvid" />                    <!-- 수신자 ID -->
+        <result column="rcvname" property="rcvname" />                <!-- 수신자명 -->
+        <result column="rcvdutyname" property="rcvdutyname" />        <!-- 수신자 직급직위명 -->
+        <result column="rcvdt" property="rcvdt" />                    <!-- 수신일자 -->
+        <result column="rcvelectsignid" property="rcvelectsignid" />  <!-- 수신자 전자서명 -->
+        <result column="sndrcvdocid" property="sndrcvdocid" />        <!-- 수발비밀 ID -->
+        <result column="failreason" property="failreason" />          <!-- 실패사유 -->
+        <result column="qty" property="qty" />                        <!-- 붙임파일 수량 -->
+        <result column="invrcpttype" property="invrcpttype" />        <!-- 송증영수증형태 -->
+        <result column="rgstid" property="rgstid" />                  <!-- 등록자 ID -->
+        <result column="rgstname" property="rgstname" />              <!-- 등록자명 -->
+        <result column="rgstdt" property="rgstdt" />                  <!-- 등록일자 -->
+        <result column="updtid" property="updtid" />                  <!-- 수정자 ID -->
+        <result column="updtname" property="updtname" />              <!-- 수정자명 -->
+        <result column="updtdt" property="updtdt" />                  <!-- 수정일자 -->
+        <result column="sndverifyfileid" property="sndverifyfileid" /><!-- 송증시점확인정보파일 ID -->
+        <result column="rcvverifyfileid" property="rcvverifyfileid" /><!-- 영수증시점확인정보파일 ID -->
+
+        <result column="acceptid" property="acceptid" />
+        <result column="acceptname" property="acceptname" />
+        <result column="acceptdutyname" property="acceptdutyname" />
+        <result column="acceptdeptname" property="acceptdeptname" />
+    </resultMap>
+
+
+    <!-- 접수대기함, 접수현황함, 송증영수증 접수정보 조회 -->
+    <select id="selectReceipt" parameterType="com.anylogic.ssystem.bms.dct.model.SelectReceiptReqVO" resultMap="selectReceiptMap">
+        SELECT
+            DISTINCT ON (a.docid)
+            a.docid as "docid"
+            , copyno as "copyno" 
+            , invrcpttl as "invrcpttl" 
+            , seclevel as "seclevel" 
+            , mgmtno as "mgmtno" 
+            , docno as "docno" 
+            , recdeptname as "recdeptname" 
+            , refdeptname as "refdeptname" 
+            , sndminiid as "sndminiid" 
+            , sndmininame as "sndmininame" 
+            , snddeptid as "snddeptid" 
+            , snddeptname as "snddeptname" 
+            , sndid as "sndid" 
+            , sndname as "sndname" 
+            , snddutyname as "snddutyname" 
+            , snddt as "snddt" 
+            , sndelectsignid as "sndelectsignid" 
+            , rcvminiid as "rcvminiid" 
+            , rcvmininame as "rcvmininame" 
+            , rcvdeptid as "rcvdeptid" 
+            , rcvdeptname as "rcvdeptname" 
+            , rcvid as "rcvid" 
+            , rcvname as "rcvname" 
+            , rcvdutyname as "rcvdutyname" 
+            , rcvdt as "rcvdt" 
+            , rcvelectsignid as "rcvelectsignid" 
+            , sndrcvdocid as "sndrcvdocid" 
+            , failreason as "failreason" 
+            , qty as "qty" 
+            , invrcpttype as "invrcpttype" 
+            , rgstid as "rgstid" 
+            , rgstname as "rgstname" 
+            , rgstdt as "rgstdt" 
+            , updtid as "updtid" 
+            , updtname as "updtname" 
+            , updtdt as "updtdt" 
+            , sndverifyfileid as "sndverifyfileid" 
+            , rcvverifyfileid as "rcvverifyfileid"
+            , a.receiverid as "receiverid"
+            , b.acceptid
+            , b.acceptname
+            , b.acceptdutyname
+            , b.acceptdeptname
+        FROM  sbms.sbms_user.bms_dct_invrcpt a
+        INNER JOIN sbms.sbms_user.bms_dct_enf_doc b ON (a.docid = b.docid)
+        WHERE 1 = 1
+            <if test="docid != null and docid !=''"> 
+                and a.docid = #{docid}
+            </if>
+            <if test="copyno != null and copyno !=''"> 
+                and copyno = #{copyno}
+            </if>
+        ORDER BY a.docid DESC, b.indt DESC
+
+    </select>
+
+    <!-- 송증영수증 등록 -->
+    <insert id="insertReceipt" parameterType="com.anylogic.ssystem.bms.dct.model.SelectReceiptReqVO">
+        INSERT INTO
+        sbms.sbms_user.bms_dct_invrcpt(
+        <trim suffixOverrides=",">
+            <if test="docid != null and docid !=''">
+                docid,
+            </if>
+            <if test="copyno != null and copyno !=''">
+                copyno,
+            </if>
+            <if test="invrcpttl != null and invrcpttl !=''">
+                invrcpttl,
+            </if>
+            <if test="seclevel != null and seclevel !=''">
+                seclevel,
+            </if>
+            <if test="mgmtno != null and mgmtno !=''">
+                mgmtno,
+            </if>
+            <if test="docno != null and docno !=''">
+                docno,
+            </if>
+            <if test="recdeptname != null and recdeptname !=''">
+                recdeptname,
+            </if>
+            <if test="refdeptname != null and refdeptname !=''">
+                refdeptname,
+            </if>
+            <if test="sndminiid != null and sndminiid !=''">
+                sndminiid,
+            </if>
+            <if test="sndmininame != null and sndmininame !=''">
+                sndmininame,
+            </if>
+            <if test="snddeptid != null and snddeptid !=''">
+                snddeptid,
+            </if>
+            <if test="snddeptname != null and snddeptname !=''">
+                snddeptname,
+            </if>
+            <if test="sndid != null and sndid !=''">
+                sndid,
+            </if>
+            <if test="sndname != null and sndname !=''">
+                sndname,
+            </if>
+            <if test="snddutyname != null and snddutyname !=''">
+                snddutyname,
+            </if>
+            <if test="snddt != null and snddt !=''">
+                snddt,
+            </if>
+            <if test="sndelectsignid != null and sndelectsignid !=''">
+                sndelectsignid,
+            </if>
+            <if test="rcvminiid != null and rcvminiid !=''">
+                rcvminiid,
+            </if>
+            <if test="rcvmininame != null and rcvmininame !=''">
+                rcvmininame,
+            </if>
+            <if test="rcvdeptid != null and rcvdeptid !=''">
+                rcvdeptid,
+            </if>
+            <if test="rcvdeptname != null and rcvdeptname !=''">
+                rcvdeptname,
+            </if>
+            <if test="rcvid != null and rcvid !=''">
+                rcvid,
+            </if>
+            <if test="rcvname != null and rcvname !=''">
+                rcvname,
+            </if>
+            <if test="rcvdutyname != null and rcvdutyname !=''">
+                rcvdutyname,
+            </if>
+            <if test="rcvdt != null and rcvdt !=''">
+                rcvdt,
+            </if>
+            <if test="rcvelectsignid != null and rcvelectsignid !=''">
+                rcvelectsignid,
+            </if>
+            <if test="sndrcvdocid != null and sndrcvdocid !=''">
+                sndrcvdocid,
+            </if>
+            <if test="failreason != null and failreason !=''">
+                failreason,
+            </if>
+            <if test="qty != null">
+                qty,
+            </if>
+            <if test="invrcpttype != null and invrcpttype !=''">
+                invrcpttype,
+            </if>
+            <if test="rgstid != null and rgstid !=''">
+                rgstid,
+            </if>
+            <if test="rgstname != null and rgstname !=''">
+                rgstname,
+            </if>
+            <if test="rgstdt != null and rgstdt !=''">
+                rgstdt,
+            </if>
+            <if test="updtid != null and updtid !=''">
+                updtid,
+            </if>
+            <if test="updtname != null and updtname !=''">
+                updtname,
+            </if>
+            <if test="updtdt != null and updtdt !=''">
+                updtdt,
+            </if>
+            <if test="sndverifyfileid != null and sndverifyfileid !=''">
+                sndverifyfileid,
+            </if>
+            <if test="rcvverifyfileid != null and rcvverifyfileid !=''">
+                rcvverifyfileid,
+            </if>
+            <if test="receiverid != null and receiverid !=''">
+                receiverid,
+            </if>
+        </trim>
+        )
+        VALUES(
+        <trim suffixOverrides=",">
+            <if test="docid != null and docid !=''">
+                #{docid},
+            </if>
+            <if test="copyno != null and copyno !=''">
+                #{copyno},
+            </if>
+            <if test="invrcpttl != null and invrcpttl !=''">
+                #{invrcpttl},
+            </if>
+            <if test="seclevel != null and seclevel !=''">
+                #{seclevel},
+            </if>
+            <if test="mgmtno != null and mgmtno !=''">
+                #{mgmtno},
+            </if>
+            <if test="docno != null and docno !=''">
+                #{docno},
+            </if>
+            <if test="recdeptname != null and recdeptname !=''">
+                #{recdeptname},
+            </if>
+            <if test="refdeptname != null and refdeptname !=''">
+                #{refdeptname},
+            </if>
+            <if test="sndminiid != null and sndminiid !=''">
+                #{sndminiid},
+            </if>
+            <if test="sndmininame != null and sndmininame !=''">
+                #{sndmininame},
+            </if>
+            <if test="snddeptid != null and snddeptid !=''">
+                #{snddeptid},
+            </if>
+            <if test="snddeptname != null and snddeptname !=''">
+                #{snddeptname},
+            </if>
+            <if test="sndid != null and sndid !=''">
+                #{sndid},
+            </if>
+            <if test="sndname != null and sndname !=''">
+                #{sndname},
+            </if>
+            <if test="snddutyname != null and snddutyname !=''">
+                #{snddutyname},
+            </if>
+            <if test="snddt != null and snddt !=''">
+                #{snddt},
+            </if>
+            <if test="sndelectsignid != null and sndelectsignid !=''">
+                #{sndelectsignid},
+            </if>
+            <if test="rcvminiid != null and rcvminiid !=''">
+                #{rcvminiid},
+            </if>
+            <if test="rcvmininame != null and rcvmininame !=''">
+                #{rcvmininame},
+            </if>
+            <if test="rcvdeptid != null and rcvdeptid !=''">
+                #{rcvdeptid},
+            </if>
+            <if test="rcvdeptname != null and rcvdeptname !=''">
+                #{rcvdeptname},
+            </if>
+            <if test="rcvid != null and rcvid !=''">
+                #{rcvid},
+            </if>
+            <if test="rcvname != null and rcvname !=''">
+                #{rcvname},
+            </if>
+            <if test="rcvdutyname != null and rcvdutyname !=''">
+                #{rcvdutyname},
+            </if>
+            <if test="rcvdt != null and rcvdt !=''">
+                #{rcvdt},
+            </if>
+            <if test="rcvelectsignid != null and rcvelectsignid !=''">
+                #{rcvelectsignid},
+            </if>
+            <if test="sndrcvdocid != null and sndrcvdocid !=''">
+                #{sndrcvdocid},
+            </if>
+            <if test="failreason != null and failreason !=''">
+                #{failreason},
+            </if>
+            <if test="qty != null">
+                #{qty},
+            </if>
+            <if test="invrcpttype != null and invrcpttype !=''">
+                #{invrcpttype},
+            </if>
+            <if test="rgstid != null and rgstid !=''">
+                #{rgstid},
+            </if>
+            <if test="rgstname != null and rgstname !=''">
+                #{rgstname},
+            </if>
+            <if test="rgstdt != null and rgstdt !=''">
+                #{rgstdt},
+            </if>
+            <if test="updtid != null and updtid !=''">
+                #{updtid},
+            </if>
+            <if test="updtname != null and updtname !=''">
+                #{updtname},
+            </if>
+            <if test="updtdt != null and updtdt !=''">
+                #{updtdt},
+            </if>
+            <if test="sndverifyfileid != null and sndverifyfileid !=''">
+                #{sndverifyfileid},
+            </if>
+            <if test="rcvverifyfileid != null and rcvverifyfileid !=''">
+                #{rcvverifyfileid},
+            </if>
+            <if test="receiverid != null and receiverid !=''">
+                #{receiverid},
+            </if>
+        </trim>
+        )
+        ON CONFLICT (docid, copyno, receiverid )
+        DO UPDATE
+        SET
+        snddt = #{snddt}
+    </insert>
+
+    <!-- 송증영수증 수정 -->
+    <update id="updateReceipt" parameterType="com.anylogic.ssystem.bms.dct.model.SelectReceiptReqVO">
+        UPDATE sbms.sbms_user.bms_dct_invrcpt
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="docid != null and docid !=''">
+                docid = #{docid},
+            </if>
+            <if test="copyno != null and copyno !=''">
+                copyno = #{copyno},
+            </if>
+            <if test="invrcpttl != null and invrcpttl !=''">
+                invrcpttl = #{invrcpttl},
+            </if>
+            <if test="seclevel != null and seclevel !=''">
+                seclevel = #{seclevel},
+            </if>
+            <if test="mgmtno != null and mgmtno !=''">
+                mgmtno = #{mgmtno},
+            </if>
+            <if test="docno != null and docno !=''">
+                docno = #{docno},
+            </if>
+            <if test="recdeptname != null and recdeptname !=''">
+                recdeptname = #{recdeptname},
+            </if>
+            <if test="refdeptname != null and refdeptname !=''">
+                refdeptname = #{refdeptname},
+            </if>
+            <if test="sndminiid != null and sndminiid !=''">
+                sndminiid = #{sndminiid},
+            </if>
+            <if test="sndmininame != null and sndmininame !=''">
+                sndmininame = #{sndmininame},
+            </if>
+            <if test="snddeptid != null and snddeptid !=''">
+                snddeptid = #{snddeptid},
+            </if>
+            <if test="snddeptname != null and snddeptname !=''">
+                snddeptname = #{snddeptname},
+            </if>
+            <if test="sndid != null and sndid !=''">
+                sndid = #{sndid},
+            </if>
+            <if test="sndname != null and sndname !=''">
+                sndname = #{sndname},
+            </if>
+            <if test="snddutyname != null and snddutyname !=''">
+                snddutyname = #{snddutyname},
+            </if>
+            <if test="snddt != null and snddt !=''">
+                snddt = #{snddt},
+            </if>
+            <if test="sndelectsignid != null and sndelectsignid !=''">
+                sndelectsignid = #{sndelectsignid},
+            </if>
+            <if test="rcvminiid != null and rcvminiid !=''">
+                rcvminiid = #{rcvminiid},
+            </if>
+            <if test="rcvmininame != null and rcvmininame !=''">
+                rcvmininame = #{rcvmininame},
+            </if>
+            <if test="rcvdeptid != null and rcvdeptid !=''">
+                rcvdeptid = #{rcvdeptid},
+            </if>
+            <if test="rcvdeptname != null and rcvdeptname !=''">
+                rcvdeptname = #{rcvdeptname},
+            </if>
+            <if test="rcvid != null and rcvid !=''">
+                rcvid = #{rcvid},
+            </if>
+            <if test="rcvname != null and rcvname !=''">
+                rcvname = #{rcvname},
+            </if>
+            <if test="rcvdutyname != null and rcvdutyname !=''">
+                rcvdutyname = #{rcvdutyname},
+            </if>
+            <if test="rcvdt != null and rcvdt !=''">
+                rcvdt = #{rcvdt},
+            </if>
+            <if test="rcvelectsignid != null and rcvelectsignid !=''">
+                rcvelectsignid = #{rcvelectsignid},
+            </if>
+            <if test="sndrcvdocid != null and sndrcvdocid !=''">
+                sndrcvdocid = #{sndrcvdocid},
+            </if>
+            <if test="failreason != null and failreason !=''">
+                failreason = #{failreason},
+            </if>
+            <if test="qty != null and qty !=''">
+                qty = #{qty},
+            </if>
+            <if test="invrcpttype != null and invrcpttype !=''">
+                invrcpttype = #{invrcpttype},
+            </if>
+            <if test="rgstid != null and rgstid !=''">
+                rgstid = #{rgstid},
+            </if>
+            <if test="rgstname != null and rgstname !=''">
+                rgstname = #{rgstname},
+            </if>
+            <if test="rgstdt != null and rgstdt !=''">
+                rgstdt = #{rgstdt},
+            </if>
+            <if test="updtid != null and updtid !=''">
+                updtid = #{updtid},
+            </if>
+            <if test="updtname != null and updtname !=''">
+                updtname = #{updtname},
+            </if>
+            <if test="updtdt != null and updtdt !=''">
+                updtdt = #{updtdt},
+            </if>
+            <if test="sndverifyfileid != null and sndverifyfileid !=''">
+                sndverifyfileid = #{sndverifyfileid},
+            </if>
+            <if test="rcvverifyfileid != null and rcvverifyfileid !=''">
+                rcvverifyfileid = #{rcvverifyfileid},
+            </if>
+            <if test="receiverid != null and receiverid !=''">
+                receiverid = #{receiverid},
+            </if>
+        </trim>
+        WHERE 1 = 1
+        and docid = #{docid}
+    </update>
+
+</mapper>

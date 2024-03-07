@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.anylogic.ssystem.bms.trn.mapper.BmsDctMgmtRegiMapper">
+
+    <!--  인계인수시 비밀관리기록부 상태값 수정 -->
+    <update id="updateMgmtRegi" parameterType="com.anylogic.ssystem.bms.trn.model.UpdateMgmtRegiReqVO">
+        UPDATE sbms.sbms_user.bms_dct_mgmt_regi
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="mgmtno != null and mgmtno !=''">
+                mgmtno = #{mgmtno},
+            </if>
+            <if test="docid != null and docid !=''">
+                docid = #{docid},
+            </if>
+            <if test="seclevel != null and seclevel !=''">
+                seclevel = #{seclevel},
+            </if>
+            <if test="mgmtseq != null and mgmtseq !=''">
+                mgmtseq = #{mgmtseq},
+            </if>
+            <if test="regirecvyear != null and regirecvyear !=''">
+                regirecvyear = #{regirecvyear},
+            </if>
+            <if test="regirecvgubun != null and regirecvgubun !=''">
+                regirecvgubun = #{regirecvgubun},
+            </if>
+            <if test="regirecvdt != null and regirecvdt !=''">
+                regirecvdt = #{regirecvdt},
+            </if>
+            <if test="regirecvsendid != null and regirecvsendid !=''">
+                regirecvsendid = #{regirecvsendid},
+            </if>
+            <if test="regirecvsendname != null and regirecvsendname !=''">
+                regirecvsendname = #{regirecvsendname},
+            </if>
+            <if test="regirecvtype != null and regirecvtype !=''">
+                regirecvtype = #{regirecvtype},
+            </if>
+            <if test="secttl != null and secttl !=''">
+                secttl = #{secttl},
+            </if>
+            <if test="sectype != null and sectype !=''">
+                sectype = #{sectype},
+            </if>
+            <if test="attchcnt != null and attchcnt !=''">
+                attchcnt = #{attchcnt},
+            </if>
+            <if test="copyno != null and copyno !=''">
+                copyno = #{copyno},
+            </if>
+            <if test="notiprotterm != null and notiprotterm !=''">
+                notiprotterm = #{notiprotterm},
+            </if>
+            <if test="notiprsrvterm != null and notiprsrvterm !=''">
+                notiprsrvterm = #{notiprsrvterm},
+            </if>
+            <if test="deptid != null and deptid !=''">
+                deptid = #{deptid},
+            </if>
+            <if test="deptname != null and deptname !=''">
+                deptname = #{deptname},
+            </if>
+            <if test="readrangetype != null and readrangetype !=''">
+                readrangetype = #{readrangetype},
+            </if>
+            <if test="secstatus != null and secstatus !=''">
+                secstatus = #{secstatus},
+            </if>
+            <if test="authorid != null and authorid !=''">
+                authorid = #{authorid},
+            </if>
+            <if test="authorname != null and authorname !=''">
+                authorname = #{authorname},
+            </if>
+            <if test="authordutyname != null and authordutyname !=''">
+                authordutyname = #{authordutyname},
+            </if>
+            <if test="authorposid != null and authorposid !=''">
+                authorposid = #{authorposid},
+            </if>
+            <if test="authorgrdid != null and authorgrdid !=''">
+                authorgrdid = #{authorgrdid},
+            </if>
+            <if test="reclassdt != null and reclassdt !=''">
+                reclassdt = #{reclassdt},
+            </if>
+            <if test="reclasscont != null and reclasscont !=''">
+                reclasscont = #{reclasscont},
+            </if>
+            <if test="reclassbasis != null and reclassbasis !=''">
+                reclassbasis = #{reclassbasis},
+            </if>
+            <if test="reclassmgtno != null and reclassmgtno !=''">
+                reclassmgtno = #{reclassmgtno},
+            </if>
+            <if test="reclassmgmtid != null and reclassmgmtid !=''">
+                reclassmgmtid = #{reclassmgmtid},
+            </if>
+            <if test="reclasslevel != null and reclasslevel !=''">
+                reclasslevel = #{reclasslevel},
+            </if>
+            <if test="transdt != null and transdt !=''">
+                transdt = #{transdt},
+            </if>
+            <if test="transbasis != null and transbasis !=''">
+                transbasis = #{transbasis},
+            </if>
+            <if test="destructdt != null and destructdt !=''">
+                destructdt = #{destructdt},
+            </if>
+            <if test="destructbasis != null and destructbasis !=''">
+                destructbasis = #{destructbasis},
+            </if>
+            <if test="cnsrvflag != null and cnsrvflag !=''">
+                cnsrvflag = #{cnsrvflag},
+            </if>
+            <if test="cnsrvdt != null and cnsrvdt !=''">
+                cnsrvdt = #{cnsrvdt},
+            </if>
+            <if test="cnsrvbasis != null and cnsrvbasis !=''">
+                cnsrvbasis = #{cnsrvbasis},
+            </if>
+            <if test="custdyplace != null and custdyplace !=''">
+                custdyplace = #{custdyplace},
+            </if>
+            <if test="rfidtagflag != null and rfidtagflag !=''">
+                rfidtagflag = #{rfidtagflag},
+            </if>
+            <if test="delflag != null and delflag !=''">
+                delflag = #{delflag},
+            </if>
+            <if test="rgstid != null and rgstid !=''">
+                rgstid = #{rgstid},
+            </if>
+            <if test="rgstname != null and rgstname !=''">
+                rgstname = #{rgstname},
+            </if>
+            <if test="rgstdt != null and rgstdt !=''">
+                rgstdt = #{rgstdt},
+            </if>
+            <if test="updtid != null and updtid !=''">
+                updtid = #{updtid},
+            </if>
+            <if test="updtname != null and updtname !=''">
+                updtname = #{updtname},
+            </if>
+            <if test="updtdt != null and updtdt !=''">
+                updtdt = #{updtdt},
+            </if>
+            <if test="legacymgmtno != null and legacymgmtno !=''">
+                legacymgmtno = #{legacymgmtno},
+            </if>
+            <if test="note != null and note !=''">
+                note = #{note},
+            </if>
+            <if test="legacydocno != null and legacydocno !=''">
+                legacydocno = #{legacydocno},
+            </if>
+            <if test="indt != null and indt !=''">
+                indt = #{indt},
+            </if>
+            <if test="sectypeetc != null and sectypeetc !=''">
+                sectypeetc = #{sectypeetc},
+            </if>
+            <if test="realtitle != null and realtitle !=''">
+                realtitle = #{realtitle},
+            </if>
+            <if test="cnsrvterm != null and cnsrvterm !=''">
+                cnsrvterm = #{cnsrvterm},
+            </if>
+            <if test="aggregatemgmtid != null and aggregatemgmtid !=''">
+                aggregatemgmtid = #{aggregatemgmtid},
+            </if>
+            <if test="aggregatedt != null and aggregatedt !=''">
+                aggregatedt = #{aggregatedt},
+            </if>
+            <if test="destructconfirm != null and destructconfirm !=''">
+                destructconfirm = #{destructconfirm},
+            </if>
+            <if test="destructconfirmdt != null and destructconfirmdt !=''">
+                destructconfirmdt = #{destructconfirmdt},
+            </if>
+            <if test="transwaitdt != null and transwaitdt !=''">
+                transwaitdt = #{transwaitdt},
+            </if>
+        </trim>
+        WHERE 1 = 1
+            and mgmtid = #{mgmtid}
+    </update>
+
+</mapper>

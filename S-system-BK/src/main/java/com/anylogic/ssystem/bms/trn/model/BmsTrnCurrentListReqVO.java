@@ -1,0 +1,110 @@
+/*
+   AnyX Platform version 2.0
+
+   Copyright ⓒ 2022 anylogic corp. All rights reserved.
+
+   This is a proprietary software of anylogic corp, and you may not use this file except in
+   compliance with license agreement with anylogic corp. Any redistribution or use of this
+   software, with or without modification shall be strictly prohibited without prior written
+   approval of anylogic corp, and the copyright notice above does not evidence any actual or
+   intended publication of such software.
+*/
+
+
+
+package com.anylogic.ssystem.bms.trn.model;
+
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.ToString;
+import java.io.Serializable;
+import java.lang.String;
+
+import com.anylogic.ssystem.common.model.AnyXCommonVO;
+
+
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+@Getter
+@Setter
+@ApiModel
+public class BmsTrnCurrentListReqVO extends AnyXCommonVO implements Serializable {
+
+    @ApiModelProperty("제목")
+    @Size(max=200)
+    private String title;                        // 제목
+
+    @ApiModelProperty("기안자 부서명")
+    @Size(max=256)
+    private String reqdeptname;                  // 기안자 부서명
+
+    @ApiModelProperty("기안자 부서ID")
+    private String reqdeptid;                   // 기안자 부서ID
+
+    @ApiModelProperty("기안자명")
+    @Size(max=100)
+    private String requsername;                  // 기안자명
+
+    @ApiModelProperty("")
+    @Size(max=256)
+    private String apprdeptname;                 // 
+
+    @ApiModelProperty("")
+    @Size(max=256)
+    private String apprusername;                 //
+
+    @ApiModelProperty("결재유형코드")
+    @Size(max=5)
+    private String apprcode;
+
+    @ApiModelProperty("인계인수 일련번호")
+    @Size(max=35)
+    private String transferid;                   // 인계인수 일련번호
+
+    @ApiModelProperty("진행상태")
+    @Size(max=5)
+    private String status;                       // 진행상태
+
+    @ApiModelProperty("최종결재완료여부")
+    @Size(max=5)
+    private String apprstatus;                   // 최종결재완료여부
+
+    @ApiModelProperty("appruserid")
+    private String appruserid;                       // appruserid
+
+    @ApiModelProperty("startDt")
+    private String startDt;                      // startDt
+
+    @ApiModelProperty("endDt")
+    private String endDt;                        // endDt
+
+    @ApiModelProperty("현재페이지")
+    private int pageNum;                         //  현재페이지
+
+    @ApiModelProperty("페이지당열갯수")
+    private int pageSize;                      //  페이지당열갯수
+
+    @ApiModelProperty("정렬유형")
+    @Size(max=5)
+    private String sortDirection;                //  정렬유형
+
+    @ApiModelProperty("정렬항목")
+    @Size(max=50)
+    private String sortItem;                     //  정렬항목 
+
+    @ApiModelProperty("정렬테이블")
+    @Size(max=50)
+    private String sortIndicator;                //  정렬테이블
+
+}
+

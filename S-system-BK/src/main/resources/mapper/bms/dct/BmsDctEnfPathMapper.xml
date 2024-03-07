@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.anylogic.ssystem.bms.dct.mapper.BmsDctEnfPathMapper">
+
+    <resultMap id="selectDctEnfPathMap" type="com.anylogic.ssystem.bms.dct.model.SelectDctEnfPathResVO">
+        <id column="docid" property="docid" />                        <!-- 비밀 ID -->
+        <id column="enfdocid" property="enfdocid" />                  <!-- 시행비밀 ID -->
+        <id column="pathorder" property="pathorder" />                <!-- 경로순서 -->
+        <result column="state" property="state" />                    <!-- 상황 -->
+        <result column="objid" property="objid" />                    <!-- 객체 ID -->
+        <result column="objtype" property="objtype" />                <!-- 객체 유형 -->
+        <result column="objname" property="objname" />                <!-- 객체 이름 -->
+        <result column="deptid" property="deptid" />                  <!-- 부서 ID -->
+        <result column="deptname" property="deptname" />              <!-- 부서 이름 -->
+        <result column="dutyname" property="dutyname" />              <!-- 직위직급 이름 -->
+        <result column="dutynamedesc" property="dutynamedesc" />      <!-- 직위직급 이름 상세 -->
+        <result column="positionid" property="positionid" />          <!-- 직위 ID -->
+        <result column="gradeid" property="gradeid" />                <!-- 직급 ID -->
+        <result column="asktype" property="asktype" />                <!-- 요청유형 -->
+        <result column="acttype" property="acttype" />                <!-- 처리유형 -->
+        <result column="readopinion" property="readopinion" />        <!-- 열람의견 -->
+        <result column="actapprdt" property="actapprdt" />            <!-- 처리경로시간 -->
+        <result column="mainver" property="mainver" />                <!-- 메인버전 -->
+        <result column="subver" property="subver" />                  <!-- 서브버전 -->
+        <result column="readdt" property="readdt" />                  <!-- 열람일시 -->
+        <result column="absreason" property="absreason" />            <!-- 부재사유 -->
+        <result column="inid" property="inid" />                      <!-- 등록자 ID -->
+        <result column="indt" property="indt" />                      <!-- 등록일 -->
+        <result column="starred" property="starred" />                <!-- 중요여부 -->
+        <result column="appname" property="appname" />                <!-- 전결이름 -->
+        <result column="updateflag" property="updateflag" />          <!-- 수정 FLAG -->
+        <result column="repathorder" property="repathorder" />        <!-- 재검토경로순서 -->
+        <result column="deputyflag" property="deputyflag" />          <!-- 대리지정 FLAG -->
+        <result column="oriobjid" property="oriobjid" />              <!-- 원 객체 ID -->
+        <result column="oriobjname" property="oriobjname" />          <!-- 원 객체이름 -->
+        <result column="orideptid" property="orideptid" />            <!-- 원 부서 ID -->
+        <result column="orideptname" property="orideptname" />        <!-- 원 부서이름 -->
+        <result column="oridutyname" property="oridutyname" />        <!-- 원 직위직급이름 -->
+        <result column="oridutynamedesc" property="oridutynamedesc" /><!-- 원 직위직급이름상세 -->
+        <result column="oripositionid" property="oripositionid" />    <!-- 원 직위 ID -->
+        <result column="origradeid" property="origradeid" />          <!-- 원 직급 ID -->
+        <result column="historyflag" property="historyflag" />        <!-- 이력정보 FLAG -->
+        <result column="reportdt" property="reportdt" />              <!-- 보고일자 -->
+        <result column="proposer" property="proposer" />              <!-- 발의자 -->
+        <result column="electsignid" property="electsignid" />        <!-- 전자서명 ID -->
+        <result column="actgubun" property="actgubun" />
+        <result column="opinion" property="opinion" />
+    </resultMap>
+
+
+    <!-- 시행 경로 등록 -->
+    <insert id="insertEnforcePath" parameterType="com.anylogic.ssystem.bms.dct.model.InsertEnforcePathReqVO">
+        INSERT INTO
+        sbms.sbms_user.bms_dct_enf_path(
+            <trim suffixOverrides=",">
+            <if test="enfdocid != null and enfdocid !=''">
+                enfdocid,
+            </if>
+            <if test="actseq != null and actseq !=''">
+                actseq,
+            </if>
+            <if test="acterid != null and acterid !=''">
+                acterid,
+            </if>
+            <if test="actername != null and actername !=''">
+                actername,
+            </if>
+            <if test="actergubun != null and actergubun !=''">
+                actergubun,
+            </if>
+            <if test="deptid != null and deptid !=''">
+                deptid,
+            </if>
+            <if test="deptname != null and deptname !=''">
+                deptname,
+            </if>
+            <if test="deptnamedesc != null and deptnamedesc !=''">
+                deptnamedesc,
+            </if>
+            <if test="dutyname != null and dutyname !=''">
+                dutyname,
+            </if>
+            <if test="positionid != null and positionid !=''">
+                positionid,
+            </if>
+            <if test="gradeid != null and gradeid !=''">
+                gradeid,
+            </if>
+            <if test="indt != null and indt !=''">
+                indt,
+            </if>
+            <if test="inid != null and inid !=''">
+                inid,
+            </if>
+            <if test="actdt != null and actdt !=''">
+                actdt,
+            </if>
+            <if test="readdt != null and readdt !=''">
+                readdt,
+            </if>
+            <if test="starred != null and starred !=''">
+                starred,
+            </if>
+            <if test="acceptdt != null and acceptdt !=''">
+                acceptdt,
+            </if>
+            </trim>
+        )
+        VALUES(
+            <trim suffixOverrides=",">
+            <if test="enfdocid != null and enfdocid !=''">
+                #{enfdocid},
+            </if>
+            <if test="actseq != null and actseq !=''">
+                #{actseq},
+            </if>
+            <if test="acterid != null and acterid !=''">
+                #{acterid},
+            </if>
+            <if test="actername != null and actername !=''">
+                #{actername},
+            </if>
+            <if test="actergubun != null and actergubun !=''">
+                #{actergubun},
+            </if>
+            <if test="deptid != null and deptid !=''">
+                #{deptid},
+            </if>
+            <if test="deptname != null and deptname !=''">
+                #{deptname},
+            </if>
+            <if test="deptnamedesc != null and deptnamedesc !=''">
+                #{deptnamedesc},
+            </if>
+            <if test="dutyname != null and dutyname !=''">
+                #{dutyname},
+            </if>
+            <if test="positionid != null and positionid !=''">
+                #{positionid},
+            </if>
+            <if test="gradeid != null and gradeid !=''">
+                #{gradeid},
+            </if>
+            <if test="indt != null and indt !=''">
+                #{indt},
+            </if>
+            <if test="inid != null and inid !=''">
+                #{inid},
+            </if>
+            <if test="actdt != null and actdt !=''">
+                #{actdt},
+            </if>
+            <if test="readdt != null and readdt !=''">
+                #{readdt},
+            </if>
+            <if test="starred != null and starred !=''">
+                #{starred},
+            </if>
+            <if test="acceptdt != null and acceptdt !=''">
+                #{acceptdt},
+            </if>
+            </trim>
+        )
+    </insert>
+
+    <!-- 시행 경로 조회 -->
+    <select id="selectDctEnfPath" parameterType="com.anylogic.ssystem.bms.dct.model.SelectDctEnfPathReqVO" resultMap="selectDctEnfPathMap">
+        SELECT
+        A.enfdocid as "enfdocid",
+        A.gradeid as "gradeid",
+        A.deptnamedesc as "deptnamedesc",
+        A.starred as "starred",
+        A.actdt as "actdt",
+        A.indt as "indt",
+        A.actername as "actername",
+        A.dutyname as "dutyname",
+        A.acterid as "acterid",
+        A.readdt as "readdt",
+        A.deptname as "deptname",
+        A.positionid as "positionid",
+        A.inid as "inid",
+        A.actergubun as "actergubun",
+        A.deptid as "deptid",
+        A.acceptdt as "acceptdt",
+        B.actgubun as "actgubun",
+        B.actopinion as "actopinion",
+        B.actseq as "actseq"
+        FROM  sbms.sbms_user.bms_dct_enf_path A
+        LEFT OUTER JOIN sbms.sbms_user.bms_dct_enf_history B
+<!--        ON (A.enfdocid = B.enfdocid and A.actseq = B.actseq)-->
+        ON (A.enfdocid = B.enfdocid)
+        WHERE 1 = 1
+        <if test="enfdocid != null and enfdocid !=''">
+            and A.enfdocid = #{enfdocid}
+        </if>
+        and B.actgubun = 'EPA08'
+        ORDER BY B.actseq ASC, A.indt DESC
+        LIMIT 1
+    </select>
+
+    <!-- 시행 경로 삭제 -->
+    <delete id="deleteEnfPathList" parameterType="java.util.Map">
+        DELETE FROM sbms.sbms_user.bms_dct_enf_path
+        WHERE enfdocid = #{enfdocid}
+    </delete>
+
+    <!-- actseq 조회 -->
+    <select id="getActSeq" resultType="Int">
+        SELECT nextval('sbms_user.actseq');
+    </select>
+
+    <!-- actseq2 조회 -->
+    <select id="getActSeq2" resultType="Int">
+        SELECT nextval('sbms_user.actseq2');
+    </select>
+
+</mapper>

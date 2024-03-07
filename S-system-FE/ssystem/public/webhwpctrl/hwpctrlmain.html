@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <!-- <base href="https://172.18.18.25:8080/webhwpctrl/"> -->
+    <base href="https://hwp.s-system.kinac:8080/webhwpctrl/">
+    <script type="text/javascript" data-type="css/app" data-framework="aori|lab" src="js/loadVersion.js"></script>
+    <script type="text/javascript" data-type="css/app" data-framework="aori|lab" src="js/loadHead.js"></script>
+    <script type="text/javascript">
+        var mySkin = getUrlParameter("skin");
+        window.serverProps = {skin:mySkin};
+        // window.BaseUrl = getBaseUrl(getUrlParameter("baseurl"));
+        // window.BaseUrl = "https://172.18.18.25:8080/webhwpctrl/";
+        window.BaseUrl = "https://hwp.s-system.kinac:8080/webhwpctrl/";
+    </script>
+    <script type="text/javascript">
+        var require = {
+            urlArgs : "version="+window.__hctfwoVersion
+        };
+    </script>
+    <script type="text/javascript" src="js/libs/require/require.js"></script>
+    <script type="text/javascript" src="js/require_config.js"></script>
+    <script type="text/javascript">
+        require["config"]({
+            "waitSeconds" : 60
+        });
+        require(["main-hwpapp"]);
+    </script>
+</head>
+<body>
+<iframe id="download_iframe" style="width:0px;height:0px;border:0;display:none;"></iframe>
+</body>
+</html>

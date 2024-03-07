@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.anylogic.ssystem.bms.com.mapper.ComUserinfoMapper">
+
+    <resultMap id="selectFindManagerMap" type="com.anylogic.ssystem.bms.com.model.SelectFindManagerResVO">
+        <id column="vgroupid" property="vgroupid" />                  <!-- 가상그룹아이디 -->
+        <result column="vgroupname" property="vgroupname" />          <!-- 가상그룹명 -->
+        <result column="detail" property="detail" />                  <!-- 상세 -->
+        <result column="authtype" property="authtype" />              <!-- 보안유형 -->
+        <result column="userid" property="userid" />                  <!-- 사용자아이디 -->
+        <result column="orgid" property="orgid" />                    <!-- 조직아이디 -->
+        <result column="vgrouptype" property="vgrouptype" />          <!-- 가상그룹유형 -->
+        <result column="loginid" property="loginid" />                <!-- 로그인아이디 -->
+        <result column="username" property="username" />              <!-- 사용자명 -->
+        <result column="deptid" property="deptid" />                  <!-- 부서아이디 -->
+        <result column="deptname" property="deptname" />              <!-- 부서명 -->
+        <result column="residentno" property="residentno" />          <!-- 지역번호 -->
+        <result column="position" property="position" />              <!-- 직위 -->
+        <result column="grade" property="grade" />                    <!-- 직급 -->
+        <result column="password" property="password" />              <!-- 비밀번호 -->
+        <result column="userorder" property="userorder" />            <!-- 사용자순서 -->
+        <result column="imgubun" property="imgubun" />                <!-- 임용구분 -->
+        <result column="isdeleted" property="isdeleted" />            <!-- 존폐여부 -->
+        <result column="isconcurrent" property="isconcurrent" />      <!-- 겸직여부 -->
+        <result column="positiondetail" property="positiondetail" />  <!-- 직위상세 -->
+        <result column="approvalpassword" property="approvalpassword" /><!-- 승인비밀번호 -->
+        <result column="inid" property="inid" />                      <!-- 등록자아이디 -->
+        <result column="indt" property="indt" />                      <!-- 등록일시 -->
+        <result column="upid" property="upid" />                      <!-- 수정자아이디 -->
+        <result column="updt" property="updt" />                      <!-- 수정일시 -->
+    </resultMap>
+
+    <resultMap id="selectUserListMap" type="com.anylogic.ssystem.bms.com.model.SelectUserListResVO">
+        <id column="userid" property="userid" />                      <!-- 사용자아이디 -->
+        <result column="loginid" property="loginid" />                <!-- 로그인아이디 -->
+        <result column="username" property="username" />              <!-- 사용자명 -->
+        <result column="deptid" property="deptid" />                  <!-- 부서아이디 -->
+        <result column="deptname" property="deptname" />              <!-- 부서명 -->
+        <result column="position" property="position" />              <!-- 직위 -->
+        <result column="grade" property="grade" />                    <!-- 직급 -->
+        <result column="password" property="password" />              <!-- 비밀번호 -->
+        <result column="vgroupid" property="vgroupid" />
+        <result column="vgroupname" property="vgroupname" />
+    </resultMap>
+
+    <resultMap id="getUserDetailMap" type="com.anylogic.ssystem.bms.com.model.GetUserDetailResVO">
+        <id column="userid" property="userid" />                      <!-- 사용자아이디 -->
+        <result column="loginid" property="loginid" />                <!-- 로그인아이디 -->
+        <result column="username" property="username" />              <!-- 사용자명 -->
+        <result column="deptid" property="deptid" />                  <!-- 부서아이디 -->
+        <result column="deptname" property="deptname" />              <!-- 부서명 -->
+        <result column="residentno" property="residentno" />          <!-- 지역번호 -->
+        <result column="position" property="position" />              <!-- 직위 -->
+        <result column="grade" property="grade" />                    <!-- 직급 -->
+        <result column="password" property="password" />              <!-- 비밀번호 -->
+        <result column="userorder" property="userorder" />            <!-- 사용자순서 -->
+        <result column="imgubun" property="imgubun" />                <!-- 임용구분 -->
+        <result column="isdeleted" property="isdeleted" />            <!-- 존폐여부 -->
+        <result column="isconcurrent" property="isconcurrent" />      <!-- 겸직여부 -->
+        <result column="positiondetail" property="positiondetail" />  <!-- 직위상세 -->
+        <result column="approvalpassword" property="approvalpassword" /><!-- 승인비밀번호 -->
+        <result column="inid" property="inid" />                      <!-- 등록자아이디 -->
+        <result column="indt" property="indt" />                      <!-- 등록일시 -->
+        <result column="upid" property="upid" />                      <!-- 수정자아이디 -->
+        <result column="updt" property="updt" />                      <!-- 수정일시 -->
+        <result column="vgroupid" property="vgroupid" />              <!-- 가상그룹아이디 -->
+        <result column="orgid" property="orgid" />                    <!-- 조직아이디 -->
+        <result column="vgrouptype" property="vgrouptype" />          <!-- 가상그룹유형 -->
+        <result column="vgroupname" property="vgroupname" />          <!-- 가상그룹명 -->
+        <result column="detail" property="detail" />                  <!-- 상세 -->
+        <result column="authtype" property="authtype" />              <!-- 보안유형 -->
+        <result column="secretgrade" property="secretgrade" />        <!-- 비밀취급인가등급 -->
+        <result column="email" property="email" />                    <!-- 이메일 -->
+        <result column="mobilephone" property="mobilephone" />        <!-- 전화번호 -->
+    </resultMap>
+
+    <resultMap id="checkUserIdMap" type="com.anylogic.ssystem.bms.com.model.CheckUserIdResVO">
+        <id column="userid" property="userid" />                      <!-- 사용자아이디 -->
+        <result column="loginid" property="loginid" />                <!-- 로그인아이디 -->
+        <result column="username" property="username" />              <!-- 사용자명 -->
+        <result column="deptid" property="deptid" />                  <!-- 부서아이디 -->
+        <result column="deptname" property="deptname" />              <!-- 부서명 -->
+        <result column="position" property="position" />              <!-- 직위 -->
+        <result column="grade" property="grade" />                    <!-- 직급 -->
+        <result column="password" property="password" />              <!-- 비밀번호 -->
+    </resultMap>
+
+
+    <!--  사용 요청 시 (파일반출/존안/이관) 담당자 정보 조회 -->
+    <select id="selectFindManager" parameterType="com.anylogic.ssystem.bms.com.model.SelectFindManagerReqVO" resultMap="selectFindManagerMap">
+        SELECT
+        A.vgroupid as "vgroupid"
+        , A.vgroupname as "vgroupname"
+        , A.detail as "detail"
+        , A.authtype as "authtype"
+        , B.userid as "userid"
+        , B.orgid as "orgid"
+        , B.vgrouptype as "vgrouptype"
+        , C.loginid as "loginid"
+        , C.username as "username"
+        , C.deptid as "deptid"
+        , C.deptname as "deptname"
+        , C.residentno as "residentno"
+        , C.position as "position"
+        , C.grade as "grade"
+        , C.password as "password"
+        , C.userorder as "userorder"
+        , C.imgubun as "imgubun"
+        , C.isdeleted as "isdeleted"
+        , C.isconcurrent as "isconcurrent"
+        , C.positiondetail as "positiondetail"
+        , C.approvalpassword as "approvalpassword"
+        , C.inid as "inid"
+        , C.indt as "indt"
+        , C.upid as "upid"
+        , C.updt as "updt"
+        FROM  sbms.sbms_user.com_vgroup  A
+            LEFT OUTER JOIN  sbms.sbms_user.com_vgroup_user  B
+                ON ( A.vgroupid  =  B.vgroupid  )
+            LEFT OUTER JOIN  sbms.sbms_user.com_userinfo  C
+                ON ( B.userid  =  C.userid  )
+        WHERE A.vgroupid IN
+            <foreach item="item" collection="vgroupid" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+            <if test="orgid != null and orgid !=''">
+                and orgid = #{orgid}
+            </if>
+    </select>
+
+    <!--  조직관리 > 부서/사용자관리 > 사용자 목록 조회 -->
+    <select id="selectUserList" parameterType="com.anylogic.ssystem.bms.com.model.SelectUserListReqVO" resultMap="selectUserListMap">
+        SELECT
+            X.userid as "userid"
+            , X.loginid as "loginid"
+            , X.username as "username"
+            , X.deptid as "deptid"
+            , X.deptname as "deptname"
+            , X.position as "position"
+            , X.grade as "grade"
+            , X.password as "password"
+            , X.vgroupid as "vgroupid"
+            , (case when X.vgroupname = '부서장, ' then '부서장' else X.vgroupname end) as "vgroupname"
+        FROM (
+            SELECT
+                A.userid as "userid"
+                , A.loginid as "loginid"
+                , A.username as "username"
+                , A.deptid as "deptid"
+                , A.deptname as "deptname"
+                , A.position as "position"
+                , A.grade as "grade"
+                , A.password as "password"
+                , string_agg(C.vgroupid, ', ') as "vgroupid"
+                , concat(case when B.chiefid =A.userid then '부서장, ' else '' end, string_agg(D.vgroupname, ', ')) as "vgroupname"
+            FROM  sbms.sbms_user.com_userinfo A
+            LEFT OUTER JOIN  sbms.sbms_user.com_organizationinfo  B
+                ON ( A.deptid  =  B.orgid  )
+            LEFT OUTER JOIN  sbms.sbms_user.com_vgroup_user C
+                ON ( A.userid  =  C.userid  )
+            LEFT OUTER JOIN  sbms.sbms_user.com_vgroup D
+                ON ( C.vgroupid  =  D.vgroupid  )
+            WHERE 1 = 1
+            <if test="userid != null and userid !=''">
+                and userid like CONCAT('%', #{userid}, '%')
+            </if>
+            <if test="username != null and username !=''">
+                and username like CONCAT('%', #{username}, '%')
+            </if>
+            <if test="deptname != null and deptname !=''">
+                and deptname like CONCAT('%', #{deptname}, '%')
+            </if>
+            <if test="deptid != null and deptid !=''">
+                and deptid = #{deptid}
+            </if>
+            GROUP BY A.userid, B.chiefid
+        ) X
+        ORDER BY X.userid ASC
+    </select>
+
+    <!-- 조직관리 > 부서/사용자관리 > 사용자 삭제 -->
+    <delete id="deleteUserBIA" parameterType="com.anylogic.ssystem.bms.com.model.DeleteUserBIAReqVO">
+        DELETE FROM sbms.sbms_user.com_userinfo
+        WHERE 1 = 1
+            and userid = #{userid}
+    </delete>
+
+    <!-- 조직관리 > 부서/사용자관리 > 사용자 상세 조회 -->
+    <select id="getUserDetail" parameterType="com.anylogic.ssystem.bms.com.model.GetUserDetailReqVO" resultMap="getUserDetailMap">
+        SELECT
+            A.userid as "userid" 
+            , A.loginid as "loginid" 
+            , A.username as "username" 
+            , A.deptid as "deptid" 
+            , A.deptname as "deptname" 
+            , A.residentno as "residentno" 
+            , A.position as "position" 
+            , A.grade as "grade" 
+            , A.password as "password" 
+            , A.userorder as "userorder" 
+            , A.imgubun as "imgubun" 
+            , A.isdeleted as "isdeleted" 
+            , A.isconcurrent as "isconcurrent" 
+            , A.positiondetail as "positiondetail" 
+            , A.approvalpassword as "approvalpassword" 
+            , A.inid as "inid" 
+            , A.indt as "indt" 
+            , A.upid as "upid" 
+            , A.updt as "updt"
+            , B.vgroupid as "vgroupid"
+            , B.orgid as "orgid"
+            , B.vgrouptype as "vgrouptype"
+            , C.vgroupname as "vgroupname"
+            , C.detail as "detail"
+            , C.authtype as "authtype"
+            , D.secretgrade as "secretgrade"
+            , E.email as "email"
+            , E.mobilephone as "mobilephone"
+        FROM  sbms.sbms_user.com_userinfo  A
+            LEFT OUTER JOIN  sbms.sbms_user.com_vgroup_user  B
+                ON ( A.userid  =  B.userid  )
+            LEFT OUTER JOIN  sbms.sbms_user.com_vgroup  C
+                ON ( B.vgroupid  =  C.vgroupid  )
+            LEFT OUTER JOIN sbms.sbms_user.com_userinfo_detail2 D
+                ON ( A.userid = D.userid )
+            LEFT OUTER JOIN sbms.sbms_user.com_userinfo_detail E
+                ON ( A.userid = E.userid )
+        WHERE 1 = 1
+            <if test="userid != null and userid !=''"> 
+                and A.userid = #{userid}
+            </if>
+    </select>
+
+    <!-- 조직관리 > 부서/사용자관리 > 사용자 등록 > 아이디 중복확인 -->
+    <select id="checkUserId" parameterType="com.anylogic.ssystem.bms.com.model.CheckUserIdReqVO" resultMap="checkUserIdMap">
+        SELECT
+            userid as "userid"
+            , loginid as "loginid"
+            , username as "username"
+            , deptid as "deptid"
+            , deptname as "deptname"
+            , position as "position"
+            , grade as "grade"
+            , password as "password"
+        FROM  sbms.sbms_user.com_userinfo
+        WHERE 1 = 1
+            <if test="userid != null and userid !=''">
+                and userid = #{userid}
+            </if>
+    </select>
+
+    <!-- 조직관리 > 부서/사용자관리 > 사용자 등록 -->
+    <insert id="insertUserBIA" parameterType="com.anylogic.ssystem.bms.com.model.InsertUserBIAReqVO">
+        INSERT INTO
+        sbms.sbms_user.com_userinfo(
+            <trim suffixOverrides=",">
+            <if test="userid != null and userid !=''">
+                userid,
+            </if>
+            <if test="loginid != null and loginid !=''">
+                loginid,
+            </if>
+            <if test="username != null and username !=''">
+                username,
+            </if>
+            <if test="deptid != null and deptid !=''">
+                deptid,
+            </if>
+            <if test="deptname != null and deptname !=''">
+                deptname,
+            </if>
+            <if test="position != null and position !=''">
+                position,
+            </if>
+            <if test="grade != null and grade !=''">
+                grade,
+            </if>
+            <if test="password != null and password !=''">
+                password,
+            </if>
+            <if test="inid != null and inid !=''">
+                inid,
+            </if>
+            <if test="indt != null and indt !=''">
+                indt,
+            </if>
+            <if test="upid != null and upid !=''">
+                upid,
+            </if>
+            <if test="updt != null and updt !=''">
+                updt,
+            </if>
+            </trim>
+        )
+        VALUES(
+            <trim suffixOverrides=",">
+            <if test="userid != null and userid !=''">
+                #{userid},
+            </if>
+            <if test="loginid != null and loginid !=''">
+                #{loginid},
+            </if>
+            <if test="username != null and username !=''">
+                #{username},
+            </if>
+            <if test="deptid != null and deptid !=''">
+                #{deptid},
+            </if>
+            <if test="deptname != null and deptname !=''">
+                #{deptname},
+            </if>
+            <if test="position != null and position !=''">
+                #{position},
+            </if>
+            <if test="grade != null and grade !=''">
+                #{grade},
+            </if>
+            <if test="password != null and password !=''">
+                #{password},
+            </if>
+            <if test="inid != null and inid !=''">
+                #{inid},
+            </if>
+            <if test="indt != null and indt !=''">
+                #{indt},
+            </if>
+            <if test="upid != null and upid !=''">
+                #{upid},
+            </if>
+            <if test="updt != null and updt !=''">
+                #{updt},
+            </if>
+            </trim>
+        )
+    </insert>
+
+    <!-- 조직관리 > 부서/사용자관리 > 사용자 수정 -->
+    <update id="updateUserBIA" parameterType="com.anylogic.ssystem.bms.com.model.UpdateUserBIAReqVO">
+        UPDATE sbms.sbms_user.com_userinfo
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="loginid != null and loginid !=''">
+                loginid = #{loginid},
+            </if>
+            <if test="username != null and username !=''">
+                username = #{username},
+            </if>
+            <if test="deptid != null">
+                deptid = #{deptid},
+            </if>
+            <if test="deptname != null and deptname !=''">
+                deptname = #{deptname},
+            </if>
+            <if test="position != null and position !=''">
+                position = #{position},
+            </if>
+            <if test="grade != null and grade !=''">
+                grade = #{grade},
+            </if>
+            <if test="password != null and password !=''">
+                password = #{password},
+            </if>
+            <if test="inid != null and inid !=''">
+                inid = #{inid},
+            </if>
+            <if test="indt != null and indt !=''">
+                indt = #{indt},
+            </if>
+            <if test="upid != null and upid !=''">
+                upid = #{upid},
+            </if>
+            <if test="updt != null and updt !=''">
+                updt = #{updt},
+            </if>
+        </trim>
+        WHERE 1 = 1
+            and userid = #{userid}
+    </update>
+
+</mapper>

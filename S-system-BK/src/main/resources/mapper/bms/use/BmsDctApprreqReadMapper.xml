@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.anylogic.ssystem.bms.use.mapper.BmsDctApprreqReadMapper">
+
+    <!--  전자 열람 요청내용 등록 -->
+    <insert id="insertUseDigitalViewReq" parameterType="com.anylogic.ssystem.bms.use.model.InsertUseDigitalViewReqReqVO">
+        INSERT INTO
+        sbms.sbms_user.bms_dct_apprreq_read(
+            <trim suffixOverrides=",">
+            <if test="apprreqid != null and apprreqid !=''">
+                apprreqid,
+            </if>
+            <if test="mgmtid != null and mgmtid !=''">
+                mgmtid,
+            </if>
+            <if test="reqreadbegindt != null and reqreadbegindt !=''">
+                reqreadbegindt,
+            </if>
+            <if test="reqreadenddt != null and reqreadenddt !=''">
+                reqreadenddt,
+            </if>
+            <if test="grantreadbegindt != null and grantreadbegindt !=''">
+                grantreadbegindt,
+            </if>
+            <if test="grantreadenddt != null and grantreadenddt !=''">
+                grantreadenddt,
+            </if>
+            <if test="grantflag != null and grantflag !=''">
+                grantflag,
+            </if>
+            <if test="isread != null and isread !=''">
+                isread,
+            </if>
+            <if test="readdt != null and readdt !=''">
+                readdt,
+            </if>
+            </trim>
+        )
+        VALUES(
+            <trim suffixOverrides=",">
+            <if test="apprreqid != null and apprreqid !=''">
+                #{apprreqid},
+            </if>
+            <if test="mgmtid != null and mgmtid !=''">
+                #{mgmtid},
+            </if>
+            <if test="reqreadbegindt != null and reqreadbegindt !=''">
+                #{reqreadbegindt},
+            </if>
+            <if test="reqreadenddt != null and reqreadenddt !=''">
+                #{reqreadenddt},
+            </if>
+            <if test="grantreadbegindt != null and grantreadbegindt !=''">
+                #{grantreadbegindt},
+            </if>
+            <if test="grantreadenddt != null and grantreadenddt !=''">
+                #{grantreadenddt},
+            </if>
+            <if test="grantflag != null and grantflag !=''">
+                #{grantflag},
+            </if>
+            <if test="isread != null and isread !=''">
+                #{isread},
+            </if>
+            <if test="readdt != null and readdt !=''">
+                #{readdt},
+            </if>
+            </trim>
+        )
+    </insert>
+
+    <!-- 비전자 열람 요청내용 등록 -->
+    <insert id="insertUseNonDigitalViewReq" parameterType="com.anylogic.ssystem.bms.use.model.InsertUseDigitalViewReqReqVO">
+        INSERT INTO
+        sbms.sbms_user.bms_dct_apprreq_read(
+            <trim suffixOverrides=",">
+            <if test="apprreqid != null and apprreqid !=''">
+                apprreqid,
+            </if>
+            <if test="mgmtid != null and mgmtid !=''">
+                mgmtid,
+            </if>
+            <if test="reqreadbegindt != null and reqreadbegindt !=''">
+                reqreadbegindt,
+            </if>
+            <if test="reqreadenddt != null and reqreadenddt !=''">
+                reqreadenddt,
+            </if>
+            <if test="grantreadbegindt != null and grantreadbegindt !=''">
+                grantreadbegindt,
+            </if>
+            <if test="grantreadenddt != null and grantreadenddt !=''">
+                grantreadenddt,
+            </if>
+            <if test="grantflag != null and grantflag !=''">
+                grantflag,
+            </if>
+            <if test="isread != null and isread !=''">
+                isread,
+            </if>
+            <if test="readdt != null and readdt !=''">
+                readdt,
+            </if>
+            <if test="readcharge != null and readcharge !=''">
+                readcharge,
+            </if>
+            </trim>
+        )
+        VALUES(
+            <trim suffixOverrides=",">
+            <if test="apprreqid != null and apprreqid !=''">
+                #{apprreqid},
+            </if>
+            <if test="mgmtid != null and mgmtid !=''">
+                #{mgmtid},
+            </if>
+            <if test="reqreadbegindt != null and reqreadbegindt !=''">
+                #{reqreadbegindt},
+            </if>
+            <if test="reqreadenddt != null and reqreadenddt !=''">
+                #{reqreadenddt},
+            </if>
+            <if test="grantreadbegindt != null and grantreadbegindt !=''">
+                #{grantreadbegindt},
+            </if>
+            <if test="grantreadenddt != null and grantreadenddt !=''">
+                #{grantreadenddt},
+            </if>
+            <if test="grantflag != null and grantflag !=''">
+                #{grantflag},
+            </if>
+            <if test="isread != null and isread !=''">
+                #{isread},
+            </if>
+            <if test="readdt != null and readdt !=''">
+                #{readdt},
+            </if>
+            <if test="readcharge != null and readcharge !=''">
+                #{readcharge},
+            </if>
+            </trim>
+        )
+    </insert>
+
+    <!-- 각 요청서 승인/반려 처리 - 승인한 열람정보 수정 -->
+    <update id="updateUseReqMapView" parameterType="java.util.Map">
+        UPDATE sbms.sbms_user.bms_dct_apprreq_read
+        SET
+            grantreadbegindt = REPLACE(#{grantreadbegindt},'-','') || '000000'
+          ,grantreadenddt = REPLACE(#{grantreadenddt},'-','') || '235959'
+          ,grantflag = #{grantflag}
+        WHERE apprreqid = #{apprreqid}
+          AND mgmtid = #{mgmtid}
+    </update>
+
+    <!-- 각 요청서 상세화면 조회 - 열람할 문서 정보 -->
+    <select id="selectUseReqViewMapList" parameterType="java.util.Map" resultType="java.util.HashMap">
+        SELECT b.apprreqid                                                                 as "apprreqid"
+             , a.mgmtid                                                                    as "mgmtid"
+             , a.mgmtno                                                                    as "mgmtno"
+             , a.copyno                                                                    as "copyno"
+             , a.secttl                                                                    as "secttl"
+             , a.authorname                                                                as "authorname"
+             , TO_CHAR(TO_TIMESTAMP(b.reqreadbegindt, 'YYYYMMDDHH24MISS'), 'YYYY.MM.DD') || '~' ||
+               TO_CHAR(TO_TIMESTAMP(b.reqreadenddt, 'YYYYMMDDHH24MISS'), 'YYYY.MM.DD')     as "reqreadtran"
+             , TO_CHAR(TO_TIMESTAMP(b.reqreadbegindt, 'YYYYMMDDHH24MISS'), 'YYYY-MM-DD')   as "reqreadbegindt"
+             , TO_CHAR(TO_TIMESTAMP(b.reqreadenddt, 'YYYYMMDDHH24MISS'), 'YYYY-MM-DD')     as "reqreadenddt"
+             , TO_CHAR(TO_TIMESTAMP(COALESCE(NULLIF(TRIM(b.grantreadbegindt),''),b.reqreadbegindt), 'YYYYMMDDHH24MISS'), 'YYYY-MM-DD') as "grantreadbegindt"
+             , TO_CHAR(TO_TIMESTAMP(COALESCE(NULLIF(TRIM(b.grantreadenddt),''),b.reqreadenddt), 'YYYYMMDDHH24MISS'), 'YYYY-MM-DD')   as "grantreadenddt"
+             , a.regirecvtype                                                              as "regirecvtype"
+             , a.docid as "docid"
+        FROM sbms.sbms_user.bms_dct_mgmt_regi a
+                 left outer join sbms.sbms_user.bms_dct_apprreq_read b on (a.mgmtid = b.mgmtid)
+        WHERE 1 = 1
+          and apprreqid = #{apprreqid}
+    </select>
+
+</mapper>

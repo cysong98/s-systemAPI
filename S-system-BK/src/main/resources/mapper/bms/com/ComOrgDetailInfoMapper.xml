@@ -1,0 +1,582 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.anylogic.ssystem.bms.com.mapper.ComOrgDetailInfoMapper">
+
+    <resultMap id="deleteSignBIASelectFileMap" type="com.anylogic.ssystem.bms.com.model.DeleteSignBIASelectFileResVO">
+        <id column="fileid" property="fileid" />                      <!-- 파일 ID -->
+        <result column="cfilename" property="cfilename" />            <!-- 파일이름 -->
+        <result column="sfilename" property="sfilename" />            <!-- 파일 고유이름 -->
+        <result column="filesize" property="filesize" />              <!-- 파일크기 -->
+        <result column="saveid" property="saveid" />                  <!-- 저장아이디 -->
+        <result column="filewidth" property="filewidth" />            <!-- 파일WIDTH -->
+        <result column="fileheight" property="fileheight" />          <!-- 파일HEIGHT -->
+        <result column="inid" property="inid" />                      <!-- 등록자 ID -->
+        <result column="indt" property="indt" />                      <!-- 등록일시 -->
+        <result column="upid" property="upid" />                      <!-- 수정자 ID -->
+        <result column="updt" property="updt" />                      <!-- 수정일시 -->
+        <result column="fileurl" property="fileurl" />                <!-- 파일 URL -->
+        <result column="filepath" property="filepath" />              <!-- 파일경로 -->
+    </resultMap>
+
+    <resultMap id="deleteLogoBIASelectFileMap" type="com.anylogic.ssystem.bms.com.model.DeleteLogoBIASelectFileResVO">
+        <id column="fileid" property="fileid" />                      <!-- 파일 ID -->
+        <result column="cfilename" property="cfilename" />            <!-- 파일이름 -->
+        <result column="sfilename" property="sfilename" />            <!-- 파일 고유이름 -->
+        <result column="filesize" property="filesize" />              <!-- 파일크기 -->
+        <result column="saveid" property="saveid" />                  <!-- 저장아이디 -->
+        <result column="filewidth" property="filewidth" />            <!-- 파일WIDTH -->
+        <result column="fileheight" property="fileheight" />          <!-- 파일HEIGHT -->
+        <result column="inid" property="inid" />                      <!-- 등록자 ID -->
+        <result column="indt" property="indt" />                      <!-- 등록일시 -->
+        <result column="upid" property="upid" />                      <!-- 수정자 ID -->
+        <result column="updt" property="updt" />                      <!-- 수정일시 -->
+        <result column="fileurl" property="fileurl" />                <!-- 파일 URL -->
+        <result column="filepath" property="filepath" />              <!-- 파일경로 -->
+    </resultMap>
+
+    <resultMap id="getOrgDetailInfoSeqMap" type="com.anylogic.ssystem.bms.com.model.GetOrgDetailInfoSeqResVO">
+        <id column="orgid" property="orgid" />
+        <id column="seq" property="seq" />
+    </resultMap>
+
+    <!-- COM_ORG_DETAIL_INFO 마지막 시퀀스 번호 획득 -->
+    <select id="getOrgDetailInfoSeq" parameterType="com.anylogic.ssystem.bms.com.model.GetOrgDetailInfoSeqReqVO" resultMap="getOrgDetailInfoSeqMap">
+        SELECT
+            orgid as "orgid"
+             , seq as "seq"
+        FROM sbms.sbms_user.com_org_detail_info
+        WHERE 1 = 1
+          and orgid = #{orgid}
+        ORDER BY seq DESC
+            LIMIT 1;
+    </select>
+
+    <!-- ====================================== 관인 관리 ====================================== -->
+    <!--  조직관리 > 관인관리 > 관인 디테일 삭제 -->
+    <delete id="deleteGwanOrgDetail" parameterType="com.anylogic.ssystem.bms.com.model.DeleteGwanOrgDetailReqVO">
+        DELETE FROM sbms.sbms_user.com_org_detail_info
+        WHERE 1 = 1
+            and orgid = #{orgid}
+            and seq = #{seq}
+    </delete>
+
+    <!-- 조직관리 > 관인관리 > 관인 디테일 등록 -->
+    <insert id="insertGwanOrgDetail" parameterType="com.anylogic.ssystem.bms.com.model.InsertGwanOrgDetailReqVO">
+        INSERT INTO
+        sbms.sbms_user.com_org_detail_info(
+            <trim suffixOverrides=",">
+            <if test="orgid != null and orgid !=''">
+                orgid,
+            </if>
+            <if test="seq != null and seq !=''">
+                seq,
+            </if>
+            <if test="managegubun != null and managegubun !=''">
+                managegubun,
+            </if>
+            <if test="fileid != null and fileid !=''">
+                fileid,
+            </if>
+            <if test="etc != null and etc !=''">
+                etc,
+            </if>
+            <if test="isuse != null and isuse !=''">
+                isuse,
+            </if>
+            <if test="isdefault != null and isdefault !=''">
+                isdefault,
+            </if>
+            <if test="inid != null and inid !=''">
+                inid,
+            </if>
+            <if test="indt != null and indt !=''">
+                indt,
+            </if>
+            <if test="upid != null and upid !=''">
+                upid,
+            </if>
+            <if test="updt != null and updt !=''">
+                updt,
+            </if>
+            </trim>
+        )
+        VALUES(
+            <trim suffixOverrides=",">
+            <if test="orgid != null and orgid !=''">
+                #{orgid},
+            </if>
+            <if test="seq != null and seq !=''">
+                #{seq}::double precision,
+            </if>
+            <if test="managegubun != null and managegubun !=''">
+                #{managegubun},
+            </if>
+            <if test="fileid != null and fileid !=''">
+                #{fileid},
+            </if>
+            <if test="etc != null and etc !=''">
+                #{etc},
+            </if>
+            <if test="isuse != null and isuse !=''">
+                #{isuse},
+            </if>
+            <if test="isdefault != null and isdefault !=''">
+                #{isdefault},
+            </if>
+            <if test="inid != null and inid !=''">
+                #{inid},
+            </if>
+            <if test="indt != null and indt !=''">
+                #{indt},
+            </if>
+            <if test="upid != null and upid !=''">
+                #{upid},
+            </if>
+            <if test="updt != null and updt !=''">
+                #{updt},
+            </if>
+            </trim>
+        )
+    </insert>
+
+    <!-- 조직관리 > 관인관리 > 관인 디테일 수정 -->
+    <update id="updateGwanOrgDetail" parameterType="com.anylogic.ssystem.bms.com.model.UpdateGwanOrgDetailReqVO">
+        UPDATE sbms.sbms_user.com_org_detail_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="managegubun != null and managegubun !=''">
+                managegubun = #{managegubun},
+            </if>
+            <if test="fileid != null and fileid !=''">
+                fileid = #{fileid},
+            </if>
+            <if test="etc != null and etc !=''">
+                etc = #{etc},
+            </if>
+            <if test="isuse != null and isuse !=''">
+                isuse = #{isuse},
+            </if>
+            <if test="isdefault != null and isdefault !=''">
+                isdefault = #{isdefault},
+            </if>
+            <if test="inid != null and inid !=''">
+                inid = #{inid},
+            </if>
+            <if test="indt != null and indt !=''">
+                indt = #{indt},
+            </if>
+            <if test="upid != null and upid !=''">
+                upid = #{upid},
+            </if>
+            <if test="updt != null and updt !=''">
+                updt = #{updt},
+            </if>
+        </trim>
+        WHERE 1 = 1
+            and orgid = #{orgid}
+            and seq = #{seq}
+    </update>
+
+    <!-- ====================================== 서명인 관리 ====================================== -->
+    <!-- 조직관리 > 서명인관리 > 서명인 삭제 -->
+    <delete id="deleteSignBIA" parameterType="com.anylogic.ssystem.bms.com.model.DeleteSignBIAReqVO">
+        DELETE FROM sbms.sbms_user.com_org_detail_info
+        WHERE 1 = 1
+            and orgid = #{orgid}
+            and seq = #{seq}
+    </delete>
+
+    <!-- 조직관리 > 서명인관리 > 서명인 이미지 삭제 -->
+    <delete id="deleteComImage" parameterType="com.anylogic.ssystem.bms.com.model.DeleteComImageReqVO">
+        DELETE FROM sbms.sbms_user.com_image
+        WHERE 1 = 1
+            and fileid = #{fileid}
+    </delete>
+
+    <!--  조직관리 > 서명인관리 > 삭제할 서명인 이미지 목록 조회 -->
+    <select id="deleteSignBIASelectFile" parameterType="com.anylogic.ssystem.bms.com.model.DeleteSignBIASelectFileReqVO" resultMap="deleteSignBIASelectFileMap">
+        SELECT
+            fileid as "fileid"
+            , cfilename as "cfilename"
+            , sfilename as "sfilename"
+            , filesize as "filesize"
+            , saveid as "saveid"
+            , filewidth as "filewidth"
+            , fileheight as "fileheight"
+            , inid as "inid"
+            , indt as "indt"
+            , upid as "upid"
+            , updt as "updt"
+            , fileurl as "fileurl"
+            , filepath as "filepath"
+        FROM  sbms.sbms_user.com_image
+        WHERE 1 = 1
+            <if test="fileid != null and fileid !=''">
+                and fileid = #{fileid}
+            </if>
+    </select>
+
+    <!-- 조직관리 > 서명인관리 > 서명인 등록 -->
+    <insert id="insertSignBIA" parameterType="com.anylogic.ssystem.bms.com.model.InsertSignBIAReqVO">
+        INSERT INTO
+        sbms.sbms_user.com_org_detail_info(
+            <trim suffixOverrides=",">
+            <if test="orgid != null and orgid !=''">
+                orgid,
+            </if>
+            <if test="seq != null and seq !=''">
+                seq,
+            </if>
+            <if test="managegubun != null and managegubun !=''">
+                managegubun,
+            </if>
+            <if test="fileid != null and fileid !=''">
+                fileid,
+            </if>
+            <if test="etc != null and etc !=''">
+                etc,
+            </if>
+            <if test="isuse != null and isuse !=''">
+                isuse,
+            </if>
+            <if test="isdefault != null and isdefault !=''">
+                isdefault,
+            </if>
+            <if test="inid != null and inid !=''">
+                inid,
+            </if>
+            <if test="indt != null and indt !=''">
+                indt,
+            </if>
+            <if test="upid != null and upid !=''">
+                upid,
+            </if>
+            <if test="updt != null and updt !=''">
+                updt,
+            </if>
+            </trim>
+        )
+        VALUES(
+            <trim suffixOverrides=",">
+            <if test="orgid != null and orgid !=''">
+                #{orgid},
+            </if>
+            <if test="seq != null and seq !=''">
+                #{seq}::double precision,
+            </if>
+            <if test="managegubun != null and managegubun !=''">
+                #{managegubun},
+            </if>
+            <if test="fileid != null and fileid !=''">
+                #{fileid},
+            </if>
+            <if test="etc != null and etc !=''">
+                #{etc},
+            </if>
+            <if test="isuse != null and isuse !=''">
+                #{isuse},
+            </if>
+            <if test="isdefault != null and isdefault !=''">
+                #{isdefault},
+            </if>
+            <if test="inid != null and inid !=''">
+                #{inid},
+            </if>
+            <if test="indt != null and indt !=''">
+                #{indt},
+            </if>
+            <if test="upid != null and upid !=''">
+                #{upid},
+            </if>
+            <if test="updt != null and updt !=''">
+                #{updt},
+            </if>
+            </trim>
+        )
+    </insert>
+
+    <!-- 조직관리 > 서명인관리 > 서명인 이미지 등록 -->
+    <insert id="insertComImage" parameterType="com.anylogic.ssystem.bms.com.model.InsertComImageReqVO">
+        INSERT INTO
+        sbms.sbms_user.com_image(
+        <trim suffixOverrides=",">
+            <if test="fileid != null and fileid !=''">
+                fileid,
+            </if>
+            <if test="cfilename != null and cfilename !=''">
+                cfilename,
+            </if>
+            <if test="sfilename != null and sfilename !=''">
+                sfilename,
+            </if>
+            <if test="filesize != null and filesize !=''">
+                filesize,
+            </if>
+            <if test="saveid != null and saveid !=''">
+                saveid,
+            </if>
+            <if test="filewidth != null and filewidth !=''">
+                filewidth,
+            </if>
+            <if test="fileheight != null and fileheight !=''">
+                fileheight,
+            </if>
+            <if test="inid != null and inid !=''">
+                inid,
+            </if>
+            <if test="indt != null and indt !=''">
+                indt,
+            </if>
+            <if test="upid != null and upid !=''">
+                upid,
+            </if>
+            <if test="updt != null and updt !=''">
+                updt,
+            </if>
+            <if test="fileurl != null and fileurl !=''">
+                fileurl,
+            </if>
+            <if test="filepath != null and filepath !=''">
+                filepath,
+            </if>
+        </trim>
+        )
+        VALUES(
+        <trim suffixOverrides=",">
+            <if test="fileid != null and fileid !=''">
+                #{fileid},
+            </if>
+            <if test="cfilename != null and cfilename !=''">
+                #{cfilename},
+            </if>
+            <if test="sfilename != null and sfilename !=''">
+                #{sfilename},
+            </if>
+            <if test="filesize != null and filesize !=''">
+                #{filesize},
+            </if>
+            <if test="saveid != null and saveid !=''">
+                #{saveid},
+            </if>
+            <if test="filewidth != null and filewidth !=''">
+                #{filewidth},
+            </if>
+            <if test="fileheight != null and fileheight !=''">
+                #{fileheight},
+            </if>
+            <if test="inid != null and inid !=''">
+                #{inid},
+            </if>
+            <if test="indt != null and indt !=''">
+                #{indt},
+            </if>
+            <if test="upid != null and upid !=''">
+                #{upid},
+            </if>
+            <if test="updt != null and updt !=''">
+                #{updt},
+            </if>
+            <if test="fileurl != null and fileurl !=''">
+                #{fileurl},
+            </if>
+            <if test="filepath != null and filepath !=''">
+                #{filepath},
+            </if>
+        </trim>
+        )
+    </insert>
+
+    <!-- 조직관리 > 서명인관리 > 서명인 수정 -->
+    <update id="updateSignBIA" parameterType="com.anylogic.ssystem.bms.com.model.UpdateSignBIAReqVO">
+        UPDATE sbms.sbms_user.com_org_detail_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="managegubun != null and managegubun !=''">
+                managegubun = #{managegubun},
+            </if>
+            <if test="fileid != null and fileid !=''">
+                fileid = #{fileid},
+            </if>
+            <if test="etc != null and etc !=''">
+                etc = #{etc},
+            </if>
+            <if test="isuse != null and isuse !=''">
+                isuse = #{isuse},
+            </if>
+            <if test="isdefault != null and isdefault !=''">
+                isdefault = #{isdefault},
+            </if>
+            <if test="inid != null and inid !=''">
+                inid = #{inid},
+            </if>
+            <if test="indt != null and indt !=''">
+                indt = #{indt},
+            </if>
+            <if test="upid != null and upid !=''">
+                upid = #{upid},
+            </if>
+            <if test="updt != null and updt !=''">
+                updt = #{updt},
+            </if>
+        </trim>
+        WHERE 1 = 1
+            and orgid = #{orgid}
+            and seq = #{seq}
+    </update>
+
+    <!-- 파일 경로 조회 -->
+    <select id="getFilePath" parameterType="String" resultType="String">
+        SELECT
+            filepath
+        FROM sbms.sbms_user.com_image
+            WHERE cfilename = #{cfilename}
+
+    </select>
+
+    <!-- ========================= 로고 관리 ========================= -->
+    <!-- 조직관리 > 심볼/로고관리 > 심볼/로고 삭제 -->
+    <delete id="deleteLogoBIA" parameterType="com.anylogic.ssystem.bms.com.model.DeleteLogoBIAReqVO">
+        DELETE FROM sbms.sbms_user.com_org_detail_info
+        WHERE 1 = 1
+            and orgid = #{orgid}
+            and seq = #{seq}
+    </delete>
+
+    <!-- 조직관리 > 심볼/로고관리 > 삭제할 심볼/로고 이미지 목록 조회 -->
+    <select id="deleteLogoBIASelectFile" parameterType="com.anylogic.ssystem.bms.com.model.DeleteLogoBIASelectFileReqVO" resultMap="deleteLogoBIASelectFileMap">
+        SELECT
+            fileid as "fileid"
+            , cfilename as "cfilename"
+            , sfilename as "sfilename"
+            , filesize as "filesize"
+            , saveid as "saveid"
+            , filewidth as "filewidth"
+            , fileheight as "fileheight"
+            , inid as "inid"
+            , indt as "indt"
+            , upid as "upid"
+            , updt as "updt"
+            , fileurl as "fileurl"
+            , filepath as "filepath"
+        FROM  sbms.sbms_user.com_image
+        WHERE 1 = 1
+            <if test="fileid != null and fileid !=''">
+                and fileid = #{fileid}
+            </if>
+    </select>
+
+    <!-- 조직관리 > 심볼/로고관리 > 심볼/로고 등록 -->
+    <insert id="insertLogoBIA" parameterType="com.anylogic.ssystem.bms.com.model.InsertLogoBIAReqVO">
+        INSERT INTO
+        sbms.sbms_user.com_org_detail_info(
+        <trim suffixOverrides=",">
+            <if test="orgid != null and orgid !=''">
+                orgid,
+            </if>
+            <if test="seq != null and seq !=''">
+                seq,
+            </if>
+            <if test="managegubun != null and managegubun !=''">
+                managegubun,
+            </if>
+            <if test="fileid != null and fileid !=''">
+                fileid,
+            </if>
+            <if test="etc != null and etc !=''">
+                etc,
+            </if>
+            <if test="isuse != null and isuse !=''">
+                isuse,
+            </if>
+            <if test="isdefault != null and isdefault !=''">
+                isdefault,
+            </if>
+            <if test="inid != null and inid !=''">
+                inid,
+            </if>
+            <if test="indt != null and indt !=''">
+                indt,
+            </if>
+            <if test="upid != null and upid !=''">
+                upid,
+            </if>
+            <if test="updt != null and updt !=''">
+                updt,
+            </if>
+        </trim>
+        )
+        VALUES(
+        <trim suffixOverrides=",">
+            <if test="orgid != null and orgid !=''">
+                #{orgid},
+            </if>
+            <if test="seq != null and seq !=''">
+                #{seq},
+            </if>
+            <if test="managegubun != null and managegubun !=''">
+                #{managegubun},
+            </if>
+            <if test="fileid != null and fileid !=''">
+                #{fileid},
+            </if>
+            <if test="etc != null and etc !=''">
+                #{etc},
+            </if>
+            <if test="isuse != null and isuse !=''">
+                #{isuse},
+            </if>
+            <if test="isdefault != null and isdefault !=''">
+                #{isdefault},
+            </if>
+            <if test="inid != null and inid !=''">
+                #{inid},
+            </if>
+            <if test="indt != null and indt !=''">
+                #{indt},
+            </if>
+            <if test="upid != null and upid !=''">
+                #{upid},
+            </if>
+            <if test="updt != null and updt !=''">
+                #{updt},
+            </if>
+        </trim>
+        )
+    </insert>
+
+    <!--  조직관리 > 심볼/로고관리 > 심볼/로고 수정 -->
+    <update id="updateLogoBIA" parameterType="com.anylogic.ssystem.bms.com.model.UpdateLogoBIAReqVO">
+        UPDATE sbms.sbms_user.com_org_detail_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="managegubun != null and managegubun !=''">
+                managegubun = #{managegubun},
+            </if>
+            <if test="fileid != null and fileid !=''">
+                fileid = #{fileid},
+            </if>
+            <if test="etc != null and etc !=''">
+                etc = #{etc},
+            </if>
+            <if test="isuse != null and isuse !=''">
+                isuse = #{isuse},
+            </if>
+            <if test="isdefault != null and isdefault !=''">
+                isdefault = #{isdefault},
+            </if>
+            <if test="inid != null and inid !=''">
+                inid = #{inid},
+            </if>
+            <if test="indt != null and indt !=''">
+                indt = #{indt},
+            </if>
+            <if test="upid != null and upid !=''">
+                upid = #{upid},
+            </if>
+            <if test="updt != null and updt !=''">
+                updt = #{updt},
+            </if>
+        </trim>
+        WHERE 1 = 1
+            and orgid = #{orgid}
+            and seq = #{seq}
+    </update>
+
+</mapper>

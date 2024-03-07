@@ -1,0 +1,54 @@
+/*
+   AnyX Platform version 2.0
+
+   Copyright ⓒ 2022 anylogic corp. All rights reserved.
+
+   This is a proprietary software of anylogic corp, and you may not use this file except in
+   compliance with license agreement with anylogic corp. Any redistribution or use of this
+   software, with or without modification shall be strictly prohibited without prior written
+   approval of anylogic corp, and the copyright notice above does not evidence any actual or
+   intended publication of such software.
+*/
+
+
+
+package com.anylogic.ssystem.bms.dct.model;
+
+import com.anylogic.ssystem.common.model.AnyXCommonVO;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.*;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
+
+@ApiModel("getMgmtRegi")
+@Getter
+@Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class GetHistCardInfoResVO extends AnyXCommonVO implements Serializable {
+    @ApiModelProperty("비밀 ID") private String docid;              // 비밀 ID
+    @ApiModelProperty("이력 일시") private String histdt;           // 이력 일시
+    @ApiModelProperty("이력 순번") private BigDecimal histseq;// 이력 순번
+    @ApiModelProperty("결제요청 ID") private String apprreqid;      // 결제요청 ID
+    @ApiModelProperty("이력구분") private String histgubun;         // 이력구분
+    @ApiModelProperty("소속코드") private String deptid;            // 소속코드
+    @ApiModelProperty("소속명") private String deptname;            // 소속명
+    @ApiModelProperty("직위직급명") private String dutyname;        // 직위직급명
+    @ApiModelProperty("사용자 ID") private String userid;           // 사용자 ID
+    @ApiModelProperty("사용자명") private String username;          // 사용자명
+    @ApiModelProperty("이력상태") private String histstatus;        // 이력상태
+    @ApiModelProperty("기타") private String etc;                   // 기타
+    @ApiModelProperty("전자서명 ID") private String electsignid;    // 전자서명 ID
+
+    @ApiModelProperty("") private String etcFileOrder;
+    @ApiModelProperty("") private int rownum;
+
+
+}
+

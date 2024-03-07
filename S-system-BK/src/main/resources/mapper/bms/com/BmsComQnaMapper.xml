@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.anylogic.ssystem.bms.com.mapper.BmsComQnaMapper">
+
+    <resultMap id="selectQnaListMap" type="com.anylogic.ssystem.bms.com.model.SelectQnaListResVO">
+        <id column="qnaid" property="qnaid" />                        <!-- 아이디 -->
+        <result column="refid" property="refid" />                    <!-- 상위아이디 -->
+        <result column="thread" property="thread" />                  <!-- 그룹 -->
+        <result column="pos" property="pos" />                        <!-- 순서 -->
+        <result column="depth" property="depth" />                    <!-- 깊이 -->
+        <result column="title" property="title" />                    <!-- 제목 -->
+        <result column="cont" property="cont" />                      <!-- 내용 -->
+        <result column="fileyn" property="fileyn" />                  <!-- 첨부파일여부 -->
+        <result column="selcnt" property="selcnt" />                  <!-- 조회수 -->
+        <result column="repcnt" property="repcnt" />                  <!-- 답변수 -->
+        <result column="inid" property="inid" />                      <!-- 등록자아이디 -->
+        <result column="inname" property="inname" />                  <!-- 등록자명 -->
+        <result column="indt" property="indt" />                      <!-- 등록일시 -->
+        <result column="upid" property="upid" />                      <!-- 수정자아이디 -->
+        <result column="upname" property="upname" />                  <!-- 수정자명 -->
+        <result column="updt" property="updt" />                      <!-- 수정일시 -->
+    </resultMap>
+
+    <resultMap id="getQnaDetailMap" type="com.anylogic.ssystem.bms.com.model.GetQnaDetailResVO">
+        <id column="qnaid" property="qnaid" />                        <!-- 아이디 -->
+        <result column="refid" property="refid" />                    <!-- 상위아이디 -->
+        <result column="thread" property="thread" />                  <!-- 그룹 -->
+        <result column="pos" property="pos" />                        <!-- 순서 -->
+        <result column="depth" property="depth" />                    <!-- 깊이 -->
+        <result column="title" property="title" />                    <!-- 제목 -->
+        <result column="cont" property="cont" />                      <!-- 내용 -->
+        <result column="fileyn" property="fileyn" />                  <!-- 첨부파일여부 -->
+        <result column="selcnt" property="selcnt" />                  <!-- 조회수 -->
+        <result column="repcnt" property="repcnt" />                  <!-- 답변수 -->
+        <result column="inid" property="inid" />                      <!-- 등록자아이디 -->
+        <result column="inname" property="inname" />                  <!-- 등록자명 -->
+        <result column="indt" property="indt" />                      <!-- 등록일시 -->
+        <result column="upid" property="upid" />                      <!-- 수정자아이디 -->
+        <result column="upname" property="upname" />                  <!-- 수정자명 -->
+        <result column="updt" property="updt" />                      <!-- 수정일시 -->
+    </resultMap>
+
+    <resultMap id="getSeqMap" type="com.anylogic.ssystem.bms.com.model.GetSeqResVO">
+        <result column="thread" property="thread" />                  <!-- 그룹 -->
+    </resultMap>
+
+
+    <!-- 게시판관리 > Q&A 관리 > Q&A 목록 조회 -->
+    <select id="selectQnaList" parameterType="com.anylogic.ssystem.bms.com.model.SelectQnaListReqVO" resultMap="selectQnaListMap">
+        SELECT
+            qnaid as "qnaid" 
+            , refid as "refid" 
+            , thread as "thread" 
+            , pos as "pos" 
+            , depth as "depth" 
+            , title as "title" 
+            , cont as "cont" 
+            , fileyn as "fileyn" 
+            , selcnt as "selcnt" 
+            , repcnt as "repcnt" 
+            , inid as "inid" 
+            , inname as "inname" 
+            , indt as "indt" 
+            , upid as "upid" 
+            , upname as "upname" 
+            , updt as "updt" 
+        FROM  sbms.sbms_user.bms_com_qna
+        WHERE 1 = 1
+            <if test="refid != null and refid !=''">
+                and refid = #{refid}
+            </if>
+            <if test="title != null and title !=''">
+                and title like CONCAT('%', #{title}, '%')
+            </if>
+            <if test="inname != null and inname !=''">
+                and inname like CONCAT('%', #{inname}, '%')
+            </if>
+            <if test="thread != null and thread !=''">
+                and thread = #{thread}
+            </if>
+            <if test="pos != null and pos !=''">
+                and pos = #{pos}
+            </if>
+            <if test="depth != null and depth !=''">
+                and depth = #{depth}
+            </if>
+            <if test="startDt != null and startDt !=''">
+                and indt <![CDATA[>=]]> #{startDt}
+            </if>
+            <if test="endDt != null and endDt !=''">
+                and indt <![CDATA[<=]]> #{endDt}
+            </if>
+            <if test="sortDirection == 'ASC'">
+                ORDER BY indt ASC
+            </if>
+            <if test="sortDirection == 'DESC'">
+                ORDER BY indt DESC
+            </if>
+    </select>
+
+    <!-- 게시판관리 > Q&A 관리 > Q&A 삭제 -->
+    <delete id="deleteQna" parameterType="com.anylogic.ssystem.bms.com.model.DeleteQnaReqVO">
+        DELETE FROM sbms.sbms_user.bms_com_qna
+        WHERE 1 = 1
+            and qnaid = #{qnaid}
+    </delete>
+
+    <!-- 게시판관리 > Q&A 관리 > Q&A 상세 조회 -->
+    <select id="getQnaDetail" parameterType="com.anylogic.ssystem.bms.com.model.GetQnaDetailReqVO" resultMap="getQnaDetailMap">
+        SELECT
+            qnaid as "qnaid"
+            , refid as "refid"
+            , thread as "thread"
+            , pos as "pos"
+            , depth as "depth"
+            , title as "title"
+            , cont as "cont"
+            , fileyn as "fileyn"
+            , selcnt as "selcnt"
+            , repcnt as "repcnt"
+            , inid as "inid"
+            , inname as "inname"
+            , indt as "indt"
+            , upid as "upid"
+            , upname as "upname"
+            , updt as "updt"
+        FROM  sbms.sbms_user.bms_com_qna
+        WHERE 1 = 1
+            <if test="qnaid != null and qnaid !=''">
+                and qnaid like CONCAT('%', #{qnaid}, '%')
+            </if>
+
+    </select>
+
+    <!-- 게시판관리 > Q&A 관리 > Q&A 등록 -->
+    <insert id="insertQna" parameterType="com.anylogic.ssystem.bms.com.model.InsertQnaReqVO">
+        INSERT INTO
+        sbms.sbms_user.bms_com_qna(
+            <trim suffixOverrides=",">
+            <if test="qnaid != null and qnaid !=''">
+                qnaid,
+            </if>
+            <if test="refid != null and refid !=''">
+                refid,
+            </if>
+            <if test="thread != null and thread !=''">
+                thread,
+            </if>
+            <if test="pos != null and pos !=''">
+                pos,
+            </if>
+            <if test="depth != null and depth !=''">
+                depth,
+            </if>
+            <if test="title != null and title !=''">
+                title,
+            </if>
+            <if test="cont != null and cont !=''">
+                cont,
+            </if>
+            <if test="fileyn != null and fileyn !=''">
+                fileyn,
+            </if>
+            <if test="selcnt != null and selcnt !=''">
+                selcnt,
+            </if>
+            <if test="repcnt != null and repcnt !=''">
+                repcnt,
+            </if>
+            <if test="inid != null and inid !=''">
+                inid,
+            </if>
+            <if test="inname != null and inname !=''">
+                inname,
+            </if>
+            <if test="indt != null and indt !=''">
+                indt,
+            </if>
+            <if test="upid != null and upid !=''">
+                upid,
+            </if>
+            <if test="upname != null and upname !=''">
+                upname,
+            </if>
+            <if test="updt != null and updt !=''">
+                updt,
+            </if>
+            </trim>
+        )
+        VALUES(
+            <trim suffixOverrides=",">
+            <if test="qnaid != null and qnaid !=''">
+                #{qnaid},
+            </if>
+            <if test="refid != null and refid !=''">
+                #{refid},
+            </if>
+            <if test="thread != null and thread !=''">
+                #{thread},
+            </if>
+            <if test="pos != null and pos !=''">
+                #{pos},
+            </if>
+            <if test="depth != null and depth !=''">
+                #{depth},
+            </if>
+            <if test="title != null and title !=''">
+                #{title},
+            </if>
+            <if test="cont != null and cont !=''">
+                #{cont},
+            </if>
+            <if test="fileyn != null and fileyn !=''">
+                #{fileyn},
+            </if>
+            <if test="selcnt != null and selcnt !=''">
+                #{selcnt},
+            </if>
+            <if test="repcnt != null and repcnt !=''">
+                #{repcnt},
+            </if>
+            <if test="inid != null and inid !=''">
+                #{inid},
+            </if>
+            <if test="inname != null and inname !=''">
+                #{inname},
+            </if>
+            <if test="indt != null and indt !=''">
+                #{indt},
+            </if>
+            <if test="upid != null and upid !=''">
+                #{upid},
+            </if>
+            <if test="upname != null and upname !=''">
+                #{upname},
+            </if>
+            <if test="updt != null and updt !=''">
+                #{updt},
+            </if>
+            </trim>
+        )
+    </insert>
+
+    <!-- 게시판관리 > Q&A 관리 > 마지막 시퀀스 번호 획득 -->
+    <select id="getSeq" resultMap="getSeqMap">
+        SELECT
+            thread as "thread"
+        FROM sbms.sbms_user.bms_com_qna
+        ORDER BY thread DESC
+        LIMIT 1
+    </select>
+
+    <!-- 게시판관리 > Q&A 관리 > Q&A 수정 -->
+    <update id="updateQna" parameterType="com.anylogic.ssystem.bms.com.model.UpdateQnaReqVO">
+        UPDATE sbms.sbms_user.bms_com_qna
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="refid != null and refid !=''">
+                refid = #{refid},
+            </if>
+            <if test="thread != null and thread !=''">
+                thread = #{thread},
+            </if>
+            <if test="pos != null and pos !=''">
+                pos = #{pos},
+            </if>
+            <if test="depth != null and depth !=''">
+                depth = #{depth},
+            </if>
+            <if test="title != null and title !=''">
+                title = #{title},
+            </if>
+            <if test="cont != null and cont !=''">
+                cont = #{cont},
+            </if>
+            <if test="fileyn != null and fileyn !=''">
+                fileyn = #{fileyn},
+            </if>
+            <if test="selcnt != null and selcnt !=''">
+                selcnt = #{selcnt},
+            </if>
+            <if test="repcnt != null and repcnt !=''">
+                repcnt = #{repcnt},
+            </if>
+            <if test="inid != null and inid !=''">
+                inid = #{inid},
+            </if>
+            <if test="inname != null and inname !=''">
+                inname = #{inname},
+            </if>
+            <if test="indt != null and indt !=''">
+                indt = #{indt},
+            </if>
+            <if test="upid != null and upid !=''">
+                upid = #{upid},
+            </if>
+            <if test="upname != null and upname !=''">
+                upname = #{upname},
+            </if>
+            <if test="updt != null and updt !=''">
+                updt = #{updt},
+            </if>
+        </trim>
+        WHERE 1 = 1
+            and qnaid = #{qnaid}
+    </update>
+
+</mapper>

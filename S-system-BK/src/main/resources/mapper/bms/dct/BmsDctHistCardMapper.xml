@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.anylogic.ssystem.bms.dct.mapper.BmsDctHistCardMapper">
+
+    <resultMap id="getHistCardInfoMap" type="com.anylogic.ssystem.bms.dct.model.GetHistCardInfoResVO">
+        <result column="docid" property="docid" />
+        <result column="histdt" property="histdt" />
+        <result column="histseq" property="histseq" />
+        <result column="apprreqid" property="apprreqid" />
+        <result column="histgubun" property="histgubun" />
+        <result column="deptid" property="deptid" />
+        <result column="deptname" property="deptname" />
+        <result column="dutyname" property="dutyname" />
+        <result column="userid" property="userid" />
+        <result column="username" property="username" />
+        <result column="histstatus" property="histstatus" />
+        <result column="etc" property="etc" />
+        <result column="electsignid" property="electsignid" />
+
+        <result column="etcFileOrder" property="etcFileOrder" />
+        <result column="deptid" property="deptid" />
+        <result column="rownum" property="rownum" />
+    </resultMap>
+
+    <!-- hist_seq 조회 -->
+    <select id="getHistSeq" resultType="String">
+        SELECT nextval('sbms_user.hist_seq');
+    </select>
+
+    <!-- 이력 등록 -->
+    <insert id="insertHistory" parameterType="com.anylogic.ssystem.bms.dct.model.InsertHistoryReqVO">
+        INSERT INTO
+        sbms.sbms_user.bms_dct_hist_card(
+            <trim suffixOverrides=",">
+            <if test="docid != null and docid !=''">
+                docid,
+            </if>
+            <if test="histdt != null and histdt !=''">
+                histdt,
+            </if>
+            <if test="histseq != null and histseq !=''">
+                histseq,
+            </if>
+            <if test="apprreqid != null and apprreqid !=''">
+                apprreqid,
+            </if>
+            <if test="histgubun != null and histgubun !=''">
+                histgubun,
+            </if>
+            <if test="deptid != null and deptid !=''">
+                deptid,
+            </if>
+            <if test="deptname != null and deptname !=''">
+                deptname,
+            </if>
+            <if test="dutyname != null and dutyname !=''">
+                dutyname,
+            </if>
+            <if test="userid != null and userid !=''">
+                userid,
+            </if>
+            <if test="username != null and username !=''">
+                username,
+            </if>
+            <if test="histstatus != null and histstatus !=''">
+                histstatus,
+            </if>
+            <if test="etc != null and etc !=''">
+                etc,
+            </if>
+            <if test="electsignid != null and electsignid !=''">
+                electsignid,
+            </if>
+            </trim>
+        )
+        VALUES(
+            <trim suffixOverrides=",">
+            <if test="docid != null and docid !=''">
+                #{docid},
+            </if>
+            <if test="histdt != null and histdt !=''">
+                #{histdt},
+            </if>
+            <if test="histseq != null and histseq !=''">
+                #{histseq},
+            </if>
+            <if test="apprreqid != null and apprreqid !=''">
+                #{apprreqid},
+            </if>
+            <if test="histgubun != null and histgubun !=''">
+                #{histgubun},
+            </if>
+            <if test="deptid != null and deptid !=''">
+                #{deptid},
+            </if>
+            <if test="deptname != null and deptname !=''">
+                #{deptname},
+            </if>
+            <if test="dutyname != null and dutyname !=''">
+                #{dutyname},
+            </if>
+            <if test="userid != null and userid !=''">
+                #{userid},
+            </if>
+            <if test="username != null and username !=''">
+                #{username},
+            </if>
+            <if test="histstatus != null and histstatus !=''">
+                #{histstatus},
+            </if>
+            <if test="etc != null and etc !=''">
+                #{etc},
+            </if>
+            <if test="electsignid != null and electsignid !=''">
+                #{electsignid},
+            </if>
+            </trim>
+        )
+    </insert>
+
+    <!-- 비밀 이력 팝업 조회 -->
+    <select id="getHistCardInfo" parameterType="com.anylogic.ssystem.bms.dct.model.GetHistCardInfoReqVO" resultMap="getHistCardInfoMap">
+        SELECT
+            docid,
+            histdt,
+            histseq,
+            apprreqid,
+            histgubun,
+            deptid,
+            deptname,
+            dutyname,
+            userid,
+            username,
+            histstatus,
+            etc,
+            electsignid
+        FROM sbms_user.bms_dct_hist_card
+        WHERE docid = #{docid}
+        <if test="histstatus != null and histstatus !=''">
+            and histstatus = #{histstatus}
+        </if>
+        <if test="etcFileOrder != null and etcFileOrder !=''">
+            <!-- 이력카드에서 파일번호를 변수로 받음. -->
+            and etc ~ ('\m'||#{etcFileOrder}||'번 파일\M:' )
+        </if>
+        <if test="histgubun != null and histgubun !=''">
+            and histgubun = #{histgubun}
+        </if>
+        <if test="deptid != null and deptid !=''">
+            and deptid = #{deptid}
+        </if>
+        ORDER BY histseq DESC, histdt DESC, histstatus DESC
+    </select>
+
+</mapper>

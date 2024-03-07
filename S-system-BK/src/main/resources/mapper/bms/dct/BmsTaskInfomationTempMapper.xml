@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.anylogic.ssystem.bms.dct.mapper.BmsTaskInfomationTempMapper">
+
+    <resultMap id="selectTaskInfoTempMap" type="com.anylogic.ssystem.bms.dct.model.SelectTaskInfoTempResVO">
+        <id column="infomationid" property="infomationid" />          <!-- 정보출처 ID -->
+        <result column="resultid" property="resultid" />              <!-- 실적 ID -->
+        <result column="infotext" property="infotext" />              <!-- 정보출처 제목 -->
+        <result column="inid" property="inid" />                      <!-- 등록자 ID -->
+        <result column="indt" property="indt" />                      <!-- 등록일 -->
+        <result column="attachid" property="attachid" />              <!-- 첨부파일 ID -->
+        <result column="infotype" property="infotype" />              <!-- 정보출처유형 -->
+        <result column="deleteyn" property="deleteyn" />              <!-- 삭제여부 -->
+        <result column="infotitle" property="infotitle" />            <!-- 정보출처타이틀 -->
+        <result column="sfilename" property="sfilename" />            <!-- 파일명 -->
+        <result column="flepath" property="flepath" />            <!-- 파일경로 -->
+    </resultMap>
+
+
+    <!-- 임시저장된 관련근거 조회 -->
+    <select id="selectTaskInfoTemp" parameterType="com.anylogic.ssystem.bms.dct.model.SelectTaskInfoTempReqVO" resultMap="selectTaskInfoTempMap">
+        SELECT
+            a.infomationid as "infomationid",
+            a.resultid as "resultid",
+            a.infotext as "infotext",
+            a.inid as "inid",
+            a.indt as "indt",
+            a.attachid as "attachid",
+            a.infotype as "infotype",
+            a.deleteyn as "deleteyn",
+            a.infotitle as "infotitle",
+            b.sfilename as "sfilename",
+            b.flepath as "flepath"
+        FROM sbms.sbms_user.bms_task_infomation_temp a
+        LEFT JOIN sbms.sbms_user.bms_dct_file b ON a.attachid = b.fleid
+        WHERE 1 = 1
+        <if test="docid != null and docid !=''">
+            and a.resultid like CONCAT('%', #{docid}, '%')
+        </if>
+        <if test="infomationid != null and infomationid !=''">
+            and a.infomationid  = #{infomationid}
+        </if>
+        ORDER BY a.indt DESC
+    </select>
+
+    <!-- 기안완료된 관련근거 조회 -->
+    <select id="selectTaskInfo" parameterType="com.anylogic.ssystem.bms.dct.model.SelectTaskInfoTempReqVO" resultMap="selectTaskInfoTempMap">
+        SELECT
+            a.infomationid as "infomationid",
+            a.resultid as "resultid",
+            a.infotext as "infotext",
+            a.inid as "inid",
+            a.indt as "indt",
+            a.attachid as "attachid",
+            a.infotype as "infotype",
+            a.deleteyn as "deleteyn",
+            a.infotitle as "infotitle",
+            b.sfilename as "sfilename",
+            b.flepath as "flepath"
+        FROM sbms.sbms_user.bms_task_infomation a
+        LEFT JOIN sbms.sbms_user.bms_dct_file b ON a.attachid = b.fleid
+        WHERE 1 = 1
+        <if test="docid != null and docid !=''">
+            and a.resultid like CONCAT('%', #{docid}, '%')
+        </if>
+        <if test="infomationid != null and infomationid !=''">
+            and a.infomationid  = #{infomationid}
+        </if>
+        ORDER BY a.indt DESC
+    </select>
+
+    <!-- 관련근거 파일 조회 -->
+    <select id="selectTaskInfoJoinFile" parameterType="com.anylogic.ssystem.bms.dct.model.SelectTaskInfoTempReqVO" resultMap="selectTaskInfoTempMap">
+        SELECT *
+        FROM sbms.sbms_user.bms_task_infomation a
+        INNER JOIN sbms.sbms_user.bms_dct_file b ON a.attachid = b.fleid
+        WHERE 1 = 1
+        <if test="docid != null and docid !=''">
+            and a.resultid like CONCAT('%', #{docid}, '%')
+        </if>
+        <if test="oridocid != null and oridocid !=''">
+            and a.resultid like CONCAT('%', #{oridocid}, '%')
+        </if>
+        <if test="infomationid != null and infomationid !=''">
+            and a.infomationid  = #{infomationid}
+        </if>
+    </select>
+
+</mapper>

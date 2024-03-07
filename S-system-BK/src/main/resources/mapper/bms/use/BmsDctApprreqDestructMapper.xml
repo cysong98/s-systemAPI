@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.anylogic.ssystem.bms.use.mapper.BmsDctApprreqDestructMapper">
+
+    <!--  파기 요청내용 등록 -->
+    <insert id="insertComingDestructApproveBIA" parameterType="com.anylogic.ssystem.bms.use.model.InsertComingDestructApproveBIAReqVO">
+        INSERT INTO
+        sbms.sbms_user.bms_dct_apprreq_destruct(
+            <trim suffixOverrides=",">
+            <if test="apprreqid != null and apprreqid !=''">
+                apprreqid,
+            </if>
+            <if test="mgmtid != null and mgmtid !=''">
+                mgmtid,
+            </if>
+            <if test="grantflag != null and grantflag !=''">
+                grantflag,
+            </if>
+            </trim>
+        )
+        VALUES(
+            <trim suffixOverrides=",">
+            <if test="apprreqid != null and apprreqid !=''">
+                #{apprreqid},
+            </if>
+            <if test="mgmtid != null and mgmtid !=''">
+                #{mgmtid},
+            </if>
+            <if test="grantflag != null and grantflag !=''">
+                #{grantflag},
+            </if>
+            </trim>
+        )
+    </insert>
+
+    <!-- 각 요청서 승인/반려 처리 - 승인한 파기정보 수정 -->
+    <update id="updateUseReqMapDestruct" parameterType="java.util.Map">
+        UPDATE sbms.sbms_user.bms_dct_apprreq_destruct
+        set grantflag = #{grantflag}
+        WHERE apprreqid = #{apprreqid}
+          AND mgmtid = #{mgmtid}
+    </update>
+
+    <!-- 각 요청서 상세화면 조회 - 파기할 문서 정보 -->
+    <select id="selectUseReqDestructMapList" parameterType="java.util.Map" resultType="java.util.HashMap">
+        SELECT
+            b.apprreqid AS "apprreqid",
+            a.mgmtid AS "mgmtid",
+            a.mgmtno AS "mgmtno",
+            a.secttl AS "secttl",
+            a.deptname AS "deptname",
+            a.authorid AS "authorid",
+            a.authorname AS "authorname",
+            a.docid AS "docid",
+            a.regirecvtype AS "regirecvtype",
+            a.rgstdt AS "rgstdt",
+            c.copyreclass AS "copyreclass",
+            c.copyprotdt AS "copyprotdt",
+            a.copyno AS "copyno"
+        FROM sbms.sbms_user.bms_dct_mgmt_regi a
+                 LEFT OUTER JOIN sbms.sbms_user.bms_dct_apprreq_destruct b ON (a.mgmtid = b.mgmtid)
+                 LEFT OUTER JOIN sbms.sbms_user.bms_dct_attr c ON (a.docid = c.docid)
+        WHERE b.apprreqid = #{apprreqid}
+    </select>
+
+</mapper>

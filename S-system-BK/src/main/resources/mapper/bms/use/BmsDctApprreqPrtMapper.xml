@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.anylogic.ssystem.bms.use.mapper.BmsDctApprreqPrtMapper">
+
+    <resultMap id="selectUseReqPrintListMap" type="com.anylogic.ssystem.bms.use.model.SelectUseReqPrintListResVO">
+        <id column="apprreqid" property="apprreqid" />                <!-- 요청 ID -->
+        <id column="mgmtid" property="mgmtid" />                      <!-- 관리번호 -->
+        <result column="reqprtcnt" property="reqprtcnt" />            <!-- 요청인쇄부수 -->
+        <result column="reqdestructdt" property="reqdestructdt" />    <!-- 요청파기예정일 -->
+        <result column="grantprtcnt" property="grantprtcnt" />        <!-- 승인인쇄부수 -->
+        <result column="grantdestructdt" property="grantdestructdt" /><!-- 승인파기예정일 -->
+        <result column="prtcnt" property="prtcnt" />                  <!-- 인쇄부수 -->
+        <result column="prtdt" property="prtdt" />                    <!-- 인쇄일시 -->
+        <result column="destructcnt" property="destructcnt" />        <!-- 파기부수 -->
+        <result column="destructdt" property="destructdt" />          <!-- 파기일시 -->
+        <result column="grantflag" property="grantflag" />            <!-- 승인여부 -->
+        <result column="fleorder" property="fleorder" />              <!-- 첨부순서 -->
+        <result column="gubun" property="gubun" />                    <!-- 구분 -->
+        <result column="fleid" property="fleid" />                    <!-- 첨부 ID -->
+        <result column="sfilename" property="sfilename" />            <!-- 파일 고유이름 -->
+        <result column="flettl" property="flettl" />                  <!-- 첨부명 -->
+        <result column="flesize" property="flesize" />                <!-- 첨부크기 -->
+        <result column="docid" property="docid" />                    <!-- 비밀 ID -->
+        <result column="indt" property="indt" />                      <!-- 등록일 -->
+        <result column="inid" property="inid" />                      <!-- 등록자 ID -->
+        <result column="markflag" property="markflag" />              <!-- 비밀등급표시여부 -->
+        <result column="origubun" property="origubun" />              <!-- 기존 문서의 구분 -->
+        <result column="oridocid" property="oridocid" />              <!-- 기존 문서의 비밀 ID -->
+        <result column="isviewtype" property="isviewtype" />          <!-- 비전자 첨부구분 -->
+        <result column="fleurl" property="fleurl" />                  <!--  -->
+        <result column="flepath" property="flepath" />                <!--  -->
+    </resultMap>
+
+
+    <!--  전자 인쇄 요청내용 등록 -->
+    <insert id="insertUseDigitalPrint" parameterType="com.anylogic.ssystem.bms.use.model.InsertUseDigitalPrintReqVO">
+        INSERT INTO
+        sbms.sbms_user.bms_dct_apprreq_prt(
+        <trim suffixOverrides=",">
+            <if test="apprreqid != null and apprreqid !=''">
+                apprreqid,
+            </if>
+            <if test="mgmtid != null and mgmtid !=''">
+                mgmtid,
+            </if>
+            <if test="reqprtcnt != null and reqprtcnt !=''">
+                reqprtcnt,
+            </if>
+            <if test="reqdestructdt != null and reqdestructdt !=''">
+                reqdestructdt,
+            </if>
+            <if test="grantprtcnt != null and grantprtcnt !=''">
+                grantprtcnt,
+            </if>
+            <if test="grantdestructdt != null and grantdestructdt !=''">
+                grantdestructdt,
+            </if>
+            <if test="prtcnt != null and prtcnt !=''">
+                prtcnt,
+            </if>
+            <if test="prtdt != null and prtdt !=''">
+                prtdt,
+            </if>
+            <if test="destructcnt != null and destructcnt !=''">
+                destructcnt,
+            </if>
+            <if test="destructdt != null and destructdt !=''">
+                destructdt,
+            </if>
+            <if test="grantflag != null and grantflag !=''">
+                grantflag,
+            </if>
+        </trim>
+        )
+        VALUES(
+        <trim suffixOverrides=",">
+            <if test="apprreqid != null and apprreqid !=''">
+                #{apprreqid},
+            </if>
+            <if test="mgmtid != null and mgmtid !=''">
+                #{mgmtid},
+            </if>
+            <if test="reqprtcnt != null and reqprtcnt !=''">
+                #{reqprtcnt},
+            </if>
+            <if test="reqdestructdt != null and reqdestructdt !=''">
+                #{reqdestructdt},
+            </if>
+            <if test="grantprtcnt != null and grantprtcnt !=''">
+                #{grantprtcnt},
+            </if>
+            <if test="grantdestructdt != null and grantdestructdt !=''">
+                #{grantdestructdt},
+            </if>
+            <if test="prtcnt != null and prtcnt !=''">
+                #{prtcnt},
+            </if>
+            <if test="prtdt != null and prtdt !=''">
+                #{prtdt},
+            </if>
+            <if test="destructcnt != null and destructcnt !=''">
+                #{destructcnt},
+            </if>
+            <if test="destructdt != null and destructdt !=''">
+                #{destructdt},
+            </if>
+            <if test="grantflag != null and grantflag !=''">
+                #{grantflag},
+            </if>
+        </trim>
+        )
+    </insert>
+
+    <!-- (반영X) 비전자 인쇄 요청내용 등록 -->
+    <insert id="insertUseNonDigitalPrint" parameterType="com.anylogic.ssystem.bms.use.model.InsertUseDigitalPrintReqVO">
+        INSERT INTO
+        sbms.sbms_user.bms_dct_apprreq_prt(
+        <trim suffixOverrides=",">
+            <if test="apprreqid != null and apprreqid !=''">
+                apprreqid,
+            </if>
+            <if test="mgmtid != null and mgmtid !=''">
+                mgmtid,
+            </if>
+            <if test="reqprtcnt != null and reqprtcnt !=''">
+                reqprtcnt,
+            </if>
+            <if test="reqdestructdt != null and reqdestructdt !=''">
+                reqdestructdt,
+            </if>
+            <if test="grantprtcnt != null and grantprtcnt !=''">
+                grantprtcnt,
+            </if>
+            <if test="grantdestructdt != null and grantdestructdt !=''">
+                grantdestructdt,
+            </if>
+            <if test="prtcnt != null and prtcnt !=''">
+                prtcnt,
+            </if>
+            <if test="prtdt != null and prtdt !=''">
+                prtdt,
+            </if>
+            <if test="destructcnt != null and destructcnt !=''">
+                destructcnt,
+            </if>
+            <if test="destructdt != null and destructdt !=''">
+                destructdt,
+            </if>
+            <if test="grantflag != null and grantflag !=''">
+                grantflag,
+            </if>
+            <if test="prtcharge != null and prtcharge !=''">
+                prtcharge,
+            </if>
+        </trim>
+        )
+        VALUES(
+        <trim suffixOverrides=",">
+            <if test="apprreqid != null and apprreqid !=''">
+                #{apprreqid},
+            </if>
+            <if test="mgmtid != null and mgmtid !=''">
+                #{mgmtid},
+            </if>
+            <if test="reqprtcnt != null and reqprtcnt !=''">
+                #{reqprtcnt},
+            </if>
+            <if test="reqdestructdt != null and reqdestructdt !=''">
+                #{reqdestructdt},
+            </if>
+            <if test="grantprtcnt != null and grantprtcnt !=''">
+                #{grantprtcnt},
+            </if>
+            <if test="grantdestructdt != null and grantdestructdt !=''">
+                #{grantdestructdt},
+            </if>
+            <if test="prtcnt != null and prtcnt !=''">
+                #{prtcnt},
+            </if>
+            <if test="prtdt != null and prtdt !=''">
+                #{prtdt},
+            </if>
+            <if test="destructcnt != null and destructcnt !=''">
+                #{destructcnt},
+            </if>
+            <if test="destructdt != null and destructdt !=''">
+                #{destructdt},
+            </if>
+            <if test="grantflag != null and grantflag !=''">
+                #{grantflag},
+            </if>
+            <if test="prtcharge != null and prtcharge !=''">
+                #{prtcharge},
+            </if>
+        </trim>
+        )
+    </insert>
+
+    <!-- 각 요청서 승인/반려 처리 - 승인한 인쇄정보 수정 -->
+    <update id="updateUseReqMapPrint" parameterType="java.util.Map">
+        UPDATE sbms.sbms_user.bms_dct_apprreq_prt
+        SET
+            grantdestructdt = REPLACE(#{grantdestructdt},'-','') || '235959'
+          ,grantprtcnt = CAST(#{grantprtcnt} AS numeric)
+          ,grantflag = #{grantflag}
+        WHERE apprreqid = #{apprreqid}
+          AND mgmtid = #{mgmtid}
+    </update>
+
+    <!-- 각 요청서 상세화면 조회 - 인쇄할 문서 정보  -->
+    <select id="selectUseReqPrintMapList" parameterType="java.util.Map" resultType="java.util.HashMap">
+        SELECT
+            b.apprreqid as "apprreqid"
+             , m.mgmtid as "mgmtid"
+             , m.mgmtno as "mgmtno"
+             , m.secttl as "secttl"
+             , m.authorname as "authorname"
+             , TO_CHAR(TO_TIMESTAMP(b.reqdestructdt, 'YYYYMMDDHH24MISS'), 'YYYY.MM.DD') as "reqdestructdt"
+             , b.reqprtcnt as "reqprtcnt"
+             , TO_CHAR(TO_TIMESTAMP(COALESCE(NULLIF(TRIM(b.grantdestructdt),''),b.reqdestructdt), 'YYYYMMDDHH24MISS'), 'YYYY-MM-DD') as "grantdestructdt"
+             , COALESCE(NULLIF(b.grantprtcnt,null),b.reqprtcnt) as "grantprtcnt"
+             , (
+            SELECT
+                array_agg(
+                        jsonb_build_object(
+                                'flepath', COALESCE(NULLIF(fle.flepath, ''), ''),
+                                'sfilename', COALESCE(NULLIF(fle.sfilename, ''), ''),
+                                'gubun', COALESCE(NULLIF(f.gubun, ''), ''),
+                                'fleorder', f.fleorder,
+                                'prtcnt', f.prtcnt
+                            )
+                    )
+            FROM sbms.sbms_user.bms_dct_file fle
+                     INNER JOIN sbms.sbms_user.bms_dct_apprreq_prt_fle f ON (fle.fleid = f.fleid) WHERE f.apprreqid = #{apprreqid} AND f.mgmtid = m.mgmtid
+        ) AS "fileInfoList"
+             , m.docid as "docid"
+             , COALESCE(b.prtcnt, 0) AS "prtcnt"
+             , CASE
+                   WHEN b.prtdt IS NOT NULL THEN TO_CHAR(TO_TIMESTAMP(b.prtdt, 'YYYYMMDDHH24MISS'), 'YYYY-MM-DD')
+                   ELSE ''
+            END AS "prtdt"
+             , COALESCE(b.destructcnt, 0) AS "destructcnt"
+             , CASE
+                   WHEN b.destructdt IS NOT NULL THEN TO_CHAR(TO_TIMESTAMP(b.destructdt, 'YYYYMMDDHH24MISS'), 'YYYY-MM-DD')
+                   ELSE ''
+            END AS "destructdt"
+        FROM sbms.sbms_user.bms_dct_mgmt_regi m left outer join sbms.sbms_user.bms_dct_apprreq_prt b on (m.mgmtid = b.mgmtid)
+        WHERE b.apprreqid = #{apprreqid}
+    </select>
+
+    <!-- 파기예정일자 조회 -->
+    <select id="getReqdesturcdtByid" parameterType="com.anylogic.ssystem.bms.use.model.SelectUseReqPrintListReqVO" resultMap="selectUseReqPrintListMap">
+        SELECT reqdestructdt as "reqdestructdt"
+        FROM  sbms.sbms_user.bms_dct_apprreq_prt
+        WHERE apprreqid = #{apprreqid} limit 1
+    </select>
+
+</mapper>

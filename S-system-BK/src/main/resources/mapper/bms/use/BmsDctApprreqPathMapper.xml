@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.anylogic.ssystem.bms.use.mapper.BmsDctApprreqPathMapper">
+
+    <!--  마지막 결재자인지 체크 -->
+    <select id="checkPathFinalApprover" parameterType="com.anylogic.ssystem.bms.use.model.UpdateUseReqViewAppPathApproveBIAReqVO" resultType="int">
+        SELECT
+            CASE WHEN a.apprreqseq = (
+                SELECT MAX(b.apprreqseq)
+                FROM sbms.sbms_user.bms_dct_apprreq_path b
+                WHERE a.apprreqid = b.apprreqid
+            ) THEN 1 ELSE 0 END AS is_final_approver
+        FROM sbms.sbms_user.bms_dct_apprreq_path a
+        WHERE apprreqid = #{apprreqid}
+          AND apprid = #{apprid}
+
+    </select>
+
+    <!-- 결재자 상태 수정 -->
+    <update id="updateUseReqViewAppPath" parameterType="com.anylogic.ssystem.bms.use.model.UpdateUseReqViewAppPathApproveBIAReqVO">
+        UPDATE sbms.sbms_user.bms_dct_apprreq_path
+        SET apprstatus = #{apprstatus}
+            ,apprgubun = #{apprgubun}
+            ,appropinion = #{appropinion}
+            ,updtid = #{updtid}
+            ,updtname = #{updtname}
+            ,updtdt = #{updtdt}
+        WHERE apprreqid = #{apprreqid}
+          AND apprid = #{apprid}
+    </update>
+
+    <!-- 요청서 결재 경로 등록 -->
+    <insert id="insertDctApprReqPath" parameterType="com.anylogic.ssystem.bms.use.model.InsertDctApprReqPathReqVO">
+        INSERT INTO
+        sbms.sbms_user.bms_dct_apprreq_path(
+            <trim suffixOverrides=",">
+            <if test="apprreqid != null and apprreqid !=''">
+                apprreqid,
+            </if>
+            <if test="apprreqseq != null and apprreqseq !=''">
+                apprreqseq,
+            </if>
+            <if test="apprtype != null and apprtype !=''">
+                apprtype,
+            </if>
+            <if test="apprgubun != null and apprgubun !=''">
+                apprgubun,
+            </if>
+            <if test="apprstatus != null and apprstatus !=''">
+                apprstatus,
+            </if>
+            <if test="apprid != null and apprid !=''">
+                apprid,
+            </if>
+            <if test="apprname != null and apprname !=''">
+                apprname,
+            </if>
+            <if test="apprdeptid != null and apprdeptid !=''">
+                apprdeptid,
+            </if>
+            <if test="apprdeptname != null and apprdeptname !=''">
+                apprdeptname,
+            </if>
+            <if test="apprdutyname != null and apprdutyname !=''">
+                apprdutyname,
+            </if>
+            <if test="apprposid != null and apprposid !=''">
+                apprposid,
+            </if>
+            <if test="apprgrdid != null and apprgrdid !=''">
+                apprgrdid,
+            </if>
+            <if test="appropinion != null and appropinion !=''">
+                appropinion,
+            </if>
+            <if test="electsign != null and electsign !=''">
+                electsign,
+            </if>
+            <if test="rgstid != null and rgstid !=''">
+                rgstid,
+            </if>
+            <if test="rgstname != null and rgstname !=''">
+                rgstname,
+            </if>
+            <if test="rgstdt != null and rgstdt !=''">
+                rgstdt,
+            </if>
+            <if test="updtid != null and updtid !=''">
+                updtid,
+            </if>
+            <if test="updtname != null and updtname !=''">
+                updtname,
+            </if>
+            <if test="updtdt != null and updtdt !=''">
+                updtdt,
+            </if>
+            </trim>
+        )
+        VALUES(
+            <trim suffixOverrides=",">
+            <if test="apprreqid != null and apprreqid !=''">
+                #{apprreqid},
+            </if>
+            <if test="apprreqseq != null and apprreqseq !=''">
+                #{apprreqseq},
+            </if>
+            <if test="apprtype != null and apprtype !=''">
+                #{apprtype},
+            </if>
+            <if test="apprgubun != null and apprgubun !=''">
+                #{apprgubun},
+            </if>
+            <if test="apprstatus != null and apprstatus !=''">
+                #{apprstatus},
+            </if>
+            <if test="apprid != null and apprid !=''">
+                #{apprid},
+            </if>
+            <if test="apprname != null and apprname !=''">
+                #{apprname},
+            </if>
+            <if test="apprdeptid != null and apprdeptid !=''">
+                #{apprdeptid},
+            </if>
+            <if test="apprdeptname != null and apprdeptname !=''">
+                #{apprdeptname},
+            </if>
+            <if test="apprdutyname != null and apprdutyname !=''">
+                #{apprdutyname},
+            </if>
+            <if test="apprposid != null and apprposid !=''">
+                #{apprposid},
+            </if>
+            <if test="apprgrdid != null and apprgrdid !=''">
+                #{apprgrdid},
+            </if>
+            <if test="appropinion != null and appropinion !=''">
+                #{appropinion},
+            </if>
+            <if test="electsign != null and electsign !=''">
+                #{electsign},
+            </if>
+            <if test="rgstid != null and rgstid !=''">
+                #{rgstid},
+            </if>
+            <if test="rgstname != null and rgstname !=''">
+                #{rgstname},
+            </if>
+            <if test="rgstdt != null and rgstdt !=''">
+                #{rgstdt},
+            </if>
+            <if test="updtid != null and updtid !=''">
+                #{updtid},
+            </if>
+            <if test="updtname != null and updtname !=''">
+                #{updtname},
+            </if>
+            <if test="updtdt != null and updtdt !=''">
+                #{updtdt},
+            </if>
+            </trim>
+        )
+    </insert>
+
+</mapper>

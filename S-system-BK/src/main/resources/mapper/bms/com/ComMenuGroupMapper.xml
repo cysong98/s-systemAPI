@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.anylogic.ssystem.bms.com.mapper.ComMenuGroupMapper">
+
+    <resultMap id="selectSubmenuMap" type="com.anylogic.ssystem.bms.com.model.SelectSubMenuResVO">
+        <id column="menuid" property="menuid" />                      <!--  -->
+        <id column="submenuid" property="submenuid" />                <!--  -->
+        <result column="isdefault" property="isdefault" />            <!--  -->
+        <result column="submenuorder" property="submenuorder" />      <!--  -->
+    </resultMap>
+
+    <resultMap id="getParentMenuMap" type="com.anylogic.ssystem.bms.com.model.GetParentMenuResVO">
+        <id column="menuid" property="menuid" />                      <!--  -->
+        <id column="submenuid" property="submenuid" />                <!--  -->
+        <result column="isdefault" property="isdefault" />            <!--  -->
+        <result column="submenuorder" property="submenuorder" />      <!--  -->
+    </resultMap>
+
+    <resultMap id="selectLeftMenuSubMap" type="com.anylogic.ssystem.bms.com.model.SelectLeftMenuSubResVO">
+        <result column="parentid" property="parentid"/>
+        <result column="subid" property="subid"/>
+        <result column="submenuorder" property="submenuorder"/>
+        <result column="subname" property="subname"/>
+        <result column="suburl" property="suburl"/>
+    </resultMap>
+
+
+    <!-- LEFT MENU 조회 - 하위 메뉴 -->
+    <select id="selectLeftMenuSub" resultMap="selectLeftMenuSubMap">
+        select A.menuid as parentid,
+               A.submenuid as subid,
+               A.submenuorder as submenuorder,
+               B.name as subname,
+               B.url as suburl
+        FROM  sbms.sbms_user.com_menu_group A
+        inner join sbms.sbms_user.com_menu B on A.submenuid = B.id
+        ORDER BY submenuorder ASC
+    </select>
+
+    <!-- 시스템관리 > 메뉴관리 > 하위메뉴 목록 조회 -->
+    <select id="selectSubmenu" parameterType="com.anylogic.ssystem.bms.com.model.SelectSubMenuReqVO" resultMap="selectSubmenuMap">
+        SELECT
+            menuid as "menuid"
+            , submenuid as "submenuid"
+            , isdefault as "isdefault"
+            , submenuorder as "submenuorder"
+        FROM  sbms.sbms_user.com_menu_group
+        WHERE 1 = 1
+            <if test="menuid != null and menuid !=''">
+                and menuid = #{menuid}
+            </if>
+            <if test="submenuid != null and submenuid !=''">
+                and submenuid = #{submenuid}
+            </if>
+        ORDER BY
+        <choose>
+            <when test="sortDirection == 'ASC'">submenuorder ASC</when>
+            <when test="sortDirection == 'DESC'">submenuorder DESC</when>
+        </choose>
+    </select>
+
+    <!-- 시스템관리 > 메뉴관리 > 하위메뉴 삭제 -->
+    <delete id="deleteSubMenu" parameterType="com.anylogic.ssystem.bms.com.model.DeleteSubMenuReqVO">
+        DELETE FROM sbms.sbms_user.com_menu_group
+        WHERE 1 = 1
+            and submenuid = #{submenuid}
+    </delete>
+
+    <!-- 시스템관리 > 메뉴관리 > 메뉴 상세 조회 - 부모메뉴 -->
+    <select id="getParentMenu" parameterType="com.anylogic.ssystem.bms.com.model.GetParentMenuReqVO" resultMap="getParentMenuMap">
+        SELECT
+            menuid as "menuid" 
+            , submenuid as "submenuid" 
+            , isdefault as "isdefault" 
+            , submenuorder as "submenuorder" 
+        FROM  sbms.sbms_user.com_menu_group
+        WHERE 1 = 1
+            <if test="submenuid != null and submenuid !=''">
+                and submenuid = #{submenuid}
+            </if>
+
+    </select>
+
+    <!--  시스템관리 > 메뉴관리 > 하위메뉴 등록 -->
+    <insert id="insertSubMenu" parameterType="com.anylogic.ssystem.bms.com.model.InsertSubMenuReqVO">
+        INSERT INTO
+        sbms.sbms_user.com_menu_group(
+            <trim suffixOverrides=",">
+            <if test="menuid != null and menuid !=''">
+                menuid,
+            </if>
+            <if test="submenuid != null and submenuid !=''">
+                submenuid,
+            </if>
+            <if test="isdefault != null and isdefault !=''">
+                isdefault,
+            </if>
+            <if test="submenuorder != null and submenuorder !=''">
+                submenuorder,
+            </if>
+            </trim>
+        )
+        VALUES(
+            <trim suffixOverrides=",">
+            <if test="menuid != null and menuid !=''">
+                #{menuid},
+            </if>
+            <if test="submenuid != null and submenuid !=''">
+                #{submenuid},
+            </if>
+            <if test="isdefault != null and isdefault !=''">
+                #{isdefault},
+            </if>
+            <if test="submenuorder != null and submenuorder !=''">
+                #{submenuorder},
+            </if>
+            </trim>
+        )
+    </insert>
+
+    <!--  시스템관리 > 메뉴관리 > 하위메뉴 수정 -->
+    <update id="updateSubMenu" parameterType="com.anylogic.ssystem.bms.com.model.UpdateSubMenuReqVO">
+        UPDATE sbms.sbms_user.com_menu_group
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="menuid != null and menuid !=''">
+                menuid = #{menuid},
+            </if>
+            <if test="isdefault != null and isdefault !=''">
+                isdefault = #{isdefault},
+            </if>
+            <if test="submenuorder != null and submenuorder !=''">
+                submenuorder = #{submenuorder},
+            </if>
+        </trim>
+        WHERE 1 = 1
+            and submenuid = #{submenuid}
+    </update>
+
+</mapper>

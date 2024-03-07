@@ -1,0 +1,2946 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.anylogic.ssystem.bms.dct.mapper.BmsDctEnfDocMapper">
+
+    <resultMap id="selectReturnListMap" type="com.anylogic.ssystem.bms.dct.model.SelectReturnListResVO">
+        <id column="enfdocid" property="enfdocid" />                  <!-- 시행비밀 ID -->
+        <result column="docid" property="docid" />                    <!-- 비밀 ID -->
+        <result column="enfgubun" property="enfgubun" />              <!-- 시행구분 -->
+        <result column="relaydocid" property="relaydocid" />          <!-- 유통망 비밀 ID -->
+        <result column="receiverid" property="receiverid" />          <!-- 수신처 ID -->
+        <result column="recvdeptid" property="recvdeptid" />          <!-- 수신부서 ID -->
+        <result column="doctitle" property="doctitle" />              <!-- 비밀제목 -->
+        <result column="keyword" property="keyword" />                <!-- 키워드 -->
+        <result column="docstatus" property="docstatus" />            <!-- 비밀상태 -->
+        <result column="apprdocnum" property="apprdocnum" />          <!-- 승인비밀번호 -->
+        <result column="acceptdocseq" property="acceptdocseq" />      <!-- 접수비밀번호 일련번호 -->
+        <result column="acceptdt" property="acceptdt" />              <!-- 접수일 -->
+        <result column="acceptid" property="acceptid" />              <!-- 접수자 ID -->
+        <result column="acceptname" property="acceptname" />          <!-- 접수자 이름 -->
+        <result column="acceptdutyname" property="acceptdutyname" />  <!-- 접수자 직위직급이름 -->
+        <result column="acceptgradeid" property="acceptgradeid" />    <!-- 접수자 직위 ID -->
+        <result column="acceptpositionid" property="acceptpositionid" /><!-- 접수자 직급 ID -->
+        <result column="acceptdeptid" property="acceptdeptid" />      <!-- 접수자 부서 ID -->
+        <result column="acceptdeptname" property="acceptdeptname" />  <!-- 접수자 부서 이름 -->
+        <result column="acceptdeptnamedesc" property="acceptdeptnamedesc" /><!-- 접수자 부서이름상세 -->
+        <result column="actseq" property="actseq" />                  <!-- 처리일련번호 -->
+        <result column="open" property="open" />                      <!-- 공개 -->
+        <result column="openbasis" property="openbasis" />            <!-- 공개근거 -->
+        <result column="openreason" property="openreason" />          <!-- 공개사유 -->
+        <result column="readrangetype" property="readrangetype" />    <!-- 열람범위유형 -->
+        <result column="recvdt" property="recvdt" />                  <!-- 수신일 -->
+        <result column="distributeflag" property="distributeflag" />  <!-- 배부 FLAG -->
+        <result column="setcardflag" property="setcardflag" />        <!-- 과제카드 지정여부 -->
+        <result column="shareopnflag" property="shareopnflag" />      <!-- 공유의견 FLAG -->
+        <result column="moveflag" property="moveflag" />              <!-- 인계 FLAG -->
+        <result column="paperdocflag" property="paperdocflag" />      <!-- 종이비밀 FLAG -->
+        <result column="paperbodyflag" property="paperbodyflag" />    <!-- 종이본문 FLAG -->
+        <result column="attcount" property="attcount" />              <!-- 첨부개수 -->
+        <result column="delflag" property="delflag" />                <!-- 삭제 FLAG -->
+        <result column="relaytype" property="relaytype" />            <!-- 유통망 종류 -->
+        <result column="systemtype" property="systemtype" />          <!-- 시스템 유형 -->
+        <result column="convbodyflag" property="convbodyflag" />      <!-- 본문변환FLAG -->
+        <result column="drmgubun" property="drmgubun" />              <!-- DRM구분 -->
+        <result column="firstreadid" property="firstreadid" />        <!-- 최초열람ID -->
+        <result column="firstreaddt" property="firstreaddt" />        <!-- 최초열람일 -->
+        <result column="inid" property="inid" />                      <!-- 등록자 ID -->
+        <result column="indt" property="indt" />                      <!-- 등록일 -->
+        <result column="upid" property="upid" />                      <!-- 수정자 ID -->
+        <result column="updt" property="updt" />                      <!-- 수정일 -->
+        <result column="distributedocseq" property="distributedocseq" /><!-- 비밀배부일련번호 -->
+        <result column="distributeorgid" property="distributeorgid" /><!-- 비밀배부기관 ID -->
+        <result column="paperappid" property="paperappid" />          <!-- 종이비밀결재자 ID -->
+        <result column="paperappname" property="paperappname" />      <!-- 종이비밀결재자 이름 -->
+        <result column="paperappdeptname" property="paperappdeptname" /><!-- 종이비밀결재자 부서이름 -->
+        <result column="paperappdutyname" property="paperappdutyname" /><!-- 종이비밀결제자 직위직급이름 -->
+        <result column="readlimittype" property="readlimittype" />    <!-- 열람제한유형 -->
+        <result column="readlimitdate" property="readlimitdate" />    <!-- 열람제한일자 -->
+        <result column="protectflag" property="protectflag" />        <!-- 비밀보안 FLAG -->
+        <result column="chargerid" property="chargerid" />            <!-- 업무담당확인자 ID -->
+        <result column="chargerdeptid" property="chargerdeptid" />    <!-- 업무담당확인자 부서 ID -->
+        <result column="distributedt" property="distributedt" />      <!-- 최초배부일 -->
+        <result column="paperrecgubun" property="paperrecgubun" />    <!-- 기록물등록구분 -->
+        <result column="paperrecspecial" property="paperrecspecial" /><!-- 특수기록물 -->
+        <result column="paperrectypes" property="paperrectypes" />    <!-- 기록물형태 -->
+        <result column="apprdocnumcode" property="apprdocnumcode" />  <!-- 비밀승인코드 -->
+        <result column="transflag" property="transflag" />            <!-- 이관여부 -->
+        <result column="recordersummary" property="recordersummary" /><!-- 기록요약 -->
+        <result column="emergency" property="emergency" />            <!-- 긴급도 -->
+        <result column="addsendcnt" property="addsendcnt" />          <!-- 추가발송 회수 -->
+        <result column="docgroup" property="docgroup" />              <!-- 보고서종류 -->
+        <result column="faketitle" property="faketitle" />            <!-- 가제목 -->
+        <result column="secgubun" property="secgubun" />              <!-- 비밀구분 -->
+        <result column="seclevel" property="seclevel" />              <!-- 비밀등급 -->
+        <result column="orgnprotdt" property="orgnprotdt" />          <!-- 원본보호기간 -->
+        <result column="orgnnextlevel" property="orgnnextlevel" />    <!-- 원본차기비밀등급 -->
+        <result column="orgnreclass" property="orgnreclass" />        <!-- 원본재분류 -->
+        <result column="orgnprotcond" property="orgnprotcond" />      <!-- 원본보호조건 -->
+        <result column="copyprotdt" property="copyprotdt" />          <!-- 사본보호기간 -->
+        <result column="copynextlevel" property="copynextlevel" />    <!-- 사본차기비밀등급 -->
+        <result column="copyreclass" property="copyreclass" />        <!-- 사본재분류 -->
+        <result column="copyprotcond" property="copyprotcond" />      <!-- 사본보호조건 -->
+        <result column="prsrvterm" property="prsrvterm" />            <!-- 보존기간 -->
+        <result column="docno" property="docno" />                    <!-- 문서번호 -->
+        <result column="mgmtno" property="mgmtno" />                  <!-- 관리번호 -->
+        <result column="copyno" property="copyno" />                  <!-- 사본번호 -->
+        <result column="createdeptid" property="createdeptid" />      <!-- 생산부서코드 -->
+        <result column="createdeptname" property="createdeptname" />  <!-- 생산부서명 -->
+        <result column="docpagenum" property="docpagenum" />          <!-- 쪽수 -->
+        <result column="specialyn" property="specialyn" />            <!-- 특별관리여부 -->
+        <result column="binderyn" property="binderyn" />              <!-- 참고철 바인더 여부 -->
+        <result column="secretdocyn" property="secretdocyn" />        <!-- 가제목 사용여부 -->
+        <result column="waryn" property="waryn" />                    <!-- 전시여부 -->
+        <result column="isnewrule" property="isnewrule" />            <!-- 신규 -->
+        <result column="istransrule" property="istransrule" />        <!-- 이관여부 -->
+        <result column="orgncreateyear" property="orgncreateyear" />  <!--  -->
+        <result column="wargubun" property="wargubun" />              <!--  -->
+        <result column="docgubun" property="docgubun" />              <!-- 문서 구분 -->
+        <result column="tempflag" property="tempflag" />              <!-- 임시 FLAG -->
+        <result column="sendorgname" property="sendorgname" />        <!-- 발신기관 이름 -->
+        <result column="sendname" property="sendname" />              <!-- 발신이름 -->
+        <result column="campaignhead" property="campaignhead" />      <!-- 캠페인상부 -->
+        <result column="campaigntail" property="campaigntail" />      <!-- 캠페인하부 -->
+        <result column="senddt" property="senddt" />                  <!-- 발송일시 -->
+        <result column="sendopinion" property="sendopinion" />        <!-- 발송의견 -->
+        <result column="senderid" property="senderid" />              <!-- 발송자 ID -->
+        <result column="sendername" property="sendername" />          <!-- 발송자 이름 -->
+        <result column="senderdutyname" property="senderdutyname" />  <!-- 발송자 직위직급 -->
+        <result column="senderpositionid" property="senderpositionid" /><!-- 발송자 직위 ID -->
+        <result column="sendergradeid" property="sendergradeid" />    <!-- 발송자 직급 ID -->
+        <result column="senderdeptid" property="senderdeptid" />      <!-- 발송자 부서 ID -->
+        <result column="senderdeptname" property="senderdeptname" />  <!-- 발송자 부서이름 -->
+        <result column="senderdeptnamedesc" property="senderdeptnamedesc" /><!-- 발송자 부서상세이름 -->
+        <result column="address" property="address" />                <!-- 주소정보 -->
+        <result column="zipcode" property="zipcode" />                <!-- 우편번호 -->
+        <result column="homepage" property="homepage" />              <!-- 홈페이지 -->
+        <result column="phonenumber" property="phonenumber" />        <!-- 전화번호 -->
+        <result column="faxnumber" property="faxnumber" />            <!-- FAX번호 -->
+        <result column="email" property="email" />                    <!-- 이메일주소 -->
+        <result column="recvdisplayname" property="recvdisplayname" /><!-- 수신처 표시이름 -->
+        <result column="recvdisplayflag" property="recvdisplayflag" /><!-- 수신처 표시명 FLAG -->
+        <result column="viadeptname" property="viadeptname" />        <!-- 경유부서이름 -->
+        <result column="enfrecvrange" property="enfrecvrange" />      <!-- 시행수신처범위 -->
+        <result column="sendtype" property="sendtype" />              <!-- 발송유형 -->
+        <result column="sealsigntype" property="sealsigntype" />      <!-- 관인날인종류 -->
+        <result column="sealsignname" property="sealsignname" />      <!-- 관인날인명 -->
+        <result column="sendorgid" property="sendorgid" />            <!-- 발신기관 ID -->
+        <result column="faxsndreqdt" property="faxsndreqdt" />        <!-- FAX 발송요청일시 -->
+        <result column="circdocflag" property="circdocflag" />        <!-- 문서 FLAG -->
+        <result column="distctrlflag" property="distctrlflag" />      <!-- 배포처 통제 -->
+        <result column="distplflag" property="distplflag" />          <!--  -->
+        <result column="deptname" property="deptname" />          <!--  -->
+        <result column="actseq" property="actseq" />          <!--  -->
+        <result column="acterid" property="acterid" />          <!--  -->
+        <result column="actername" property="actername" />          <!--  -->
+        <result column="acterdutyname" property="acterdutyname" />          <!--  -->
+        <result column="acterdeptid" property="acterdeptid" />          <!--  -->
+        <result column="acterdeptname" property="acterdeptname" />          <!--  -->
+        <result column="actgubun" property="actgubun" />          <!--  -->
+        <result column="actdt" property="actdt" />          <!--  -->
+        <result column="actopinion" property="actopinion" />          <!--  -->
+        <result column="state" property="state" />                    <!-- 상황 -->
+    </resultMap>
+
+    <resultMap id="selectDctDistributeListMap" type="com.anylogic.ssystem.bms.dct.model.SelectDctDistributeListResVO">
+        <id column="enfdocid" property="enfdocid" />                  <!-- 시행비밀 ID -->
+        <result column="docid" property="docid" />                    <!-- 비밀 ID -->
+        <result column="enfgubun" property="enfgubun" />              <!-- 시행구분 -->
+        <result column="relaydocid" property="relaydocid" />          <!-- 유통망 비밀 ID -->
+        <result column="receiverid" property="receiverid" />          <!-- 수신처 ID -->
+        <result column="recvdeptid" property="recvdeptid" />          <!-- 수신부서 ID -->
+        <result column="doctitle" property="doctitle" />              <!-- 비밀제목 -->
+        <result column="keyword" property="keyword" />                <!-- 키워드 -->
+        <result column="docstatus" property="docstatus" />            <!-- 비밀상태 -->
+        <result column="apprdocnum" property="apprdocnum" />          <!-- 승인비밀번호 -->
+        <result column="acceptdocseq" property="acceptdocseq" />      <!-- 접수비밀번호 일련번호 -->
+        <result column="acceptdt" property="acceptdt" />              <!-- 접수일 -->
+        <result column="acceptid" property="acceptid" />              <!-- 접수자 ID -->
+        <result column="acceptname" property="acceptname" />          <!-- 접수자 이름 -->
+        <result column="acceptdutyname" property="acceptdutyname" />  <!-- 접수자 직위직급이름 -->
+        <result column="acceptgradeid" property="acceptgradeid" />    <!-- 접수자 직위 ID -->
+        <result column="acceptpositionid" property="acceptpositionid" /><!-- 접수자 직급 ID -->
+        <result column="acceptdeptid" property="acceptdeptid" />      <!-- 접수자 부서 ID -->
+        <result column="acceptdeptname" property="acceptdeptname" />  <!-- 접수자 부서 이름 -->
+        <result column="acceptdeptnamedesc" property="acceptdeptnamedesc" /><!-- 접수자 부서이름상세 -->
+        <result column="actseq" property="actseq" />                  <!-- 처리일련번호 -->
+        <result column="open" property="open" />                      <!-- 공개 -->
+        <result column="openbasis" property="openbasis" />            <!-- 공개근거 -->
+        <result column="openreason" property="openreason" />          <!-- 공개사유 -->
+        <result column="readrangetype" property="readrangetype" />    <!-- 열람범위유형 -->
+        <result column="recvdt" property="recvdt" />                  <!-- 수신일 -->
+        <result column="distributeflag" property="distributeflag" />  <!-- 배부 FLAG -->
+        <result column="setcardflag" property="setcardflag" />        <!-- 과제카드 지정여부 -->
+        <result column="shareopnflag" property="shareopnflag" />      <!-- 공유의견 FLAG -->
+        <result column="moveflag" property="moveflag" />              <!-- 인계 FLAG -->
+        <result column="paperdocflag" property="paperdocflag" />      <!-- 종이비밀 FLAG -->
+        <result column="paperbodyflag" property="paperbodyflag" />    <!-- 종이본문 FLAG -->
+        <result column="attcount" property="attcount" />              <!-- 첨부개수 -->
+        <result column="delflag" property="delflag" />                <!-- 삭제 FLAG -->
+        <result column="relaytype" property="relaytype" />            <!-- 유통망 종류 -->
+        <result column="systemtype" property="systemtype" />          <!-- 시스템 유형 -->
+        <result column="convbodyflag" property="convbodyflag" />      <!-- 본문변환FLAG -->
+        <result column="drmgubun" property="drmgubun" />              <!-- DRM구분 -->
+        <result column="firstreadid" property="firstreadid" />        <!-- 최초열람ID -->
+        <result column="firstreaddt" property="firstreaddt" />        <!-- 최초열람일 -->
+        <result column="inid" property="inid" />                      <!-- 등록자 ID -->
+        <result column="indt" property="indt" />                      <!-- 등록일 -->
+        <result column="upid" property="upid" />                      <!-- 수정자 ID -->
+        <result column="updt" property="updt" />                      <!-- 수정일 -->
+        <result column="distributedocseq" property="distributedocseq" /><!-- 비밀배부일련번호 -->
+        <result column="distributeorgid" property="distributeorgid" /><!-- 비밀배부기관 ID -->
+        <result column="paperappid" property="paperappid" />          <!-- 종이비밀결재자 ID -->
+        <result column="paperappname" property="paperappname" />      <!-- 종이비밀결재자 이름 -->
+        <result column="paperappdeptname" property="paperappdeptname" /><!-- 종이비밀결재자 부서이름 -->
+        <result column="paperappdutyname" property="paperappdutyname" /><!-- 종이비밀결제자 직위직급이름 -->
+        <result column="readlimittype" property="readlimittype" />    <!-- 열람제한유형 -->
+        <result column="readlimitdate" property="readlimitdate" />    <!-- 열람제한일자 -->
+        <result column="protectflag" property="protectflag" />        <!-- 비밀보안 FLAG -->
+        <result column="chargerid" property="chargerid" />            <!-- 업무담당확인자 ID -->
+        <result column="chargerdeptid" property="chargerdeptid" />    <!-- 업무담당확인자 부서 ID -->
+        <result column="distributedt" property="distributedt" />      <!-- 최초배부일 -->
+        <result column="paperrecgubun" property="paperrecgubun" />    <!-- 기록물등록구분 -->
+        <result column="paperrecspecial" property="paperrecspecial" /><!-- 특수기록물 -->
+        <result column="paperrectypes" property="paperrectypes" />    <!-- 기록물형태 -->
+        <result column="apprdocnumcode" property="apprdocnumcode" />  <!-- 비밀승인코드 -->
+        <result column="transflag" property="transflag" />            <!-- 이관여부 -->
+        <result column="recordersummary" property="recordersummary" /><!-- 기록요약 -->
+        <result column="emergency" property="emergency" />            <!-- 긴급도 -->
+        <result column="addsendcnt" property="addsendcnt" />          <!-- 추가발송 회수 -->
+        <result column="docgroup" property="docgroup" />              <!-- 보고서종류 -->
+        <result column="faketitle" property="faketitle" />            <!-- 가제목 -->
+        <result column="secgubun" property="secgubun" />              <!-- 비밀구분 -->
+        <result column="seclevel" property="seclevel" />              <!-- 비밀등급 -->
+        <result column="orgnprotdt" property="orgnprotdt" />          <!-- 원본보호기간 -->
+        <result column="orgnnextlevel" property="orgnnextlevel" />    <!-- 원본차기비밀등급 -->
+        <result column="orgnreclass" property="orgnreclass" />        <!-- 원본재분류 -->
+        <result column="orgnprotcond" property="orgnprotcond" />      <!-- 원본보호조건 -->
+        <result column="copyprotdt" property="copyprotdt" />          <!-- 사본보호기간 -->
+        <result column="copynextlevel" property="copynextlevel" />    <!-- 사본차기비밀등급 -->
+        <result column="copyreclass" property="copyreclass" />        <!-- 사본재분류 -->
+        <result column="copyprotcond" property="copyprotcond" />      <!-- 사본보호조건 -->
+        <result column="prsrvterm" property="prsrvterm" />            <!-- 보존기간 -->
+        <result column="docno" property="docno" />                    <!-- 문서번호 -->
+        <result column="mgmtno" property="mgmtno" />                  <!-- 관리번호 -->
+        <result column="copyno" property="copyno" />                  <!-- 사본번호 -->
+        <result column="createdeptid" property="createdeptid" />      <!-- 생산부서코드 -->
+        <result column="createdeptname" property="createdeptname" />  <!-- 생산부서명 -->
+        <result column="docpagenum" property="docpagenum" />          <!-- 쪽수 -->
+        <result column="specialyn" property="specialyn" />            <!-- 특별관리여부 -->
+        <result column="binderyn" property="binderyn" />              <!-- 참고철 바인더 여부 -->
+        <result column="secretdocyn" property="secretdocyn" />        <!-- 가제목 사용여부 -->
+        <result column="waryn" property="waryn" />                    <!-- 전시여부 -->
+        <result column="isnewrule" property="isnewrule" />            <!-- 신규 -->
+        <result column="istransrule" property="istransrule" />        <!-- 이관여부 -->
+        <result column="orgncreateyear" property="orgncreateyear" />  <!--  -->
+        <result column="wargubun" property="wargubun" />              <!--  -->
+        <result column="docttl" property="docttl" />                  <!-- 비밀명 -->
+        <result column="gubun" property="gubun" />                    <!-- 구분 -->
+        <result column="authorid" property="authorid" />              <!-- 담당자 ID -->
+        <result column="authorname" property="authorname" />          <!-- 담당자 이름 -->
+        <result column="authordutyname" property="authordutyname" />  <!-- 담당자직위직급 -->
+        <result column="authorpositionid" property="authorpositionid" /><!-- 담당자직위 ID -->
+        <result column="authorgradeid" property="authorgradeid" />    <!-- 담당자직급 ID -->
+        <result column="authordeptid" property="authordeptid" />      <!-- 담당자부서 ID -->
+        <result column="authordeptname" property="authordeptname" />  <!-- 담당자부서이름 -->
+        <result column="authordeptnamedesc" property="authordeptnamedesc" /><!-- 담당자부서이름상세 -->
+        <result column="lastauthorid" property="lastauthorid" />      <!-- 최종작성자 ID -->
+        <result column="lastauthorname" property="lastauthorname" />  <!-- 최종작성자 이름 -->
+        <result column="state" property="state" />                    <!-- 상황 -->
+        <result column="docnoseq" property="docnoseq" />              <!-- 비밀일련번호 -->
+        <result column="tempflag" property="tempflag" />              <!-- 임시FLAG -->
+        <result column="reportdt" property="reportdt" />              <!-- 보고일자 -->
+        <result column="enddt" property="enddt" />                    <!-- 종료일 -->
+        <result column="docfrom" property="docfrom" />                <!-- 비밀출처 -->
+        <result column="rcvsflag" property="rcvsflag" />              <!-- 수신FLAG -->
+        <result column="typeflag" property="typeflag" />              <!-- 유형FLAG -->
+        <result column="setupflag" property="setupflag" />            <!-- 설정FLAG -->
+        <result column="oridocid" property="oridocid" />              <!-- 원 비밀 FLAG -->
+        <result column="oriseq" property="oriseq" />                  <!-- 원 일련번호 -->
+        <result column="batchseq" property="batchseq" />              <!-- 일괄처리 일련번호 -->
+        <result column="paperflag" property="paperflag" />            <!-- 종이FLAG -->
+        <result column="maindocflag" property="maindocflag" />        <!-- 본문FLAG -->
+        <result column="attachseq" property="attachseq" />            <!-- 첨부일련번호 -->
+        <result column="migflag" property="migflag" />                <!-- 마이그레이션여부 -->
+        <result column="addsendstate" property="addsendstate" />      <!-- 추가발송상태 -->
+        <result column="papersendflag" property="papersendflag" />    <!--  -->
+        <result column="filelendflag" property="filelendflag" />      <!--  -->
+        <result column="deptname" property="deptname" />
+        <result column="gubun" property="gubun" />
+        <result column="actgubun" property="actgubun" />
+        <result column="actopinion" property="actopinion" />
+    </resultMap>
+
+    <resultMap id="selectReceiptListMap" type="com.anylogic.ssystem.bms.dct.model.SelectReceiptListResVO">
+        <id column="enfdocid" property="enfdocid" />                  <!-- 시행비밀 ID -->
+        <result column="docid" property="docid" />                    <!-- 비밀 ID -->
+        <result column="enfgubun" property="enfgubun" />              <!-- 시행구분 -->
+        <result column="relaydocid" property="relaydocid" />          <!-- 유통망 비밀 ID -->
+        <result column="receiverid" property="receiverid" />          <!-- 수신처 ID -->
+        <result column="recvdeptid" property="recvdeptid" />          <!-- 수신부서 ID -->
+        <result column="doctitle" property="doctitle" />              <!-- 비밀제목 -->
+        <result column="keyword" property="keyword" />                <!-- 키워드 -->
+        <result column="docstatus" property="docstatus" />            <!-- 비밀상태 -->
+        <result column="apprdocnum" property="apprdocnum" />          <!-- 승인비밀번호 -->
+        <result column="acceptdocseq" property="acceptdocseq" />      <!-- 접수비밀번호 일련번호 -->
+        <result column="acceptdt" property="acceptdt" />              <!-- 접수일 -->
+        <result column="acceptid" property="acceptid" />              <!-- 접수자 ID -->
+        <result column="acceptname" property="acceptname" />          <!-- 접수자 이름 -->
+        <result column="acceptdutyname" property="acceptdutyname" />  <!-- 접수자 직위직급이름 -->
+        <result column="acceptgradeid" property="acceptgradeid" />    <!-- 접수자 직위 ID -->
+        <result column="acceptpositionid" property="acceptpositionid" /><!-- 접수자 직급 ID -->
+        <result column="acceptdeptid" property="acceptdeptid" />      <!-- 접수자 부서 ID -->
+        <result column="acceptdeptname" property="acceptdeptname" />  <!-- 접수자 부서 이름 -->
+        <result column="acceptdeptnamedesc" property="acceptdeptnamedesc" /><!-- 접수자 부서이름상세 -->
+        <result column="actseq" property="actseq" />                  <!-- 처리일련번호 -->
+        <result column="open" property="open" />                      <!-- 공개 -->
+        <result column="openbasis" property="openbasis" />            <!-- 공개근거 -->
+        <result column="openreason" property="openreason" />          <!-- 공개사유 -->
+        <result column="readrangetype" property="readrangetype" />    <!-- 열람범위유형 -->
+        <result column="recvdt" property="recvdt" />                  <!-- 수신일 -->
+        <result column="distributeflag" property="distributeflag" />  <!-- 배부 FLAG -->
+        <result column="setcardflag" property="setcardflag" />        <!-- 과제카드 지정여부 -->
+        <result column="shareopnflag" property="shareopnflag" />      <!-- 공유의견 FLAG -->
+        <result column="moveflag" property="moveflag" />              <!-- 인계 FLAG -->
+        <result column="paperdocflag" property="paperdocflag" />      <!-- 종이비밀 FLAG -->
+        <result column="paperbodyflag" property="paperbodyflag" />    <!-- 종이본문 FLAG -->
+        <result column="attcount" property="attcount" />              <!-- 첨부개수 -->
+        <result column="delflag" property="delflag" />                <!-- 삭제 FLAG -->
+        <result column="relaytype" property="relaytype" />            <!-- 유통망 종류 -->
+        <result column="systemtype" property="systemtype" />          <!-- 시스템 유형 -->
+        <result column="convbodyflag" property="convbodyflag" />      <!-- 본문변환FLAG -->
+        <result column="drmgubun" property="drmgubun" />              <!-- DRM구분 -->
+        <result column="firstreadid" property="firstreadid" />        <!-- 최초열람ID -->
+        <result column="firstreaddt" property="firstreaddt" />        <!-- 최초열람일 -->
+        <result column="inid" property="inid" />                      <!-- 등록자 ID -->
+        <result column="indt" property="indt" />                      <!-- 등록일 -->
+        <result column="upid" property="upid" />                      <!-- 수정자 ID -->
+        <result column="updt" property="updt" />                      <!-- 수정일 -->
+        <result column="distributedocseq" property="distributedocseq" /><!-- 비밀배부일련번호 -->
+        <result column="distributeorgid" property="distributeorgid" /><!-- 비밀배부기관 ID -->
+        <result column="paperappid" property="paperappid" />          <!-- 종이비밀결재자 ID -->
+        <result column="paperappname" property="paperappname" />      <!-- 종이비밀결재자 이름 -->
+        <result column="paperappdeptname" property="paperappdeptname" /><!-- 종이비밀결재자 부서이름 -->
+        <result column="paperappdutyname" property="paperappdutyname" /><!-- 종이비밀결제자 직위직급이름 -->
+        <result column="readlimittype" property="readlimittype" />    <!-- 열람제한유형 -->
+        <result column="readlimitdate" property="readlimitdate" />    <!-- 열람제한일자 -->
+        <result column="protectflag" property="protectflag" />        <!-- 비밀보안 FLAG -->
+        <result column="chargerid" property="chargerid" />            <!-- 업무담당확인자 ID -->
+        <result column="chargerdeptid" property="chargerdeptid" />    <!-- 업무담당확인자 부서 ID -->
+        <result column="distributedt" property="distributedt" />      <!-- 최초배부일 -->
+        <result column="paperrecgubun" property="paperrecgubun" />    <!-- 기록물등록구분 -->
+        <result column="paperrecspecial" property="paperrecspecial" /><!-- 특수기록물 -->
+        <result column="paperrectypes" property="paperrectypes" />    <!-- 기록물형태 -->
+        <result column="apprdocnumcode" property="apprdocnumcode" />  <!-- 비밀승인코드 -->
+        <result column="transflag" property="transflag" />            <!-- 이관여부 -->
+        <result column="recordersummary" property="recordersummary" /><!-- 기록요약 -->
+        <result column="emergency" property="emergency" />            <!-- 긴급도 -->
+        <result column="addsendcnt" property="addsendcnt" />          <!-- 추가발송 회수 -->
+        <result column="docgroup" property="docgroup" />              <!-- 보고서종류 -->
+        <result column="faketitle" property="faketitle" />            <!-- 가제목 -->
+        <result column="secgubun" property="secgubun" />              <!-- 비밀구분 -->
+        <result column="seclevel" property="seclevel" />              <!-- 비밀등급 -->
+        <result column="orgnprotdt" property="orgnprotdt" />          <!-- 원본보호기간 -->
+        <result column="orgnnextlevel" property="orgnnextlevel" />    <!-- 원본차기비밀등급 -->
+        <result column="orgnreclass" property="orgnreclass" />        <!-- 원본재분류 -->
+        <result column="orgnprotcond" property="orgnprotcond" />      <!-- 원본보호조건 -->
+        <result column="copyprotdt" property="copyprotdt" />          <!-- 사본보호기간 -->
+        <result column="copynextlevel" property="copynextlevel" />    <!-- 사본차기비밀등급 -->
+        <result column="copyreclass" property="copyreclass" />        <!-- 사본재분류 -->
+        <result column="copyprotcond" property="copyprotcond" />      <!-- 사본보호조건 -->
+        <result column="prsrvterm" property="prsrvterm" />            <!-- 보존기간 -->
+        <result column="docno" property="docno" />                    <!-- 문서번호 -->
+        <result column="mgmtno" property="mgmtno" />                  <!-- 관리번호 -->
+        <result column="copyno" property="copyno" />                  <!-- 사본번호 -->
+        <result column="createdeptid" property="createdeptid" />      <!-- 생산부서코드 -->
+        <result column="createdeptname" property="createdeptname" />  <!-- 생산부서명 -->
+        <result column="docpagenum" property="docpagenum" />          <!-- 쪽수 -->
+        <result column="specialyn" property="specialyn" />            <!-- 특별관리여부 -->
+        <result column="binderyn" property="binderyn" />              <!-- 참고철 바인더 여부 -->
+        <result column="secretdocyn" property="secretdocyn" />        <!-- 가제목 사용여부 -->
+        <result column="waryn" property="waryn" />                    <!-- 전시여부 -->
+        <result column="isnewrule" property="isnewrule" />            <!-- 신규 -->
+        <result column="istransrule" property="istransrule" />        <!-- 이관여부 -->
+        <result column="orgncreateyear" property="orgncreateyear" />  <!--  -->
+        <result column="wargubun" property="wargubun" />              <!--  -->
+        <result column="username" property="username" />              <!--  -->
+        <result column="deptname" property="deptname" />
+        <result column="gubun" property="gubun" />
+        <result column="sendopinion" property="sendopinion" />
+        <result column="actgubun" property="actgubun" />
+        <result column="actopinion" property="actopinion" />
+        <result column="regirecvgubun" property="regirecvgubun" />   <!-- 접수 구분 (생산,접수) -->
+        <result column="regirecvtype" property="regirecvtype" />
+        <result column="auth" property="auth" />
+        <result column="actseq" property="actseq" />
+    </resultMap>
+
+    <resultMap id="selectRecvHistoryMap" type="com.anylogic.ssystem.bms.dct.model.SelectRecvHistoryResVO">
+        <id column="enfdocid" property="enfdocid" />                  <!-- 시행비밀 ID -->
+        <result column="docid" property="docid" />                    <!-- 비밀 ID -->
+        <result column="enfgubun" property="enfgubun" />              <!-- 시행구분 -->
+        <result column="relaydocid" property="relaydocid" />          <!-- 유통망 비밀 ID -->
+        <result column="receiverid" property="receiverid" />          <!-- 수신처 ID -->
+        <result column="recvdeptid" property="recvdeptid" />          <!-- 수신부서 ID -->
+        <result column="doctitle" property="doctitle" />              <!-- 비밀제목 -->
+        <result column="keyword" property="keyword" />                <!-- 키워드 -->
+        <result column="docstatus" property="docstatus" />            <!-- 비밀상태 -->
+        <result column="apprdocnum" property="apprdocnum" />          <!-- 승인비밀번호 -->
+        <result column="acceptdocseq" property="acceptdocseq" />      <!-- 접수비밀번호 일련번호 -->
+        <result column="acceptdt" property="acceptdt" />              <!-- 접수일 -->
+        <result column="acceptid" property="acceptid" />              <!-- 접수자 ID -->
+        <result column="acceptname" property="acceptname" />          <!-- 접수자 이름 -->
+        <result column="acceptdutyname" property="acceptdutyname" />  <!-- 접수자 직위직급이름 -->
+        <result column="acceptgradeid" property="acceptgradeid" />    <!-- 접수자 직위 ID -->
+        <result column="acceptpositionid" property="acceptpositionid" /><!-- 접수자 직급 ID -->
+        <result column="acceptdeptid" property="acceptdeptid" />      <!-- 접수자 부서 ID -->
+        <result column="acceptdeptname" property="acceptdeptname" />  <!-- 접수자 부서 이름 -->
+        <result column="acceptdeptnamedesc" property="acceptdeptnamedesc" /><!-- 접수자 부서이름상세 -->
+        <result column="actseq" property="actseq" />                  <!-- 처리일련번호 -->
+        <result column="open" property="open" />                      <!-- 공개 -->
+        <result column="openbasis" property="openbasis" />            <!-- 공개근거 -->
+        <result column="openreason" property="openreason" />          <!-- 공개사유 -->
+        <result column="readrangetype" property="readrangetype" />    <!-- 열람범위유형 -->
+        <result column="recvdt" property="recvdt" />                  <!-- 수신일 -->
+        <result column="distributeflag" property="distributeflag" />  <!-- 배부 FLAG -->
+        <result column="setcardflag" property="setcardflag" />        <!-- 과제카드 지정여부 -->
+        <result column="shareopnflag" property="shareopnflag" />      <!-- 공유의견 FLAG -->
+        <result column="moveflag" property="moveflag" />              <!-- 인계 FLAG -->
+        <result column="paperdocflag" property="paperdocflag" />      <!-- 종이비밀 FLAG -->
+        <result column="paperbodyflag" property="paperbodyflag" />    <!-- 종이본문 FLAG -->
+        <result column="attcount" property="attcount" />              <!-- 첨부개수 -->
+        <result column="delflag" property="delflag" />                <!-- 삭제 FLAG -->
+        <result column="relaytype" property="relaytype" />            <!-- 유통망 종류 -->
+        <result column="systemtype" property="systemtype" />          <!-- 시스템 유형 -->
+        <result column="convbodyflag" property="convbodyflag" />      <!-- 본문변환FLAG -->
+        <result column="drmgubun" property="drmgubun" />              <!-- DRM구분 -->
+        <result column="firstreadid" property="firstreadid" />        <!-- 최초열람ID -->
+        <result column="firstreaddt" property="firstreaddt" />        <!-- 최초열람일 -->
+        <result column="inid" property="inid" />                      <!-- 등록자 ID -->
+        <result column="indt" property="indt" />                      <!-- 등록일 -->
+        <result column="upid" property="upid" />                      <!-- 수정자 ID -->
+        <result column="updt" property="updt" />                      <!-- 수정일 -->
+        <result column="distributedocseq" property="distributedocseq" /><!-- 비밀배부일련번호 -->
+        <result column="distributeorgid" property="distributeorgid" /><!-- 비밀배부기관 ID -->
+        <result column="paperappid" property="paperappid" />          <!-- 종이비밀결재자 ID -->
+        <result column="paperappname" property="paperappname" />      <!-- 종이비밀결재자 이름 -->
+        <result column="paperappdeptname" property="paperappdeptname" /><!-- 종이비밀결재자 부서이름 -->
+        <result column="paperappdutyname" property="paperappdutyname" /><!-- 종이비밀결제자 직위직급이름 -->
+        <result column="readlimittype" property="readlimittype" />    <!-- 열람제한유형 -->
+        <result column="readlimitdate" property="readlimitdate" />    <!-- 열람제한일자 -->
+        <result column="protectflag" property="protectflag" />        <!-- 비밀보안 FLAG -->
+        <result column="chargerid" property="chargerid" />            <!-- 업무담당확인자 ID -->
+        <result column="chargerdeptid" property="chargerdeptid" />    <!-- 업무담당확인자 부서 ID -->
+        <result column="distributedt" property="distributedt" />      <!-- 최초배부일 -->
+        <result column="paperrecgubun" property="paperrecgubun" />    <!-- 기록물등록구분 -->
+        <result column="paperrecspecial" property="paperrecspecial" /><!-- 특수기록물 -->
+        <result column="paperrectypes" property="paperrectypes" />    <!-- 기록물형태 -->
+        <result column="apprdocnumcode" property="apprdocnumcode" />  <!-- 비밀승인코드 -->
+        <result column="transflag" property="transflag" />            <!-- 이관여부 -->
+        <result column="recordersummary" property="recordersummary" /><!-- 기록요약 -->
+        <result column="emergency" property="emergency" />            <!-- 긴급도 -->
+        <result column="addsendcnt" property="addsendcnt" />          <!-- 추가발송 회수 -->
+        <result column="docgroup" property="docgroup" />              <!-- 보고서종류 -->
+        <result column="faketitle" property="faketitle" />            <!-- 가제목 -->
+    </resultMap>
+
+    <resultMap id="selectNotAssignTaskListMap" type="com.anylogic.ssystem.bms.dct.model.SelectNotAssignTaskListResVO">
+        <id column="enfdocid" property="enfdocid" />                  <!-- 시행비밀 ID -->
+        <result column="docid" property="docid" />                    <!-- 비밀 ID -->
+        <result column="enfgubun" property="enfgubun" />              <!-- 시행구분 -->
+        <result column="relaydocid" property="relaydocid" />          <!-- 유통망 비밀 ID -->
+        <result column="receiverid" property="receiverid" />          <!-- 수신처 ID -->
+        <result column="recvdeptid" property="recvdeptid" />          <!-- 수신부서 ID -->
+        <result column="doctitle" property="doctitle" />              <!-- 비밀제목 -->
+        <result column="keyword" property="keyword" />                <!-- 키워드 -->
+        <result column="docstatus" property="docstatus" />            <!-- 비밀상태 -->
+        <result column="apprdocnum" property="apprdocnum" />          <!-- 승인비밀번호 -->
+        <result column="acceptdocseq" property="acceptdocseq" />      <!-- 접수비밀번호 일련번호 -->
+        <result column="acceptdt" property="acceptdt" />              <!-- 접수일 -->
+        <result column="acceptid" property="acceptid" />              <!-- 접수자 ID -->
+        <result column="acceptname" property="acceptname" />          <!-- 접수자 이름 -->
+        <result column="acceptdutyname" property="acceptdutyname" />  <!-- 접수자 직위직급이름 -->
+        <result column="acceptgradeid" property="acceptgradeid" />    <!-- 접수자 직위 ID -->
+        <result column="acceptpositionid" property="acceptpositionid" /><!-- 접수자 직급 ID -->
+        <result column="acceptdeptid" property="acceptdeptid" />      <!-- 접수자 부서 ID -->
+        <result column="acceptdeptname" property="acceptdeptname" />  <!-- 접수자 부서 이름 -->
+        <result column="acceptdeptnamedesc" property="acceptdeptnamedesc" /><!-- 접수자 부서이름상세 -->
+        <result column="actseq" property="actseq" />                  <!-- 처리일련번호 -->
+        <result column="open" property="open" />                      <!-- 공개 -->
+        <result column="openbasis" property="openbasis" />            <!-- 공개근거 -->
+        <result column="openreason" property="openreason" />          <!-- 공개사유 -->
+        <result column="readrangetype" property="readrangetype" />    <!-- 열람범위유형 -->
+        <result column="recvdt" property="recvdt" />                  <!-- 수신일 -->
+        <result column="distributeflag" property="distributeflag" />  <!-- 배부 FLAG -->
+        <result column="setcardflag" property="setcardflag" />        <!-- 과제카드 지정여부 -->
+        <result column="shareopnflag" property="shareopnflag" />      <!-- 공유의견 FLAG -->
+        <result column="moveflag" property="moveflag" />              <!-- 인계 FLAG -->
+        <result column="paperdocflag" property="paperdocflag" />      <!-- 종이비밀 FLAG -->
+        <result column="paperbodyflag" property="paperbodyflag" />    <!-- 종이본문 FLAG -->
+        <result column="attcount" property="attcount" />              <!-- 첨부개수 -->
+        <result column="delflag" property="delflag" />                <!-- 삭제 FLAG -->
+        <result column="relaytype" property="relaytype" />            <!-- 유통망 종류 -->
+        <result column="systemtype" property="systemtype" />          <!-- 시스템 유형 -->
+        <result column="convbodyflag" property="convbodyflag" />      <!-- 본문변환FLAG -->
+        <result column="drmgubun" property="drmgubun" />              <!-- DRM구분 -->
+        <result column="firstreadid" property="firstreadid" />        <!-- 최초열람ID -->
+        <result column="firstreaddt" property="firstreaddt" />        <!-- 최초열람일 -->
+        <result column="inid" property="inid" />                      <!-- 등록자 ID -->
+        <result column="indt" property="indt" />                      <!-- 등록일 -->
+        <result column="upid" property="upid" />                      <!-- 수정자 ID -->
+        <result column="updt" property="updt" />                      <!-- 수정일 -->
+        <result column="distributedocseq" property="distributedocseq" /><!-- 비밀배부일련번호 -->
+        <result column="distributeorgid" property="distributeorgid" /><!-- 비밀배부기관 ID -->
+        <result column="paperappid" property="paperappid" />          <!-- 종이비밀결재자 ID -->
+        <result column="paperappname" property="paperappname" />      <!-- 종이비밀결재자 이름 -->
+        <result column="paperappdeptname" property="paperappdeptname" /><!-- 종이비밀결재자 부서이름 -->
+        <result column="paperappdutyname" property="paperappdutyname" /><!-- 종이비밀결제자 직위직급이름 -->
+        <result column="readlimittype" property="readlimittype" />    <!-- 열람제한유형 -->
+        <result column="readlimitdate" property="readlimitdate" />    <!-- 열람제한일자 -->
+        <result column="protectflag" property="protectflag" />        <!-- 비밀보안 FLAG -->
+        <result column="chargerid" property="chargerid" />            <!-- 업무담당확인자 ID -->
+        <result column="chargerdeptid" property="chargerdeptid" />    <!-- 업무담당확인자 부서 ID -->
+        <result column="distributedt" property="distributedt" />      <!-- 최초배부일 -->
+        <result column="paperrecgubun" property="paperrecgubun" />    <!-- 기록물등록구분 -->
+        <result column="paperrecspecial" property="paperrecspecial" /><!-- 특수기록물 -->
+        <result column="paperrectypes" property="paperrectypes" />    <!-- 기록물형태 -->
+        <result column="apprdocnumcode" property="apprdocnumcode" />  <!-- 비밀승인코드 -->
+        <result column="transflag" property="transflag" />            <!-- 이관여부 -->
+        <result column="recordersummary" property="recordersummary" /><!-- 기록요약 -->
+        <result column="emergency" property="emergency" />            <!-- 긴급도 -->
+        <result column="addsendcnt" property="addsendcnt" />          <!-- 추가발송 회수 -->
+        <result column="docgroup" property="docgroup" />              <!-- 보고서종류 -->
+        <result column="faketitle" property="faketitle" />            <!-- 가제목 -->
+        <result column="acterid" property="acterid" />                <!-- 처리자 ID -->
+        <result column="actername" property="actername" />            <!-- 처리자 이름 -->
+        <result column="actergubun" property="actergubun" />          <!-- 처리자 구분 -->
+        <result column="deptid" property="deptid" />                  <!-- 부서 ID -->
+        <result column="deptname" property="deptname" />              <!-- 부서 이름 -->
+        <result column="deptnamedesc" property="deptnamedesc" />      <!-- 부서 이름 상세 -->
+        <result column="dutyname" property="dutyname" />              <!-- 직위직급 이름 -->
+        <result column="positionid" property="positionid" />          <!-- 직위 ID -->
+        <result column="gradeid" property="gradeid" />                <!-- 직급 ID -->
+        <result column="actdt" property="actdt" />                    <!-- 처리일 -->
+        <result column="readdt" property="readdt" />                  <!-- 열람일시 -->
+        <result column="starred" property="starred" />                <!-- 중요여부 -->
+        <result column="secgubun" property="secgubun" />              <!-- 비밀구분 -->
+        <result column="seclevel" property="seclevel" />              <!-- 비밀등급 -->
+        <result column="orgnprotdt" property="orgnprotdt" />          <!-- 원본보호기간 -->
+        <result column="orgnnextlevel" property="orgnnextlevel" />    <!-- 원본차기비밀등급 -->
+        <result column="orgnreclass" property="orgnreclass" />        <!-- 원본재분류 -->
+        <result column="orgnprotcond" property="orgnprotcond" />      <!-- 원본보호조건 -->
+        <result column="copyprotdt" property="copyprotdt" />          <!-- 사본보호기간 -->
+        <result column="copynextlevel" property="copynextlevel" />    <!-- 사본차기비밀등급 -->
+        <result column="copyreclass" property="copyreclass" />        <!-- 사본재분류 -->
+        <result column="copyprotcond" property="copyprotcond" />      <!-- 사본보호조건 -->
+        <result column="prsrvterm" property="prsrvterm" />            <!-- 보존기간 -->
+        <result column="docno" property="docno" />                    <!-- 문서번호 -->
+        <result column="mgmtno" property="mgmtno" />                  <!-- 관리번호 -->
+        <result column="copyno" property="copyno" />                  <!-- 사본번호 -->
+        <result column="createdeptid" property="createdeptid" />      <!-- 생산부서코드 -->
+        <result column="createdeptname" property="createdeptname" />  <!-- 생산부서명 -->
+        <result column="docpagenum" property="docpagenum" />          <!-- 쪽수 -->
+        <result column="specialyn" property="specialyn" />            <!-- 특별관리여부 -->
+        <result column="binderyn" property="binderyn" />              <!-- 참고철 바인더 여부 -->
+        <result column="secretdocyn" property="secretdocyn" />        <!-- 가제목 사용여부 -->
+        <result column="waryn" property="waryn" />                    <!-- 전시여부 -->
+        <result column="isnewrule" property="isnewrule" />            <!-- 신규 -->
+        <result column="istransrule" property="istransrule" />        <!-- 이관여부 -->
+        <result column="orgncreateyear" property="orgncreateyear" />  <!--  -->
+        <result column="wargubun" property="wargubun" />              <!--  -->
+    </resultMap>
+
+    <resultMap id="selectReprocessListMap" type="com.anylogic.ssystem.bms.dct.model.SelectReprocessListResVO">
+        <id column="enfdocid" property="enfdocid" />                  <!-- 시행비밀 ID -->
+        <result column="docid" property="docid" />                    <!-- 비밀 ID -->
+        <result column="enfgubun" property="enfgubun" />              <!-- 시행구분 -->
+        <result column="relaydocid" property="relaydocid" />          <!-- 유통망 비밀 ID -->
+        <result column="receiverid" property="receiverid" />          <!-- 수신처 ID -->
+        <result column="recvdeptid" property="recvdeptid" />          <!-- 수신부서 ID -->
+        <result column="doctitle" property="doctitle" />              <!-- 비밀제목 -->
+        <result column="keyword" property="keyword" />                <!-- 키워드 -->
+        <result column="docstatus" property="docstatus" />            <!-- 비밀상태 -->
+        <result column="apprdocnum" property="apprdocnum" />          <!-- 승인비밀번호 -->
+        <result column="acceptdocseq" property="acceptdocseq" />      <!-- 접수비밀번호 일련번호 -->
+        <result column="acceptdt" property="acceptdt" />              <!-- 접수일 -->
+        <result column="acceptid" property="acceptid" />              <!-- 접수자 ID -->
+        <result column="acceptname" property="acceptname" />          <!-- 접수자 이름 -->
+        <result column="acceptdutyname" property="acceptdutyname" />  <!-- 접수자 직위직급이름 -->
+        <result column="acceptgradeid" property="acceptgradeid" />    <!-- 접수자 직위 ID -->
+        <result column="acceptpositionid" property="acceptpositionid" /><!-- 접수자 직급 ID -->
+        <result column="acceptdeptid" property="acceptdeptid" />      <!-- 접수자 부서 ID -->
+        <result column="acceptdeptname" property="acceptdeptname" />  <!-- 접수자 부서 이름 -->
+        <result column="acceptdeptnamedesc" property="acceptdeptnamedesc" /><!-- 접수자 부서이름상세 -->
+        <result column="actseq" property="actseq" />                  <!-- 처리일련번호 -->
+        <result column="open" property="open" />                      <!-- 공개 -->
+        <result column="openbasis" property="openbasis" />            <!-- 공개근거 -->
+        <result column="openreason" property="openreason" />          <!-- 공개사유 -->
+        <result column="readrangetype" property="readrangetype" />    <!-- 열람범위유형 -->
+        <result column="recvdt" property="recvdt" />                  <!-- 수신일 -->
+        <result column="distributeflag" property="distributeflag" />  <!-- 배부 FLAG -->
+        <result column="setcardflag" property="setcardflag" />        <!-- 과제카드 지정여부 -->
+        <result column="shareopnflag" property="shareopnflag" />      <!-- 공유의견 FLAG -->
+        <result column="moveflag" property="moveflag" />              <!-- 인계 FLAG -->
+        <result column="paperdocflag" property="paperdocflag" />      <!-- 종이비밀 FLAG -->
+        <result column="paperbodyflag" property="paperbodyflag" />    <!-- 종이본문 FLAG -->
+        <result column="attcount" property="attcount" />              <!-- 첨부개수 -->
+        <result column="delflag" property="delflag" />                <!-- 삭제 FLAG -->
+        <result column="relaytype" property="relaytype" />            <!-- 유통망 종류 -->
+        <result column="systemtype" property="systemtype" />          <!-- 시스템 유형 -->
+        <result column="convbodyflag" property="convbodyflag" />      <!-- 본문변환FLAG -->
+        <result column="drmgubun" property="drmgubun" />              <!-- DRM구분 -->
+        <result column="firstreadid" property="firstreadid" />        <!-- 최초열람ID -->
+        <result column="firstreaddt" property="firstreaddt" />        <!-- 최초열람일 -->
+        <result column="inid" property="inid" />                      <!-- 등록자 ID -->
+        <result column="indt" property="indt" />                      <!-- 등록일 -->
+        <result column="upid" property="upid" />                      <!-- 수정자 ID -->
+        <result column="updt" property="updt" />                      <!-- 수정일 -->
+        <result column="distributedocseq" property="distributedocseq" /><!-- 비밀배부일련번호 -->
+        <result column="distributeorgid" property="distributeorgid" /><!-- 비밀배부기관 ID -->
+        <result column="paperappid" property="paperappid" />          <!-- 종이비밀결재자 ID -->
+        <result column="paperappname" property="paperappname" />      <!-- 종이비밀결재자 이름 -->
+        <result column="paperappdeptname" property="paperappdeptname" /><!-- 종이비밀결재자 부서이름 -->
+        <result column="paperappdutyname" property="paperappdutyname" /><!-- 종이비밀결제자 직위직급이름 -->
+        <result column="readlimittype" property="readlimittype" />    <!-- 열람제한유형 -->
+        <result column="readlimitdate" property="readlimitdate" />    <!-- 열람제한일자 -->
+        <result column="protectflag" property="protectflag" />        <!-- 비밀보안 FLAG -->
+        <result column="chargerid" property="chargerid" />            <!-- 업무담당확인자 ID -->
+        <result column="chargerdeptid" property="chargerdeptid" />    <!-- 업무담당확인자 부서 ID -->
+        <result column="distributedt" property="distributedt" />      <!-- 최초배부일 -->
+        <result column="paperrecgubun" property="paperrecgubun" />    <!-- 기록물등록구분 -->
+        <result column="paperrecspecial" property="paperrecspecial" /><!-- 특수기록물 -->
+        <result column="paperrectypes" property="paperrectypes" />    <!-- 기록물형태 -->
+        <result column="apprdocnumcode" property="apprdocnumcode" />  <!-- 비밀승인코드 -->
+        <result column="transflag" property="transflag" />            <!-- 이관여부 -->
+        <result column="recordersummary" property="recordersummary" /><!-- 기록요약 -->
+        <result column="emergency" property="emergency" />            <!-- 긴급도 -->
+        <result column="addsendcnt" property="addsendcnt" />          <!-- 추가발송 회수 -->
+        <result column="docgroup" property="docgroup" />              <!-- 보고서종류 -->
+        <result column="faketitle" property="faketitle" />            <!-- 가제목 -->
+        <result column="acterid" property="acterid" />                <!-- 처리자 ID -->
+        <result column="actername" property="actername" />            <!-- 처리자 이름 -->
+        <result column="acterdutyname" property="acterdutyname" />    <!-- 처리자 직위직급이름 -->
+        <result column="acterpositionid" property="acterpositionid" /><!-- 처리자 직위 ID -->
+        <result column="actergradeid" property="actergradeid" />      <!-- 처리자 직급 ID -->
+        <result column="acterdeptid" property="acterdeptid" />        <!-- 처리자 부서 ID -->
+        <result column="acterdeptname" property="acterdeptname" />    <!-- 처리자 부서 이름 -->
+        <result column="acterdeptnamedesc" property="acterdeptnamedesc" /><!-- 처리자 부서 이름 상세 -->
+        <result column="actgubun" property="actgubun" />              <!-- 처리구분 -->
+        <result column="actdt" property="actdt" />                    <!-- 처리일 -->
+        <result column="actopinion" property="actopinion" />          <!-- 처리의견 -->
+        <result column="recid" property="recid" />                    <!-- 기록관 ID -->
+        <result column="recname" property="recname" />                <!-- 수신자 이름 -->
+        <result column="recdutyname" property="recdutyname" />        <!-- 수신자 직위직급 -->
+        <result column="recpositionid" property="recpositionid" />    <!-- 수신자 직위 ID -->
+        <result column="recgradeid" property="recgradeid" />          <!-- 수신자 직급 ID -->
+        <result column="recdeptid" property="recdeptid" />            <!-- 수신자 부서 ID -->
+        <result column="recdeptname" property="recdeptname" />        <!-- 수신자 부서 이름 -->
+        <result column="recdeptnamedesc" property="recdeptnamedesc" /><!-- 수신자 부서 상세이름 -->
+        <result column="pathhisid" property="pathhisid" />            <!-- 처리경로이력 ID -->
+        <result column="electsignid" property="electsignid" />        <!-- 전자서명 ID -->
+        <result column="version" property="version" />                <!-- 버전 -->
+        <result column="apprreqid" property="apprreqid" />            <!-- 결재요청 ID -->
+        <result column="regirecvgubun" property="regirecvgubun" />    <!-- 생산/접수 구분 -->
+        <result column="reqtype" property="reqtype" />                <!-- 요청 구분 -->
+        <result column="secgubun" property="secgubun" />              <!-- 비밀 구분 -->
+        <result column="seclevel" property="seclevel" />              <!-- 비밀 등급 -->
+        <result column="copyno" property="copyno" />                  <!-- 사본 번호 -->
+        <result column="gubun" property="gubun" />                    <!-- 구분 -->
+        <result column="rfidtagflag" property="rfidtagflag" />        <!-- RFID 사용 여부 -->
+        <result column="prsrvterm" property="prsrvterm" />            <!-- 보존 기간 -->
+        <result column="orgnprotdt" property="orgnprotdt" />          <!-- 원본 보호 기간 -->
+        <result column="orgnnextlevel" property="orgnnextlevel" />    <!-- 원본 차기 비밀 등급 -->
+        <result column="orgnreclass" property="orgnreclass" />        <!-- 원본 재분류 -->
+        <result column="orgnprotcond" property="orgnprotcond" />      <!-- 원본 보호조건 -->
+        <result column="copyprotdt" property="copyprotdt" />          <!-- 사본 보호기간 -->
+        <result column="copynextlevel" property="copynextlevel" />    <!-- 사본 차기 비밀 등급 -->
+        <result column="copyreclass" property="copyreclass" />        <!-- 사본 재분류 -->
+        <result column="copyprotcond" property="copyprotcond" />      <!-- 사본 보호 조건 -->
+        <result column="docttl" property="docttl" />                  <!-- 비밀명 -->
+        <result column="summary" property="summary" />                <!-- 요약 -->
+        <result column="authorid" property="authorid" />              <!-- 담당자 ID -->
+        <result column="authorname" property="authorname" />          <!-- 담당자 이름 -->
+        <result column="authordutyname" property="authordutyname" />  <!-- 담당자 직위직급 -->
+        <result column="authorpositionid" property="authorpositionid" /><!-- 담당자 직위 ID -->
+        <result column="authorgradeid" property="authorgradeid" />    <!-- 담당자 직급 ID -->
+        <result column="authordeptid" property="authordeptid" />      <!-- 담당자 부서 ID -->
+        <result column="authordeptname" property="authordeptname" />  <!-- 담당자 부서 이름 -->
+        <result column="authordeptnamedesc" property="authordeptnamedesc" /><!-- 담당자 부서 이름 상세 -->
+        <result column="lastauthorid" property="lastauthorid" />      <!-- 결재자 ID -->
+        <result column="lastauthorname" property="lastauthorname" />  <!-- 결재자 이름 -->
+        <result column="draftername" property="draftername" />        <!-- 기안자 이름 -->
+        <result column="sendorgname" property="sendorgname" />        <!-- 발신기관 이름 -->
+        <result column="senddt" property="senddt" />                  <!-- 발송일시 -->
+        <result column="recvdisplayname" property="recvdisplayname" /><!-- 수신처 표시 이름 -->
+        <result column="viadeptname" property="viadeptname" />        <!-- 경유부서 이름 -->
+        <result column="sectype" property="sectype" />                <!-- 비밀 형태 -->
+        <result column="tcardid" property="tcardid" />                <!-- 단위과제카드 ID -->
+        <result column="pcardid" property="pcardid" />                <!-- 관리과제카드 ID -->
+        <result column="ocardid" property="ocardid" />                <!-- 기관과제카드 ID -->
+        <result column="inname" property="inname" />                  <!-- 등록자 이름 -->
+        <result column="draftdt" property="draftdt" />                <!-- 기안일자 -->
+        <result column="approvedt" property="approvedt" />            <!-- 결재일자 -->
+        <result column="lastauthordutyname" property="lastauthordutyname" /><!-- 결재자직위직급 -->
+        <result column="lastauthorpositionid" property="lastauthorpositionid" /><!-- 결재자직위 ID -->
+        <result column="lastauthorgradeid" property="lastauthorgradeid" /><!-- 결재자 직급 ID -->
+        <result column="lastauthordeptid" property="lastauthordeptid" /><!-- 결재자 부서 ID -->
+        <result column="lastauthordeptname" property="lastauthordeptname" /><!-- 결재자 부서 이름 -->
+        <result column="lastauthordeptnamedesc" property="lastauthordeptnamedesc" /><!-- 결재자 부서 이름 상세 -->
+        <result column="type" property="type" />                      <!-- 타입 -->
+        <result column="mgmtid" property="mgmtid" />                  <!-- 비밀관리 ID -->
+        <result column="confirmflag" property="confirmflag" />        <!-- 승인여부 -->
+        <result column="createdeptid" property="createdeptid" />      <!-- 생산부서코드 -->
+        <result column="createdeptname" property="createdeptname" />  <!-- 생산부서명 -->
+        <result column="docpagenum" property="docpagenum" />          <!-- 쪽수 -->
+        <result column="cabinetroomno" property="cabinetroomno" />    <!-- 단번호 -->
+        <result column="cabinetid" property="cabinetid" />            <!-- 보관함 코드 -->
+        <result column="regirecvdt" property="regirecvdt" />          <!-- 등재일자 -->
+        <result column="sectypeetc" property="sectypeetc" />          <!-- 등록구분기타 -->
+        <result column="specialyn" property="specialyn" />            <!-- 특별관리 여부 -->
+        <result column="binderyn" property="binderyn" />              <!-- 참고철바인더 여부 -->
+        <result column="secretdocyn" property="secretdocyn" />        <!-- 가제목 사용여부 -->
+        <result column="waryn" property="waryn" />                    <!-- 전시여부 -->
+        <result column="isnewrule" property="isnewrule" />            <!-- 신규 -->
+        <result column="istransrule" property="istransrule" />        <!-- 이관여부 -->
+        <result column="wargubun" property="wargubun" />              <!--  -->
+        <result column="bsnsSeCd" property="bsnsSeCd" />            <!--  -->
+        <result column="bsnsSmbol" property="bsnsSmbol" />           <!--  -->
+        <result column="hostilegubun" property="hostilegubun" />      <!--  -->
+        <result column="realexist" property="realexist" />            <!--  -->
+        <result column="mediatype" property="mediatype" />            <!--  -->
+        <result column="mediatypeEtc" property="mediatypeEtc" />     <!--  -->
+        <result column="orgncreateyear" property="orgncreateyear" />  <!--  -->
+        <result column="deptname" property="deptname" />
+        <result column="gubun" property="gubun" />
+        <result column="sendopinion" property="sendopinion" />
+        <result column="actgubun" property="actgubun" />
+        <result column="actopinion" property="actopinion" />
+        <result column="docno" property="docno" />
+        <result column="regirecvgubun" property="regirecvgubun" />   <!-- 접수 구분 (생산,접수) -->
+        <result column="regirecvtype" property="regirecvtype" />
+        <result column="actseq" property="actseq" />
+    </resultMap>
+
+    <resultMap id="getReprocessMap" type="com.anylogic.ssystem.bms.dct.model.GetReprocessResVO">
+        <id column="enfdocid" property="enfdocid" />                  <!-- 시행비밀 ID -->
+        <result column="docid" property="docid" />                    <!-- 비밀 ID -->
+        <result column="enfgubun" property="enfgubun" />              <!-- 시행구분 -->
+        <result column="relaydocid" property="relaydocid" />          <!-- 유통망 비밀 ID -->
+        <result column="receiverid" property="receiverid" />          <!-- 수신처 ID -->
+        <result column="recvdeptid" property="recvdeptid" />          <!-- 수신부서 ID -->
+        <result column="doctitle" property="doctitle" />              <!-- 비밀제목 -->
+        <result column="keyword" property="keyword" />                <!-- 키워드 -->
+        <result column="docstatus" property="docstatus" />            <!-- 비밀상태 -->
+        <result column="apprdocnum" property="apprdocnum" />          <!-- 승인비밀번호 -->
+        <result column="acceptdocseq" property="acceptdocseq" />      <!-- 접수비밀번호 일련번호 -->
+        <result column="acceptdt" property="acceptdt" />              <!-- 접수일 -->
+        <result column="acceptid" property="acceptid" />              <!-- 접수자 ID -->
+        <result column="acceptname" property="acceptname" />          <!-- 접수자 이름 -->
+        <result column="acceptdutyname" property="acceptdutyname" />  <!-- 접수자 직위직급이름 -->
+        <result column="acceptgradeid" property="acceptgradeid" />    <!-- 접수자 직위 ID -->
+        <result column="acceptpositionid" property="acceptpositionid" /><!-- 접수자 직급 ID -->
+        <result column="acceptdeptid" property="acceptdeptid" />      <!-- 접수자 부서 ID -->
+        <result column="acceptdeptname" property="acceptdeptname" />  <!-- 접수자 부서 이름 -->
+        <result column="acceptdeptnamedesc" property="acceptdeptnamedesc" /><!-- 접수자 부서이름상세 -->
+        <result column="actseq" property="actseq" />                  <!-- 처리일련번호 -->
+        <result column="open" property="open" />                      <!-- 공개 -->
+        <result column="openbasis" property="openbasis" />            <!-- 공개근거 -->
+        <result column="openreason" property="openreason" />          <!-- 공개사유 -->
+        <result column="readrangetype" property="readrangetype" />    <!-- 열람범위유형 -->
+        <result column="recvdt" property="recvdt" />                  <!-- 수신일 -->
+        <result column="distributeflag" property="distributeflag" />  <!-- 배부 FLAG -->
+        <result column="setcardflag" property="setcardflag" />        <!-- 과제카드 지정여부 -->
+        <result column="shareopnflag" property="shareopnflag" />      <!-- 공유의견 FLAG -->
+        <result column="moveflag" property="moveflag" />              <!-- 인계 FLAG -->
+        <result column="paperdocflag" property="paperdocflag" />      <!-- 종이비밀 FLAG -->
+        <result column="paperbodyflag" property="paperbodyflag" />    <!-- 종이본문 FLAG -->
+        <result column="attcount" property="attcount" />              <!-- 첨부개수 -->
+        <result column="delflag" property="delflag" />                <!-- 삭제 FLAG -->
+        <result column="relaytype" property="relaytype" />            <!-- 유통망 종류 -->
+        <result column="systemtype" property="systemtype" />          <!-- 시스템 유형 -->
+        <result column="convbodyflag" property="convbodyflag" />      <!-- 본문변환FLAG -->
+        <result column="drmgubun" property="drmgubun" />              <!-- DRM구분 -->
+        <result column="firstreadid" property="firstreadid" />        <!-- 최초열람ID -->
+        <result column="firstreaddt" property="firstreaddt" />        <!-- 최초열람일 -->
+        <result column="inid" property="inid" />                      <!-- 등록자 ID -->
+        <result column="indt" property="indt" />                      <!-- 등록일 -->
+        <result column="upid" property="upid" />                      <!-- 수정자 ID -->
+        <result column="updt" property="updt" />                      <!-- 수정일 -->
+        <result column="distributedocseq" property="distributedocseq" /><!-- 비밀배부일련번호 -->
+        <result column="distributeorgid" property="distributeorgid" /><!-- 비밀배부기관 ID -->
+        <result column="paperappid" property="paperappid" />          <!-- 종이비밀결재자 ID -->
+        <result column="paperappname" property="paperappname" />      <!-- 종이비밀결재자 이름 -->
+        <result column="paperappdeptname" property="paperappdeptname" /><!-- 종이비밀결재자 부서이름 -->
+        <result column="paperappdutyname" property="paperappdutyname" /><!-- 종이비밀결제자 직위직급이름 -->
+        <result column="readlimittype" property="readlimittype" />    <!-- 열람제한유형 -->
+        <result column="readlimitdate" property="readlimitdate" />    <!-- 열람제한일자 -->
+        <result column="protectflag" property="protectflag" />        <!-- 비밀보안 FLAG -->
+        <result column="chargerid" property="chargerid" />            <!-- 업무담당확인자 ID -->
+        <result column="chargerdeptid" property="chargerdeptid" />    <!-- 업무담당확인자 부서 ID -->
+        <result column="distributedt" property="distributedt" />      <!-- 최초배부일 -->
+        <result column="paperrecgubun" property="paperrecgubun" />    <!-- 기록물등록구분 -->
+        <result column="paperrecspecial" property="paperrecspecial" /><!-- 특수기록물 -->
+        <result column="paperrectypes" property="paperrectypes" />    <!-- 기록물형태 -->
+        <result column="apprdocnumcode" property="apprdocnumcode" />  <!-- 비밀승인코드 -->
+        <result column="transflag" property="transflag" />            <!-- 이관여부 -->
+        <result column="recordersummary" property="recordersummary" /><!-- 기록요약 -->
+        <result column="emergency" property="emergency" />            <!-- 긴급도 -->
+        <result column="addsendcnt" property="addsendcnt" />          <!-- 추가발송 회수 -->
+        <result column="docgroup" property="docgroup" />              <!-- 보고서종류 -->
+        <result column="faketitle" property="faketitle" />            <!-- 가제목 -->
+    </resultMap>
+
+    <resultMap id="selectSendBackReadyListMap" type="com.anylogic.ssystem.bms.dct.model.SelectSendBackReadyListResVO">
+        <id column="enfdocid" property="enfdocid" />                  <!-- 시행비밀 ID -->
+        <result column="docid" property="docid" />                    <!-- 비밀 ID -->
+        <result column="enfgubun" property="enfgubun" />              <!-- 시행구분 -->
+        <result column="relaydocid" property="relaydocid" />          <!-- 유통망 비밀 ID -->
+        <result column="receiverid" property="receiverid" />          <!-- 수신처 ID -->
+        <result column="recvdeptid" property="recvdeptid" />          <!-- 수신부서 ID -->
+        <result column="doctitle" property="doctitle" />              <!-- 비밀제목 -->
+        <result column="keyword" property="keyword" />                <!-- 키워드 -->
+        <result column="docstatus" property="docstatus" />            <!-- 비밀상태 -->
+        <result column="apprdocnum" property="apprdocnum" />          <!-- 승인비밀번호 -->
+        <result column="acceptdocseq" property="acceptdocseq" />      <!-- 접수비밀번호 일련번호 -->
+        <result column="acceptdt" property="acceptdt" />              <!-- 접수일 -->
+        <result column="acceptid" property="acceptid" />              <!-- 접수자 ID -->
+        <result column="acceptname" property="acceptname" />          <!-- 접수자 이름 -->
+        <result column="acceptdutyname" property="acceptdutyname" />  <!-- 접수자 직위직급이름 -->
+        <result column="acceptgradeid" property="acceptgradeid" />    <!-- 접수자 직위 ID -->
+        <result column="acceptpositionid" property="acceptpositionid" /><!-- 접수자 직급 ID -->
+        <result column="acceptdeptid" property="acceptdeptid" />      <!-- 접수자 부서 ID -->
+        <result column="acceptdeptname" property="acceptdeptname" />  <!-- 접수자 부서 이름 -->
+        <result column="acceptdeptnamedesc" property="acceptdeptnamedesc" /><!-- 접수자 부서이름상세 -->
+        <result column="actseq" property="actseq" />                  <!-- 처리일련번호 -->
+        <result column="open" property="open" />                      <!-- 공개 -->
+        <result column="openbasis" property="openbasis" />            <!-- 공개근거 -->
+        <result column="openreason" property="openreason" />          <!-- 공개사유 -->
+        <result column="readrangetype" property="readrangetype" />    <!-- 열람범위유형 -->
+        <result column="recvdt" property="recvdt" />                  <!-- 수신일 -->
+        <result column="distributeflag" property="distributeflag" />  <!-- 배부 FLAG -->
+        <result column="setcardflag" property="setcardflag" />        <!-- 과제카드 지정여부 -->
+        <result column="shareopnflag" property="shareopnflag" />      <!-- 공유의견 FLAG -->
+        <result column="moveflag" property="moveflag" />              <!-- 인계 FLAG -->
+        <result column="paperdocflag" property="paperdocflag" />      <!-- 종이비밀 FLAG -->
+        <result column="paperbodyflag" property="paperbodyflag" />    <!-- 종이본문 FLAG -->
+        <result column="attcount" property="attcount" />              <!-- 첨부개수 -->
+        <result column="delflag" property="delflag" />                <!-- 삭제 FLAG -->
+        <result column="relaytype" property="relaytype" />            <!-- 유통망 종류 -->
+        <result column="systemtype" property="systemtype" />          <!-- 시스템 유형 -->
+        <result column="convbodyflag" property="convbodyflag" />      <!-- 본문변환FLAG -->
+        <result column="drmgubun" property="drmgubun" />              <!-- DRM구분 -->
+        <result column="firstreadid" property="firstreadid" />        <!-- 최초열람ID -->
+        <result column="firstreaddt" property="firstreaddt" />        <!-- 최초열람일 -->
+        <result column="inid" property="inid" />                      <!-- 등록자 ID -->
+        <result column="indt" property="indt" />                      <!-- 등록일 -->
+        <result column="upid" property="upid" />                      <!-- 수정자 ID -->
+        <result column="updt" property="updt" />                      <!-- 수정일 -->
+        <result column="distributedocseq" property="distributedocseq" /><!-- 비밀배부일련번호 -->
+        <result column="distributeorgid" property="distributeorgid" /><!-- 비밀배부기관 ID -->
+        <result column="paperappid" property="paperappid" />          <!-- 종이비밀결재자 ID -->
+        <result column="paperappname" property="paperappname" />      <!-- 종이비밀결재자 이름 -->
+        <result column="paperappdeptname" property="paperappdeptname" /><!-- 종이비밀결재자 부서이름 -->
+        <result column="paperappdutyname" property="paperappdutyname" /><!-- 종이비밀결제자 직위직급이름 -->
+        <result column="readlimittype" property="readlimittype" />    <!-- 열람제한유형 -->
+        <result column="readlimitdate" property="readlimitdate" />    <!-- 열람제한일자 -->
+        <result column="protectflag" property="protectflag" />        <!-- 비밀보안 FLAG -->
+        <result column="chargerid" property="chargerid" />            <!-- 업무담당확인자 ID -->
+        <result column="chargerdeptid" property="chargerdeptid" />    <!-- 업무담당확인자 부서 ID -->
+        <result column="distributedt" property="distributedt" />      <!-- 최초배부일 -->
+        <result column="paperrecgubun" property="paperrecgubun" />    <!-- 기록물등록구분 -->
+        <result column="paperrecspecial" property="paperrecspecial" /><!-- 특수기록물 -->
+        <result column="paperrectypes" property="paperrectypes" />    <!-- 기록물형태 -->
+        <result column="apprdocnumcode" property="apprdocnumcode" />  <!-- 비밀승인코드 -->
+        <result column="transflag" property="transflag" />            <!-- 이관여부 -->
+        <result column="recordersummary" property="recordersummary" /><!-- 기록요약 -->
+        <result column="emergency" property="emergency" />            <!-- 긴급도 -->
+        <result column="addsendcnt" property="addsendcnt" />          <!-- 추가발송 회수 -->
+        <result column="docgroup" property="docgroup" />              <!-- 보고서종류 -->
+        <result column="faketitle" property="faketitle" />            <!-- 가제목 -->
+        <result column="secgubun" property="secgubun" />              <!-- 비밀구분 -->
+        <result column="seclevel" property="seclevel" />              <!-- 비밀등급 -->
+        <result column="orgnprotdt" property="orgnprotdt" />          <!-- 원본보호기간 -->
+        <result column="orgnnextlevel" property="orgnnextlevel" />    <!-- 원본차기비밀등급 -->
+        <result column="orgnreclass" property="orgnreclass" />        <!-- 원본재분류 -->
+        <result column="orgnprotcond" property="orgnprotcond" />      <!-- 원본보호조건 -->
+        <result column="copyprotdt" property="copyprotdt" />          <!-- 사본보호기간 -->
+        <result column="copynextlevel" property="copynextlevel" />    <!-- 사본차기비밀등급 -->
+        <result column="copyreclass" property="copyreclass" />        <!-- 사본재분류 -->
+        <result column="copyprotcond" property="copyprotcond" />      <!-- 사본보호조건 -->
+        <result column="prsrvterm" property="prsrvterm" />            <!-- 보존기간 -->
+        <result column="docno" property="docno" />                    <!-- 문서번호 -->
+        <result column="mgmtno" property="mgmtno" />                  <!-- 관리번호 -->
+        <result column="copyno" property="copyno" />                  <!-- 사본번호 -->
+        <result column="createdeptid" property="createdeptid" />      <!-- 생산부서코드 -->
+        <result column="createdeptname" property="createdeptname" />  <!-- 생산부서명 -->
+        <result column="docpagenum" property="docpagenum" />          <!-- 쪽수 -->
+        <result column="specialyn" property="specialyn" />            <!-- 특별관리여부 -->
+        <result column="binderyn" property="binderyn" />              <!-- 참고철 바인더 여부 -->
+        <result column="secretdocyn" property="secretdocyn" />        <!-- 가제목 사용여부 -->
+        <result column="waryn" property="waryn" />                    <!-- 전시여부 -->
+        <result column="isnewrule" property="isnewrule" />            <!-- 신규 -->
+        <result column="istransrule" property="istransrule" />        <!-- 이관여부 -->
+        <result column="orgncreateyear" property="orgncreateyear" />  <!--  -->
+        <result column="wargubun" property="wargubun" />              <!--  -->
+        <result column="acterid" property="acterid" />                <!-- 처리자 ID -->
+        <result column="actername" property="actername" />            <!-- 처리자 이름 -->
+        <result column="acterdutyname" property="acterdutyname" />    <!-- 처리자 직위직급이름 -->
+        <result column="acterpositionid" property="acterpositionid" /><!-- 처리자 직위 ID -->
+        <result column="actergradeid" property="actergradeid" />      <!-- 처리자 직급 ID -->
+        <result column="acterdeptid" property="acterdeptid" />        <!-- 처리자 부서 ID -->
+        <result column="acterdeptname" property="acterdeptname" />    <!-- 처리자 부서 이름 -->
+        <result column="acterdeptnamedesc" property="acterdeptnamedesc" /><!-- 처리자 부서 이름 상세 -->
+        <result column="actgubun" property="actgubun" />              <!-- 처리구분 -->
+        <result column="actdt" property="actdt" />                    <!-- 처리일 -->
+        <result column="actopinion" property="actopinion" />          <!-- 처리의견 -->
+        <result column="recid" property="recid" />                    <!-- 기록관 ID -->
+        <result column="recname" property="recname" />                <!-- 수신자 이름 -->
+        <result column="recdutyname" property="recdutyname" />        <!-- 수신자 직위직급 -->
+        <result column="recpositionid" property="recpositionid" />    <!-- 수신자 직위 ID -->
+        <result column="recgradeid" property="recgradeid" />          <!-- 수신자 직급 ID -->
+        <result column="recdeptid" property="recdeptid" />            <!-- 수신자 부서 ID -->
+        <result column="recdeptname" property="recdeptname" />        <!-- 수신자 부서 이름 -->
+        <result column="recdeptnamedesc" property="recdeptnamedesc" /><!-- 수신자 부서 상세이름 -->
+        <result column="pathhisid" property="pathhisid" />            <!-- 처리경로이력 ID -->
+        <result column="electsignid" property="electsignid" />        <!-- 전자서명 ID -->
+        <result column="version" property="version" />                <!-- 버전 -->
+        <result column="apprreqid" property="apprreqid" />            <!-- 결재요청 ID -->
+        <result column="regirecvgubun" property="regirecvgubun" />    <!-- 생산/접수 구분 -->
+        <result column="reqtype" property="reqtype" />                <!-- 요청 구분 -->
+        <result column="gubun" property="gubun" />                    <!-- 구분 -->
+        <result column="rfidtagflag" property="rfidtagflag" />        <!-- RFID 사용 여부 -->
+        <result column="docttl" property="docttl" />                  <!-- 비밀명 -->
+        <result column="summary" property="summary" />                <!-- 요약 -->
+        <result column="authorid" property="authorid" />              <!-- 담당자 ID -->
+        <result column="authorname" property="authorname" />          <!-- 담당자 이름 -->
+        <result column="authordutyname" property="authordutyname" />  <!-- 담당자 직위직급 -->
+        <result column="authorpositionid" property="authorpositionid" /><!-- 담당자 직위 ID -->
+        <result column="authorgradeid" property="authorgradeid" />    <!-- 담당자 직급 ID -->
+        <result column="authordeptid" property="authordeptid" />      <!-- 담당자 부서 ID -->
+        <result column="authordeptname" property="authordeptname" />  <!-- 담당자 부서 이름 -->
+        <result column="authordeptnamedesc" property="authordeptnamedesc" /><!-- 담당자 부서 이름 상세 -->
+        <result column="lastauthorid" property="lastauthorid" />      <!-- 결재자 ID -->
+        <result column="lastauthorname" property="lastauthorname" />  <!-- 결재자 이름 -->
+        <result column="draftername" property="draftername" />        <!-- 기안자 이름 -->
+        <result column="sendorgname" property="sendorgname" />        <!-- 발신기관 이름 -->
+        <result column="senddt" property="senddt" />                  <!-- 발송일시 -->
+        <result column="recvdisplayname" property="recvdisplayname" /><!-- 수신처 표시 이름 -->
+        <result column="viadeptname" property="viadeptname" />        <!-- 경유부서 이름 -->
+        <result column="sectype" property="sectype" />                <!-- 비밀 형태 -->
+        <result column="tcardid" property="tcardid" />                <!-- 단위과제카드 ID -->
+        <result column="pcardid" property="pcardid" />                <!-- 관리과제카드 ID -->
+        <result column="ocardid" property="ocardid" />                <!-- 기관과제카드 ID -->
+        <result column="inname" property="inname" />                  <!-- 등록자 이름 -->
+        <result column="draftdt" property="draftdt" />                <!-- 기안일자 -->
+        <result column="approvedt" property="approvedt" />            <!-- 결재일자 -->
+        <result column="lastauthordutyname" property="lastauthordutyname" /><!-- 결재자직위직급 -->
+        <result column="lastauthorpositionid" property="lastauthorpositionid" /><!-- 결재자직위 ID -->
+        <result column="lastauthorgradeid" property="lastauthorgradeid" /><!-- 결재자 직급 ID -->
+        <result column="lastauthordeptid" property="lastauthordeptid" /><!-- 결재자 부서 ID -->
+        <result column="lastauthordeptname" property="lastauthordeptname" /><!-- 결재자 부서 이름 -->
+        <result column="lastauthordeptnamedesc" property="lastauthordeptnamedesc" /><!-- 결재자 부서 이름 상세 -->
+        <result column="type" property="type" />                      <!-- 타입 -->
+        <result column="mgmtid" property="mgmtid" />                  <!-- 비밀관리 ID -->
+        <result column="confirmflag" property="confirmflag" />        <!-- 승인여부 -->
+        <result column="cabinetroomno" property="cabinetroomno" />    <!-- 단번호 -->
+        <result column="cabinetid" property="cabinetid" />            <!-- 보관함 코드 -->
+        <result column="regirecvdt" property="regirecvdt" />          <!-- 등재일자 -->
+        <result column="sectypeetc" property="sectypeetc" />          <!-- 등록구분기타 -->
+        <result column="bsnsSeCd" property="bsnsSeCd" />            <!--  -->
+        <result column="bsnsSmbol" property="bsnsSmbol" />           <!--  -->
+        <result column="hostilegubun" property="hostilegubun" />      <!--  -->
+        <result column="realexist" property="realexist" />            <!--  -->
+        <result column="mediatype" property="mediatype" />            <!--  -->
+        <result column="mediatypeEtc" property="mediatypeEtc" />     <!--  -->
+        <result column="deptname" property="deptname" />
+        <result column="gubun" property="gubun" />
+        <result column="sendopinion" property="sendopinion" />
+        <result column="actgubun" property="actgubun" />
+        <result column="actopinion" property="actopinion" />
+    </resultMap>
+
+    <!-- 시행비밀정보 등록 -->
+    <insert id="insertEnforceCard" parameterType="com.anylogic.ssystem.bms.dct.model.InsertEnforceCardReqVO">
+        INSERT INTO
+        sbms.sbms_user.bms_dct_enf_doc(
+            <trim suffixOverrides=",">
+            <if test="enfdocid != null and enfdocid !=''">
+                enfdocid,
+            </if>
+            <if test="docid != null and docid !=''">
+                docid,
+            </if>
+            <if test="enfgubun != null and enfgubun !=''">
+                enfgubun,
+            </if>
+            <if test="relaydocid != null and relaydocid !=''">
+                relaydocid,
+            </if>
+            <if test="receiverid != null and receiverid !=''">
+                receiverid,
+            </if>
+            <if test="recvdeptid != null and recvdeptid !=''">
+                recvdeptid,
+            </if>
+            <if test="doctitle != null and doctitle !=''">
+                doctitle,
+            </if>
+            <if test="keyword != null and keyword !=''">
+                keyword,
+            </if>
+            <if test="docstatus != null and docstatus !=''">
+                docstatus,
+            </if>
+            <if test="apprdocnum != null and apprdocnum !=''">
+                apprdocnum,
+            </if>
+            <if test="acceptdocseq != null and acceptdocseq !=''">
+                acceptdocseq,
+            </if>
+            <if test="acceptdt != null and acceptdt !=''">
+                acceptdt,
+            </if>
+            <if test="acceptid != null and acceptid !=''">
+                acceptid,
+            </if>
+            <if test="acceptname != null and acceptname !=''">
+                acceptname,
+            </if>
+            <if test="acceptdutyname != null and acceptdutyname !=''">
+                acceptdutyname,
+            </if>
+            <if test="acceptgradeid != null and acceptgradeid !=''">
+                acceptgradeid,
+            </if>
+            <if test="acceptpositionid != null and acceptpositionid !=''">
+                acceptpositionid,
+            </if>
+            <if test="acceptdeptid != null and acceptdeptid !=''">
+                acceptdeptid,
+            </if>
+            <if test="acceptdeptname != null and acceptdeptname !=''">
+                acceptdeptname,
+            </if>
+            <if test="acceptdeptnamedesc != null and acceptdeptnamedesc !=''">
+                acceptdeptnamedesc,
+            </if>
+            <if test="actseq != null and actseq !=''">
+                actseq,
+            </if>
+            <if test="open != null and open !=''">
+                open,
+            </if>
+            <if test="openbasis != null and openbasis !=''">
+                openbasis,
+            </if>
+            <if test="openreason != null and openreason !=''">
+                openreason,
+            </if>
+            <if test="readrangetype != null and readrangetype !=''">
+                readrangetype,
+            </if>
+            <if test="recvdt != null and recvdt !=''">
+                recvdt,
+            </if>
+            <if test="distributeflag != null and distributeflag !=''">
+                distributeflag,
+            </if>
+            <if test="setcardflag != null and setcardflag !=''">
+                setcardflag,
+            </if>
+            <if test="shareopnflag != null and shareopnflag !=''">
+                shareopnflag,
+            </if>
+            <if test="moveflag != null and moveflag !=''">
+                moveflag,
+            </if>
+            <if test="paperdocflag != null and paperdocflag !=''">
+                paperdocflag,
+            </if>
+            <if test="paperbodyflag != null and paperbodyflag !=''">
+                paperbodyflag,
+            </if>
+            <if test="attcount != null and attcount !=''">
+                attcount,
+            </if>
+            <if test="delflag != null and delflag !=''">
+                delflag,
+            </if>
+            <if test="relaytype != null and relaytype !=''">
+                relaytype,
+            </if>
+            <if test="systemtype != null and systemtype !=''">
+                systemtype,
+            </if>
+            <if test="convbodyflag != null and convbodyflag !=''">
+                convbodyflag,
+            </if>
+            <if test="drmgubun != null and drmgubun !=''">
+                drmgubun,
+            </if>
+            <if test="firstreadid != null and firstreadid !=''">
+                firstreadid,
+            </if>
+            <if test="firstreaddt != null and firstreaddt !=''">
+                firstreaddt,
+            </if>
+            <if test="inid != null and inid !=''">
+                inid,
+            </if>
+            <if test="indt != null and indt !=''">
+                indt,
+            </if>
+            <if test="upid != null and upid !=''">
+                upid,
+            </if>
+            <if test="updt != null and updt !=''">
+                updt,
+            </if>
+            <if test="distributedocseq != null and distributedocseq !=''">
+                distributedocseq,
+            </if>
+            <if test="distributeorgid != null and distributeorgid !=''">
+                distributeorgid,
+            </if>
+            <if test="paperappid != null and paperappid !=''">
+                paperappid,
+            </if>
+            <if test="paperappname != null and paperappname !=''">
+                paperappname,
+            </if>
+            <if test="paperappdeptname != null and paperappdeptname !=''">
+                paperappdeptname,
+            </if>
+            <if test="paperappdutyname != null and paperappdutyname !=''">
+                paperappdutyname,
+            </if>
+            <if test="readlimittype != null and readlimittype !=''">
+                readlimittype,
+            </if>
+            <if test="readlimitdate != null and readlimitdate !=''">
+                readlimitdate,
+            </if>
+            <if test="protectflag != null and protectflag !=''">
+                protectflag,
+            </if>
+            <if test="chargerid != null and chargerid !=''">
+                chargerid,
+            </if>
+            <if test="chargerdeptid != null and chargerdeptid !=''">
+                chargerdeptid,
+            </if>
+            <if test="distributedt != null and distributedt !=''">
+                distributedt,
+            </if>
+            <if test="paperrecgubun != null and paperrecgubun !=''">
+                paperrecgubun,
+            </if>
+            <if test="paperrecspecial != null and paperrecspecial !=''">
+                paperrecspecial,
+            </if>
+            <if test="paperrectypes != null and paperrectypes !=''">
+                paperrectypes,
+            </if>
+            <if test="apprdocnumcode != null and apprdocnumcode !=''">
+                apprdocnumcode,
+            </if>
+            <if test="transflag != null and transflag !=''">
+                transflag,
+            </if>
+            <if test="recordersummary != null and recordersummary !=''">
+                recordersummary,
+            </if>
+            <if test="emergency != null and emergency !=''">
+                emergency,
+            </if>
+            <if test="addsendcnt != null and addsendcnt !=''">
+                addsendcnt,
+            </if>
+            <if test="docgroup != null and docgroup !=''">
+                docgroup,
+            </if>
+            <if test="faketitle != null and faketitle !=''">
+                faketitle,
+            </if>
+            </trim>
+        )
+        VALUES(
+            <trim suffixOverrides=",">
+            <if test="enfdocid != null and enfdocid !=''">
+                #{enfdocid},
+            </if>
+            <if test="docid != null and docid !=''">
+                #{docid},
+            </if>
+            <if test="enfgubun != null and enfgubun !=''">
+                #{enfgubun},
+            </if>
+            <if test="relaydocid != null and relaydocid !=''">
+                #{relaydocid},
+            </if>
+            <if test="receiverid != null and receiverid !=''">
+                #{receiverid},
+            </if>
+            <if test="recvdeptid != null and recvdeptid !=''">
+                #{recvdeptid},
+            </if>
+            <if test="doctitle != null and doctitle !=''">
+                #{doctitle},
+            </if>
+            <if test="keyword != null and keyword !=''">
+                #{keyword},
+            </if>
+            <if test="docstatus != null and docstatus !=''">
+                #{docstatus},
+            </if>
+            <if test="apprdocnum != null and apprdocnum !=''">
+                #{apprdocnum},
+            </if>
+            <if test="acceptdocseq != null and acceptdocseq !=''">
+                #{acceptdocseq},
+            </if>
+            <if test="acceptdt != null and acceptdt !=''">
+                #{acceptdt},
+            </if>
+            <if test="acceptid != null and acceptid !=''">
+                #{acceptid},
+            </if>
+            <if test="acceptname != null and acceptname !=''">
+                #{acceptname},
+            </if>
+            <if test="acceptdutyname != null and acceptdutyname !=''">
+                #{acceptdutyname},
+            </if>
+            <if test="acceptgradeid != null and acceptgradeid !=''">
+                #{acceptgradeid},
+            </if>
+            <if test="acceptpositionid != null and acceptpositionid !=''">
+                #{acceptpositionid},
+            </if>
+            <if test="acceptdeptid != null and acceptdeptid !=''">
+                #{acceptdeptid},
+            </if>
+            <if test="acceptdeptname != null and acceptdeptname !=''">
+                #{acceptdeptname},
+            </if>
+            <if test="acceptdeptnamedesc != null and acceptdeptnamedesc !=''">
+                #{acceptdeptnamedesc},
+            </if>
+            <if test="actseq != null and actseq !=''">
+                #{actseq},
+            </if>
+            <if test="open != null and open !=''">
+                #{open},
+            </if>
+            <if test="openbasis != null and openbasis !=''">
+                #{openbasis},
+            </if>
+            <if test="openreason != null and openreason !=''">
+                #{openreason},
+            </if>
+            <if test="readrangetype != null and readrangetype !=''">
+                #{readrangetype},
+            </if>
+            <if test="recvdt != null and recvdt !=''">
+                #{recvdt},
+            </if>
+            <if test="distributeflag != null and distributeflag !=''">
+                #{distributeflag},
+            </if>
+            <if test="setcardflag != null and setcardflag !=''">
+                #{setcardflag},
+            </if>
+            <if test="shareopnflag != null and shareopnflag !=''">
+                #{shareopnflag},
+            </if>
+            <if test="moveflag != null and moveflag !=''">
+                #{moveflag},
+            </if>
+            <if test="paperdocflag != null and paperdocflag !=''">
+                #{paperdocflag},
+            </if>
+            <if test="paperbodyflag != null and paperbodyflag !=''">
+                #{paperbodyflag},
+            </if>
+            <if test="attcount != null and attcount !=''">
+                #{attcount},
+            </if>
+            <if test="delflag != null and delflag !=''">
+                #{delflag},
+            </if>
+            <if test="relaytype != null and relaytype !=''">
+                #{relaytype},
+            </if>
+            <if test="systemtype != null and systemtype !=''">
+                #{systemtype},
+            </if>
+            <if test="convbodyflag != null and convbodyflag !=''">
+                #{convbodyflag},
+            </if>
+            <if test="drmgubun != null and drmgubun !=''">
+                #{drmgubun},
+            </if>
+            <if test="firstreadid != null and firstreadid !=''">
+                #{firstreadid},
+            </if>
+            <if test="firstreaddt != null and firstreaddt !=''">
+                #{firstreaddt},
+            </if>
+            <if test="inid != null and inid !=''">
+                #{inid},
+            </if>
+            <if test="indt != null and indt !=''">
+                #{indt},
+            </if>
+            <if test="upid != null and upid !=''">
+                #{upid},
+            </if>
+            <if test="updt != null and updt !=''">
+                #{updt},
+            </if>
+            <if test="distributedocseq != null and distributedocseq !=''">
+                #{distributedocseq},
+            </if>
+            <if test="distributeorgid != null and distributeorgid !=''">
+                #{distributeorgid},
+            </if>
+            <if test="paperappid != null and paperappid !=''">
+                #{paperappid},
+            </if>
+            <if test="paperappname != null and paperappname !=''">
+                #{paperappname},
+            </if>
+            <if test="paperappdeptname != null and paperappdeptname !=''">
+                #{paperappdeptname},
+            </if>
+            <if test="paperappdutyname != null and paperappdutyname !=''">
+                #{paperappdutyname},
+            </if>
+            <if test="readlimittype != null and readlimittype !=''">
+                #{readlimittype},
+            </if>
+            <if test="readlimitdate != null and readlimitdate !=''">
+                #{readlimitdate},
+            </if>
+            <if test="protectflag != null and protectflag !=''">
+                #{protectflag},
+            </if>
+            <if test="chargerid != null and chargerid !=''">
+                #{chargerid},
+            </if>
+            <if test="chargerdeptid != null and chargerdeptid !=''">
+                #{chargerdeptid},
+            </if>
+            <if test="distributedt != null and distributedt !=''">
+                #{distributedt},
+            </if>
+            <if test="paperrecgubun != null and paperrecgubun !=''">
+                #{paperrecgubun},
+            </if>
+            <if test="paperrecspecial != null and paperrecspecial !=''">
+                #{paperrecspecial},
+            </if>
+            <if test="paperrectypes != null and paperrectypes !=''">
+                #{paperrectypes},
+            </if>
+            <if test="apprdocnumcode != null and apprdocnumcode !=''">
+                #{apprdocnumcode},
+            </if>
+            <if test="transflag != null and transflag !=''">
+                #{transflag},
+            </if>
+            <if test="recordersummary != null and recordersummary !=''">
+                #{recordersummary},
+            </if>
+            <if test="emergency != null and emergency !=''">
+                #{emergency},
+            </if>
+            <if test="addsendcnt != null and addsendcnt !=''">
+                #{addsendcnt},
+            </if>
+            <if test="docgroup != null and docgroup !=''">
+                #{docgroup},
+            </if>
+            <if test="faketitle != null and faketitle !=''">
+                #{faketitle},
+            </if>
+            </trim>
+        )
+        ON CONFLICT (enfdocid )
+        DO UPDATE
+        SET
+        docstatus = #{docstatus}
+    </insert>
+
+    <!-- 발송 > 반송함 > 반송함 목록 조회 -->
+    <select id="selectReturnList" parameterType="com.anylogic.ssystem.bms.dct.model.SelectReturnListReqVO" resultMap="selectReturnListMap">
+        SELECT
+            A.enfdocid as "enfdocid"
+            , A.docid as "docid"
+            , A.enfgubun as "enfgubun" 
+            , A.relaydocid as "relaydocid" 
+            , A.receiverid as "receiverid" 
+            , A.recvdeptid as "recvdeptid" 
+            , A.doctitle as "doctitle" 
+            , A.keyword as "keyword" 
+            , A.docstatus as "docstatus" 
+            , A.apprdocnum as "apprdocnum" 
+            , A.acceptdocseq as "acceptdocseq" 
+            , A.acceptdt as "acceptdt" 
+            , A.acceptid as "acceptid" 
+            , A.acceptname as "acceptname" 
+            , A.acceptdutyname as "acceptdutyname" 
+            , A.acceptgradeid as "acceptgradeid" 
+            , A.acceptpositionid as "acceptpositionid" 
+            , A.acceptdeptid as "acceptdeptid" 
+            , A.acceptdeptname as "acceptdeptname" 
+            , A.acceptdeptnamedesc as "acceptdeptnamedesc" 
+            , A.actseq as "actseq" 
+            , A.open as "open" 
+            , A.openbasis as "openbasis" 
+            , A.openreason as "openreason" 
+            , A.readrangetype as "readrangetype" 
+            , A.recvdt as "recvdt" 
+            , A.distributeflag as "distributeflag" 
+            , A.setcardflag as "setcardflag" 
+            , A.shareopnflag as "shareopnflag" 
+            , A.moveflag as "moveflag" 
+            , A.paperdocflag as "paperdocflag" 
+            , A.paperbodyflag as "paperbodyflag" 
+            , A.attcount as "attcount" 
+            , A.delflag as "delflag" 
+            , A.relaytype as "relaytype" 
+            , A.systemtype as "systemtype" 
+            , A.convbodyflag as "convbodyflag" 
+            , A.drmgubun as "drmgubun" 
+            , A.firstreadid as "firstreadid" 
+            , A.firstreaddt as "firstreaddt" 
+            , A.inid as "inid" 
+            , A.indt as "indt" 
+            , A.upid as "upid" 
+            , A.updt as "updt" 
+            , A.distributedocseq as "distributedocseq" 
+            , A.distributeorgid as "distributeorgid" 
+            , A.paperappid as "paperappid" 
+            , A.paperappname as "paperappname" 
+            , A.paperappdeptname as "paperappdeptname" 
+            , A.paperappdutyname as "paperappdutyname" 
+            , A.readlimittype as "readlimittype" 
+            , A.readlimitdate as "readlimitdate" 
+            , A.protectflag as "protectflag" 
+            , A.chargerid as "chargerid" 
+            , A.chargerdeptid as "chargerdeptid" 
+            , A.distributedt as "distributedt" 
+            , A.paperrecgubun as "paperrecgubun" 
+            , A.paperrecspecial as "paperrecspecial" 
+            , A.paperrectypes as "paperrectypes" 
+            , A.apprdocnumcode as "apprdocnumcode" 
+            , A.transflag as "transflag" 
+            , A.recordersummary as "recordersummary" 
+            , A.emergency as "emergency" 
+            , A.addsendcnt as "addsendcnt" 
+            , A.docgroup as "docgroup" 
+            , A.faketitle as "faketitle"
+            , B.secgubun as "secgubun" 
+            , B.seclevel as "seclevel" 
+            , B.orgnprotdt as "orgnprotdt" 
+            , B.orgnnextlevel as "orgnnextlevel" 
+            , B.orgnreclass as "orgnreclass" 
+            , B.orgnprotcond as "orgnprotcond" 
+            , B.copyprotdt as "copyprotdt" 
+            , B.copynextlevel as "copynextlevel" 
+            , B.copyreclass as "copyreclass" 
+            , B.copyprotcond as "copyprotcond" 
+            , B.prsrvterm as "prsrvterm" 
+            , B.docno as "docno" 
+            , B.mgmtno as "mgmtno" 
+            , B.copyno as "copyno" 
+            , B.createdeptid as "createdeptid" 
+            , B.createdeptname as "createdeptname" 
+            , B.docpagenum as "docpagenum" 
+            , B.specialyn as "specialyn" 
+            , B.binderyn as "binderyn" 
+            , B.secretdocyn as "secretdocyn" 
+            , B.waryn as "waryn" 
+            , B.isnewrule as "isnewrule" 
+            , B.istransrule as "istransrule" 
+            , B.orgncreateyear as "orgncreateyear" 
+            , B.wargubun as "wargubun"
+            , C.docgubun as "docgubun" 
+            , C.tempflag as "tempflag" 
+            , C.sendorgname as "sendorgname" 
+            , C.sendname as "sendname" 
+            , C.campaignhead as "campaignhead" 
+            , C.campaigntail as "campaigntail" 
+            , C.senddt as "senddt" 
+            , C.sendopinion as "sendopinion" 
+            , C.senderid as "senderid" 
+            , C.sendername as "sendername" 
+            , C.senderdutyname as "senderdutyname" 
+            , C.senderpositionid as "senderpositionid" 
+            , C.sendergradeid as "sendergradeid" 
+            , C.senderdeptid as "senderdeptid" 
+            , C.senderdeptname as "senderdeptname" 
+            , C.senderdeptnamedesc as "senderdeptnamedesc" 
+            , C.address as "address" 
+            , C.zipcode as "zipcode" 
+            , C.homepage as "homepage" 
+            , C.phonenumber as "phonenumber" 
+            , C.faxnumber as "faxnumber" 
+            , C.email as "email" 
+            , C.recvdisplayname as "recvdisplayname" 
+            , C.recvdisplayflag as "recvdisplayflag" 
+            , C.viadeptname as "viadeptname" 
+            , C.enfrecvrange as "enfrecvrange" 
+            , C.sendtype as "sendtype" 
+            , C.sealsigntype as "sealsigntype" 
+            , C.sealsignname as "sealsignname" 
+            , C.sendorgid as "sendorgid" 
+            , C.faxsndreqdt as "faxsndreqdt" 
+            , C.circdocflag as "circdocflag" 
+            , C.distctrlflag as "distctrlflag" 
+            , C.distplflag as "distplflag"
+            , D.inid as "inid"
+            , E.actseq as "actseq"
+            , E.acterid as "acterid"
+            , E.actername as "actername"
+            , E.acterdutyname as "acterdutyname"
+            , E.acterdeptid as "acterdeptid"
+            , E.acterdeptname as "acterdeptname"
+            , E.actgubun as "actgubun"
+            , E.actdt as "actdt"
+            , E.actopinion as "actopinion"
+            , F.state as "state"
+        FROM  sbms.sbms_user.bms_dct_enf_doc  A
+            LEFT OUTER JOIN  sbms.sbms_user.bms_dct_attr  B
+                ON ( A.docid  =  B.docid  )
+            LEFT OUTER JOIN  sbms.sbms_user.bms_dct_doc_sendinfo  C
+                ON ( A.docid  =  C.docid  )
+            INNER JOIN  sbms.sbms_user.bms_dct_appr_recv D
+                ON ( A.docid  =  D.docid  )
+            INNER JOIN
+            (
+                SELECT enfdocid, actseq, acterid, actername, acterdutyname, acterdeptid, acterdeptname, actgubun, actdt, actopinion,
+                ROW_NUMBER() OVER (PARTITION BY enfdocid ORDER BY actdt DESC) as rn
+                FROM sbms.sbms_user.bms_dct_enf_history
+            ) E ON ( A.enfdocid  =  E.enfdocid and E.rn =1)
+            INNER JOIN sbms.sbms_user.bms_dct_rdoc F
+                ON ( A.docid  =  F.docid )
+        WHERE 1 = 1
+            and D.inid = #{userid} <!-- 기안자 ID -->
+            and A.docstatus IN ('EDS06', 'EDS40') <!-- 반송대기, 반송종료 -->
+            and E.actgubun = 'EPA05'
+            and F.state != 'DRDS5' <!--발송안함 아닌것-->
+            <if test="doctitle != null and doctitle !=''"> 
+                and doctitle like CONCAT('%', #{doctitle}, '%') 
+            </if>
+            <if test="recvdeptname != null and recvdeptname !=''"> 
+                and recvdeptname = #{recvdeptname} 
+            </if>
+            <if test="startDt != null and startDt !=''"> 
+                and A.indt like CONCAT('%', #{startDt}, '%')
+            </if>
+            <if test="endDt != null and endDt !=''"> 
+                and A.indt like CONCAT('%', #{endDt}, '%')
+            </if>
+        <if test="startDt != null and startDt !=''">
+            and A.updt <![CDATA[>=]]> #{startDt}
+        </if>
+        <if test="endDt != null and endDt !=''">
+            and A.updt <![CDATA[<=]]> #{endDt}
+        </if>
+            ORDER BY A.updt DESC, A.docid DESC
+    </select>
+
+    <!-- 접수 > 배부함 > 배부함 목록 조회 -->
+    <select id="selectDctDistributeList" parameterType="com.anylogic.ssystem.bms.dct.model.SelectDctDistributeListReqVO" resultMap="selectDctDistributeListMap">
+        SELECT
+        DISTINCT ON (A.updt, A.docid)
+            A.enfdocid as "enfdocid" 
+            , A.docid as "docid" 
+            , A.enfgubun as "enfgubun" 
+            , A.relaydocid as "relaydocid" 
+            , A.receiverid as "receiverid" 
+            , A.recvdeptid as "recvdeptid" 
+            , A.doctitle as "doctitle" 
+            , A.keyword as "keyword" 
+            , A.docstatus as "docstatus" 
+            , A.apprdocnum as "apprdocnum" 
+            , A.acceptdocseq as "acceptdocseq" 
+            , A.acceptdt as "acceptdt" 
+            , A.acceptid as "acceptid" 
+            , A.acceptname as "acceptname" 
+            , A.acceptdutyname as "acceptdutyname" 
+            , A.acceptgradeid as "acceptgradeid" 
+            , A.acceptpositionid as "acceptpositionid" 
+            , A.acceptdeptid as "acceptdeptid" 
+            , A.acceptdeptname as "acceptdeptname" 
+            , A.acceptdeptnamedesc as "acceptdeptnamedesc" 
+            , A.actseq as "actseq" 
+            , A.open as "open" 
+            , A.openbasis as "openbasis" 
+            , A.openreason as "openreason" 
+            , A.readrangetype as "readrangetype" 
+            , A.recvdt as "recvdt" 
+            , A.distributeflag as "distributeflag" 
+            , A.setcardflag as "setcardflag" 
+            , A.shareopnflag as "shareopnflag" 
+            , A.moveflag as "moveflag" 
+            , A.paperdocflag as "paperdocflag" 
+            , A.paperbodyflag as "paperbodyflag" 
+            , A.attcount as "attcount" 
+            , A.delflag as "delflag" 
+            , A.relaytype as "relaytype" 
+            , A.systemtype as "systemtype" 
+            , A.convbodyflag as "convbodyflag" 
+            , A.drmgubun as "drmgubun" 
+            , A.firstreadid as "firstreadid" 
+            , A.firstreaddt as "firstreaddt" 
+            , A.inid as "inid" 
+            , A.indt as "indt" 
+            , A.upid as "upid" 
+            , A.updt as "updt" 
+            , A.distributedocseq as "distributedocseq" 
+            , A.distributeorgid as "distributeorgid" 
+            , A.paperappid as "paperappid" 
+            , A.paperappname as "paperappname" 
+            , A.paperappdeptname as "paperappdeptname" 
+            , A.paperappdutyname as "paperappdutyname" 
+            , A.readlimittype as "readlimittype" 
+            , A.readlimitdate as "readlimitdate" 
+            , A.protectflag as "protectflag" 
+            , A.chargerid as "chargerid" 
+            , A.chargerdeptid as "chargerdeptid" 
+            , A.distributedt as "distributedt" 
+            , A.paperrecgubun as "paperrecgubun" 
+            , A.paperrecspecial as "paperrecspecial" 
+            , A.paperrectypes as "paperrectypes" 
+            , A.apprdocnumcode as "apprdocnumcode" 
+            , A.transflag as "transflag" 
+            , A.recordersummary as "recordersummary" 
+            , A.emergency as "emergency" 
+            , A.addsendcnt as "addsendcnt" 
+            , A.docgroup as "docgroup" 
+            , A.faketitle as "faketitle" 
+            , B.secgubun as "secgubun"
+            , B.seclevel as "seclevel" 
+            , B.orgnprotdt as "orgnprotdt" 
+            , B.orgnnextlevel as "orgnnextlevel" 
+            , B.orgnreclass as "orgnreclass" 
+            , B.orgnprotcond as "orgnprotcond" 
+            , B.copyprotdt as "copyprotdt" 
+            , B.copynextlevel as "copynextlevel" 
+            , B.copyreclass as "copyreclass" 
+            , B.copyprotcond as "copyprotcond" 
+            , B.prsrvterm as "prsrvterm" 
+            , B.docno as "docno" 
+            , B.mgmtno as "mgmtno" 
+            , B.copyno as "copyno" 
+            , B.createdeptid as "createdeptid" 
+            , B.createdeptname as "createdeptname" 
+            , B.docpagenum as "docpagenum" 
+            , B.specialyn as "specialyn" 
+            , B.binderyn as "binderyn" 
+            , B.secretdocyn as "secretdocyn" 
+            , B.waryn as "waryn" 
+            , B.isnewrule as "isnewrule" 
+            , B.istransrule as "istransrule" 
+            , B.orgncreateyear as "orgncreateyear" 
+            , B.wargubun as "wargubun" 
+            , C.docttl as "docttl"
+            , C.gubun as "gubun" 
+            , C.authorid as "authorid" 
+            , C.authorname as "authorname" 
+            , C.authordutyname as "authordutyname" 
+            , C.authorpositionid as "authorpositionid" 
+            , C.authorgradeid as "authorgradeid" 
+            , C.authordeptid as "authordeptid" 
+            , C.authordeptname as "authordeptname" 
+            , C.authordeptnamedesc as "authordeptnamedesc" 
+            , C.lastauthorid as "lastauthorid" 
+            , C.lastauthorname as "lastauthorname" 
+            , C.state as "state" 
+            , C.docnoseq as "docnoseq" 
+            , C.tempflag as "tempflag" 
+            , C.reportdt as "reportdt" 
+            , C.enddt as "enddt" 
+            , C.docfrom as "docfrom" 
+            , C.rcvsflag as "rcvsflag" 
+            , C.typeflag as "typeflag" 
+            , C.setupflag as "setupflag" 
+            , C.oridocid as "oridocid" 
+            , C.oriseq as "oriseq" 
+            , C.batchseq as "batchseq" 
+            , C.paperflag as "paperflag" 
+            , C.maindocflag as "maindocflag" 
+            , C.attachseq as "attachseq" 
+            , C.migflag as "migflag" 
+            , C.addsendstate as "addsendstate" 
+            , C.papersendflag as "papersendflag" 
+            , C.filelendflag as "filelendflag"
+            , D.deptname as "deptname"
+            , E.*
+            , G.actgubun
+            , G.actopinion
+        FROM  sbms.sbms_user.bms_dct_enf_doc  A
+            LEFT OUTER JOIN  sbms.sbms_user.bms_dct_attr  B
+                ON ( A.docid  =  B.docid  )
+            LEFT OUTER JOIN  sbms.sbms_user.bms_dct_rdoc  C
+                ON ( A.docid  =  C.docid  )
+            LEFT OUTER JOIN sbms.sbms_user.bms_dct_appr_recv D
+                ON (A.docid = D.docid)
+            LEFT OUTER JOIN sbms.sbms_user.bms_dct_doc_sendinfo E
+                ON (A.docid = E.docid)
+            LEFT OUTER JOIN sbms.sbms_user.bms_dct_enf_history G
+                ON (A.enfdocid = G.enfdocid)
+        WHERE 1 = 1
+            and A.inid = #{userid}
+            and A.docstatus = 'EDS02'
+            <if test="docid != null and docid !=''"> 
+                and A.docid = #{docid}
+            </if>
+            <if test="docstatus != null and docstatus !=''"> 
+                and A.docstatus like CONCAT('%', #{docstatus}, '%')
+            </if>
+            <if test="recvdt != null and recvdt !=''"> 
+                and recvdt like CONCAT('%', #{recvdt}, '%') 
+            </if>
+            <if test="docno != null and docno !=''"> 
+                and docno like CONCAT('%', #{docno}, '%') 
+            </if>
+            <if test="seclevel != null and seclevel !=''"> 
+                and seclevel = #{seclevel}
+            </if>
+            <if test="doctitle != null and doctitle !=''"> 
+                and A.doctitle like CONCAT('%', #{doctitle}, '%')
+            </if>
+            <if test="deptname != null and deptname !=''">
+                and D.deptname like CONCAT('%', #{deptname}, '%')
+            </if>
+            <if test="createdeptname != null and createdeptname !=''"> 
+                and createdeptname like CONCAT('%', #{createdeptname}, '%') 
+            </if>
+            <if test="enfgubun != null and enfgubun !=''"> 
+                and enfgubun like CONCAT('%', #{enfgubun}, '%') 
+            </if>
+            <if test="startDt != null and startDt !=''"> 
+                and recvdt like CONCAT('%', #{startDt}, '%') 
+            </if>
+            <if test="endDt != null and endDt !=''"> 
+                and recvdt like CONCAT('%', #{endDt}, '%') 
+            </if>
+            <if test="startDt != null and startDt !=''">
+                and A.updt <![CDATA[>=]]> #{startDt}
+            </if>
+            <if test="endDt != null and endDt !=''">
+                and A.updt <![CDATA[<=]]> #{endDt}
+            </if>
+            ORDER BY A.updt DESC, A.docid DESC
+    </select>
+
+    <!-- 접수 > 접수대기함 > 접수대기함 목록 조회 -->
+    <select id="selectReceiptList" parameterType="com.anylogic.ssystem.bms.dct.model.SelectReceiptListReqVO" resultMap="selectReceiptListMap">
+        SELECT
+            A.enfdocid as "enfdocid" 
+            , A.docid as "docid" 
+            , A.enfgubun as "enfgubun" 
+            , A.relaydocid as "relaydocid" 
+            , A.receiverid as "receiverid" 
+            , A.recvdeptid as "recvdeptid" 
+            , A.doctitle as "doctitle" 
+            , A.keyword as "keyword" 
+            , A.docstatus as "docstatus" 
+            , A.apprdocnum as "apprdocnum" 
+            , A.acceptdocseq as "acceptdocseq" 
+            , A.acceptdt as "acceptdt" 
+            , A.acceptid as "acceptid" 
+            , A.acceptname as "acceptname" 
+            , A.acceptdutyname as "acceptdutyname" 
+            , A.acceptgradeid as "acceptgradeid" 
+            , A.acceptpositionid as "acceptpositionid" 
+            , A.acceptdeptid as "acceptdeptid" 
+            , A.acceptdeptname as "acceptdeptname" 
+            , A.acceptdeptnamedesc as "acceptdeptnamedesc" 
+            , A.actseq as "actseq" 
+            , A.open as "open" 
+            , A.openbasis as "openbasis" 
+            , A.openreason as "openreason" 
+            , A.readrangetype as "readrangetype" 
+            , A.recvdt as "recvdt" 
+            , A.distributeflag as "distributeflag" 
+            , A.setcardflag as "setcardflag" 
+            , A.shareopnflag as "shareopnflag" 
+            , A.moveflag as "moveflag" 
+            , A.paperdocflag as "paperdocflag" 
+            , A.paperbodyflag as "paperbodyflag" 
+            , A.attcount as "attcount" 
+            , A.delflag as "delflag" 
+            , A.relaytype as "relaytype" 
+            , A.systemtype as "systemtype" 
+            , A.convbodyflag as "convbodyflag" 
+            , A.drmgubun as "drmgubun" 
+            , A.firstreadid as "firstreadid" 
+            , A.firstreaddt as "firstreaddt" 
+            , A.inid as "inid"
+            , A.indt as "indt" 
+            , A.upid as "upid" 
+            , A.updt as "updt" 
+            , A.distributedocseq as "distributedocseq" 
+            , A.distributeorgid as "distributeorgid" 
+            , A.paperappid as "paperappid" 
+            , A.paperappname as "paperappname" 
+            , A.paperappdeptname as "paperappdeptname" 
+            , A.paperappdutyname as "paperappdutyname" 
+            , A.readlimittype as "readlimittype" 
+            , A.readlimitdate as "readlimitdate" 
+            , A.protectflag as "protectflag" 
+            , A.chargerid as "chargerid" 
+            , A.chargerdeptid as "chargerdeptid" 
+            , A.distributedt as "distributedt" 
+            , A.paperrecgubun as "paperrecgubun" 
+            , A.paperrecspecial as "paperrecspecial" 
+            , A.paperrectypes as "paperrectypes" 
+            , A.apprdocnumcode as "apprdocnumcode" 
+            , A.transflag as "transflag" 
+            , A.recordersummary as "recordersummary" 
+            , A.emergency as "emergency" 
+            , A.addsendcnt as "addsendcnt" 
+            , A.docgroup as "docgroup" 
+            , A.faketitle as "faketitle"
+            , A.acceptdeptname as "acceptdeptname"
+            , A.acceptdocseq as "acceptdocseq"
+            , A.actseq as "actseq"
+            , B.userid as "userid"
+            , B.vgroupid as "vgroupid"
+            , B.orgid as "orgid"
+            , C.userid as "userid"
+            , C.deptid as "deptid"
+            , C.username as "username"
+            , D.docid
+            , D.receiverid
+            , D.tempflag
+            , D.seq as "seq"
+            , D.gubun
+            , D.deptid
+            , D.deptname
+            , D.refdeptid
+            , D.refdeptname
+            , D.zipcode
+            , D.address
+            , D.phonenumber
+            , D.faxnumber
+            , D.recsymbol
+            , D.indt
+            , D.inid
+            , E.docid
+            , E.docgubun
+            , E.tempflag
+            , E.sendorgname
+            , E.sendname
+            , E.senddt
+            , E.sendopinion
+            , E.senderid
+            , E.sendername
+            , E.senderdutyname
+            , E.senderpositionid
+            , E.sendergradeid
+            , E.senderdeptid
+            , E.senderdeptname
+            , E.senderdeptnamedesc
+            , F.seclevel
+            , F.createdeptname
+            , F.docno
+            , F.copyno
+            , (
+                SELECT MAX(regirecvgubun)
+                FROM sbms.sbms_user.bms_dct_mgmt_regi
+                WHERE docid  = (
+                    SELECT MAX(oridocid)
+                    FROM sbms.sbms_user.bms_dct_rdoc
+                    WHERE docid = A.docid
+                )
+            ) as "regirecvgubun"
+            , (
+                SELECT MAX(regirecvtype)
+                FROM sbms.sbms_user.bms_dct_mgmt_regi
+                WHERE docid  = (
+                    SELECT MAX(oridocid)
+                    FROM sbms.sbms_user.bms_dct_rdoc
+                    WHERE docid = A.docid
+                )
+            ) as "regirecvtype"
+            , F.mgmtno
+        FROM  sbms.sbms_user.bms_dct_enf_doc  A
+            INNER JOIN sbms.sbms_user.com_vgroup_user B
+                ON (A.inid = B.userid and B.vgroupid = '5220')
+            INNER JOIN sbms.sbms_user.com_userinfo C
+                ON (B.userid = C.userid)
+            INNER JOIN sbms.sbms_user.bms_dct_appr_recv D
+                ON (A.docid = D.docid)
+            INNER JOIN sbms.sbms_user.bms_dct_doc_sendinfo E
+                ON (A.docid = E.docid)
+            INNER JOIN sbms.sbms_user.bms_dct_attr F
+                ON (A.docid = F.docid)
+        WHERE 1 = 1
+            and (
+                CASE
+                    <!-- chargerid 는 담당자이며, 로그인한 유저id 로 확인함. 담당자 지정된 사람이기 때문에 보이게 됨. && 재지정요청,반송대기,종료,반송종료 제외 [TRUE] -->
+                    WHEN A.chargerid = #{userid} and A.docstatus NOT IN ('EDS10', 'EDS06', 'EDS11', 'EDS40')
+                        THEN TRUE
+                    <!-- 정리 : 담당자가 지정돼있지 않고, 관리자 권한(vgroupid) 이 있으면서, 수신자의 부서id와 로그인한 유저의 부서id가 같은 경우에 속하면 && 재지정요청,반송대기,종료,반송종료 제외 [TRUE] -->
+                    WHEN A.chargerid IS NULL AND B.vgroupid = #{vgroupid} AND B.orgid = #{deptid}
+                        AND (A.recvdeptid = C.deptid) and A.docstatus NOT IN ('EDS10', 'EDS06', 'EDS11', 'EDS40')
+                        THEN TRUE
+                    ELSE FALSE
+                END
+                )
+            <if test="docid != null and docid !=''"> 
+                and A.docid like CONCAT('%', #{docid}, '%')
+            </if>
+            <if test="title != null and title !=''"> 
+                and title = #{title} 
+            </if>
+            <if test="recvdt != null and recvdt !=''"> 
+                and recvdt like CONCAT('%', #{recvdt}, '%') 
+            </if>
+            <if test="docno != null and docno !=''"> 
+                and docno like CONCAT('%', #{docno}, '%') 
+            </if>
+            <if test="seclevel != null and seclevel !=''"> 
+                and seclevel = #{seclevel}
+            </if>
+            <if test="doctitle != null and doctitle !=''"> 
+                and doctitle like CONCAT('%', #{doctitle}, '%') 
+            </if>
+            <if test="createdeptname != null and createdeptname !=''"> 
+                and createdeptname like CONCAT('%', #{createdeptname}, '%') 
+            </if>
+            <if test="enfgubun != null and enfgubun !=''"> 
+                and enfgubun like CONCAT('%', #{enfgubun}, '%') 
+            </if>
+            <if test="enfdocid != null and enfdocid !=''">
+                and enfdocid = #{enfdocid}
+            </if>
+            <if test="tempflag != null and tempflag !=''">
+                and D.tempflag = #{tempflag}
+            </if>
+            <if test="startDt != null and startDt !=''">
+                and A.updt <![CDATA[>=]]> #{startDt}
+            </if>
+            <if test="endDt != null and endDt !=''">
+                and A.updt <![CDATA[<=]]> #{endDt}
+            </if>
+            ORDER BY A.indt DESC
+    </select>
+
+    <!-- 시행비밀정보 조회 - 문서 -->
+    <select id="selectRecvHistory" parameterType="com.anylogic.ssystem.bms.dct.model.SelectRecvHistoryReqVO" resultMap="selectRecvHistoryMap">
+        SELECT
+            enfdocid as "enfdocid"
+            , docid as "docid"
+            , enfgubun as "enfgubun"
+            , relaydocid as "relaydocid"
+            , receiverid as "receiverid"
+            , recvdeptid as "recvdeptid"
+            , doctitle as "doctitle"
+            , keyword as "keyword"
+            , docstatus as "docstatus"
+            , apprdocnum as "apprdocnum"
+            , acceptdocseq as "acceptdocseq"
+            , acceptdt as "acceptdt"
+            , acceptid as "acceptid"
+            , acceptname as "acceptname"
+            , acceptdutyname as "acceptdutyname"
+            , acceptgradeid as "acceptgradeid"
+            , acceptpositionid as "acceptpositionid"
+            , acceptdeptid as "acceptdeptid"
+            , acceptdeptname as "acceptdeptname"
+            , acceptdeptnamedesc as "acceptdeptnamedesc"
+            , actseq as "actseq"
+            , open as "open"
+            , openbasis as "openbasis"
+            , openreason as "openreason"
+            , readrangetype as "readrangetype"
+            , recvdt as "recvdt"
+            , distributeflag as "distributeflag"
+            , setcardflag as "setcardflag"
+            , shareopnflag as "shareopnflag"
+            , moveflag as "moveflag"
+            , paperdocflag as "paperdocflag"
+            , paperbodyflag as "paperbodyflag"
+            , attcount as "attcount"
+            , delflag as "delflag"
+            , relaytype as "relaytype"
+            , systemtype as "systemtype"
+            , convbodyflag as "convbodyflag"
+            , drmgubun as "drmgubun"
+            , firstreadid as "firstreadid"
+            , firstreaddt as "firstreaddt"
+            , inid as "inid"
+            , indt as "indt"
+            , upid as "upid"
+            , updt as "updt"
+            , distributedocseq as "distributedocseq"
+            , distributeorgid as "distributeorgid"
+            , paperappid as "paperappid"
+            , paperappname as "paperappname"
+            , paperappdeptname as "paperappdeptname"
+            , paperappdutyname as "paperappdutyname"
+            , readlimittype as "readlimittype"
+            , readlimitdate as "readlimitdate"
+            , protectflag as "protectflag"
+            , chargerid as "chargerid"
+            , chargerdeptid as "chargerdeptid"
+            , distributedt as "distributedt"
+            , paperrecgubun as "paperrecgubun"
+            , paperrecspecial as "paperrecspecial"
+            , paperrectypes as "paperrectypes"
+            , apprdocnumcode as "apprdocnumcode"
+            , transflag as "transflag"
+            , recordersummary as "recordersummary"
+            , emergency as "emergency"
+            , addsendcnt as "addsendcnt"
+            , docgroup as "docgroup"
+            , faketitle as "faketitle"
+        FROM  sbms.sbms_user.bms_dct_enf_doc
+        WHERE 1 = 1
+            <if test="docid != null and docid !=''">
+                and docid like CONCAT('%', #{docid}, '%')
+            </if>
+            <if test="enfdocid != null and enfdocid !=''">
+                and enfdocid = #{enfdocid}
+            </if>
+            <if test="authorid != null and authorid !=''">
+                and authorid = #{authorid}
+            </if>
+            <if test="deptid != null and deptid !=''">
+                and deptid = #{deptid}
+            </if>
+
+    </select>
+
+    <!--  접수한 문서 문서처리 시 상태값 수정 -->
+    <update id="updateEnfDocRepath" parameterType="com.anylogic.ssystem.bms.dct.model.UpdateEnfDocRepathReqVO">
+        UPDATE sbms.sbms_user.bms_dct_enf_doc
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="docid != null and docid !=''">
+                docid = #{docid},
+            </if>
+            <if test="enfgubun != null and enfgubun !=''">
+                enfgubun = #{enfgubun},
+            </if>
+            <if test="relaydocid != null and relaydocid !=''">
+                relaydocid = #{relaydocid},
+            </if>
+            <if test="receiverid != null and receiverid !=''">
+                receiverid = #{receiverid},
+            </if>
+            <if test="recvdeptid != null and recvdeptid !=''">
+                recvdeptid = #{recvdeptid},
+            </if>
+            <if test="doctitle != null and doctitle !=''">
+                doctitle = #{doctitle},
+            </if>
+            <if test="keyword != null and keyword !=''">
+                keyword = #{keyword},
+            </if>
+            <if test="docstatus != null and docstatus !=''">
+                docstatus = #{docstatus},
+            </if>
+            <if test="apprdocnum != null and apprdocnum !=''">
+                apprdocnum = #{apprdocnum},
+            </if>
+            <if test="acceptdocseq != null and acceptdocseq !=''">
+                acceptdocseq = #{acceptdocseq},
+            </if>
+            <if test="acceptdt != null and acceptdt !=''">
+                acceptdt = #{acceptdt},
+            </if>
+            <if test="acceptid != null and acceptid !=''">
+                acceptid = #{acceptid},
+            </if>
+            <if test="acceptname != null and acceptname !=''">
+                acceptname = #{acceptname},
+            </if>
+            <if test="acceptdutyname != null and acceptdutyname !=''">
+                acceptdutyname = #{acceptdutyname},
+            </if>
+            <if test="acceptgradeid != null and acceptgradeid !=''">
+                acceptgradeid = #{acceptgradeid},
+            </if>
+            <if test="acceptpositionid != null and acceptpositionid !=''">
+                acceptpositionid = #{acceptpositionid},
+            </if>
+            <if test="acceptdeptid != null and acceptdeptid !=''">
+                acceptdeptid = #{acceptdeptid},
+            </if>
+            <if test="acceptdeptname != null and acceptdeptname !=''">
+                acceptdeptname = #{acceptdeptname},
+            </if>
+            <if test="acceptdeptnamedesc != null and acceptdeptnamedesc !=''">
+                acceptdeptnamedesc = #{acceptdeptnamedesc},
+            </if>
+            <if test="actseq != null and actseq !=''">
+                actseq = #{actseq},
+            </if>
+            <if test="open != null and open !=''">
+                open = #{open},
+            </if>
+            <if test="openbasis != null and openbasis !=''">
+                openbasis = #{openbasis},
+            </if>
+            <if test="openreason != null and openreason !=''">
+                openreason = #{openreason},
+            </if>
+            <if test="readrangetype != null and readrangetype !=''">
+                readrangetype = #{readrangetype},
+            </if>
+            <if test="recvdt != null and recvdt !=''">
+                recvdt = #{recvdt},
+            </if>
+            <if test="distributeflag != null and distributeflag !=''">
+                distributeflag = #{distributeflag},
+            </if>
+            <if test="setcardflag != null and setcardflag !=''">
+                setcardflag = #{setcardflag},
+            </if>
+            <if test="shareopnflag != null and shareopnflag !=''">
+                shareopnflag = #{shareopnflag},
+            </if>
+            <if test="moveflag != null and moveflag !=''">
+                moveflag = #{moveflag},
+            </if>
+            <if test="paperdocflag != null and paperdocflag !=''">
+                paperdocflag = #{paperdocflag},
+            </if>
+            <if test="paperbodyflag != null and paperbodyflag !=''">
+                paperbodyflag = #{paperbodyflag},
+            </if>
+            <if test="attcount != null and attcount !=''">
+                attcount = #{attcount},
+            </if>
+            <if test="delflag != null and delflag !=''">
+                delflag = #{delflag},
+            </if>
+            <if test="relaytype != null and relaytype !=''">
+                relaytype = #{relaytype},
+            </if>
+            <if test="systemtype != null and systemtype !=''">
+                systemtype = #{systemtype},
+            </if>
+            <if test="convbodyflag != null and convbodyflag !=''">
+                convbodyflag = #{convbodyflag},
+            </if>
+            <if test="drmgubun != null and drmgubun !=''">
+                drmgubun = #{drmgubun},
+            </if>
+            <if test="firstreadid != null and firstreadid !=''">
+                firstreadid = #{firstreadid},
+            </if>
+            <if test="firstreaddt != null and firstreaddt !=''">
+                firstreaddt = #{firstreaddt},
+            </if>
+            <if test="inid != null and inid !=''">
+                inid = #{inid},
+            </if>
+            <if test="indt != null and indt !=''">
+                indt = #{indt},
+            </if>
+            <if test="upid != null and upid !=''">
+                upid = #{upid},
+            </if>
+            <if test="updt != null and updt !=''">
+                updt = #{updt},
+            </if>
+            <if test="distributedocseq != null and distributedocseq !=''">
+                distributedocseq = #{distributedocseq},
+            </if>
+            <if test="distributeorgid != null and distributeorgid !=''">
+                distributeorgid = #{distributeorgid},
+            </if>
+            <if test="paperappid != null and paperappid !=''">
+                paperappid = #{paperappid},
+            </if>
+            <if test="paperappname != null and paperappname !=''">
+                paperappname = #{paperappname},
+            </if>
+            <if test="paperappdeptname != null and paperappdeptname !=''">
+                paperappdeptname = #{paperappdeptname},
+            </if>
+            <if test="paperappdutyname != null and paperappdutyname !=''">
+                paperappdutyname = #{paperappdutyname},
+            </if>
+            <if test="readlimittype != null and readlimittype !=''">
+                readlimittype = #{readlimittype},
+            </if>
+            <if test="readlimitdate != null and readlimitdate !=''">
+                readlimitdate = #{readlimitdate},
+            </if>
+            <if test="protectflag != null and protectflag !=''">
+                protectflag = #{protectflag},
+            </if>
+            <if test="chargerid != null and chargerid !=''">
+                chargerid = #{chargerid},
+            </if>
+            <if test="chargerdeptid != null and chargerdeptid !=''">
+                chargerdeptid = #{chargerdeptid},
+            </if>
+            <if test="distributedt != null and distributedt !=''">
+                distributedt = #{distributedt},
+            </if>
+            <if test="paperrecgubun != null and paperrecgubun !=''">
+                paperrecgubun = #{paperrecgubun},
+            </if>
+            <if test="paperrecspecial != null and paperrecspecial !=''">
+                paperrecspecial = #{paperrecspecial},
+            </if>
+            <if test="paperrectypes != null and paperrectypes !=''">
+                paperrectypes = #{paperrectypes},
+            </if>
+            <if test="apprdocnumcode != null and apprdocnumcode !=''">
+                apprdocnumcode = #{apprdocnumcode},
+            </if>
+            <if test="transflag != null and transflag !=''">
+                transflag = #{transflag},
+            </if>
+            <if test="recordersummary != null and recordersummary !=''">
+                recordersummary = #{recordersummary},
+            </if>
+            <if test="emergency != null and emergency !=''">
+                emergency = #{emergency},
+            </if>
+            <if test="addsendcnt != null and addsendcnt !=''">
+                addsendcnt = #{addsendcnt},
+            </if>
+            <if test="docgroup != null and docgroup !=''">
+                docgroup = #{docgroup},
+            </if>
+            <if test="faketitle != null and faketitle !=''">
+                faketitle = #{faketitle},
+            </if>
+        </trim>
+        WHERE 1 = 1
+            and enfdocid = #{enfdocid}
+    </update>
+
+    <!-- 접수 > 재지정함 > 재지정함 목록 조회 -->
+    <select id="selectReprocessList" parameterType="com.anylogic.ssystem.bms.dct.model.SelectReprocessListReqVO" resultMap="selectReprocessListMap">
+        SELECT
+            DISTINCT ON (A.updt)
+            A.enfdocid as "enfdocid" 
+            , A.docid as "docid" 
+            , A.enfgubun as "enfgubun" 
+            , A.relaydocid as "relaydocid" 
+            , A.receiverid as "receiverid" 
+            , A.recvdeptid as "recvdeptid" 
+            , A.doctitle as "doctitle" 
+            , A.keyword as "keyword" 
+            , A.docstatus as "docstatus" 
+            , A.apprdocnum as "apprdocnum" 
+            , A.acceptdocseq as "acceptdocseq" 
+            , A.acceptdt as "acceptdt" 
+            , A.acceptid as "acceptid" 
+            , A.acceptname as "acceptname" 
+            , A.acceptdutyname as "acceptdutyname" 
+            , A.acceptgradeid as "acceptgradeid" 
+            , A.acceptpositionid as "acceptpositionid" 
+            , A.acceptdeptid as "acceptdeptid" 
+            , A.acceptdeptname as "acceptdeptname" 
+            , A.acceptdeptnamedesc as "acceptdeptnamedesc"
+            , A.open as "open" 
+            , A.openbasis as "openbasis" 
+            , A.openreason as "openreason" 
+            , A.readrangetype as "readrangetype" 
+            , A.recvdt as "recvdt" 
+            , A.distributeflag as "distributeflag" 
+            , A.setcardflag as "setcardflag" 
+            , A.shareopnflag as "shareopnflag" 
+            , A.moveflag as "moveflag" 
+            , A.paperdocflag as "paperdocflag" 
+            , A.paperbodyflag as "paperbodyflag" 
+            , A.attcount as "attcount" 
+            , A.delflag as "delflag" 
+            , A.relaytype as "relaytype" 
+            , A.systemtype as "systemtype" 
+            , A.convbodyflag as "convbodyflag" 
+            , A.drmgubun as "drmgubun" 
+            , A.firstreadid as "firstreadid" 
+            , A.firstreaddt as "firstreaddt" 
+            , A.inid as "inid" 
+            , A.indt as "indt" 
+            , A.upid as "upid" 
+            , A.updt as "updt" 
+            , A.distributedocseq as "distributedocseq" 
+            , A.distributeorgid as "distributeorgid" 
+            , A.paperappid as "paperappid" 
+            , A.paperappname as "paperappname" 
+            , A.paperappdeptname as "paperappdeptname" 
+            , A.paperappdutyname as "paperappdutyname" 
+            , A.readlimittype as "readlimittype" 
+            , A.readlimitdate as "readlimitdate" 
+            , A.protectflag as "protectflag" 
+            , A.chargerid as "chargerid" 
+            , A.chargerdeptid as "chargerdeptid" 
+            , A.distributedt as "distributedt" 
+            , A.paperrecgubun as "paperrecgubun" 
+            , A.paperrecspecial as "paperrecspecial" 
+            , A.paperrectypes as "paperrectypes" 
+            , A.apprdocnumcode as "apprdocnumcode" 
+            , A.transflag as "transflag" 
+            , A.recordersummary as "recordersummary" 
+            , A.emergency as "emergency" 
+            , A.addsendcnt as "addsendcnt" 
+            , A.docgroup as "docgroup" 
+            , A.faketitle as "faketitle"
+            , B.enfdocid as "enfdocid"
+            , B.acterid as "acterid" 
+            , B.actername as "actername" 
+            , B.acterdutyname as "acterdutyname" 
+            , B.acterpositionid as "acterpositionid" 
+            , B.actergradeid as "actergradeid" 
+            , B.acterdeptid as "acterdeptid" 
+            , B.acterdeptname as "acterdeptname" 
+            , B.acterdeptnamedesc as "acterdeptnamedesc" 
+            , B.actgubun as "actgubun" 
+            , B.actdt as "actdt" 
+            , B.recid as "recid"
+            , B.recname as "recname" 
+            , B.recdutyname as "recdutyname" 
+            , B.recpositionid as "recpositionid" 
+            , B.recgradeid as "recgradeid" 
+            , B.recdeptid as "recdeptid" 
+            , B.recdeptname as "recdeptname" 
+            , B.recdeptnamedesc as "recdeptnamedesc" 
+            , B.pathhisid as "pathhisid" 
+            , B.electsignid as "electsignid"
+            , C.version as "version" 
+            , C.apprreqid as "apprreqid"
+            , C.reqtype as "reqtype" 
+            , C.secgubun as "secgubun"
+            , C.rfidtagflag as "rfidtagflag" 
+            , C.prsrvterm as "prsrvterm" 
+            , C.orgnprotdt as "orgnprotdt" 
+            , C.orgnnextlevel as "orgnnextlevel" 
+            , C.orgnreclass as "orgnreclass" 
+            , C.orgnprotcond as "orgnprotcond" 
+            , C.copyprotdt as "copyprotdt" 
+            , C.copynextlevel as "copynextlevel" 
+            , C.copyreclass as "copyreclass" 
+            , C.copyprotcond as "copyprotcond" 
+            , C.docttl as "docttl" 
+            , C.summary as "summary" 
+            , C.authorid as "authorid" 
+            , C.authorname as "authorname" 
+            , C.authordutyname as "authordutyname" 
+            , C.authorpositionid as "authorpositionid" 
+            , C.authorgradeid as "authorgradeid" 
+            , C.authordeptid as "authordeptid" 
+            , C.authordeptname as "authordeptname" 
+            , C.authordeptnamedesc as "authordeptnamedesc" 
+            , C.lastauthorid as "lastauthorid" 
+            , C.lastauthorname as "lastauthorname" 
+            , C.draftername as "draftername" 
+            , C.sendorgname as "sendorgname" 
+            , C.senddt as "senddt" 
+            , C.recvdisplayname as "recvdisplayname" 
+            , C.viadeptname as "viadeptname" 
+            , C.sectype as "sectype" 
+            , C.tcardid as "tcardid" 
+            , C.pcardid as "pcardid" 
+            , C.ocardid as "ocardid" 
+            , C.inname as "inname" 
+            , C.draftdt as "draftdt" 
+            , C.approvedt as "approvedt" 
+            , C.lastauthordutyname as "lastauthordutyname" 
+            , C.lastauthorpositionid as "lastauthorpositionid" 
+            , C.lastauthorgradeid as "lastauthorgradeid" 
+            , C.lastauthordeptid as "lastauthordeptid" 
+            , C.lastauthordeptname as "lastauthordeptname" 
+            , C.lastauthordeptnamedesc as "lastauthordeptnamedesc" 
+            , C.type as "type" 
+            , C.mgmtid as "mgmtid" 
+            , C.confirmflag as "confirmflag" 
+            , C.createdeptid as "createdeptid" 
+            , C.createdeptname as "createdeptname" 
+            , C.docpagenum as "docpagenum" 
+            , C.cabinetroomno as "cabinetroomno" 
+            , C.cabinetid as "cabinetid" 
+            , C.regirecvdt as "regirecvdt" 
+            , C.sectypeetc as "sectypeetc" 
+            , C.specialyn as "specialyn" 
+            , C.binderyn as "binderyn" 
+            , C.secretdocyn as "secretdocyn" 
+            , C.waryn as "waryn" 
+            , C.isnewrule as "isnewrule" 
+            , C.istransrule as "istransrule" 
+            , C.wargubun as "wargubun" 
+            , C.bsns_se_cd as "bsnsSeCd" 
+            , C.bsns_smbol as "bsnsSmbol" 
+            , C.hostilegubun as "hostilegubun" 
+            , C.realexist as "realexist" 
+            , C.mediatype as "mediatype" 
+            , C.mediatype_etc as "mediatypeEtc" 
+            , C.orgncreateyear as "orgncreateyear"
+            , D.receiverid as "receiverid"
+            , D.tempflag as "tempflag"
+            , D.seq as "seq"
+            , D.gubun as "gubun"
+            , D.deptid as "deptid"
+            , D.deptname as "deptname"
+            , D.refdeptid as "refdeptid"
+            , D.refdeptname as "refdeptname"
+            , D.zipcode as "zipcode"
+            , D.address as "address"
+            , D.phonenumber as "phonenumber"
+            , D.faxnumber as "faxnumber"
+            , D.recsymbol as "recsymbol"
+            , D.indt as "indt"
+            , D.inid as "inid"
+            , E.docid as "docid"
+            , E.docgubun as "docgubun"
+            , E.tempflag as "tempflag"
+            , E.sendorgname as "sendorgname"
+            , E.sendname as "sendname"
+            , E.senddt as "senddt"
+            , E.sendopinion as "sendopinion"
+            , E.senderid as "senderid"
+            , E.sendername as "sendername"
+            , E.senderdutyname as "senderdutyname"
+            , E.senderpositionid as "senderpositionid"
+            , E.sendergradeid as "sendergradeid"
+            , E.senderdeptid as "senderdeptid"
+            , E.senderdeptname as "senderdeptname"
+            , E.senderdeptnamedesc as "senderdeptnamedesc"
+            , F.seclevel as "seclevel"
+            , F.createdeptname as "createdeptname"
+            , F.docno as "docno"
+            , F.copyno as "copyno"
+            , (
+                SELECT MAX(regirecvgubun)
+                FROM sbms.sbms_user.bms_dct_mgmt_regi
+                WHERE docid  = (
+                    SELECT MAX(oridocid)
+                    FROM sbms.sbms_user.bms_dct_rdoc
+                    WHERE docid = A.docid
+                )
+            ) as "regirecvgubun"
+            , (
+                SELECT MAX(regirecvtype)
+                FROM sbms.sbms_user.bms_dct_mgmt_regi
+                WHERE docid  = (
+                    SELECT MAX(oridocid)
+                    FROM sbms.sbms_user.bms_dct_rdoc
+                    WHERE docid = A.docid
+                )
+            ) as "regirecvtype"
+            , G.actseq as "actseq"
+            , H.actopinion as "actopinion"
+        FROM  sbms.sbms_user.bms_dct_enf_doc  A
+            LEFT OUTER JOIN  sbms.sbms_user.bms_dct_enf_history  B
+                ON ( A.enfdocid  =  B.enfdocid  )
+            LEFT OUTER JOIN  sbms.sbms_user.bms_dct_apprreq_docinfo  C
+                ON ( A.docid  =  C.docid  )
+            INNER JOIN sbms.sbms_user.bms_dct_appr_recv D
+                ON (A.docid = D.docid)
+            INNER JOIN sbms.sbms_user.bms_dct_doc_sendinfo E
+                ON (A.docid = E.docid)
+            INNER JOIN sbms.sbms_user.bms_dct_attr F
+                ON (A.docid = F.docid)
+            LEFT OUTER JOIN (
+                SELECT
+                    enfdocid,
+                    actseq,
+                    actdt,
+                    actgubun,
+                    ROW_NUMBER() OVER (PARTITION BY enfdocid ORDER BY actdt ASC) as rn
+                FROM sbms.sbms_user.bms_dct_enf_history
+                WHERE actgubun = 'EPA08'
+            ) G
+                ON (A.enfdocid = G.enfdocid AND G.rn = 1)
+            LEFT OUTER JOIN (
+                SELECT
+                    enfdocid,
+                    actopinion,
+                    ROW_NUMBER() OVER (PARTITION BY enfdocid ORDER BY actdt DESC) as rn
+                FROM sbms.sbms_user.bms_dct_enf_history
+                WHERE actgubun = 'EPA17'
+            ) H
+                ON (A.enfdocid = H.enfdocid AND H.rn = 1)
+        WHERE 1 = 1
+            and (A.inid = #{userid}) <!--담당자 지정자(담당등록관리자)-->
+            and B.actgubun = 'EPA17' <!--재지정요청-->
+            and docstatus = 'EDS10' <!--재지정요청-->
+            <if test="enfdocid != null and enfdocid !=''">
+                and A.enfdocid = #{enfdocid}
+            </if>
+            <if test="title != null and title !=''"> 
+                and title = #{title} 
+            </if>
+            <if test="doctitle != null and doctitle !=''">
+                and A.doctitle like CONCAT('%', #{doctitle}, '%')
+            </if>
+            <if test="acceptdt != null and acceptdt !=''"> 
+                and acceptdt like CONCAT('%', #{acceptdt}, '%') 
+            </if>
+            <if test="acceptdeptname != null and acceptdeptname !=''"> 
+                and A.acceptdeptname like CONCAT('%', #{acceptdeptname}, '%')
+            </if>
+            <if test="acterdeptname != null and acterdeptname !=''">
+                and B.acterdeptname like CONCAT('%', #{acterdeptname}, '%')
+            </if>
+            <if test="actername != null and actername !=''">
+                and B.actername like CONCAT('%', #{actername}, '%')
+            </if>
+            <if test="authorname != null and authorname !=''"> 
+                and authorname like CONCAT('%', #{authorname}, '%') 
+            </if>
+            <if test="enfgubun != null and enfgubun !=''"> 
+                and enfgubun like CONCAT('%', #{enfgubun}, '%') 
+            </if>
+            <if test="startDt != null and startDt !=''">
+                and A.updt <![CDATA[>=]]> #{startDt}
+            </if>
+            <if test="endDt != null and endDt !=''">
+                and A.updt <![CDATA[<=]]> #{endDt}
+            </if>
+            ORDER BY A.updt DESC
+    </select>
+
+    <!--  비전자 접수 문서 상세 > 접수 정보 조회 -->
+    <select id="getReprocess" parameterType="com.anylogic.ssystem.bms.dct.model.GetReprocessReqVO" resultMap="getReprocessMap">
+        SELECT
+            enfdocid as "enfdocid" 
+            , docid as "docid" 
+            , enfgubun as "enfgubun" 
+            , relaydocid as "relaydocid" 
+            , receiverid as "receiverid" 
+            , recvdeptid as "recvdeptid" 
+            , doctitle as "doctitle" 
+            , keyword as "keyword" 
+            , docstatus as "docstatus" 
+            , apprdocnum as "apprdocnum" 
+            , acceptdocseq as "acceptdocseq" 
+            , acceptdt as "acceptdt" 
+            , acceptid as "acceptid" 
+            , acceptname as "acceptname" 
+            , acceptdutyname as "acceptdutyname" 
+            , acceptgradeid as "acceptgradeid" 
+            , acceptpositionid as "acceptpositionid" 
+            , acceptdeptid as "acceptdeptid" 
+            , acceptdeptname as "acceptdeptname" 
+            , acceptdeptnamedesc as "acceptdeptnamedesc" 
+            , actseq as "actseq" 
+            , open as "open" 
+            , openbasis as "openbasis" 
+            , openreason as "openreason" 
+            , readrangetype as "readrangetype" 
+            , recvdt as "recvdt" 
+            , distributeflag as "distributeflag" 
+            , setcardflag as "setcardflag" 
+            , shareopnflag as "shareopnflag" 
+            , moveflag as "moveflag" 
+            , paperdocflag as "paperdocflag" 
+            , paperbodyflag as "paperbodyflag" 
+            , attcount as "attcount" 
+            , delflag as "delflag" 
+            , relaytype as "relaytype" 
+            , systemtype as "systemtype" 
+            , convbodyflag as "convbodyflag" 
+            , drmgubun as "drmgubun" 
+            , firstreadid as "firstreadid" 
+            , firstreaddt as "firstreaddt" 
+            , inid as "inid" 
+            , indt as "indt" 
+            , upid as "upid" 
+            , updt as "updt" 
+            , distributedocseq as "distributedocseq" 
+            , distributeorgid as "distributeorgid" 
+            , paperappid as "paperappid" 
+            , paperappname as "paperappname" 
+            , paperappdeptname as "paperappdeptname" 
+            , paperappdutyname as "paperappdutyname" 
+            , readlimittype as "readlimittype" 
+            , readlimitdate as "readlimitdate" 
+            , protectflag as "protectflag" 
+            , chargerid as "chargerid" 
+            , chargerdeptid as "chargerdeptid" 
+            , distributedt as "distributedt" 
+            , paperrecgubun as "paperrecgubun" 
+            , paperrecspecial as "paperrecspecial" 
+            , paperrectypes as "paperrectypes" 
+            , apprdocnumcode as "apprdocnumcode" 
+            , transflag as "transflag" 
+            , recordersummary as "recordersummary" 
+            , emergency as "emergency" 
+            , addsendcnt as "addsendcnt" 
+            , docgroup as "docgroup" 
+            , faketitle as "faketitle" 
+        FROM  sbms.sbms_user.bms_dct_enf_doc
+        WHERE 1 = 1
+            <if test="docid != null and docid !=''"> 
+                and docid = #{docid}
+            </if>
+            <if test="enfdocid != null and enfdocid !=''">
+                and enfdocid = #{enfdocid}
+            </if>
+
+    </select>
+
+    <!-- 시행비밀정보 조회 문서&유저 -->
+    <select id="getReceiptList" parameterType="com.anylogic.ssystem.bms.dct.model.SelectReceiptListReqVO" resultMap="selectReceiptListMap">
+        SELECT
+        A.enfdocid as "enfdocid"
+        , A.docid as "docid"
+        , A.enfgubun as "enfgubun"
+        , A.relaydocid as "relaydocid"
+        , A.receiverid as "receiverid"
+        , A.recvdeptid as "recvdeptid"
+        , A.doctitle as "doctitle"
+        , A.keyword as "keyword"
+        , A.docstatus as "docstatus"
+        , A.apprdocnum as "apprdocnum"
+        , A.acceptdocseq as "acceptdocseq"
+        , A.acceptdt as "acceptdt"
+        , A.acceptid as "acceptid"
+        , A.acceptname as "acceptname"
+        , A.acceptdutyname as "acceptdutyname"
+        , A.acceptgradeid as "acceptgradeid"
+        , A.acceptpositionid as "acceptpositionid"
+        , A.acceptdeptid as "acceptdeptid"
+        , A.acceptdeptname as "acceptdeptname"
+        , A.acceptdeptnamedesc as "acceptdeptnamedesc"
+        , A.actseq as "actseq"
+        , A.open as "open"
+        , A.openbasis as "openbasis"
+        , A.openreason as "openreason"
+        , A.readrangetype as "readrangetype"
+        , A.recvdt as "recvdt"
+        , A.distributeflag as "distributeflag"
+        , A.setcardflag as "setcardflag"
+        , A.shareopnflag as "shareopnflag"
+        , A.moveflag as "moveflag"
+        , A.paperdocflag as "paperdocflag"
+        , A.paperbodyflag as "paperbodyflag"
+        , A.attcount as "attcount"
+        , A.delflag as "delflag"
+        , A.relaytype as "relaytype"
+        , A.systemtype as "systemtype"
+        , A.convbodyflag as "convbodyflag"
+        , A.drmgubun as "drmgubun"
+        , A.firstreadid as "firstreadid"
+        , A.firstreaddt as "firstreaddt"
+        , A.acceptdeptname as "acceptdeptname"
+        , A.acceptdocseq as "acceptdocseq"
+        , A.actseq as "actseq"
+        , A.inid as "inid"
+        , A.indt as "indt"
+        , A.upid as "upid"
+        , A.updt as "updt"
+        , A.distributedocseq as "distributedocseq"
+        , A.distributeorgid as "distributeorgid"
+        , A.paperappid as "paperappid"
+        , A.paperappname as "paperappname"
+        , A.paperappdeptname as "paperappdeptname"
+        , A.paperappdutyname as "paperappdutyname"
+        , A.readlimittype as "readlimittype"
+        , A.readlimitdate as "readlimitdate"
+        , A.protectflag as "protectflag"
+        , A.chargerid as "chargerid"
+        , A.chargerdeptid as "chargerdeptid"
+        , A.distributedt as "distributedt"
+        , A.paperrecgubun as "paperrecgubun"
+        , A.paperrecspecial as "paperrecspecial"
+        , A.paperrectypes as "paperrectypes"
+        , A.apprdocnumcode as "apprdocnumcode"
+        , A.transflag as "transflag"
+        , A.recordersummary as "recordersummary"
+        , A.emergency as "emergency"
+        , A.addsendcnt as "addsendcnt"
+        , A.docgroup as "docgroup"
+        , A.faketitle as "faketitle"
+        , B.userid as "userid"
+        , B.vgroupid as "vgroupid"
+        , B.orgid as "orgid"
+        , C.userid as "userid"
+        , C.deptid as "deptid"
+        , C.username as "username"
+        FROM  sbms.sbms_user.bms_dct_enf_doc  A
+        INNER JOIN sbms.sbms_user.com_vgroup_user B
+        ON (A.inid = B.userid)
+        INNER JOIN sbms.sbms_user.com_userinfo C
+        ON (B.userid = C.userid)
+        WHERE 1 = 1
+<!--        and docstatus = 'EDS09' &lt;!&ndash;접수대기&ndash;&gt;-->
+        and docstatus = 'EDS05'
+        and (
+        CASE
+        <!-- chargerid 는 담당자이며, 로그인한 유저id 로 확인함. 담당자 지정된 사람이기 때문에 보이게 됨. [TRUE] -->
+        WHEN A.chargerid = #{userid} THEN TRUE
+        <!-- 정리 : 담당자가 지정돼있지 않고, 관리자 권한(vgroupid) 이 있으면서, 수신자의 부서id와 로그인한 유저의 부서id가 같은 경우에 속하면 [TRUE] -->
+        WHEN A.chargerid IS NULL AND B.vgroupid = #{vgroupid} AND B.orgid = #{deptid} and (A.recvdeptid = C.deptid) THEN true
+        ELSE FALSE
+        END
+        )
+        <if test="docid != null and docid !=''">
+            and A.docid like CONCAT('%', #{docid}, '%')
+        </if>
+        <if test="title != null and title !=''">
+            and title = #{title}
+        </if>
+        <if test="recvdt != null and recvdt !=''">
+            and recvdt like CONCAT('%', #{recvdt}, '%')
+        </if>
+        <if test="docno != null and docno !=''">
+            and docno like CONCAT('%', #{docno}, '%')
+        </if>
+        <if test="seclevel != null and seclevel !=''">
+            and seclevel = #{seclevel}
+        </if>
+        <if test="doctitle != null and doctitle !=''">
+            and doctitle like CONCAT('%', #{doctitle}, '%')
+        </if>
+        <if test="createdeptname != null and createdeptname !=''">
+            and createdeptname like CONCAT('%', #{createdeptname}, '%')
+        </if>
+        <if test="enfgubun != null and enfgubun !=''">
+            and enfgubun like CONCAT('%', #{enfgubun}, '%')
+        </if>
+        <if test="enfdocid != null and enfdocid !=''">
+            and enfdocid = #{enfdocid}
+        </if>
+        <if test="startDt != null and startDt !=''">
+            and A.updt <![CDATA[>=]]> #{startDt}
+        </if>
+        <if test="endDt != null and endDt !=''">
+            and A.updt <![CDATA[<=]]> #{endDt}
+        </if>
+        order by A.updt DESC
+
+    </select>
+
+    <!-- 접수 > 접수현황함 > 접수현황함 목록 조회 -->
+    <select id="selectReceiptCurrentList" parameterType="com.anylogic.ssystem.bms.dct.model.SelectReceiptListReqVO" resultMap="selectReceiptListMap">
+        SELECT
+        DISTINCT ON (A.enfdocid)
+        A.enfdocid as "enfdocid"
+        , A.docid as "docid"
+        , A.enfgubun as "enfgubun"
+        , A.relaydocid as "relaydocid"
+        , A.receiverid as "receiverid"
+        , A.recvdeptid as "recvdeptid"
+        , A.doctitle as "doctitle"
+        , A.keyword as "keyword"
+        , A.docstatus as "docstatus"
+        , A.apprdocnum as "apprdocnum"
+        , A.acceptdocseq as "acceptdocseq"
+        , A.acceptdt as "acceptdt"
+        , A.acceptid as "acceptid"
+        , A.acceptname as "acceptname"
+        , A.acceptdutyname as "acceptdutyname"
+        , A.acceptgradeid as "acceptgradeid"
+        , A.acceptpositionid as "acceptpositionid"
+        , A.acceptdeptid as "acceptdeptid"
+        , A.acceptdeptname as "acceptdeptname"
+        , A.acceptdeptnamedesc as "acceptdeptnamedesc"
+        , A.open as "open"
+        , A.openbasis as "openbasis"
+        , A.openreason as "openreason"
+        , A.readrangetype as "readrangetype"
+        , A.recvdt as "recvdt"
+        , A.distributeflag as "distributeflag"
+        , A.setcardflag as "setcardflag"
+        , A.shareopnflag as "shareopnflag"
+        , A.moveflag as "moveflag"
+        , A.paperdocflag as "paperdocflag"
+        , A.paperbodyflag as "paperbodyflag"
+        , A.attcount as "attcount"
+        , A.delflag as "delflag"
+        , A.relaytype as "relaytype"
+        , A.systemtype as "systemtype"
+        , A.convbodyflag as "convbodyflag"
+        , A.drmgubun as "drmgubun"
+        , A.firstreadid as "firstreadid"
+        , A.firstreaddt as "firstreaddt"
+        , A.inid as "inid"
+        , A.indt as "indt"
+        , A.upid as "upid"
+        , A.updt as "updt"
+        , A.distributedocseq as "distributedocseq"
+        , A.distributeorgid as "distributeorgid"
+        , A.paperappid as "paperappid"
+        , A.paperappname as "paperappname"
+        , A.paperappdeptname as "paperappdeptname"
+        , A.paperappdutyname as "paperappdutyname"
+        , A.readlimittype as "readlimittype"
+        , A.readlimitdate as "readlimitdate"
+        , A.protectflag as "protectflag"
+        , A.chargerid as "chargerid"
+        , A.chargerdeptid as "chargerdeptid"
+        , A.distributedt as "distributedt"
+        , A.paperrecgubun as "paperrecgubun"
+        , A.paperrecspecial as "paperrecspecial"
+        , A.paperrectypes as "paperrectypes"
+        , A.apprdocnumcode as "apprdocnumcode"
+        , A.transflag as "transflag"
+        , A.recordersummary as "recordersummary"
+        , A.emergency as "emergency"
+        , A.addsendcnt as "addsendcnt"
+        , A.docgroup as "docgroup"
+        , A.faketitle as "faketitle"
+        , B.userid as "userid"
+        , B.vgroupid as "vgroupid"
+        , B.orgid as "orgid"
+        , C.userid as "userid"
+        , C.deptid as "deptid"
+        , C.username as "username"
+        , C.deptname as "deptname"
+        , D.receiverid as "receiverid"
+        , D.tempflag as "tempflag"
+        , D.seq as "seq"
+        , D.gubun as "gubun"
+        , D.deptid as "deptid"
+        , D.deptname as "deptname"
+        , D.refdeptid as "refdeptid"
+        , D.refdeptname as "refdeptname"
+        , D.zipcode as "zipcode"
+        , D.address as "address"
+        , D.phonenumber as "phonenumber"
+        , D.faxnumber as "faxnumber"
+        , D.recsymbol as "recsymbol"
+        , D.indt as "indt"
+        , D.inid as "inid"
+        , E.docid as "docid"
+        , E.docgubun as "docgubun"
+        , E.tempflag as "tempflag"
+        , E.sendorgname as "sendorgname"
+        , E.sendname as "sendname"
+        , E.senddt as "senddt"
+        , E.sendopinion as "sendopinion"
+        , E.senderid as "senderid"
+        , E.sendername as "sendername"
+        , E.senderdutyname as "senderdutyname"
+        , E.senderpositionid as "senderpositionid"
+        , E.sendergradeid as "sendergradeid"
+        , E.senderdeptid as "senderdeptid"
+        , E.senderdeptname as "senderdeptname"
+        , E.senderdeptnamedesc as "senderdeptnamedesc"
+        , F.seclevel as "seclevel"
+        , F.createdeptname as "createdeptname"
+        , F.docno as "docno"
+        , F.copyno as "copyno"
+        , (
+            SELECT MAX(regirecvgubun)
+            FROM sbms.sbms_user.bms_dct_mgmt_regi
+            WHERE docid  = (
+                SELECT MAX(oridocid)
+                FROM sbms.sbms_user.bms_dct_rdoc
+                WHERE docid = A.docid
+            )
+        ) as "regirecvgubun"
+        , (
+            SELECT MAX(regirecvtype)
+            FROM sbms.sbms_user.bms_dct_mgmt_regi
+            WHERE docid  = (
+                SELECT MAX(oridocid)
+                FROM sbms.sbms_user.bms_dct_rdoc
+                WHERE docid = A.docid
+            )
+        ) as "regirecvtype"
+        , G.actseq as "actseq"
+        , H.actopinion
+        , CASE
+        WHEN A.docid NOT IN (SELECT docid FROM sbms_user.bms_dct_rdoc_rcvs WHERE userid = #{userid}) THEN '미보유'
+        ELSE '보유'
+        END AS "auth"
+        FROM  sbms.sbms_user.bms_dct_enf_doc  A
+        INNER JOIN sbms.sbms_user.com_vgroup_user B
+            ON (A.inid = B.userid)
+        LEFT OUTER JOIN sbms.sbms_user.com_userinfo C
+            ON (A.chargerid = C.userid)
+        INNER JOIN sbms.sbms_user.bms_dct_appr_recv D
+            ON (A.docid = D.docid)
+        INNER JOIN sbms.sbms_user.bms_dct_doc_sendinfo E
+            ON (A.docid = E.docid)
+        INNER JOIN sbms.sbms_user.bms_dct_attr F
+            ON (A.docid = F.docid)
+        LEFT OUTER JOIN (
+            SELECT
+                enfdocid,
+                actseq,
+                actdt,
+                actgubun,
+                ROW_NUMBER() OVER (PARTITION BY enfdocid ORDER BY actdt ASC) as rn
+            FROM sbms.sbms_user.bms_dct_enf_history
+            ORDER BY actseq DESC
+        ) G
+            ON (A.enfdocid = G.enfdocid AND G.rn = 1)
+        LEFT OUTER JOIN (
+            SELECT
+                enfdocid,
+                actopinion,
+                ROW_NUMBER() OVER (PARTITION BY enfdocid ORDER BY actdt DESC) as rn
+            FROM sbms.sbms_user.bms_dct_enf_history
+            ORDER BY actseq DESC
+        ) H
+            ON (A.enfdocid = H.enfdocid AND H.rn = 1)
+        WHERE 1 = 1
+        <!-- chargerid(담당자)가 지정돼있고 재지정(EDS10)이 아니거나, docstatus 가 반송대기(EDS06),반송종료(EDS40) 이고 inid(등록아이디_관리자)가 userid(로그인한유저)본인인경우를 목록에 조회 -->
+        AND (( A.chargerid IS NOT NULL AND A.docstatus != 'EDS10' ) OR (A.docstatus IN ('EDS06','EDS40') ) ) AND A.inid = #{userid}
+        <if test="docid != null and docid !=''">
+            and A.docid like CONCAT('%', #{docid}, '%')
+        </if>
+        <if test="title != null and title !=''">
+            and title = #{title}
+        </if>
+        <if test="recvdt != null and recvdt !=''">
+            and recvdt like CONCAT('%', #{recvdt}, '%')
+        </if>
+        <if test="docno != null and docno !=''">
+            and docno like CONCAT('%', #{docno}, '%')
+        </if>
+        <if test="seclevel != null and seclevel !=''">
+            and seclevel = #{seclevel}
+        </if>
+        <if test="doctitle != null and doctitle !=''">
+            and doctitle like CONCAT('%', #{doctitle}, '%')
+        </if>
+        <if test="docstatus != null and docstatus !=''">
+            and docstatus like CONCAT('%', #{docstatus}, '%')
+        </if>
+        <if test="createdeptname != null and createdeptname !=''">
+            and createdeptname like CONCAT('%', #{createdeptname}, '%')
+        </if>
+        <if test="enfgubun != null and enfgubun !=''">
+            and enfgubun like CONCAT('%', #{enfgubun}, '%')
+        </if>
+        <if test="enfdocid != null and enfdocid !=''">
+            and enfdocid = #{enfdocid}
+        </if>
+        <if test="startDt != null and startDt !=''">
+            and A.updt <![CDATA[>=]]> #{startDt}
+        </if>
+        <if test="endDt != null and endDt !=''">
+            and A.updt <![CDATA[<=]]> #{endDt}
+        </if>
+        ORDER BY A.enfdocid DESC
+    </select>
+
+    <!-- 비전자접수 > 접수대기상세 > 문서처리 (원본복사하여 저장) -->
+    <insert id="insertEnforceCardCopy" parameterType="com.anylogic.ssystem.bms.dct.model.InsertEnforceCardReqVO">
+        INSERT INTO sbms_user.bms_dct_enf_doc
+        (
+            enfdocid, docid, enfgubun,
+            recvdeptid, doctitle,  docstatus, acceptdocseq,
+            acceptid, acceptname, acceptdutyname,
+            acceptdeptid, acceptdeptname, paperdocflag,
+            inid, indt, upid, updt, chargerid, emergency
+        )
+        select
+            'ENF' || sbms.sbms_user.sys_guid() as enfdocid, #{docid}, e.enfgubun,
+            e.recvdeptid, e.doctitle,  e.docstatus, e.acceptdocseq,
+            e.acceptid, e.acceptname, e.acceptdutyname,
+            e.acceptdeptid, e.acceptdeptname, e.paperdocflag,
+            e.inid, e.indt, e.upid, e.updt, e.chargerid, e.emergency
+        from sbms_user.bms_dct_enf_doc e
+        where e.docid = #{oridocid}
+    </insert>
+</mapper>

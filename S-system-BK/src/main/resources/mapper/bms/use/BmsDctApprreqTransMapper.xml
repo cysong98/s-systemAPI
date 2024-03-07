@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.anylogic.ssystem.bms.use.mapper.BmsDctApprreqTransMapper">
+
+    <!--  내부이관, 이관대기 요청내용 등록 -->
+    <insert id="insertComingTransApproveBIA" parameterType="com.anylogic.ssystem.bms.use.model.InsertComingTransApproveBIAReqVO">
+        INSERT INTO
+        sbms.sbms_user.bms_dct_apprreq_trans(
+            <trim suffixOverrides=",">
+            <if test="apprreqid != null and apprreqid !=''">
+                apprreqid,
+            </if>
+            <if test="mgmtid != null and mgmtid !=''">
+                mgmtid,
+            </if>
+            <if test="transdt != null and transdt !=''">
+                transdt,
+            </if>
+            <if test="grantflag != null and grantflag !=''">
+                grantflag,
+            </if>
+            </trim>
+        )
+        VALUES(
+            <trim suffixOverrides=",">
+            <if test="apprreqid != null and apprreqid !=''">
+                #{apprreqid},
+            </if>
+            <if test="mgmtid != null and mgmtid !=''">
+                #{mgmtid},
+            </if>
+            <if test="transdt != null and transdt !=''">
+                #{transdt},
+            </if>
+            <if test="grantflag != null and grantflag !=''">
+                #{grantflag},
+            </if>
+            </trim>
+        )
+    </insert>
+
+    <!-- 이관연기 요청내용 등록 -->
+    <insert id="insertComingTransDelayBIA" parameterType="com.anylogic.ssystem.bms.use.model.InsertComingTransApproveBIAReqVO">
+        INSERT INTO
+        sbms.sbms_user.bms_dct_apprreq_trans(
+        <trim suffixOverrides=",">
+            <if test="apprreqid != null and apprreqid !=''">
+                apprreqid,
+            </if>
+            <if test="mgmtid != null and mgmtid !=''">
+                mgmtid,
+            </if>
+            <if test="transdt != null and transdt !=''">
+                transdt,
+            </if>
+            <if test="reqtransnextdt != null and reqtransnextdt !=''">
+                reqtransextdt,
+            </if>
+            <if test="granttransnextdt != null and granttransnextdt !=''">
+                granttransextdt,
+            </if>
+            <if test="grantflag != null and grantflag !=''">
+                grantflag,
+            </if>
+        </trim>
+        )
+        VALUES(
+        <trim suffixOverrides=",">
+            <if test="apprreqid != null and apprreqid !=''">
+                #{apprreqid},
+            </if>
+            <if test="mgmtid != null and mgmtid !=''">
+                #{mgmtid},
+            </if>
+            <if test="transdt != null and transdt !=''">
+                #{transdt},
+            </if>
+            <if test="reqtransnextdt != null and reqtransnextdt !=''">
+                #{reqtransnextdt},
+            </if>
+            <if test="granttransnextdt != null and granttransnextdt !=''">
+                #{granttransnextdt},
+            </if>
+            <if test="grantflag != null and grantflag !=''">
+                #{grantflag},
+            </if>
+        </trim>
+        )
+    </insert>
+
+    <!-- 각 요청서 승인/반려 처리 - 승인한 이관대기정보 수정 -->
+    <update id="updateUseReqMapTransWait" parameterType="java.util.Map">
+        UPDATE sbms.sbms_user.bms_dct_apprreq_trans
+        set grantflag = #{grantflag}
+        WHERE apprreqid = #{apprreqid}
+          AND mgmtid = #{mgmtid}
+    </update>
+
+    <!-- 각 요청서 승인/반려 처리 - 승인한 내부이관, 이관연기정보 수정 -->
+    <update id="updateUseReqMapTrans" parameterType="java.util.Map">
+        UPDATE sbms.sbms_user.bms_dct_apprreq_trans a
+        set transdt = TO_CHAR(now(), 'YYYYMMDDHH24MISS')
+        ,grantflag = #{grantflag}
+        <if test="granttransextdt != null and granttransextdt !=''">
+            ,granttransextdt = #{granttransextdt}
+        </if>
+        WHERE apprreqid = #{apprreqid}
+        AND mgmtid = #{mgmtid}
+    </update>
+
+    <!-- 이관대기 요청서 승인/반려 처리 - 승인한 열람범위 정보 수정 -->
+    <update id="updateUseReqMapTransRdoc" parameterType="java.util.Map">
+        UPDATE sbms.sbms_user.bms_dct_rdoc
+        SET
+            open = #{isopen},
+            readrangetype = #{openrange},
+            readlimittype = #{openrestrict}
+        WHERE docid in (
+            SELECT docid FROM sbms.sbms_user.bms_dct_mgmt_regi
+            WHERE mgmtid = #{mgmtid}
+        )
+    </update>
+
+    <!-- 각 요청서 상세화면 조회 - 이관대기, 이관연기, 내부이관할 문서 정보 -->
+    <select id="selectUseReqTransMapList" parameterType="java.util.Map" resultType="java.util.HashMap">
+        SELECT
+            b.apprreqid as "apprreqid"
+             , a.mgmtid as "mgmtid"
+             , a.mgmtno as "mgmtno"
+             , a.secttl as "secttl"
+             , a.copyno as "copyno"
+             , a.notiprsrvterm as "notiprsrvterm"
+             , a.notiprotterm as "notiprotterm"
+             , case when a.notiprsrvterm = '001' then '1년'
+                    when a.notiprsrvterm = '003' then '3년'
+                    when a.notiprsrvterm = '005' then '5년'
+                    when a.notiprsrvterm = '010' then '10년'
+                    when a.notiprsrvterm = '030' then '30년'
+                    when a.notiprsrvterm = '040' then '준영구'
+                    when a.notiprsrvterm = '050' then '영구'
+                    else a.notiprsrvterm end as notiprsrvtermnm
+             , TO_CHAR(TO_TIMESTAMP(substr(a.notiprotterm,1,8), 'YYYYMMDDHH24MISS'), 'YYYY.MM.DD') as "notiprottermnm"
+             , TO_CHAR(TO_TIMESTAMP(substr(a.notiprotterm,1,8), 'YYYYMMDDHH24MISS'), 'YYYY.MM.DD')
+            || ' ' ||
+               case when a.seclevel = '2' then '2급'
+                    when a.seclevel = '3' then '3급'
+                    when a.seclevel = '4' then '대외비'
+                    else '' end as notifromtitle
+             , a.deptname as "deptname"
+             , a.authorid as "authorid"
+             , a.authorname as "authorname"
+             , substr(b.reqtransextdt,1,4) as "reqtransextdt"
+             , case when c.open = 'CLOSE' then '비공개'
+                    when c.open = 'OPEN' then '공개'
+                    when c.open = 'PRAT' then '부분공개'
+                    else '' end as isopen
+             , case when c.readrangetype = 'DDEP1' then '기관'
+                    when c.readrangetype = 'DDEP2' then '실국'
+                    when c.readrangetype = 'DDEP3' then '부서'
+                    else '' end as openrange
+             , case when c.readlimittype = '1' then '1호'
+                    when c.readlimittype = '2' then '2호'
+                    when c.readlimittype = '3' then '3호'
+                    when c.readlimittype = '4' then '4호'
+                    when c.readlimittype = '5' then '5호'
+                    when c.readlimittype = '6' then '6호'
+                    when c.readlimittype = '7' then '7호'
+                    when c.readlimittype = '8' then '8호'
+                    else '' end as openrestrict
+             , a.docid as "docid"
+             , TO_CHAR(TO_TIMESTAMP(a.indt, 'YYYYMMDDHH24MISS'), 'YYYY.MM.DD') as "indt"
+             , a.regirecvtype as "regirecvtype"
+             , d.orgnprotdt as "orgnprotdt"
+             , d.orgnreclass as "orgnreclass"
+             , c.paperrecgubun as "paperrecgubun"
+             , COALESCE(NULLIF(LEFT(b.granttransextdt, 4), ''), LEFT(b.reqtransextdt, 4)) AS "granttransextdt"
+        FROM sbms.sbms_user.bms_dct_mgmt_regi a left outer join sbms.sbms_user.bms_dct_apprreq_trans b on (a.mgmtid = b.mgmtid)
+                                                left outer join sbms.sbms_user.bms_dct_rdoc c on (a.docid = c.docid)
+                                                left outer join sbms.sbms_user.bms_dct_attr d on (a.docid = d.docid)
+        WHERE b.apprreqid = #{apprreqid}
+    </select>
+
+</mapper>

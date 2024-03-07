@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.anylogic.ssystem.bms.com.mapper.BmsComNoticeAuthorMapper">
+
+    <resultMap id="selectNoticeAuthorMap" type="com.anylogic.ssystem.bms.com.model.SelectNoticeAuthorResVO">
+        <id column="ntcid" property="ntcid" />                        <!-- 공지사항아이디 -->
+        <result column="deptid" property="deptid" />                  <!-- 부서아이디 -->
+        <result column="deptname" property="deptname" />              <!-- 부서명 -->
+    </resultMap>
+
+    <!-- 게시판관리 > 공지사항 관리 > 공지사항 AUTHOR 조회 -->
+    <select id="selectNoticeAuthor" parameterType="com.anylogic.ssystem.bms.com.model.SelectNoticeAuthorReqVO" resultMap="selectNoticeAuthorMap">
+        SELECT
+        ntcid as "ntcid"
+        , deptid as "deptid"
+        , deptname as "deptname"
+        FROM  sbms.sbms_user.bms_com_notice_author
+        WHERE 1 = 1
+        <if test="ntcid != null and ntcid !=''">
+            and ntcid = #{ntcid}
+        </if>
+    </select>
+
+    <!-- 부서ID로 공지 ID 조회 -->
+    <select id="selectNoticeAuthorByDeptid" parameterType="com.anylogic.ssystem.bms.com.model.SelectNoticeAuthorReqVO" resultMap="selectNoticeAuthorMap">
+        SELECT DISTINCT
+            ntcid as "ntcid"
+        FROM  sbms.sbms_user.bms_com_notice_author
+        WHERE 1 = 1
+        <if test="deptid != null and deptid !=''">
+            and deptid = #{deptid}
+        </if>
+    </select>
+
+    <!-- 게시판관리 > 공지사항 관리 > 공지사항 AUTHOR 삭제 -->
+    <delete id="deleteNoticeAuthor" parameterType="com.anylogic.ssystem.bms.com.model.DeleteNoticeAuthorReqVO">
+        DELETE FROM sbms.sbms_user.bms_com_notice_author
+        WHERE 1 = 1
+            and ntcid = #{ntcid}
+    </delete>
+
+    <!-- 게시판관리 > 공지사항 관리 > 공지사항 AUTHOR 등록 -->
+    <insert id="insertNoticeAuthor" parameterType="com.anylogic.ssystem.bms.com.model.InsertNoticeAuthorReqVO">
+        INSERT INTO
+        sbms.sbms_user.bms_com_notice_author(
+            <trim suffixOverrides=",">
+            <if test="ntcid != null and ntcid !=''">
+                ntcid,
+            </if>
+            <if test="deptid != null and deptid !=''">
+                deptid,
+            </if>
+            <if test="deptname != null and deptname !=''">
+                deptname,
+            </if>
+            </trim>
+        )
+        VALUES(
+            <trim suffixOverrides=",">
+            <if test="ntcid != null and ntcid !=''">
+                #{ntcid},
+            </if>
+            <if test="deptid != null and deptid !=''">
+                #{deptid},
+            </if>
+            <if test="deptname != null and deptname !=''">
+                #{deptname},
+            </if>
+            </trim>
+        )
+    </insert>
+
+</mapper>

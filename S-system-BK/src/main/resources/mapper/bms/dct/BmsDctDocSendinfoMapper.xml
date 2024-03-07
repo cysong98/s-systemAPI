@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.anylogic.ssystem.bms.dct.mapper.BmsDctDocSendinfoMapper">
+
+    <resultMap id="selectSendinfoMap" type="com.anylogic.ssystem.bms.dct.model.SelectSendinfoResVO">
+        <id column="docid" property="docid" />                        <!-- 비밀 ID -->
+        <id column="docgubun" property="docgubun" />                  <!-- 문서 구분 -->
+        <id column="tempflag" property="tempflag" />                  <!-- 임시 FLAG -->
+        <result column="sendorgname" property="sendorgname" />        <!-- 발신기관 이름 -->
+        <result column="sendname" property="sendname" />              <!-- 발신이름 -->
+        <result column="campaignhead" property="campaignhead" />      <!-- 캠페인상부 -->
+        <result column="campaigntail" property="campaigntail" />      <!-- 캠페인하부 -->
+        <result column="senddt" property="senddt" />                  <!-- 발송일시 -->
+        <result column="sendopinion" property="sendopinion" />        <!-- 발송의견 -->
+        <result column="senderid" property="senderid" />              <!-- 발송자 ID -->
+        <result column="sendername" property="sendername" />          <!-- 발송자 이름 -->
+        <result column="senderdutyname" property="senderdutyname" />  <!-- 발송자 직위직급 -->
+        <result column="senderpositionid" property="senderpositionid" /><!-- 발송자 직위 ID -->
+        <result column="sendergradeid" property="sendergradeid" />    <!-- 발송자 직급 ID -->
+        <result column="senderdeptid" property="senderdeptid" />      <!-- 발송자 부서 ID -->
+        <result column="senderdeptname" property="senderdeptname" />  <!-- 발송자 부서이름 -->
+        <result column="senderdeptnamedesc" property="senderdeptnamedesc" /><!-- 발송자 부서상세이름 -->
+        <result column="address" property="address" />                <!-- 주소정보 -->
+        <result column="zipcode" property="zipcode" />                <!-- 우편번호 -->
+        <result column="homepage" property="homepage" />              <!-- 홈페이지 -->
+        <result column="phonenumber" property="phonenumber" />        <!-- 전화번호 -->
+        <result column="faxnumber" property="faxnumber" />            <!-- FAX번호 -->
+        <result column="email" property="email" />                    <!-- 이메일주소 -->
+        <result column="recvdisplayname" property="recvdisplayname" /><!-- 수신처 표시이름 -->
+        <result column="recvdisplayflag" property="recvdisplayflag" /><!-- 수신처 표시명 FLAG -->
+        <result column="viadeptname" property="viadeptname" />        <!-- 경유부서이름 -->
+        <result column="enfrecvrange" property="enfrecvrange" />      <!-- 시행수신처범위 -->
+        <result column="sendtype" property="sendtype" />              <!-- 발송유형 -->
+        <result column="sealsigntype" property="sealsigntype" />      <!-- 관인날인종류 -->
+        <result column="sealsignname" property="sealsignname" />      <!-- 관인날인명 -->
+        <result column="sendorgid" property="sendorgid" />            <!-- 발신기관 ID -->
+        <result column="faxsndreqdt" property="faxsndreqdt" />        <!-- FAX 발송요청일시 -->
+        <result column="circdocflag" property="circdocflag" />        <!-- 문서 FLAG -->
+        <result column="distctrlflag" property="distctrlflag" />      <!-- 배포처 통제 -->
+        <result column="distplflag" property="distplflag" />          <!--  -->
+        <result column="mgmtid" property="mgmtid" />                  <!-- 비밀관리 ID -->
+        <result column="mgmtno" property="mgmtno" />                  <!-- 관리번호 -->
+        <result column="seclevel" property="seclevel" />              <!-- 비밀등급 -->
+        <result column="mgmtseq" property="mgmtseq" />                <!-- 비밀일련번호 -->
+        <result column="regirecvyear" property="regirecvyear" />      <!-- 생산/접수 연도 -->
+        <result column="regirecvgubun" property="regirecvgubun" />    <!-- 생산/접수 구분 -->
+        <result column="regirecvdt" property="regirecvdt" />          <!-- 생산/접수 일자 -->
+        <result column="regirecvsendid" property="regirecvsendid" />  <!-- 생산/접수 발신처 ID -->
+        <result column="regirecvsendname" property="regirecvsendname" /><!-- 생산/접수 발신처명 -->
+        <result column="regirecvtype" property="regirecvtype" />      <!-- 생산/접수 형태 -->
+        <result column="secttl" property="secttl" />                  <!-- 비밀제목 -->
+        <result column="sectype" property="sectype" />                <!-- 비밀형태 -->
+        <result column="attchcnt" property="attchcnt" />              <!-- 첨부물개수 -->
+        <result column="copyno" property="copyno" />                  <!-- 사본번호 -->
+        <result column="notiprotterm" property="notiprotterm" />      <!-- 예고문보호기간 -->
+        <result column="notiprsrvterm" property="notiprsrvterm" />    <!-- 예고문보존기간 -->
+        <result column="deptid" property="deptid" />                  <!-- 처리부서 ID -->
+        <result column="deptname" property="deptname" />              <!-- 처리부서명 -->
+        <result column="readrangetype" property="readrangetype" />    <!-- 비밀형태 -->
+        <result column="secstatus" property="secstatus" />            <!-- 열람범위 -->
+        <result column="authorid" property="authorid" />              <!-- 처리담당자 ID -->
+        <result column="authorname" property="authorname" />          <!-- 처리담당자명 -->
+        <result column="authordutyname" property="authordutyname" />  <!-- 처리담당자 직위직급명 -->
+        <result column="authorposid" property="authorposid" />        <!-- 처리담당자 직위 ID -->
+        <result column="authorgrdid" property="authorgrdid" />        <!-- 처리담당자 직급 ID -->
+        <result column="reclassdt" property="reclassdt" />            <!-- 재분류일자 -->
+        <result column="reclasscont" property="reclasscont" />        <!-- 재분류내용 -->
+        <result column="reclassbasis" property="reclassbasis" />      <!-- 재분류근거 -->
+        <result column="reclassmgtno" property="reclassmgtno" />      <!-- 재분류이전 관리번호 -->
+        <result column="reclassmgmtid" property="reclassmgmtid" />    <!-- 재분류이전 관리 ID -->
+        <result column="reclasslevel" property="reclasslevel" />      <!-- 재분류코드 -->
+        <result column="transdt" property="transdt" />                <!-- 이관일자 -->
+        <result column="transbasis" property="transbasis" />          <!-- 이관근거 -->
+        <result column="destructdt" property="destructdt" />          <!-- 파기일자 -->
+        <result column="destructbasis" property="destructbasis" />    <!-- 파기근거 -->
+        <result column="cnsrvflag" property="cnsrvflag" />            <!-- 존안여부 -->
+        <result column="cnsrvdt" property="cnsrvdt" />                <!-- 존안일자 -->
+        <result column="cnsrvbasis" property="cnsrvbasis" />          <!-- 존안근거 -->
+        <result column="custdyplace" property="custdyplace" />        <!-- 보관장소 -->
+        <result column="rfidtagflag" property="rfidtagflag" />        <!-- RFID사용여부 -->
+        <result column="delflag" property="delflag" />                <!-- 삭선여부 -->
+        <result column="rgstid" property="rgstid" />                  <!-- 등재자 ID -->
+        <result column="rgstname" property="rgstname" />              <!-- 등재자명 -->
+        <result column="rgstdt" property="rgstdt" />                  <!-- 등재일시 -->
+        <result column="updtid" property="updtid" />                  <!-- 수정자 ID -->
+        <result column="updtname" property="updtname" />              <!-- 수정자명 -->
+        <result column="updtdt" property="updtdt" />                  <!-- 수정일시 -->
+        <result column="legacymgmtno" property="legacymgmtno" />      <!-- 이전시스템 관리번호 -->
+        <result column="note" property="note" />                      <!-- 비고 -->
+        <result column="legacydocno" property="legacydocno" />        <!-- 이전시스템 문서번호 -->
+        <result column="indt" property="indt" />                      <!-- 등록일시 -->
+        <result column="sectypeetc" property="sectypeetc" />          <!-- 등록구분기타 -->
+        <result column="realtitle" property="realtitle" />            <!-- 실제목 -->
+        <result column="cnsrvterm" property="cnsrvterm" />            <!-- 존안보존일자 -->
+        <result column="aggregatemgmtid" property="aggregatemgmtid" /><!-- 합철 관련 MGMT ID -->
+        <result column="aggregatedt" property="aggregatedt" />        <!-- 합철 일자 -->
+        <result column="destructconfirm" property="destructconfirm" /><!--  -->
+        <result column="destructconfirmdt" property="destructconfirmdt" /><!--  -->
+        <result column="transwaitdt" property="transwaitdt" />        <!--  -->
+    </resultMap>
+
+
+    <!--  비밀 배포카드 팝업 > 발송의견 조회 -->
+    <select id="selectSendinfo" parameterType="com.anylogic.ssystem.bms.dct.model.SelectSendinfoReqVO" resultMap="selectSendinfoMap">
+        SELECT
+            A.docid as "docid" 
+            , A.docgubun as "docgubun" 
+            , A.tempflag as "tempflag" 
+            , A.sendorgname as "sendorgname" 
+            , A.sendname as "sendname" 
+            , A.campaignhead as "campaignhead" 
+            , A.campaigntail as "campaigntail" 
+            , A.senddt as "senddt" 
+            , A.sendopinion as "sendopinion" 
+            , A.senderid as "senderid" 
+            , A.sendername as "sendername" 
+            , A.senderdutyname as "senderdutyname" 
+            , A.senderpositionid as "senderpositionid" 
+            , A.sendergradeid as "sendergradeid" 
+            , A.senderdeptid as "senderdeptid" 
+            , A.senderdeptname as "senderdeptname" 
+            , A.senderdeptnamedesc as "senderdeptnamedesc" 
+            , A.address as "address" 
+            , A.zipcode as "zipcode" 
+            , A.homepage as "homepage" 
+            , A.phonenumber as "phonenumber" 
+            , A.faxnumber as "faxnumber" 
+            , A.email as "email" 
+            , A.recvdisplayname as "recvdisplayname" 
+            , A.recvdisplayflag as "recvdisplayflag" 
+            , A.viadeptname as "viadeptname" 
+            , A.enfrecvrange as "enfrecvrange" 
+            , A.sendtype as "sendtype" 
+            , A.sealsigntype as "sealsigntype" 
+            , A.sealsignname as "sealsignname" 
+            , A.sendorgid as "sendorgid" 
+            , A.faxsndreqdt as "faxsndreqdt" 
+            , A.circdocflag as "circdocflag" 
+            , A.distctrlflag as "distctrlflag" 
+            , A.distplflag as "distplflag" 
+            , B.docid as "docid"
+            , B.mgmtid as "mgmtid" 
+            , B.mgmtno as "mgmtno" 
+            , B.seclevel as "seclevel" 
+            , B.mgmtseq as "mgmtseq" 
+            , B.regirecvyear as "regirecvyear" 
+            , B.regirecvgubun as "regirecvgubun" 
+            , B.regirecvdt as "regirecvdt" 
+            , B.regirecvsendid as "regirecvsendid" 
+            , B.regirecvsendname as "regirecvsendname" 
+            , B.regirecvtype as "regirecvtype" 
+            , B.secttl as "secttl" 
+            , B.sectype as "sectype" 
+            , B.attchcnt as "attchcnt" 
+            , B.copyno as "copyno" 
+            , B.notiprotterm as "notiprotterm" 
+            , B.notiprsrvterm as "notiprsrvterm" 
+            , B.deptid as "deptid" 
+            , B.deptname as "deptname" 
+            , B.readrangetype as "readrangetype" 
+            , B.secstatus as "secstatus" 
+            , B.authorid as "authorid" 
+            , B.authorname as "authorname" 
+            , B.authordutyname as "authordutyname" 
+            , B.authorposid as "authorposid" 
+            , B.authorgrdid as "authorgrdid" 
+            , B.reclassdt as "reclassdt" 
+            , B.reclasscont as "reclasscont" 
+            , B.reclassbasis as "reclassbasis" 
+            , B.reclassmgtno as "reclassmgtno" 
+            , B.reclassmgmtid as "reclassmgmtid" 
+            , B.reclasslevel as "reclasslevel" 
+            , B.transdt as "transdt" 
+            , B.transbasis as "transbasis" 
+            , B.destructdt as "destructdt" 
+            , B.destructbasis as "destructbasis" 
+            , B.cnsrvflag as "cnsrvflag" 
+            , B.cnsrvdt as "cnsrvdt" 
+            , B.cnsrvbasis as "cnsrvbasis" 
+            , B.custdyplace as "custdyplace" 
+            , B.rfidtagflag as "rfidtagflag" 
+            , B.delflag as "delflag" 
+            , B.rgstid as "rgstid" 
+            , B.rgstname as "rgstname" 
+            , B.rgstdt as "rgstdt" 
+            , B.updtid as "updtid" 
+            , B.updtname as "updtname" 
+            , B.updtdt as "updtdt" 
+            , B.legacymgmtno as "legacymgmtno" 
+            , B.note as "note" 
+            , B.legacydocno as "legacydocno" 
+            , B.indt as "indt" 
+            , B.sectypeetc as "sectypeetc" 
+            , B.realtitle as "realtitle" 
+            , B.cnsrvterm as "cnsrvterm" 
+            , B.aggregatemgmtid as "aggregatemgmtid" 
+            , B.aggregatedt as "aggregatedt" 
+            , B.destructconfirm as "destructconfirm" 
+            , B.destructconfirmdt as "destructconfirmdt" 
+            , B.transwaitdt as "transwaitdt"
+        FROM  sbms.sbms_user.bms_dct_doc_sendinfo  A
+            LEFT OUTER JOIN  sbms.sbms_user.bms_dct_mgmt_regi  B
+                ON ( A.docid  =  B.docid  )
+        WHERE 1 = 1
+            <if test="docid != null and docid !=''"> 
+                and A.docid = #{docid}
+            </if>
+
+    </select>
+
+    <!-- 발송의견 등록 -->
+    <insert id="insertDctDocSendinfo" parameterType="com.anylogic.ssystem.bms.dct.model.InsertDocSendInfoReqVO">
+        INSERT INTO
+        sbms.sbms_user.bms_dct_doc_sendinfo(
+        <trim suffixOverrides=",">
+            <if test="docid != null and docid !=''">
+                docid,
+            </if>
+            <if test="docgubun != null and docgubun !=''">
+                docgubun,
+            </if>
+            <if test="tempflag != null and tempflag !=''">
+                tempflag,
+            </if>
+            <if test="sendorgname != null and sendorgname !=''">
+                sendorgname,
+            </if>
+            <if test="sendname != null and sendname !=''">
+                sendname,
+            </if>
+            <if test="sendopinion != null and sendopinion !=''">
+                sendopinion
+            </if>
+        </trim>
+        )
+        VALUES(
+        <trim suffixOverrides=",">
+            <if test="docid != null and docid !=''">
+                #{docid},
+            </if>
+            <if test="docgubun != null and docgubun !=''">
+                #{docgubun},
+            </if>
+            <if test="tempflag != null and tempflag !=''">
+                #{tempflag},
+            </if>
+            <if test="sendorgname != null and sendorgname !=''">
+                #{sendorgname},
+            </if>
+            <if test="sendname != null and sendname !=''">
+                #{sendname},
+            </if>
+            <if test="sendopinion != null and sendopinion !=''">
+                #{sendopinion}
+            </if>
+        </trim>
+        )
+    </insert>
+
+</mapper>

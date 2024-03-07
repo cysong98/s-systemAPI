@@ -1,0 +1,655 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.anylogic.ssystem.bms.com.mapper.ComOrgGwaninfoMapper">
+
+    <resultMap id="selectGwanListMap" type="com.anylogic.ssystem.bms.com.model.SelectGwanListResVO">
+        <id column="orgid" property="orgid" />                        <!-- 조직 ID -->
+        <id column="seq" property="seq" />                            <!-- 일련번호 -->
+        <result column="managegubun" property="managegubun" />        <!-- 관리구분 -->
+        <result column="fileid" property="fileid" />                  <!-- 파일 ID -->
+        <result column="gwaninname" property="gwaninname" />          <!-- 관인이름 -->
+        <result column="ingubun" property="ingubun" />                <!-- 등록구분 -->
+        <result column="regdt" property="regdt" />                    <!-- 입력일 -->
+        <result column="firstdt" property="firstdt" />                <!-- 최초일 -->
+        <result column="regreason" property="regreason" />            <!-- 입력사유 -->
+        <result column="manageorgid" property="manageorgid" />        <!-- 관리조직 ID -->
+        <result column="regetc" property="regetc" />                  <!-- 입력비고 -->
+        <result column="deletedt" property="deletedt" />              <!-- 폐기일 -->
+        <result column="deletereason" property="deletereason" />      <!-- 폐기사유 -->
+        <result column="deleteorgid" property="deleteorgid" />        <!-- 폐기자 조직 ID -->
+        <result column="deletegrade" property="deletegrade" />        <!-- 폐기자 직급 -->
+        <result column="deleteuserid" property="deleteuserid" />      <!-- 폐기자 ID -->
+        <result column="deleteetc" property="deleteetc" />            <!-- 폐기 비고 -->
+        <result column="inid" property="inid" />                      <!-- 등록자 ID -->
+        <result column="indt" property="indt" />                      <!-- 등록일 -->
+        <result column="upid" property="upid" />                      <!-- 수정자 ID -->
+        <result column="updt" property="updt" />                      <!-- 수정일 -->
+        <result column="etc" property="etc" />                        <!-- 비고 -->
+        <result column="isuse" property="isuse" />                    <!-- 사용여부 -->
+        <result column="isdefault" property="isdefault" />            <!-- 기본여부 -->
+        <result column="orgname" property="orgname" />                <!-- 조직 이름 -->
+        <result column="parentorgid" property="parentorgid" />        <!-- 상위조직 ID -->
+        <result column="orgtype" property="orgtype" />                <!-- 조직유형 -->
+        <result column="orgorder" property="orgorder" />              <!-- 조직순서 -->
+        <result column="toporgid" property="toporgid" />              <!-- 최상위조직 ID -->
+        <result column="displayname" property="displayname" />        <!-- 화면표시이름 -->
+        <result column="descriptionid" property="descriptionid" />    <!-- 설명 ID -->
+        <result column="whencreated" property="whencreated" />        <!-- 생성일 -->
+        <result column="whendeleted" property="whendeleted" />        <!-- 폐지일 -->
+        <result column="isdeleted" property="isdeleted" />            <!-- 존폐여부 -->
+        <result column="chiefid" property="chiefid" />                <!-- 기관장 ID -->
+        <result column="chiefposition" property="chiefposition" />    <!-- 기관장 직위 -->
+        <result column="suborgtype" property="suborgtype" />          <!-- 하부소속기관유형 -->
+        <result column="orgkind" property="orgkind" />                <!-- 조직종류 -->
+        <result column="relaytype" property="relaytype" />            <!-- 유통망 종류 -->
+        <result column="docdeptid" property="docdeptid" />            <!-- 문서부서 ID -->
+        <result column="presedeptid" property="presedeptid" />        <!-- 존안지원부서 ID -->
+        <result column="transdeptid" property="transdeptid" />        <!-- 이관관리부서 ID -->
+        <result column="orgdepth" property="orgdepth" />              <!-- 부서 수준 -->
+        <result column="docsysteminfo" property="docsysteminfo" />    <!-- 전자문서시스템 -->
+        <result column="readtype" property="readtype" />              <!-- 오프라인 열람여부 -->
+        <result column="belonguserid" property="belonguserid" />      <!-- 장비관리자 ID -->
+        <result column="username" property="username" />              <!-- 사용자명 -->
+    </resultMap>
+
+
+    <resultMap id="getGwanDetailMap" type="com.anylogic.ssystem.bms.com.model.GetGwanDetailResVO">
+        <id column="orgid" property="orgid" />                        <!-- 조직 ID -->
+        <id column="seq" property="seq" />                            <!-- 일련번호 -->
+        <result column="managegubun" property="managegubun" />        <!-- 관리구분 -->
+        <result column="fileid" property="fileid" />                  <!-- 파일 ID -->
+        <result column="gwaninname" property="gwaninname" />          <!-- 관인이름 -->
+        <result column="ingubun" property="ingubun" />                <!-- 등록구분 -->
+        <result column="regdt" property="regdt" />                    <!-- 입력일 -->
+        <result column="firstdt" property="firstdt" />                <!-- 최초일 -->
+        <result column="regreason" property="regreason" />            <!-- 입력사유 -->
+        <result column="manageorgid" property="manageorgid" />        <!-- 관리조직 ID -->
+        <result column="regetc" property="regetc" />                  <!-- 입력비고 -->
+        <result column="deletedt" property="deletedt" />              <!-- 폐기일 -->
+        <result column="deletereason" property="deletereason" />      <!-- 폐기사유 -->
+        <result column="deleteorgid" property="deleteorgid" />        <!-- 폐기자 조직 ID -->
+        <result column="deletegrade" property="deletegrade" />        <!-- 폐기자 직급 -->
+        <result column="deleteuserid" property="deleteuserid" />      <!-- 폐기자 ID -->
+        <result column="deleteetc" property="deleteetc" />            <!-- 폐기 비고 -->
+        <result column="inid" property="inid" />                      <!-- 등록자 ID -->
+        <result column="indt" property="indt" />                      <!-- 등록일 -->
+        <result column="upid" property="upid" />                      <!-- 수정자 ID -->
+        <result column="updt" property="updt" />                      <!-- 수정일 -->
+        <result column="etc" property="etc" />                        <!-- 비고 -->
+        <result column="isuse" property="isuse" />                    <!-- 사용여부 -->
+        <result column="isdefault" property="isdefault" />            <!-- 기본여부 -->
+        <result column="orgname" property="orgname" />                <!-- 조직 이름 -->
+        <result column="parentorgid" property="parentorgid" />        <!-- 상위조직 ID -->
+        <result column="orgtype" property="orgtype" />                <!-- 조직유형 -->
+        <result column="orgorder" property="orgorder" />              <!-- 조직순서 -->
+        <result column="toporgid" property="toporgid" />              <!-- 최상위조직 ID -->
+        <result column="displayname" property="displayname" />        <!-- 화면표시이름 -->
+        <result column="descriptionid" property="descriptionid" />    <!-- 설명 ID -->
+        <result column="whencreated" property="whencreated" />        <!-- 생성일 -->
+        <result column="whendeleted" property="whendeleted" />        <!-- 폐지일 -->
+        <result column="isdeleted" property="isdeleted" />            <!-- 존폐여부 -->
+        <result column="chiefid" property="chiefid" />                <!-- 기관장 ID -->
+        <result column="chiefposition" property="chiefposition" />    <!-- 기관장 직위 -->
+        <result column="suborgtype" property="suborgtype" />          <!-- 하부소속기관유형 -->
+        <result column="orgkind" property="orgkind" />                <!-- 조직종류 -->
+        <result column="relaytype" property="relaytype" />            <!-- 유통망 종류 -->
+        <result column="docdeptid" property="docdeptid" />            <!-- 문서부서 ID -->
+        <result column="presedeptid" property="presedeptid" />        <!-- 존안지원부서 ID -->
+        <result column="transdeptid" property="transdeptid" />        <!-- 이관관리부서 ID -->
+        <result column="orgdepth" property="orgdepth" />              <!-- 부서 수준 -->
+        <result column="docsysteminfo" property="docsysteminfo" />    <!-- 전자문서시스템 -->
+        <result column="readtype" property="readtype" />              <!-- 오프라인 열람여부 -->
+        <result column="belonguserid" property="belonguserid" />      <!-- 장비관리자 ID -->
+    </resultMap>
+
+    <resultMap id="getGwanDetailSelectFileMap" type="com.anylogic.ssystem.bms.com.model.GetGwanDetailSelectFileResVO">
+        <id column="fileid" property="fileid" />                      <!-- 파일 ID -->
+        <result column="cfilename" property="cfilename" />            <!-- 파일이름 -->
+        <result column="sfilename" property="sfilename" />            <!-- 파일 고유이름 -->
+        <result column="filesize" property="filesize" />              <!-- 파일크기 -->
+        <result column="saveid" property="saveid" />                  <!-- 저장아이디 -->
+        <result column="filewidth" property="filewidth" />            <!-- 파일WIDTH -->
+        <result column="fileheight" property="fileheight" />          <!-- 파일HEIGHT -->
+        <result column="inid" property="inid" />                      <!-- 등록자 ID -->
+        <result column="indt" property="indt" />                      <!-- 등록일시 -->
+        <result column="upid" property="upid" />                      <!-- 수정자 ID -->
+        <result column="updt" property="updt" />                      <!-- 수정일시 -->
+        <result column="fileurl" property="fileurl" />                <!-- 파일 URL -->
+        <result column="filepath" property="filepath" />              <!-- 파일경로 -->
+    </resultMap>
+
+    <resultMap id="deleteGwanBIASelectFileMap" type="com.anylogic.ssystem.bms.com.model.DeleteGwanBIASelectFileResVO">
+        <id column="fileid" property="fileid" />                      <!-- 파일 ID -->
+        <result column="cfilename" property="cfilename" />            <!-- 파일이름 -->
+        <result column="sfilename" property="sfilename" />            <!-- 파일 고유이름 -->
+        <result column="filesize" property="filesize" />              <!-- 파일크기 -->
+        <result column="saveid" property="saveid" />                  <!-- 저장아이디 -->
+        <result column="filewidth" property="filewidth" />            <!-- 파일WIDTH -->
+        <result column="fileheight" property="fileheight" />          <!-- 파일HEIGHT -->
+        <result column="inid" property="inid" />                      <!-- 등록자 ID -->
+        <result column="indt" property="indt" />                      <!-- 등록일시 -->
+        <result column="upid" property="upid" />                      <!-- 수정자 ID -->
+        <result column="updt" property="updt" />                      <!-- 수정일시 -->
+        <result column="fileurl" property="fileurl" />                <!-- 파일 URL -->
+        <result column="filepath" property="filepath" />              <!-- 파일경로 -->
+    </resultMap>
+
+
+    <!-- 조직관리 > 관인관리 > 관인 목록 -->
+    <select id="selectGwanList" parameterType="com.anylogic.ssystem.bms.com.model.SelectGwanListReqVO" resultMap="selectGwanListMap">
+        SELECT
+            A.orgid as "orgid"
+            , A.seq as "seq"
+            , A.managegubun as "managegubun"
+            , A.etc as "etc"
+            , A.fileid as "fileid"
+            , A.isuse as "isuse"
+            , A.isdefault as "isdefault"
+            , A.inid as "inid"
+            , A.indt as "indt"
+            , A.upid as "upid"
+            , A.updt as "updt"
+            , B.gwaninname as "gwaninname"
+            , B.ingubun as "ingubun"
+            , B.regdt as "regdt"
+            , B.firstdt as "firstdt"
+            , B.regreason as "regreason"
+            , B.manageorgid as "manageorgid"
+            , B.regetc as "regetc"
+            , B.deletedt as "deletedt"
+            , B.deletereason as "deletereason"
+            , B.deleteorgid as "deleteorgid"
+            , B.deletegrade as "deletegrade"
+            , B.deleteuserid as "deleteuserid"
+            , B.deleteetc as "deleteetc"
+            , C.orgname as "orgname" 
+            , C.parentorgid as "parentorgid" 
+            , C.orgtype as "orgtype" 
+            , C.orgorder as "orgorder" 
+            , C.toporgid as "toporgid" 
+            , C.displayname as "displayname" 
+            , C.descriptionid as "descriptionid" 
+            , C.whencreated as "whencreated" 
+            , C.whendeleted as "whendeleted" 
+            , C.isdeleted as "isdeleted" 
+            , C.chiefid as "chiefid" 
+            , C.chiefposition as "chiefposition" 
+            , C.suborgtype as "suborgtype" 
+            , C.orgkind as "orgkind" 
+            , C.relaytype as "relaytype" 
+            , C.docdeptid as "docdeptid" 
+            , C.presedeptid as "presedeptid" 
+            , C.transdeptid as "transdeptid" 
+            , C.orgdepth as "orgdepth" 
+            , C.docsysteminfo as "docsysteminfo" 
+            , C.readtype as "readtype" 
+            , C.belonguserid as "belonguserid"
+            , D.username as "username"
+        FROM  sbms.sbms_user.com_org_detail_info  A
+            LEFT OUTER JOIN  sbms.sbms_user.com_org_gwaninfo  B
+                ON ( A.orgid  =  B.orgid  and  A.seq  =  B.seq )
+            LEFT OUTER JOIN  sbms.sbms_user.com_organizationinfo  C
+                ON ( A.orgid  =  C.orgid  )
+            LEFT OUTER JOIN  sbms.sbms_user.com_userinfo  D
+                ON ( A.inid  =  D.userid  )
+        WHERE 1 = 1
+            <if test="orgid != null and orgid !=''">
+                and A.orgid = #{orgid}
+            </if>
+            <if test="gwaninname != null and gwaninname !=''"> 
+                and gwaninname like CONCAT('%', #{gwaninname}, '%') 
+            </if>
+            <if test="etc != null and etc !=''"> 
+                and etc like CONCAT('%', #{etc}, '%') 
+            </if>
+            <if test="orgname != null and orgname !=''"> 
+                and orgname like CONCAT('%', #{orgname}, '%') 
+            </if>
+            <if test="managegubun != null and managegubun !=''">
+                and ( A.managegubun = 'ORGE1' or A.managegubun = 'ORGE3' )
+            </if>
+            <if test="startDt != null and startDt !=''">
+                and A.indt <![CDATA[>=]]> #{startDt}
+            </if>
+            <if test="endDt != null and endDt !=''">
+                and A.indt <![CDATA[<=]]> #{endDt}
+            </if>
+        ORDER BY indt DESC
+    </select>
+
+    <!-- 조직관리 > 관인관리 > 관인 삭제 -->
+    <delete id="deleteGwanBIA" parameterType="com.anylogic.ssystem.bms.com.model.DeleteGwanBIAReqVO">
+        DELETE FROM sbms.sbms_user.com_org_gwaninfo
+        WHERE 1 = 1
+            and orgid = #{orgid}
+            and seq = #{seq}
+    </delete>
+
+    <!-- 조직관리 > 관인관리 > 관인 이미지 삭제 -->
+    <delete id="deleteComImage" parameterType="com.anylogic.ssystem.bms.com.model.DeleteComImageReqVO">
+        DELETE FROM sbms.sbms_user.com_image
+        WHERE 1 = 1
+            and fileid = #{fileid}
+    </delete>
+
+    <!--  조직관리 > 관인관리 > 삭제할 관인 이미지 정보 조회 -->
+    <select id="deleteGwanBIASelectFile" parameterType="com.anylogic.ssystem.bms.com.model.DeleteGwanBIASelectFileReqVO" resultMap="deleteGwanBIASelectFileMap">
+        SELECT
+            fileid as "fileid"
+            , cfilename as "cfilename"
+            , sfilename as "sfilename"
+            , filesize as "filesize"
+            , saveid as "saveid"
+            , filewidth as "filewidth"
+            , fileheight as "fileheight"
+            , inid as "inid"
+            , indt as "indt"
+            , upid as "upid"
+            , updt as "updt"
+            , fileurl as "fileurl"
+            , filepath as "filepath"
+        FROM  sbms.sbms_user.com_image
+        WHERE 1 = 1
+            <if test="fileid != null and fileid !=''">
+                and fileid = #{fileid}
+            </if>
+
+    </select>
+
+    <!-- 조직관리 > 관인관리 > 관인 상세 조회 -->
+    <select id="getGwanDetail" parameterType="com.anylogic.ssystem.bms.com.model.GetGwanDetailReqVO" resultMap="getGwanDetailMap">
+        SELECT
+            A.orgid as "orgid" 
+            , A.seq as "seq" 
+            , A.managegubun as "managegubun" 
+            , A.fileid as "fileid" 
+            , A.gwaninname as "gwaninname" 
+            , A.ingubun as "ingubun" 
+            , A.regdt as "regdt" 
+            , A.firstdt as "firstdt" 
+            , A.regreason as "regreason" 
+            , A.manageorgid as "manageorgid" 
+            , A.regetc as "regetc" 
+            , A.deletedt as "deletedt" 
+            , A.deletereason as "deletereason" 
+            , A.deleteorgid as "deleteorgid" 
+            , A.deletegrade as "deletegrade" 
+            , A.deleteuserid as "deleteuserid" 
+            , A.deleteetc as "deleteetc" 
+            , A.inid as "inid" 
+            , A.indt as "indt" 
+            , A.upid as "upid" 
+            , A.updt as "updt"
+            , B.etc as "etc"
+            , B.isuse as "isuse"
+            , B.isdefault as "isdefault"
+            , C.orgname as "orgname"
+            , C.parentorgid as "parentorgid"
+            , C.orgtype as "orgtype"
+            , C.orgorder as "orgorder"
+            , C.toporgid as "toporgid"
+            , C.displayname as "displayname"
+            , C.descriptionid as "descriptionid"
+            , C.whencreated as "whencreated"
+            , C.whendeleted as "whendeleted"
+            , C.isdeleted as "isdeleted"
+            , C.chiefid as "chiefid"
+            , C.chiefposition as "chiefposition"
+            , C.suborgtype as "suborgtype"
+            , C.orgkind as "orgkind"
+            , C.relaytype as "relaytype"
+            , C.docdeptid as "docdeptid"
+            , C.presedeptid as "presedeptid"
+            , C.transdeptid as "transdeptid"
+            , C.orgdepth as "orgdepth"
+            , C.docsysteminfo as "docsysteminfo"
+            , C.readtype as "readtype"
+            , C.belonguserid as "belonguserid"
+        FROM  sbms.sbms_user.com_org_gwaninfo  A
+            LEFT OUTER JOIN  sbms.sbms_user.com_org_detail_info  B
+                ON ( A.orgid  =  B.orgid  and  A.seq  =  B.seq   )
+            LEFT OUTER JOIN  sbms.sbms_user.com_organizationinfo  C
+                ON ( A.orgid  =  C.orgid  )
+        WHERE 1 = 1
+            <if test="orgid != null and orgid !=''"> 
+                and A.orgid = #{orgid}
+            </if>
+            <if test="seq != null and seq != ''">
+                and A.seq = #{seq}
+            </if>
+            <if test="managegubun != null and managegubun != ''">
+                and A.managegubun = #{managegubun}
+            </if>
+    </select>
+
+    <!-- 조직관리 > 관인관리 > 관인 이미지 상세 조회 -->
+    <select id="getGwanDetailSelectFile" parameterType="com.anylogic.ssystem.bms.com.model.GetGwanDetailSelectFileReqVO" resultMap="getGwanDetailSelectFileMap">
+        SELECT
+            fileid as "fileid"
+            , cfilename as "cfilename"
+            , sfilename as "sfilename"
+            , filesize as "filesize"
+            , saveid as "saveid"
+            , filewidth as "filewidth"
+            , fileheight as "fileheight"
+            , inid as "inid"
+            , indt as "indt"
+            , upid as "upid"
+            , updt as "updt"
+            , fileurl as "fileurl"
+            , filepath as "filepath"
+        FROM  sbms.sbms_user.com_image
+        WHERE 1 = 1
+            <if test="fileid != null and fileid !=''">
+                and fileid = #{fileid}
+            </if>
+    </select>
+
+    <!-- 파일 경로 조회-->
+    <select id="getFilePath" parameterType="String" resultType="String">
+
+        SELECT
+            filepath
+                FROM sbms.sbms_user.com_image
+                WHERE cfilename = #{cfilename}
+
+    </select>
+
+    <!-- 조직관리 > 관인관리 > 관인 등록 -->
+    <insert id="insertGwanBIA" parameterType="com.anylogic.ssystem.bms.com.model.InsertGwanBIAReqVO">
+        INSERT INTO
+        sbms.sbms_user.com_org_gwaninfo(
+            <trim suffixOverrides=",">
+            <if test="orgid != null and orgid !=''">
+                orgid,
+            </if>
+            <if test="seq != null and seq !=''">
+                seq,
+            </if>
+            <if test="managegubun != null and managegubun !=''">
+                managegubun,
+            </if>
+            <if test="fileid != null and fileid !=''">
+                fileid,
+            </if>
+            <if test="gwaninname != null and gwaninname !=''">
+                gwaninname,
+            </if>
+            <if test="ingubun != null and ingubun !=''">
+                ingubun,
+            </if>
+            <if test="regdt != null and regdt !=''">
+                regdt,
+            </if>
+            <if test="firstdt != null and firstdt !=''">
+                firstdt,
+            </if>
+            <if test="regreason != null and regreason !=''">
+                regreason,
+            </if>
+            <if test="manageorgid != null and manageorgid !=''">
+                manageorgid,
+            </if>
+            <if test="regetc != null and regetc !=''">
+                regetc,
+            </if>
+            <if test="deletedt != null and deletedt !=''">
+                deletedt,
+            </if>
+            <if test="deletereason != null and deletereason !=''">
+                deletereason,
+            </if>
+            <if test="deleteorgid != null and deleteorgid !=''">
+                deleteorgid,
+            </if>
+            <if test="deletegrade != null and deletegrade !=''">
+                deletegrade,
+            </if>
+            <if test="deleteuserid != null and deleteuserid !=''">
+                deleteuserid,
+            </if>
+            <if test="deleteetc != null and deleteetc !=''">
+                deleteetc,
+            </if>
+            <if test="inid != null and inid !=''">
+                inid,
+            </if>
+            <if test="indt != null and indt !=''">
+                indt,
+            </if>
+            <if test="upid != null and upid !=''">
+                upid,
+            </if>
+            <if test="updt != null and updt !=''">
+                updt,
+            </if>
+            </trim>
+        )
+        VALUES(
+            <trim suffixOverrides=",">
+            <if test="orgid != null and orgid !=''">
+                #{orgid},
+            </if>
+            <if test="seq != null and seq !=''">
+                #{seq},
+            </if>
+            <if test="managegubun != null and managegubun !=''">
+                #{managegubun},
+            </if>
+            <if test="fileid != null and fileid !=''">
+                #{fileid},
+            </if>
+            <if test="gwaninname != null and gwaninname !=''">
+                #{gwaninname},
+            </if>
+            <if test="ingubun != null and ingubun !=''">
+                #{ingubun},
+            </if>
+            <if test="regdt != null and regdt !=''">
+                #{regdt},
+            </if>
+            <if test="firstdt != null and firstdt !=''">
+                #{firstdt},
+            </if>
+            <if test="regreason != null and regreason !=''">
+                #{regreason},
+            </if>
+            <if test="manageorgid != null and manageorgid !=''">
+                #{manageorgid},
+            </if>
+            <if test="regetc != null and regetc !=''">
+                #{regetc},
+            </if>
+            <if test="deletedt != null and deletedt !=''">
+                #{deletedt},
+            </if>
+            <if test="deletereason != null and deletereason !=''">
+                #{deletereason},
+            </if>
+            <if test="deleteorgid != null and deleteorgid !=''">
+                #{deleteorgid},
+            </if>
+            <if test="deletegrade != null and deletegrade !=''">
+                #{deletegrade},
+            </if>
+            <if test="deleteuserid != null and deleteuserid !=''">
+                #{deleteuserid},
+            </if>
+            <if test="deleteetc != null and deleteetc !=''">
+                #{deleteetc},
+            </if>
+            <if test="inid != null and inid !=''">
+                #{inid},
+            </if>
+            <if test="indt != null and indt !=''">
+                #{indt},
+            </if>
+            <if test="upid != null and upid !=''">
+                #{upid},
+            </if>
+            <if test="updt != null and updt !=''">
+                #{updt},
+            </if>
+            </trim>
+        )
+    </insert>
+
+    <!-- 조직관리 > 관인관리 > 관인 이미지 등록 -->
+    <insert id="insertComImage" parameterType="com.anylogic.ssystem.bms.com.model.InsertComImageReqVO">
+        INSERT INTO
+        sbms.sbms_user.com_image(
+        <trim suffixOverrides=",">
+            <if test="fileid != null and fileid !=''">
+                fileid,
+            </if>
+            <if test="cfilename != null and cfilename !=''">
+                cfilename,
+            </if>
+            <if test="sfilename != null and sfilename !=''">
+                sfilename,
+            </if>
+            <if test="filesize != null and filesize !=''">
+                filesize,
+            </if>
+            <if test="saveid != null and saveid !=''">
+                saveid,
+            </if>
+            <if test="filewidth != null and filewidth !=''">
+                filewidth,
+            </if>
+            <if test="fileheight != null and fileheight !=''">
+                fileheight,
+            </if>
+            <if test="inid != null and inid !=''">
+                inid,
+            </if>
+            <if test="indt != null and indt !=''">
+                indt,
+            </if>
+            <if test="upid != null and upid !=''">
+                upid,
+            </if>
+            <if test="updt != null and updt !=''">
+                updt,
+            </if>
+            <if test="fileurl != null and fileurl !=''">
+                fileurl,
+            </if>
+            <if test="filepath != null and filepath !=''">
+                filepath,
+            </if>
+        </trim>
+        )
+        VALUES(
+        <trim suffixOverrides=",">
+            <if test="fileid != null and fileid !=''">
+                #{fileid},
+            </if>
+            <if test="cfilename != null and cfilename !=''">
+                #{cfilename},
+            </if>
+            <if test="sfilename != null and sfilename !=''">
+                #{sfilename},
+            </if>
+            <if test="filesize != null and filesize !=''">
+                #{filesize},
+            </if>
+            <if test="saveid != null and saveid !=''">
+                #{saveid},
+            </if>
+            <if test="filewidth != null and filewidth !=''">
+                #{filewidth},
+            </if>
+            <if test="fileheight != null and fileheight !=''">
+                #{fileheight},
+            </if>
+            <if test="inid != null and inid !=''">
+                #{inid},
+            </if>
+            <if test="indt != null and indt !=''">
+                #{indt},
+            </if>
+            <if test="upid != null and upid !=''">
+                #{upid},
+            </if>
+            <if test="updt != null and updt !=''">
+                #{updt},
+            </if>
+            <if test="fileurl != null and fileurl !=''">
+                #{fileurl},
+            </if>
+            <if test="filepath != null and filepath !=''">
+                #{filepath},
+            </if>
+        </trim>
+        )
+    </insert>
+
+    <!-- 조직관리 > 관인관리 > 관인 수정 -->
+    <update id="updateGwanBIA" parameterType="com.anylogic.ssystem.bms.com.model.UpdateGwanBIAReqVO">
+        UPDATE sbms.sbms_user.com_org_gwaninfo
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="managegubun != null and managegubun !=''">
+                managegubun = #{managegubun},
+            </if>
+            <if test="fileid != null and fileid !=''">
+                fileid = #{fileid},
+            </if>
+            <if test="gwaninname != null and gwaninname !=''">
+                gwaninname = #{gwaninname},
+            </if>
+            <if test="ingubun != null and ingubun !=''">
+                ingubun = #{ingubun},
+            </if>
+            <if test="regdt != null and regdt !=''">
+                regdt = #{regdt},
+            </if>
+            <if test="firstdt != null">
+                firstdt = #{firstdt},
+            </if>
+            <if test="regreason != null">
+                regreason = #{regreason},
+            </if>
+            <if test="manageorgid != null and manageorgid !=''">
+                manageorgid = #{manageorgid},
+            </if>
+            <if test="regetc != null">
+                regetc = #{regetc},
+            </if>
+            <if test="deletedt != null and deletedt !=''">
+                deletedt = #{deletedt},
+            </if>
+            <if test="deletereason != null and deletereason !=''">
+                deletereason = #{deletereason},
+            </if>
+            <if test="deleteorgid != null and deleteorgid !=''">
+                deleteorgid = #{deleteorgid},
+            </if>
+            <if test="deletegrade != null and deletegrade !=''">
+                deletegrade = #{deletegrade},
+            </if>
+            <if test="deleteuserid != null and deleteuserid !=''">
+                deleteuserid = #{deleteuserid},
+            </if>
+            <if test="deleteetc != null and deleteetc !=''">
+                deleteetc = #{deleteetc},
+            </if>
+            <if test="inid != null and inid !=''">
+                inid = #{inid},
+            </if>
+            <if test="indt != null and indt !=''">
+                indt = #{indt},
+            </if>
+            <if test="upid != null and upid !=''">
+                upid = #{upid},
+            </if>
+            <if test="updt != null and updt !=''">
+                updt = #{updt},
+            </if>
+        </trim>
+        WHERE 1 = 1
+            and orgid = #{orgid}
+            and seq = #{seq}
+    </update>
+
+</mapper>

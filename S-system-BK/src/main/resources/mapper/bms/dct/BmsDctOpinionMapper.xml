@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.anylogic.ssystem.bms.dct.mapper.BmsDctOpinionMapper">
+
+    <resultMap id="getDctOpinionMap" type="com.anylogic.ssystem.bms.dct.model.SelectTempCreateCardListResVO">
+        <id column="docid" property="docid" />                        <!--  -->
+        <result column="pathorder" property="pathorder" />                  <!--  -->
+        <result column="opinion" property="opinion" />                    <!-- 의견 -->
+    </resultMap>
+
+    <!-- 처리의견 등록 -->
+    <insert id="insertDctOpinion" parameterType="com.anylogic.ssystem.bms.dct.model.InsertOpinionReqVO">
+        INSERT INTO
+        sbms.sbms_user.bms_dct_opinion(
+        <trim suffixOverrides=",">
+            <if test="docid != null and docid !=''">
+                docid,
+            </if>
+            <if test="pathorder != null and pathorder !=''">
+                pathorder,
+            </if>
+            <if test="opinion != null and opinion !=''">
+                opinion,
+            </if>
+        </trim>
+        )
+        VALUES(
+        <trim suffixOverrides=",">
+            <if test="docid != null and docid !=''">
+                #{docid},
+            </if>
+            <if test="pathorder != null and pathorder !=''">
+                #{pathorder},
+            </if>
+            <if test="opinion != null and opinion !=''">
+                #{opinion},
+            </if>
+        </trim>
+        )
+        ON CONFLICT (docid, pathorder)
+        DO UPDATE
+        SET
+        pathorder = #{pathorder},
+        opinion = #{opinion}
+    </insert>
+
+</mapper>

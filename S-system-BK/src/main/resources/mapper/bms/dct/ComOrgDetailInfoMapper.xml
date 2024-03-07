@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.anylogic.ssystem.bms.dct.mapper.ComOrgDetailInfoMapper">
+
+    <resultMap id="selectGawninMap" type="com.anylogic.ssystem.bms.dct.model.SelectGawninResVO">
+        <id column="orgid" property="orgid" />                        <!-- 조직 ID -->
+        <id column="seq" property="seq" />                            <!-- 일련번호 -->
+        <result column="managegubun" property="managegubun" />        <!-- 관리구분 -->
+        <result column="fileid" property="fileid" />                  <!-- 파일 ID -->
+        <result column="etc" property="etc" />                        <!-- 비고 -->
+        <result column="isuse" property="isuse" />                    <!-- 사용여부 -->
+        <result column="isdefault" property="isdefault" />            <!-- 기본여부 -->
+        <result column="inid" property="inid" />                      <!-- 등록자 ID -->
+        <result column="indt" property="indt" />                      <!-- 등록일 -->
+        <result column="upid" property="upid" />                      <!-- 수정자 ID -->
+        <result column="updt" property="updt" />                      <!-- 수정일 -->
+        <result column="gwaninname" property="gwaninname" />          <!-- 관인이름 -->
+        <result column="ingubun" property="ingubun" />                <!-- 등록구분 -->
+        <result column="regdt" property="regdt" />                    <!-- 입력일 -->
+        <result column="firstdt" property="firstdt" />                <!-- 최초일 -->
+        <result column="regreason" property="regreason" />            <!-- 입력사유 -->
+        <result column="manageorgid" property="manageorgid" />        <!-- 관리조직 ID -->
+        <result column="regetc" property="regetc" />                  <!-- 입력비고 -->
+        <result column="deletedt" property="deletedt" />              <!-- 폐기일 -->
+        <result column="deletereason" property="deletereason" />      <!-- 폐기사유 -->
+        <result column="deleteorgid" property="deleteorgid" />        <!-- 폐기자 조직 ID -->
+        <result column="deletegrade" property="deletegrade" />        <!-- 폐기자 직급 -->
+        <result column="deleteuserid" property="deleteuserid" />      <!-- 폐기자 ID -->
+        <result column="deleteetc" property="deleteetc" />            <!-- 폐기 비고 -->
+        <result column="cfilename" property="cfilename" />            <!--  -->
+        <result column="sfilename" property="sfilename" />            <!--  -->
+        <result column="filesize" property="filesize" />              <!--  -->
+        <result column="saveid" property="saveid" />                  <!--  -->
+        <result column="filewidth" property="filewidth" />            <!--  -->
+        <result column="fileheight" property="fileheight" />          <!--  -->
+        <result column="fileurl" property="fileurl" />            <!--  -->
+        <result column="filepath" property="filepath" />          <!--  -->
+    </resultMap>
+
+    <resultMap id="selectSignMap" type="com.anylogic.ssystem.bms.dct.model.SelectSignResVO">
+        <id column="orgid" property="orgid" />                        <!-- 조직 ID -->
+        <id column="seq" property="seq" />                            <!-- 일련번호 -->
+        <result column="managegubun" property="managegubun" />        <!-- 관리구분 -->
+        <result column="fileid" property="fileid" />                  <!-- 파일 ID -->
+        <result column="etc" property="etc" />                        <!-- 비고 -->
+        <result column="isuse" property="isuse" />                    <!-- 사용여부 -->
+        <result column="isdefault" property="isdefault" />            <!-- 기본여부 -->
+        <result column="inid" property="inid" />                      <!-- 등록자 ID -->
+        <result column="indt" property="indt" />                      <!-- 등록일 -->
+        <result column="upid" property="upid" />                      <!-- 수정자 ID -->
+        <result column="updt" property="updt" />                      <!-- 수정일 -->
+        <result column="cfilename" property="cfilename" />            <!--  -->
+        <result column="sfilename" property="sfilename" />            <!--  -->
+        <result column="filesize" property="filesize" />              <!--  -->
+        <result column="saveid" property="saveid" />                  <!--  -->
+        <result column="filewidth" property="filewidth" />            <!--  -->
+        <result column="fileheight" property="fileheight" />          <!--  -->
+        <result column="fileurl" property="fileurl" />            <!--  -->
+        <result column="filepath" property="filepath" />          <!--  -->
+    </resultMap>
+
+
+    <!-- 관인 팝업 조회 -->
+    <select id="selectGawnin" parameterType="com.anylogic.ssystem.bms.dct.model.SelectGawninReqVO" resultMap="selectGawninMap">
+        SELECT
+            A.orgid as "orgid" 
+            , A.seq as "seq" 
+            , A.managegubun as "managegubun" 
+            , A.fileid as "fileid" 
+            , A.etc as "etc" 
+            , A.isuse as "isuse" 
+            , A.isdefault as "isdefault" 
+            , A.inid as "inid" 
+            , A.indt as "indt" 
+            , A.upid as "upid" 
+            , A.updt as "updt" 
+            , B.gwaninname as "gwaninname"
+            , B.ingubun as "ingubun" 
+            , B.regdt as "regdt" 
+            , B.firstdt as "firstdt" 
+            , B.regreason as "regreason" 
+            , B.manageorgid as "manageorgid" 
+            , B.regetc as "regetc" 
+            , B.deletedt as "deletedt" 
+            , B.deletereason as "deletereason" 
+            , B.deleteorgid as "deleteorgid" 
+            , B.deletegrade as "deletegrade" 
+            , B.deleteuserid as "deleteuserid" 
+            , B.deleteetc as "deleteetc" 
+            , C.cfilename as "cfilename"
+            , C.sfilename as "sfilename" 
+            , C.filesize as "filesize" 
+            , C.saveid as "saveid" 
+            , C.filewidth as "filewidth" 
+            , C.fileheight as "fileheight"
+            , C.fileurl as "fileurl"
+            , C.filepath as "filepath"
+        FROM  sbms.sbms_user.com_org_detail_info  A
+            LEFT OUTER JOIN  sbms.sbms_user.com_org_gwaninfo  B
+                ON ( A.orgid  =  B.orgid  )
+            LEFT OUTER JOIN  sbms.sbms_user.com_image  C
+                ON ( A.fileid  =  C.fileid  )
+        WHERE 1 = 1
+            <if test="orgid != null and orgid !=''"> 
+                and A.orgid = #{orgid}
+            </if>
+            <if test="managegubun != null and managegubun !=''">
+                and A.managegubun = #{managegubun}
+            </if>
+    </select>
+
+    <!-- 서명인 팝업 조회 -->
+    <select id="selectSign" parameterType="com.anylogic.ssystem.bms.dct.model.SelectSignReqVO" resultMap="selectSignMap">
+        SELECT
+            A.orgid as "orgid" 
+            , A.seq as "seq" 
+            , A.managegubun as "managegubun" 
+            , A.fileid as "fileid" 
+            , A.etc as "etc" 
+            , A.isuse as "isuse" 
+            , A.isdefault as "isdefault" 
+            , A.inid as "inid" 
+            , A.indt as "indt" 
+            , A.upid as "upid" 
+            , A.updt as "updt" 
+            , B.cfilename as "cfilename"
+            , B.sfilename as "sfilename" 
+            , B.filesize as "filesize" 
+            , B.saveid as "saveid" 
+            , B.filewidth as "filewidth" 
+            , B.fileheight as "fileheight"
+            , B.fileurl as "fileurl"
+            , B.filepath as "filepath"
+        FROM  sbms.sbms_user.com_org_detail_info A
+            LEFT OUTER JOIN  sbms.sbms_user.com_image B
+                ON ( A.fileid  =  B.fileid  )
+        WHERE 1 = 1
+            <if test="orgid != null and orgid !=''"> 
+                and orgid = #{orgid}
+            </if>
+            <if test="managegubun != null and managegubun !=''">
+                and managegubun = #{managegubun}
+            </if>
+    </select>
+
+</mapper>

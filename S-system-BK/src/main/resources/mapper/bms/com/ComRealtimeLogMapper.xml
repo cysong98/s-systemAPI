@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.anylogic.ssystem.bms.com.mapper.ComRealtimeLogMapper">
+
+    <resultMap id="selectRealtimeLogMap" type="com.anylogic.ssystem.bms.com.model.SelectRealtimeLogResVO">
+        <id column="rtid" property="rtid" />                          <!--  -->
+        <id column="rtseq" property="rtseq" />                        <!--  -->
+        <result column="indt" property="indt" />                      <!--  -->
+        <result column="sbcip" property="sbcip" />                    <!--  -->
+        <result column="serverip" property="serverip" />              <!--  -->
+        <result column="deptid" property="deptid" />                  <!--  -->
+        <result column="deptname" property="deptname" />              <!--  -->
+        <result column="loginid" property="loginid" />                <!--  -->
+        <result column="userid" property="userid" />                  <!--  -->
+        <result column="username" property="username" />              <!--  -->
+        <result column="serialno" property="serialno" />              <!--  -->
+        <result column="flag" property="flag" />                      <!--  -->
+        <result column="token" property="token" />                      <!--  -->
+    </resultMap>
+
+
+    <!-- 시스템관리 > 실시간접속현황 > 실시간접속현황 목록 조회 -->
+    <select id="selectRealtimeLog" parameterType="com.anylogic.ssystem.bms.com.model.SelectRealtimeLogReqVO" resultMap="selectRealtimeLogMap">
+        SELECT
+            rtid as "rtid" 
+            , rtseq as "rtseq" 
+            , indt as "indt" 
+            , sbcip as "sbcip" 
+            , serverip as "serverip" 
+            , deptid as "deptid" 
+            , deptname as "deptname" 
+            , loginid as "loginid" 
+            , userid as "userid" 
+            , username as "username" 
+            , serialno as "serialno" 
+            , flag as "flag"
+            , token as "token"
+        FROM  sbms.sbms_user.com_realtime_log
+        WHERE 1 = 1
+            <if test="deptname != null and deptname !=''">
+                and deptname like CONCAT('%', #{deptname}, '%')
+            </if>
+            <if test="userid != null and userid !=''"> 
+                and userid like CONCAT('%', #{userid}, '%') 
+            </if>
+            <if test="username != null and username !=''"> 
+                and username like CONCAT('%', #{username}, '%') 
+            </if>
+            <if test="startDt != null and startDt !=''">
+                and indt <![CDATA[>=]]> #{startDt}
+            </if>
+            <if test="endDt != null and endDt !=''">
+                and indt <![CDATA[<=]]> #{endDt}
+            </if>
+            <if test="rtid != null and rtid !=''">
+                and rtid = #{rtid}
+            </if>
+            <if test="rtseq != 999999 and rtseq != -1">
+                and rtseq = #{rtseq}
+            </if>
+            <if test="flag != null and flag !=''">
+                and flag = #{flag}
+            </if>
+            <if test="token != null and token !=''">
+                and token = #{token}
+            </if>
+        ORDER BY
+        <choose>
+            <when test="rtid == 'null' or rtid == ''">indt DESC</when>
+            <when test="rtid != 'null' and rtid != ''">rtseq DESC</when>
+        </choose>
+    </select>
+
+    <!-- 실시간접속현황 등록 -->
+    <insert id="insertRealtimeLog" parameterType="com.anylogic.ssystem.bms.com.model.InsertRealtimeLogReqVO">
+        INSERT INTO
+        sbms.sbms_user.com_realtime_log(
+        <trim suffixOverrides=",">
+            <if test="rtid != null and rtid !=''">
+                rtid,
+            </if>
+                rtseq,
+            <if test="indt != null and indt !=''">
+                indt,
+            </if>
+            <if test="deptid != null and deptid !=''">
+                deptid,
+            </if>
+            <if test="deptname != null and deptname !=''">
+                deptname,
+            </if>
+            <if test="userid != null and userid !=''">
+                userid,
+            </if>
+            <if test="username != null and username !=''">
+                username,
+            </if>
+            <if test="flag != null and flag !=''">
+                flag,
+            </if>
+            <if test="token != null and token !=''">
+                token,
+            </if>
+        </trim>
+        )
+        VALUES(
+        <trim suffixOverrides=",">
+            <if test="rtid != null and rtid !=''">
+                #{rtid},
+            </if>
+                #{rtseq},
+            <if test="indt != null and indt !=''">
+                #{indt},
+            </if>
+            <if test="deptid != null and deptid !=''">
+                #{deptid},
+            </if>
+            <if test="deptname != null and deptname !=''">
+                #{deptname},
+            </if>
+            <if test="userid != null and userid !=''">
+                #{userid},
+            </if>
+            <if test="username != null and username !=''">
+                #{username},
+            </if>
+            <if test="flag != null and flag !=''">
+                #{flag},
+            </if>
+            <if test="token != null and token !=''">
+                #{token},
+            </if>
+        </trim>
+        )
+    </insert>
+
+    <!-- 실시간접속현황 수정 -->
+    <update id="updateRealtimeLog" parameterType="com.anylogic.ssystem.bms.com.model.InsertRealtimeLogReqVO">
+        UPDATE sbms.sbms_user.com_realtime_log
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="flag != null and flag !=''">
+                flag = #{flag},
+            </if>
+        </trim>
+        WHERE 1 = 1
+            <if test="rtid != null and rtid != ''">
+                and rtid = #{rtid}
+                and rtseq = #{rtseq}
+            </if>
+            <if test="userid != null and userid != ''">
+                and userid = #{userid}
+                and token = #{token}
+            </if>
+    </update>
+</mapper>
