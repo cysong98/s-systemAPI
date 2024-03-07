@@ -23,7 +23,6 @@
       </div>
     </div>
   </div>
-
     <div class="buttons-bottom">
       <v-btn variant="flat" color="grey-lighten-3" rounded="xl" @click="closePopup()">취소</v-btn>
       <v-btn variant="flat" color="indigo-darken-3" rounded="xl" @click="moveToArgs()">확인</v-btn>
@@ -32,7 +31,6 @@
 </template>
     
 <script setup>
-import console from "console";
 import { ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import _ from 'lodash';
