@@ -1,0 +1,87 @@
+spring:
+  application: ssystem
+  profiles:
+    active: prod
+    default: dev # 기본 환경을 dev로
+  devtools:
+    livereload:
+      enabled: true
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  servlet:
+    multipart:
+      max-file-size: 2000MB
+      max-request-size: 20000MB
+  ldap: # LDAP 연동
+    urls: ldap://172.18.18.37:1389
+    base: c=KR
+    username: cn=directory manager
+    password: kinacldap
+
+datasource:
+  type: com.zaxxer.hikari.HikariDataSource
+  #driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+  #username:
+  #password:
+  #url: jdbc:log4jdbc:postgresql://${postgres-server}:5432/${database-name}?currentSchema=${scheme-name}
+  driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+
+mybatis:
+  config-location: classpath:config/mybatis-config.xml
+  mapper-locations: classpath:mapper/**/*.xml
+
+server:
+  servlet:
+    register-default-servlet: true
+
+jwt:
+  active: false
+  # security 체크를 하고자 할 때 위의 flag값을 true로 변경 요망:
+  header:
+    string: Authorization
+  token:
+    prefix: Bearer
+  authorities:
+    key: roles
+  secret: ZWxhYm9yYXRlU3BlY3VsYXRlQXJteUlmU2Vuc2VUaGlua1RlbXBvcmFyeUJvb21IaXN0b3J5QXJlbmFDcmFzaFJlZ3Jlc3Npb25PcGVuU2Vzc2lvbkZpbGVFbmhhbmNlU3RhYmlsaXR5QWRk
+  refresh-token-secret: YmNucWF3bG5mYXNsZHZhbnNsZ2Zobi9zZHZuYXNsZGloYWxlZm5hd2VsYldCTkdBU0ROQVMnREZISkFXRUZCTkFTVkRkc2ZsZ2pzbGRnYXNkbnZhc25zc2RhYndza2RsYXN2c2xxdw==
+  access-token-validity-in-seconds: 60000
+  refresh-token-validity-in-seconds: 3600000
+
+# Login API
+ssystem-baseurl: https://login.s-system.kinac
+ssystem-redirect: https://sbms.s-system.kinac/login/Login/ycSBc5mZ-fnR4ONMY-TFjZ39V0-Yci1trhQ
+
+#ssystem-client-name: Ssystem
+#ssystem-client-key: 99d3c3fd-d5b2-4847-99bb-35b3f5a72bfb
+#ssystem-secret-key: ISssLSgmIiosKCEiJygqISwiISgjLSwqJigmIyElLSc
+
+ssystem-client-name: s-system
+ssystem-client-key: 3426672e-0514-4a06-90f3-aee3f436b580
+ssystem-secret-key: JCQqJCUiJSYhJCcoLCYkJyklLCgmJiMjKykjJycrJik
+
+company-id: ycSBc5mZ-fnR4ONMY-TFjZ39V0-Yci1trhQ
+master-tenant: wcOng350-Qb2WLVvm-SdwS6vc7-ZlyXb0ES
+
+# ShieldViewer URL
+shield-viewer-url: https://dms.s-system.kinac
+
+# convertPDF Url
+convert-pdf-url: http://172.18.18.43:9080
+
+# 첨부파일 저장경로
+# filePath: "Z:/iiac_dev"
+# tempFilePath: "Z:/iiac_dev/temp"
+
+# filePath: "Y:/"
+# tempFilePath: "Y:/temp"
+
+filePath: "//172.18.18.29/share"
+tempFilePath: "//172.18.18.29/share/temp"
+serverUrl: "http://172.18.18.2:8581"           # 사용하는 pc ip및 사용할 포트로 변경해서 사용
+#serverUrl: "https://sbms.s-system.kinac/api"   # .war파일 빌드시 사용하는 url
+
+# LDAP
+baseDN: "o=Government of Korea, c=KR"
+filter: "(objectclass=*)"
