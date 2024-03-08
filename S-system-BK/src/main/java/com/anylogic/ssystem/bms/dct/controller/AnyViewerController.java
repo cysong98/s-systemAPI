@@ -97,4 +97,14 @@ public class AnyViewerController {
         return ResponseEntity.ok(pdfFilePath);
     }
 
+    @PostMapping("/convertTextToPdf")
+    public ResponseEntity convertTextToPdf
+            (
+                    @Valid AttachFileVO file
+            ) throws Exception
+    {
+        String pdfFilePath = anyViewerReqService.convertTextToPdf(file);
+        return ResponseEntity.ok(pdfFilePath);
+    }
+
 }

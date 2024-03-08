@@ -18,6 +18,8 @@ import com.anylogic.ssystem.common.exception.AnyXException;
 import com.anylogic.ssystem.common.file.model.AttachFileVO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.pdfbox.pdmodel.font.PDType0Font;
+import org.apache.pdfbox.pdmodel.font.PDType1CFont;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -51,6 +53,16 @@ import kr.dogfoot.hwplib.reader.HWPReader;
 import kr.dogfoot.hwplib.object.HWPFile;
 import kr.dogfoot.hwplib.tool.textextractor.TextExtractMethod;
 import kr.dogfoot.hwplib.tool.textextractor.TextExtractor;
+
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.PDPageContentStream;
+//import org.apache.pdfbox.pdmodel.font.PDType1Font;
+import org.apache.pdfbox.pdmodel.font.PDType1Font;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 import java.io.*;
 
@@ -124,6 +136,42 @@ public class AnyViewerReqServiceImpl implements AnyViewerReqService {
 //            pdfRenderer.renderDocument();
 //            pdfDoc.save(pdfFilePath);
 //        }
+        return pdfFilePath;
+    }
+
+    // txt -> pdf
+    public String convertTextToPdf (AttachFileVO param) throws Exception {
+        String textFilePath = param.getFlepath(); // 텍스트 파일 경로
+        String pdfFilePath = "//172.18.18.29/share/fileUpload/2024/3_sabon/txt_path_to_output_pdf_file.pdf"; // 출력 PDF 파일 경로
+
+
+        try (PDDocument document = new PDDocument()) {
+            PDPage page = new PDPage();
+            document.addPage(page);
+//            PDType0Font font = PDType0Font.load(document, new File("C:/Windows/Fonts/Cambria/cambria.ttc"), 3);
+            PDType0Font font = PDType0Font.load(document, new File("C:/lhk/NanumSquareNeo-Variable.ttf"));
+
+            try (PDPageContentStream contentStream = new PDPageContentStream(document, page);
+                 BufferedReader br = new BufferedReader(new FileReader(textFilePath))) {
+                contentStream.beginText();
+//                contentStream.setFont(PDType1Font.HELVETICA, 12);
+//                contentStream.setFont(PDType1Font.TIMES_ROMAN, 12);
+                contentStream.setFont(font, 12);
+                contentStream.newLineAtOffset(25, 725);
+
+                String line;
+                while ((line = br.readLine()) != null) {
+                    contentStream.showText(line);
+                    contentStream.newLineAtOffset(0, -15); // 다음 줄로 이동
+                }
+                contentStream.endText();
+            }
+
+            document.save(pdfFilePath);
+            System.out.println("PDF created successfully at " + pdfFilePath);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return pdfFilePath;
     }
 }
