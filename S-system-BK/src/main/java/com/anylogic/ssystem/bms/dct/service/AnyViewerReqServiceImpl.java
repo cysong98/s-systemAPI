@@ -38,8 +38,7 @@ import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.printing.PDFPageable;
 import org.fit.cssbox.io.DocumentSource;
 import org.fit.cssbox.io.StreamDocumentSource;
-import org.fit.cssbox.layout.Dimension2D;
-import org.fit.cssbox.pdfbox.layout.PDFRenderer;
+
 
 import javax.print.PrintService;
 import javax.print.PrintServiceLookup;
@@ -48,10 +47,7 @@ import java.awt.print.PrinterJob;
 import java.io.*;
 import java.net.URL;
 
-////
 import kr.dogfoot.hwplib.reader.HWPReader;
-import kr.dogfoot.hwplib.tool.objectfinder.SetField;
-import kr.dogfoot.hwplib.writer.HWPWriter;
 import kr.dogfoot.hwplib.object.HWPFile;
 import kr.dogfoot.hwplib.tool.textextractor.TextExtractMethod;
 import kr.dogfoot.hwplib.tool.textextractor.TextExtractor;
@@ -72,56 +68,62 @@ public class AnyViewerReqServiceImpl implements AnyViewerReqService {
         String hwpFilePath = hwpFile.getFlepath();
         String pdfFilePath = "//172.18.18.29/share/fileUpload/2024/3_sabon/path_to_output_pdf_file.pdf";
 
-        // HWP 파일을 로드
-        File fileObj = new File(hwpFilePath);
-//        File hwpFile = hwpFilePath;
-
-        // PDF 문서를 생성
-        PDDocument document = PDDocument.load(fileObj);
-
-        // PDF 문서를 출력
-//        PrinterJob job = PrinterJob.getPrinterJob();
-//        job.setPageable(new PDFPageable(document));
-
-        // PDF 파일로 저장
-//        job.print();
-        document.save(pdfFilePath);
+//        // HWP 파일을 로드
+//        File fileObj = new File(hwpFilePath);
+////        File hwpFile = hwpFilePath;
+//
+//        // PDF 문서를 생성
+//        PDDocument document = PDDocument.load(fileObj);
+//
+//        // PDF 문서를 출력
+////        PrinterJob job = PrinterJob.getPrinterJob();
+////        job.setPageable(new PDFPageable(document));
+//
+//        // PDF 파일로 저장
+////        job.print();
+//        document.save(pdfFilePath);
 
         return pdfFilePath;
     }
 
     public void convert(String hwpFilePath, String htmlFilePath, String pdfFilePath) throws Exception {
         // 1. Convert HWP to HTML
-        convertHwpToHtml(hwpFilePath, htmlFilePath);
+//        convertHwpToHtml(hwpFilePath, htmlFilePath);
 
         // 2. Convert HTML to PDF
         // TODO: Implement HTML to PDF conversion
         // This may involve using a library like Apache PDFBox
     }
 
-    private void convertHwpToHtml(String hwpFilePath, String htmlFilePath) throws Exception {
+//    private void convertHwpToHtml(String hwpFilePath, String htmlFilePath) throws Exception {
+
+    // hwp to html
+    public String convertHwpToHtml(AttachFileVO param) throws Exception {
+        String hwpFilePath = param.getFlepath();
+        String htmlFilePath = "//172.18.18.29/share/fileUpload/2024/3_sabon/path_to_output_pdf_file.html";
         HWPFile hwpFile = HWPReader.fromFile(hwpFilePath);
         if (hwpFile != null) {
-            String extractedText = TextExtractor.extract(hwpFile, TextExtractMethod.EXACT);
+            String extractedText = TextExtractor.extract(hwpFile,TextExtractMethod.InsertControlTextBetweenParagraphText);
             try (PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(htmlFilePath)))) {
                 out.println(extractedText);
             }
         }
+        return htmlFilePath;
     }
 
-    private void convertHtmlToPdf(String htmlFilePath, String pdfFilePath) throws Exception {
-        // Create a PDF document with a single page of the specified size
-        try (PDDocument pdfDoc = new PDDocument()) {
-            // Load HTML document
-            DocumentSource docSource = new StreamDocumentSource(new File(htmlFilePath), new URL("file:."), "utf-8");
-            org.w3c.dom.Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(docSource.getInputStream());
-
-            // Create PDF renderer
-            PDFRenderer pdfRenderer = new PDFRenderer(doc, docSource.getURL(), pdfDoc, new Dimension2D.Float(PDDocument.PAGE_SIZE_A4.getWidth(), PDDocument.PAGE_SIZE_A4.getHeight()));
-
-            // Render and save
-            pdfRenderer.renderDocument();
-            pdfDoc.save(pdfFilePath);
-        }
+    // html -> pdf
+    public String convertHtmlToPdf(AttachFileVO param) throws Exception {
+        String hwpFilePath = param.getFlepath();
+        String pdfFilePath = "//172.18.18.29/share/fileUpload/2024/3_sabon/pdf_path_to_output_pdf_file.pdf";
+//        try (PDDocument pdfDoc = new PDDocument()) {
+//            DocumentSource docSource = new StreamDocumentSource(new File(hwpFilePath), new URL("file:."), "utf-8");
+//            org.w3c.dom.Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(docSource.getInputStream());
+//            PDFRenderer pdfRenderer = new PDFRenderer(doc, docSource.getURL(), pdfDoc, new Dimension2D.Float(PDDocument.PAGE_SIZE_A4.getWidth(), PDDocument.PAGE_SIZE_A4.getHeight()));
+//
+//            // Render and save
+//            pdfRenderer.renderDocument();
+//            pdfDoc.save(pdfFilePath);
+//        }
+        return pdfFilePath;
     }
 }

@@ -75,4 +75,26 @@ public class AnyViewerController {
         String pdfFilePath = anyViewerReqService.convertHwpToPdf(hwpFile);
         return ResponseEntity.ok(pdfFilePath);
     }
+
+
+    @PostMapping("/convertHwpToHtml")
+    public ResponseEntity convertHwpToHtml
+    (
+            @Valid AttachFileVO hwpFile
+    ) throws Exception
+    {
+        String pdfFilePath = anyViewerReqService.convertHwpToHtml(hwpFile);
+        return ResponseEntity.ok(pdfFilePath);
+    }
+
+    @PostMapping("/convertHtmlToPdf")
+    public ResponseEntity convertHtmlToPdf
+            (
+                    @Valid AttachFileVO hwpFile
+            ) throws Exception
+    {
+        String pdfFilePath = anyViewerReqService.convertHtmlToPdf(hwpFile);
+        return ResponseEntity.ok(pdfFilePath);
+    }
+
 }

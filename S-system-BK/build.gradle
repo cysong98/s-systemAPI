@@ -160,6 +160,11 @@ dependencies {
     implementation 'com.unboundid:unboundid-ldapsdk:6.0.7'
     implementation 'org.springframework.boot:spring-boot-starter-data-ldap:2.6.6'
 
+    // hwp to html
+    implementation 'kr.dogfoot:hwplib:1.1.4'
+    // html to pdf
+    implementation 'net.sf.cssbox:cssbox:5.0.0'
+
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
