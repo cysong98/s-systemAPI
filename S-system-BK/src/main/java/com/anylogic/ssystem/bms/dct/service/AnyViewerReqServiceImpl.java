@@ -148,14 +148,11 @@ public class AnyViewerReqServiceImpl implements AnyViewerReqService {
         try (PDDocument document = new PDDocument()) {
             PDPage page = new PDPage();
             document.addPage(page);
-//            PDType0Font font = PDType0Font.load(document, new File("C:/Windows/Fonts/Cambria/cambria.ttc"), 3);
-            PDType0Font font = PDType0Font.load(document, new File("C:/lhk/NanumSquareNeo-Variable.ttf"));
+            PDType0Font font = PDType0Font.load(document, new File("//172.18.18.29/share/anyFont/NanumSquareNeo-Variable.ttf"));
 
             try (PDPageContentStream contentStream = new PDPageContentStream(document, page);
                  BufferedReader br = new BufferedReader(new FileReader(textFilePath))) {
                 contentStream.beginText();
-//                contentStream.setFont(PDType1Font.HELVETICA, 12);
-//                contentStream.setFont(PDType1Font.TIMES_ROMAN, 12);
                 contentStream.setFont(font, 12);
                 contentStream.newLineAtOffset(25, 725);
 
