@@ -13,11 +13,17 @@ spring:
     multipart:
       max-file-size: 2000MB
       max-request-size: 20000MB
-  ldap: # LDAP 연동
-    urls: ldap://172.18.18.37:1389
-    base: c=KR
-    username: cn=directory manager
-    password: kinacldap
+#  ldap: # LDAP 연동
+#    urls: ldap://172.18.18.37:1389
+#    base: c=KR
+#    username: cn=directory manager
+#    password: kinacldap
+
+  ldap: # ANYLOGIC LDAP 연동
+    urls: ldap://172.18.18.29:1389
+    base: dc=anylogic,dc=com
+    username: cn=admin,dc=anylogic,dc=com
+    password: admin
 
 datasource:
   type: com.zaxxer.hikari.HikariDataSource
@@ -83,5 +89,9 @@ serverUrl: "http://172.18.18.2:8581"           # 사용하는 pc ip및 사용할
 #serverUrl: "https://sbms.s-system.kinac/api"   # .war파일 빌드시 사용하는 url
 
 # LDAP
-baseDN: "o=Government of Korea, c=KR"
+#baseDN: "o=Government of Korea, c=KR"
+#filter: "(objectclass=*)"
+
+# ANYLOGIC LDAP SEARCH
+baseDN: "dc=anylogic,dc=com"
 filter: "(objectclass=*)"

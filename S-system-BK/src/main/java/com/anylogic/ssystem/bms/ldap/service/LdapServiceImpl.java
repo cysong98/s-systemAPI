@@ -6,13 +6,13 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.dao.DataAccessException;
+import org.springframework.ldap.NamingException;
 import org.springframework.ldap.core.AttributesMapper;
 import org.springframework.ldap.core.LdapTemplate;
 import org.springframework.stereotype.Service;
-import com.unboundid.ldap.sdk.*;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.naming.NamingException;
 import javax.naming.directory.*;
 import javax.naming.directory.Attribute;
 
@@ -39,22 +39,14 @@ public class LdapServiceImpl implements LdapService {
     @Transactional
     @Override
     public List<Map<String, Object>> getAllGroups() {
-        List<Map<String, Object>> allGroups = new ArrayList<>();
-
-        try {
-            allGroups.addAll(searchAndSave(SearchControls.SUBTREE_SCOPE, "ucOrgFullName", "ouCode", "parentOuCode", "ucChiefTitle", "ouLevel"));
-
-            return allGroups;
-        } catch (Exception e) {
-            log.error("LDAP SYNC Exception", e);
-            return new ArrayList<>();
-        }
+        String[] organizationAttributes = {"ou","ouCode","ucOrgFullName", "parentOuCode", "ucChiefTitle","ouLevel"};
+        return searchAndSave(organizationAttributes);
     }
 
-    private List<Map<String, Object>> searchAndSave(int searchScope, String... attributeNames) {
+    private List<Map<String, Object>> searchAndSave(String... attributeNames) {
         try {
             SearchControls searchControls = new SearchControls();
-            searchControls.setSearchScope(searchScope);
+            searchControls.setSearchScope(SearchControls.SUBTREE_SCOPE);
 
             return ldapTemplate.search(baseDN, filter, searchControls, (AttributesMapper<Map<String, Object>>) attributes -> {
                 Map<String, Object> organizationAttributes = new HashMap<>();
@@ -64,11 +56,18 @@ public class LdapServiceImpl implements LdapService {
                         organizationAttributes.put(attributeName, attribute.get().toString());
                     }
                 }
-                saveLDAPDept(organizationAttributes);
+//                saveLDAPDept(organizationAttributes);
                 return organizationAttributes;
             });
+        } catch (NamingException e) {
+            log.error("LDAP NamingException", e);
+            throw new RuntimeException("LDAP NamingException", e);
+        } catch (DataAccessException e) {
+            log.error("LDAP DataAccessException", e);
+            throw new RuntimeException("LDAP DataAccessException", e);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            log.error("LDAP Exception", e);
+            throw new RuntimeException("LDAP Exception", e);
         }
     }
 
