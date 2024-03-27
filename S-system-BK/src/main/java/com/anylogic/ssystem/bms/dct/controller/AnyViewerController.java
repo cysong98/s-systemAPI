@@ -107,6 +107,20 @@ public class AnyViewerController {
         return ResponseEntity.ok(pdfFilePath);
     }
 
+    @PostMapping("/convertPptxToImages")
+    public ResponseEntity convertPptxToImages
+            (
+//                    @Valid AttachFileVO file
+//                    @Valid String pptFilePath = "path_to_your_ppt_file.pptx";
+//                    @Valid String outputDirectory = "//172.18.18.29/share/fileUpload/2024/3_sabon/images";
+                    @Valid String pptFilePath
+            ) throws Exception
+    {
+//        String pngFilePath = anyViewerReqService.convertPptToImages(file);
+        String pngFilePath = anyViewerReqService.convertPptxToImages(pptFilePath);
+        return ResponseEntity.ok(pngFilePath);
+    }
+
     @PostMapping("/convertPptToImages")
     public ResponseEntity convertPptToImages
             (

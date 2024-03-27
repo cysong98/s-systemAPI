@@ -21,6 +21,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.pdfbox.pdmodel.font.PDType0Font;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import java.awt.geom.Dimension2D;
+
+import org.apache.poi.hslf.usermodel.HSLFSlide;
+import org.apache.poi.hslf.usermodel.HSLFSlideShow;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -189,16 +192,15 @@ public class AnyViewerReqServiceImpl implements AnyViewerReqService {
 
 
     // pptx -> png
-    public String convertPptToImages(String pptFilePath) throws IOException {
+    public String convertPptxToImages(String pptxFilePath) throws IOException {
 //        pptFilePath = "//172.18.18.29/share/forConvertTest/01_input/pptx/testpptx.pptx";
-//        pptFilePath = "//172.18.18.29/share/forConvertTest/01_input/ppt/test2.ppt";
         String outputDirectory = "//172.18.18.29/share/forConvertTest/02_output/images";
 
-        try (FileInputStream inputStream = new FileInputStream(pptFilePath);
-             XMLSlideShow ppt = new XMLSlideShow(inputStream)) {
+        try (FileInputStream inputStream = new FileInputStream(pptxFilePath);
+             XMLSlideShow pptx = new XMLSlideShow(inputStream)) {
 
-            Dimension pgsize = ppt.getPageSize();
-            List<XSLFSlide> slides = ppt.getSlides();
+            Dimension pgsize = pptx.getPageSize();
+            List<XSLFSlide> slides = pptx.getSlides();
 
             for (int i = 0; i < slides.size(); i++) {
                 BufferedImage img = new BufferedImage(pgsize.width, pgsize.height, BufferedImage.TYPE_INT_RGB);
@@ -212,7 +214,37 @@ public class AnyViewerReqServiceImpl implements AnyViewerReqService {
                     ImageIO.write(img, "png", out);
                 }
             }
-            return "Conversion completed successfully.";
+            return "PPTX Conversion completed successfully.";
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "Failed to convert PPT to images due to an IO exception.";
+        }
+    }
+
+    @Override
+    public String convertPptToImages(String pptFilePath) throws Exception {
+        String outputDirectory = "//172.18.18.29/share/forConvertTest/02_output/images";
+
+        try (FileInputStream inputStream = new FileInputStream(pptFilePath);
+             HSLFSlideShow ppt = new HSLFSlideShow(inputStream)) {
+
+            Dimension pgsize = ppt.getPageSize();
+            List<HSLFSlide> slides = ppt.getSlides();
+
+            for (int i = 0; i < slides.size(); i++) {
+                BufferedImage img = new BufferedImage(pgsize.width, pgsize.height, BufferedImage.TYPE_INT_RGB);
+                Graphics2D graphics = img.createGraphics();
+                graphics.setPaint(Color.white);
+                graphics.fill(new Rectangle2D.Float(0, 0, pgsize.width, pgsize.height));
+
+                slides.get(i).draw(graphics);
+
+                String outputFileName = outputDirectory + "/pptslide-" + (i + 1) + ".png";
+                try (FileOutputStream out = new FileOutputStream(outputFileName)) {
+                    ImageIO.write(img, "png", out);
+                }
+            }
+            return "PPT Conversion completed successfully.";
         } catch (IOException e) {
             e.printStackTrace();
             return "Failed to convert PPT to images due to an IO exception.";
