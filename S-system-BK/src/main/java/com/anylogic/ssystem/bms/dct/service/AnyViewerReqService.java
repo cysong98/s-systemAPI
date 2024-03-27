@@ -8,4 +8,6 @@ public interface AnyViewerReqService {
     String convertHtmlToPdf(AttachFileVO hwpFile) throws Exception;
 
     String convertTextToPdf(AttachFileVO hwpFile) throws Exception;
+
+    String convertPptToImages(String pptFilePath) throws Exception;
 }

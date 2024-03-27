@@ -19,33 +19,23 @@ import com.anylogic.ssystem.common.file.model.AttachFileVO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.pdfbox.pdmodel.font.PDType0Font;
-import org.apache.pdfbox.pdmodel.font.PDType1CFont;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import java.awt.geom.Dimension2D;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.awt.print.PrinterJob;
-import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.stereotype.Service;
-import java.io.File;
-import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.printing.PDFPageable;
-import javax.print.*;
-//import com.anylogic.ssystem.bms.dct.mapper.HwpToPdfMapper;
 
-///
-import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.printing.PDFPageable;
+import java.io.File;
+
+
 import org.fit.cssbox.io.DocumentSource;
 import org.fit.cssbox.io.StreamDocumentSource;
 
 
-import javax.print.PrintService;
-import javax.print.PrintServiceLookup;
+
 import javax.xml.parsers.DocumentBuilderFactory;
-import java.awt.print.PrinterJob;
 import java.io.*;
 import java.net.URL;
 
@@ -54,15 +44,25 @@ import kr.dogfoot.hwplib.object.HWPFile;
 import kr.dogfoot.hwplib.tool.textextractor.TextExtractMethod;
 import kr.dogfoot.hwplib.tool.textextractor.TextExtractor;
 
-import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
-//import org.apache.pdfbox.pdmodel.font.PDType1Font;
-import org.apache.pdfbox.pdmodel.font.PDType1Font;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+
+
+/*======================================== ppt to png ====================================================*/import org.apache.poi.xslf.usermodel.XMLSlideShow;
+import org.apache.poi.xslf.usermodel.XSLFSlide;
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.List;
+/*========================================================================================================*/
 
 import java.io.*;
 
@@ -127,15 +127,29 @@ public class AnyViewerReqServiceImpl implements AnyViewerReqService {
     public String convertHtmlToPdf(AttachFileVO param) throws Exception {
         String hwpFilePath = param.getFlepath();
         String pdfFilePath = "//172.18.18.29/share/fileUpload/2024/3_sabon/pdf_path_to_output_pdf_file.pdf";
-//        try (PDDocument pdfDoc = new PDDocument()) {
-//            DocumentSource docSource = new StreamDocumentSource(new File(hwpFilePath), new URL("file:."), "utf-8");
-//            org.w3c.dom.Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(docSource.getInputStream());
+        InputStream ishwpFilePath = new FileInputStream(hwpFilePath);
+        try (PDDocument pdfDoc = new PDDocument()) {
+            DocumentSource docSource = new StreamDocumentSource(ishwpFilePath, new URL("file:."), "utf-8");
+            org.w3c.dom.Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(docSource.getInputStream());
 //            PDFRenderer pdfRenderer = new PDFRenderer(doc, docSource.getURL(), pdfDoc, new Dimension2D.Float(PDDocument.PAGE_SIZE_A4.getWidth(), PDDocument.PAGE_SIZE_A4.getHeight()));
-//
+//            PDFRenderer pdfRenderer = new PDFRenderer(doc, docSource.getURL(), pdfDoc, new Dimension2D.Float(PDDocument.PAGE_SIZE_A4.getWidth(), PDDocument.PAGE_SIZE_A4.getHeight()));
+            // A4 크기를 포인트 단위로 계산
+            float a4WidthInPoints = (210 / 25.4f) * 72;
+            float a4HeightInPoints = (297 / 25.4f) * 72;
+//            PDFRenderer pdfRenderer = new PDFRenderer(doc, docSource.getURL(), pdfDoc, new FloatDimension(PDDocument.PAGE_SIZE_A4.getWidth(), PDDocument.PAGE_SIZE_A4.getHeight()));
+//            PDFRenderer pdfRenderer = new PDFRenderer(doc, docSource.getURL(), pdfDoc, new FloatDimension(a4WidthInPoints, a4HeightInPoints));
+
+
 //            // Render and save
 //            pdfRenderer.renderDocument();
 //            pdfDoc.save(pdfFilePath);
-//        }
+            // Render each page and save
+            for (int pageIndex = 0; pageIndex < pdfDoc.getNumberOfPages(); pageIndex++) {
+//                BufferedImage image = pdfRenderer.renderImage(pageIndex);
+                // Save the image or perform other operations
+            }
+            pdfDoc.save(pdfFilePath);
+        }
         return pdfFilePath;
     }
 
@@ -171,4 +185,64 @@ public class AnyViewerReqServiceImpl implements AnyViewerReqService {
         }
         return pdfFilePath;
     }
+
+
+
+    // pptx -> png
+    public String convertPptToImages(String pptFilePath) throws IOException {
+//        pptFilePath = "//172.18.18.29/share/forConvertTest/01_input/pptx/testpptx.pptx";
+//        pptFilePath = "//172.18.18.29/share/forConvertTest/01_input/ppt/test2.ppt";
+        String outputDirectory = "//172.18.18.29/share/forConvertTest/02_output/images";
+
+        try (FileInputStream inputStream = new FileInputStream(pptFilePath);
+             XMLSlideShow ppt = new XMLSlideShow(inputStream)) {
+
+            Dimension pgsize = ppt.getPageSize();
+            List<XSLFSlide> slides = ppt.getSlides();
+
+            for (int i = 0; i < slides.size(); i++) {
+                BufferedImage img = new BufferedImage(pgsize.width, pgsize.height, BufferedImage.TYPE_INT_RGB);
+                Graphics2D graphics = img.createGraphics();
+                graphics.setPaint(Color.white);
+                graphics.fill(new Rectangle2D.Float(0, 0, pgsize.width, pgsize.height));
+                slides.get(i).draw(graphics);
+
+                String outputFileName = outputDirectory + "/slide-" + (i + 1) + ".png";
+                try (FileOutputStream out = new FileOutputStream(outputFileName)) {
+                    ImageIO.write(img, "png", out);
+                }
+            }
+            return "Conversion completed successfully.";
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "Failed to convert PPT to images due to an IO exception.";
+        }
+    }
+
+
+//    public class FloatDimension extends Dimension2D {
+//        private double width;
+//        private double height;
+//
+//        public FloatDimension(double width, double height) {
+//            this.width = width;
+//            this.height = height;
+//        }
+//
+//        @Override
+//        public double getWidth() {
+//            return width;
+//        }
+//
+//        @Override
+//        public double getHeight() {
+//            return height;
+//        }
+//
+//        @Override
+//        public void setSize(double width, double height) {
+//            this.width = width;
+//            this.height = height;
+//        }
+//    }
 }

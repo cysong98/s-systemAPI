@@ -48,28 +48,28 @@ public class ExcelCellRef {
             value = "";
         }
         else {
-            if( cell.getCellTypeEnum() == CellType.FORMULA ) {
+            if(cell.getCellType() == CellType.FORMULA) {
                 value = cell.getCellFormula();
             }
-            else if( cell.getCellTypeEnum() == CellType.NUMERIC ) {
-                //value = cell.getNumericCellValue() + "";
+            else if(cell.getCellType() == CellType.NUMERIC) {
                 value = String.valueOf((int)cell.getNumericCellValue());
             }
-            else if( cell.getCellTypeEnum() == CellType.STRING ) {
+            else if(cell.getCellType() == CellType.STRING) {
                 value = cell.getStringCellValue();
             }
-            else if( cell.getCellTypeEnum() == CellType.BOOLEAN ) {
+            else if(cell.getCellType() == CellType.BOOLEAN) {
                 value = String.valueOf(cell.getBooleanCellValue());
             }
-            else if( cell.getCellTypeEnum() == CellType.ERROR ) {
+            else if(cell.getCellType() == CellType.ERROR) {
                 value = String.valueOf(cell.getErrorCellValue());
             }
-            else if( cell.getCellTypeEnum() == CellType.BLANK ) {
+            else if(cell.getCellType() == CellType.BLANK) {
                 value = "";
             }
             else {
                 value = cell.getStringCellValue();
             }
+
         }
         
         return value;
