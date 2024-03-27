@@ -24,10 +24,12 @@ import java.awt.geom.Dimension2D;
 
 import org.apache.poi.hslf.usermodel.HSLFSlide;
 import org.apache.poi.hslf.usermodel.HSLFSlideShow;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import java.util.*;
 
 
 import java.io.File;
@@ -55,7 +57,8 @@ import java.io.FileReader;
 import java.io.IOException;
 
 
-/*======================================== ppt to png ====================================================*/import org.apache.poi.xslf.usermodel.XMLSlideShow;
+/*======================================== ppt to png ====================================================*/
+import org.apache.poi.xslf.usermodel.XMLSlideShow;
 import org.apache.poi.xslf.usermodel.XSLFSlide;
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -66,6 +69,16 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
 /*========================================================================================================*/
+
+import org.apache.pdfbox.pdmodel.PDDocument; // PDFBox 라이브러리의 PDDocument 클래스를 임포트합니다. PDDocument 객체는 PDF 문서 전체를 대표합니다.
+import org.apache.pdfbox.pdmodel.PDPage; // PDPage 클래스는 PDF 문서 내의 개별 페이지를 대표합니다.
+import org.apache.pdfbox.pdmodel.PDPageContentStream; // PDPageContentStream 클래스는 페이지에 컨텐츠(이미지, 텍스트 등)를 추가하는 데 사용됩니다.
+import org.apache.pdfbox.pdmodel.common.PDRectangle; // PDRectangle 클래스는 페이지의 크기와 형태(너비와 높이)를 정의합니다.
+import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject; // PDImageXObject 클래스는 PDF 문서에 이미지를 삽입할 때 사용됩니다.
+
+import java.io.File; // File 클래스는 파일과 디렉토리 경로명의 추상 표현입니다.
+import java.io.IOException; // IOException은 입출력 작업 실패 또는 인터럽트 시 발생하는 예외를 처리합니다.
+import java.util.List; // List 인터페이스는 순서가 있는 컬렉션을 나타냅니다. 이미지 파일 경로를 저장하는 데 사용됩니다.
 
 import java.io.*;
 
@@ -251,30 +264,87 @@ public class AnyViewerReqServiceImpl implements AnyViewerReqService {
         }
     }
 
+    /**
+     * //테스트용 하드코딩 임시 메서드
+     *
+     * @param imagePaths 이미지 파일 경로 리스트
+     * @param outputPath PDF 파일이 저장될 경로
+     */
+    public String convertImagesToPdf(List<String> imagePaths) {
+        List<String> hardcodedImagePaths = Arrays.asList(
+                "//172.18.18.29/share/forConvertTest/02_output/images/pptslide-1.png",
+                "//172.18.18.29/share/forConvertTest/02_output/images/pptslide-2.png",
+                "//172.18.18.29/share/forConvertTest/02_output/images/pptslide-3.png"
+        );
+        imagePaths = new ArrayList<>(Arrays.asList(
+                "path/to/your/image1.png",
+                "path/to/your/image2.png"
+        ));
+        imagePaths = hardcodedImagePaths;
 
-//    public class FloatDimension extends Dimension2D {
-//        private double width;
-//        private double height;
-//
-//        public FloatDimension(double width, double height) {
-//            this.width = width;
-//            this.height = height;
-//        }
-//
-//        @Override
-//        public double getWidth() {
-//            return width;
-//        }
-//
-//        @Override
-//        public double getHeight() {
-//            return height;
-//        }
-//
-//        @Override
-//        public void setSize(double width, double height) {
-//            this.width = width;
-//            this.height = height;
-//        }
-//    }
+        String outputPath = "//172.18.18.29/share/forConvertTest/02_output/images/convertedImages.pdf";
+        try (PDDocument document = new PDDocument()) {
+            for (String imagePath : imagePaths) {
+                PDPage page = new PDPage(PDRectangle.A4);
+                document.addPage(page);
+
+                PDImageXObject image = PDImageXObject.createFromFile(imagePath, document);
+                try (PDPageContentStream contentStream = new PDPageContentStream(document, page)) {
+                    float scale = Math.min(page.getMediaBox().getWidth() / image.getWidth(), page.getMediaBox().getHeight() / image.getHeight());
+                    float imageWidth = image.getWidth() * scale;
+                    float imageHeight = image.getHeight() * scale;
+                    contentStream.drawImage(image, (page.getMediaBox().getWidth() - imageWidth) / 2, (page.getMediaBox().getHeight() - imageHeight) / 2, imageWidth, imageHeight);
+                }
+            }
+            document.save(outputPath);
+            System.out.println("PDF 파일 생성 완료: " + outputPath);
+            return "PDF Conversion completed successfully.";
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.err.println("PDF 변환 중 오류가 발생하였습니다.");
+            return "PDF로 변환하는 과정에서 오류가 발생했습니다.";
+        }
+    }
+
+    /**
+     * 이미지 파일들을 PDF로 변환하고 합치는 메소드입니다.
+     *
+     * @param imagePaths 이미지 파일 경로 리스트
+     * @param outputPath PDF 파일이 저장될 경로
+     */
+    public String convertImagesToPdf2() {
+        // 하드코딩된 이미지 경로 리스트
+        List<String> imagePaths = Arrays.asList(
+                "//172.18.18.29/share/forConvertTest/02_output/images/pptslide-1.png",
+                "//172.18.18.29/share/forConvertTest/02_output/images/pptslide-2.png",
+                "//172.18.18.29/share/forConvertTest/02_output/images/pptslide-3.png"
+        );
+
+        // 이후 PDF 변환 로직...
+        try {
+            String outputPath = "//172.18.18.29/share/forConvertTest/02_output/images/convertedImages.pdf";
+            try (PDDocument document = new PDDocument()) {
+                for (String imagePath : imagePaths) {
+                    PDPage page = new PDPage(PDRectangle.A4);
+                    document.addPage(page);
+
+                    PDImageXObject image = PDImageXObject.createFromFile(imagePath, document);
+                    try (PDPageContentStream contentStream = new PDPageContentStream(document, page)) {
+                        float scale = Math.min(page.getMediaBox().getWidth() / image.getWidth(), page.getMediaBox().getHeight() / image.getHeight());
+                        float imageWidth = image.getWidth() * scale;
+                        float imageHeight = image.getHeight() * scale;
+                        contentStream.drawImage(image, (page.getMediaBox().getWidth() - imageWidth) / 2, (page.getMediaBox().getHeight() - imageHeight) / 2, imageWidth, imageHeight);
+                    }
+                }
+                document.save(outputPath);
+                System.out.println("PDF 파일 생성 완료: " + outputPath);
+                return "PDF Conversion completed successfully.";
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.err.println("PDF 변환 중 오류가 발생하였습니다.");
+            return "PDF로 변환하는 과정에서 오류가 발생했습니다.";
+        }
+    }
+
 }
