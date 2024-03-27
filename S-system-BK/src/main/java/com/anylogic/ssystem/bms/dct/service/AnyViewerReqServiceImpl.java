@@ -265,7 +265,7 @@ public class AnyViewerReqServiceImpl implements AnyViewerReqService {
     }
 
     /**
-     * //테스트용 하드코딩 임시 메서드
+     * 이미지 파일들을 PDF로 변환하고 합치는 메소드입니다.
      *
      * @param imagePaths 이미지 파일 경로 리스트
      * @param outputPath PDF 파일이 저장될 경로
@@ -307,7 +307,7 @@ public class AnyViewerReqServiceImpl implements AnyViewerReqService {
     }
 
     /**
-     * 이미지 파일들을 PDF로 변환하고 합치는 메소드입니다.
+     * //테스트용 하드코딩 임시 메서드
      *
      * @param imagePaths 이미지 파일 경로 리스트
      * @param outputPath PDF 파일이 저장될 경로
