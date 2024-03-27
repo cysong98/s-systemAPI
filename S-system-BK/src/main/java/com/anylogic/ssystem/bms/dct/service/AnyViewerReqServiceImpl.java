@@ -57,30 +57,23 @@ import java.io.FileReader;
 import java.io.IOException;
 
 
-/*======================================== ppt to png ====================================================*/
+/*======================================== for Convert ====================================================*/
 import org.apache.poi.xslf.usermodel.XMLSlideShow;
 import org.apache.poi.xslf.usermodel.XSLFSlide;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.util.List;
+import org.apache.pdfbox.pdmodel.common.PDRectangle;
+import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
+import java.io.FileOutputStream;
+import java.io.ByteArrayOutputStream;
+import java.awt.Dimension;
+import java.awt.Graphics2D;
 /*========================================================================================================*/
 
-import org.apache.pdfbox.pdmodel.PDDocument; // PDFBox 라이브러리의 PDDocument 클래스를 임포트합니다. PDDocument 객체는 PDF 문서 전체를 대표합니다.
-import org.apache.pdfbox.pdmodel.PDPage; // PDPage 클래스는 PDF 문서 내의 개별 페이지를 대표합니다.
-import org.apache.pdfbox.pdmodel.PDPageContentStream; // PDPageContentStream 클래스는 페이지에 컨텐츠(이미지, 텍스트 등)를 추가하는 데 사용됩니다.
-import org.apache.pdfbox.pdmodel.common.PDRectangle; // PDRectangle 클래스는 페이지의 크기와 형태(너비와 높이)를 정의합니다.
-import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject; // PDImageXObject 클래스는 PDF 문서에 이미지를 삽입할 때 사용됩니다.
-
-import java.io.File; // File 클래스는 파일과 디렉토리 경로명의 추상 표현입니다.
-import java.io.IOException; // IOException은 입출력 작업 실패 또는 인터럽트 시 발생하는 예외를 처리합니다.
-import java.util.List; // List 인터페이스는 순서가 있는 컬렉션을 나타냅니다. 이미지 파일 경로를 저장하는 데 사용됩니다.
-
-import java.io.*;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -206,7 +199,7 @@ public class AnyViewerReqServiceImpl implements AnyViewerReqService {
 
     // pptx -> png
     public String convertPptxToImages(String pptxFilePath) throws IOException {
-//        pptFilePath = "//172.18.18.29/share/forConvertTest/01_input/pptx/testpptx.pptx";
+//        pptxFilePath = "//172.18.18.29/share/forConvertTest/01_input/pptx/testpptx.pptx";
         String outputDirectory = "//172.18.18.29/share/forConvertTest/02_output/images";
 
         try (FileInputStream inputStream = new FileInputStream(pptxFilePath);
@@ -266,9 +259,6 @@ public class AnyViewerReqServiceImpl implements AnyViewerReqService {
 
     /**
      * 이미지 파일들을 PDF로 변환하고 합치는 메소드입니다.
-     *
-     * @param imagePaths 이미지 파일 경로 리스트
-     * @param outputPath PDF 파일이 저장될 경로
      */
     public String convertImagesToPdf(List<String> imagePaths) {
         List<String> hardcodedImagePaths = Arrays.asList(
@@ -308,9 +298,6 @@ public class AnyViewerReqServiceImpl implements AnyViewerReqService {
 
     /**
      * //테스트용 하드코딩 임시 메서드
-     *
-     * @param imagePaths 이미지 파일 경로 리스트
-     * @param outputPath PDF 파일이 저장될 경로
      */
     public String convertImagesToPdf2() {
         // 하드코딩된 이미지 경로 리스트
@@ -347,4 +334,107 @@ public class AnyViewerReqServiceImpl implements AnyViewerReqService {
         }
     }
 
+
+    public String convertPPTXToPDF(String pptxPath, String pdfPath, double scale) {
+        pptxPath = "//172.18.18.29/share/forConvertTest/01_input/pptx/testpptx.pptx";
+        pdfPath = "//172.18.18.29/share/forConvertTest/02_output/images/converted202403.pdf";
+        scale = 1.0;
+        try (XMLSlideShow ppt = new XMLSlideShow(new FileInputStream(pptxPath));
+             PDDocument doc = new PDDocument()) {
+
+            for (XSLFSlide slide : ppt.getSlides()) {
+                processSlide(ppt, slide, doc, scale);
+            }
+
+            doc.save(pdfPath);
+            System.out.println("PDF 파일 생성 완료: " + pdfPath);
+            return "PDF Conversion completed successfully.";
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "PDF로 변환하는 과정에서 오류가 발생했습니다.";
+        }
+    }
+
+    private void processSlide(XMLSlideShow ppt, XSLFSlide slide, PDDocument doc, double scale) {
+        // XMLSlideShow 객체에서 페이지 크기를 얻음
+        Dimension pageSize = ppt.getPageSize();
+        int scaledWidth = (int) (pageSize.width * scale);
+        int scaledHeight = (int) (pageSize.height * scale);
+
+        BufferedImage img = new BufferedImage(scaledWidth, scaledHeight, BufferedImage.TYPE_INT_RGB);
+        Graphics2D graphics = img.createGraphics();
+        graphics.scale(scale, scale);
+        graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        graphics.setPaint(Color.white);
+        graphics.fill(new Rectangle2D.Float(0, 0, scaledWidth, scaledHeight));
+        slide.draw(graphics);
+        graphics.dispose(); // Graphics 객체 해제
+
+        try {
+            // 이미지를 ByteArrayOutputStream에 쓰기
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ImageIO.write(img, "png", baos);
+            byte[] imageBytes = baos.toByteArray();
+
+            // PDImageXObject 생성 및 PDF 문서에 이미지 추가
+            PDImageXObject pdImage = PDImageXObject.createFromByteArray(doc, imageBytes, "slide-image");
+            PDPage page = new PDPage(new PDRectangle(scaledWidth, scaledHeight));
+            doc.addPage(page);
+
+            //이미지를 실제로 페이지에 그리는 부분
+            try (PDPageContentStream contentStream = new PDPageContentStream(doc, page)) {
+                contentStream.drawImage(pdImage, 0, 0, scaledWidth, scaledHeight);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public String convertPPTToPDF(String pptPath, String pdfPath, double scale) throws IOException {
+        pptPath = "//172.18.18.29/share/forConvertTest/01_input/ppt/test2.ppt";
+        pdfPath = "//172.18.18.29/share/forConvertTest/02_output/images/converted202403.pdf";
+        scale = 1.0;
+//        int dpi = 384; // 원하는 해상도로 설정
+        int dpi = 384; // 원하는 해상도로 설정
+
+        try (HSLFSlideShow ppt = new HSLFSlideShow(new FileInputStream(pptPath));
+             PDDocument doc = new PDDocument()) {
+
+            Dimension pgsize = ppt.getPageSize();
+            int scaledWidth = (int) (pgsize.width * scale);
+            int scaledHeight = (int) (pgsize.height * scale);
+
+            for (HSLFSlide slide : ppt.getSlides()) {
+                BufferedImage img = new BufferedImage(scaledWidth, scaledHeight, BufferedImage.TYPE_INT_RGB);
+                Graphics2D graphics = img.createGraphics();
+
+                // Apply scale
+                graphics.scale(scale, scale);
+
+                graphics.setPaint(Color.white);
+                graphics.fill(new Rectangle2D.Float(0, 0, scaledWidth, scaledHeight));
+                slide.draw(graphics);
+                graphics.dispose();
+
+                PDPage page = new PDPage(new PDRectangle(scaledWidth, scaledHeight));
+                doc.addPage(page);
+
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                ImageIO.write(img, "png", baos);
+                byte[] imageBytes = baos.toByteArray();
+
+                PDImageXObject pdImage = PDImageXObject.createFromByteArray(doc, imageBytes, "slide-image");
+
+                try (PDPageContentStream contentStream = new PDPageContentStream(doc, page)) {
+                    contentStream.drawImage(pdImage, 0, 0, scaledWidth, scaledHeight);
+                }
+            }
+
+            doc.save(pdfPath);
+            return "PDF Conversion completed successfully.";
+        }catch (IOException e) {
+            e.printStackTrace();
+            return "PDF로 변환하는 과정에서 오류가 발생했습니다.";
+        }
+    }
 }

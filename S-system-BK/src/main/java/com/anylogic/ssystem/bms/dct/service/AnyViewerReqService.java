@@ -18,4 +18,8 @@ public interface AnyViewerReqService {
     String convertImagesToPdf(List<String> imagePaths) throws Exception;
     //테스트용 하드코딩 임시 메서드
     String convertImagesToPdf2() throws Exception;
+
+    String convertPPTXToPDF(String pptxPath, String pdfPath, double scale) throws Exception;
+
+    String convertPPTToPDF(String pptPath, String pdfPath, double scale) throws Exception;
 }

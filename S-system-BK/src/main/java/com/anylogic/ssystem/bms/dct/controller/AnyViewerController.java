@@ -146,4 +146,28 @@ public class AnyViewerController {
         return ResponseEntity.ok(pngFilePath);
     }
 
+    @PostMapping("/convertPPTXToPDF")
+    public ResponseEntity convertPPTXToPDF
+            (
+                    @Valid String pptxPath,
+                    @Valid String pdfPath,
+                    @Valid Double scale
+            ) throws Exception
+    {
+        String pngFilePath = anyViewerReqService.convertPPTXToPDF(pptxPath, pdfPath, scale);
+        return ResponseEntity.ok(pngFilePath);
+    }
+
+    @PostMapping("/convertPPTToPDF")
+    public ResponseEntity convertPPTToPDF
+            (
+                    @Valid String pptPath,
+                    @Valid String pdfPath,
+                    @Valid Double scale
+            ) throws Exception
+    {
+        String pngFilePath = anyViewerReqService.convertPPTToPDF(pptPath, pdfPath, scale);
+        return ResponseEntity.ok(pngFilePath);
+    }
+
 }
