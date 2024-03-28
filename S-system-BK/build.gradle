@@ -165,10 +165,9 @@ dependencies {
     // html to pdf
     implementation 'net.sf.cssbox:cssbox:5.0.0'
     // ppt to pdf
-    implementation 'org.apache.poi:poi:5.0.0' //(.xls 등)
-    implementation 'org.apache.poi:poi-ooxml:5.0.0' //OOXML 파일 형식 의존성(.xlsx, .docx, .pptx 등)
-    implementation 'org.apache.poi:poi-scratchpad:5.0.0' //(.doc, .ppt 등)
-    implementation 'org.apache.poi:ooxml-schemas:1.4'
+    implementation 'org.apache.poi:poi:5.2.2' //(.xls 등)
+    implementation 'org.apache.poi:poi-ooxml:5.2.2' //OOXML 파일 형식 의존성(.xlsx, .docx, .pptx 등)
+    implementation 'org.apache.poi:poi-scratchpad:5.2.2' //(.doc, .ppt 등)
 
 
     // text to pdf

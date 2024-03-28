@@ -260,25 +260,14 @@ public class AnyViewerReqServiceImpl implements AnyViewerReqService {
     /**
      * 이미지 파일들을 PDF로 변환하고 합치는 메소드입니다.
      */
-    public String convertImagesToPdf(List<String> imagePaths) {
-        List<String> hardcodedImagePaths = Arrays.asList(
-                "//172.18.18.29/share/forConvertTest/02_output/images/pptslide-1.png",
-                "//172.18.18.29/share/forConvertTest/02_output/images/pptslide-2.png",
-                "//172.18.18.29/share/forConvertTest/02_output/images/pptslide-3.png"
-        );
-        imagePaths = new ArrayList<>(Arrays.asList(
-                "path/to/your/image1.png",
-                "path/to/your/image2.png"
-        ));
-        imagePaths = hardcodedImagePaths;
-
+    public String convertImagesToPdf(List<AttachFileVO> attachFiles) {
         String outputPath = "//172.18.18.29/share/forConvertTest/02_output/images/convertedImages.pdf";
         try (PDDocument document = new PDDocument()) {
-            for (String imagePath : imagePaths) {
+            for (AttachFileVO attachFile : attachFiles) {
                 PDPage page = new PDPage(PDRectangle.A4);
                 document.addPage(page);
 
-                PDImageXObject image = PDImageXObject.createFromFile(imagePath, document);
+                PDImageXObject image = PDImageXObject.createFromFile(attachFile.getFlepath(), document);
                 try (PDPageContentStream contentStream = new PDPageContentStream(document, page)) {
                     float scale = Math.min(page.getMediaBox().getWidth() / image.getWidth(), page.getMediaBox().getHeight() / image.getHeight());
                     float imageWidth = image.getWidth() * scale;
@@ -300,11 +289,11 @@ public class AnyViewerReqServiceImpl implements AnyViewerReqService {
      * //테스트용 하드코딩 임시 메서드
      */
     public String convertImagesToPdf2() {
-        // 하드코딩된 이미지 경로 리스트
         List<String> imagePaths = Arrays.asList(
-                "//172.18.18.29/share/forConvertTest/02_output/images/pptslide-1.png",
-                "//172.18.18.29/share/forConvertTest/02_output/images/pptslide-2.png",
-                "//172.18.18.29/share/forConvertTest/02_output/images/pptslide-3.png"
+//                "//172.18.18.29/share/forConvertTest/02_output/images/pptslide-1.png",
+//                "//172.18.18.29/share/forConvertTest/02_output/images/pptslide-2.png",
+//                "//172.18.18.29/share/forConvertTest/02_output/images/pptslide-3.png"
+                "//172.18.18.29/share/forConvertTest/01_input/png/D_C1_005_02  _ 비문관리카드 조회(기안자).png"
         );
 
         // 이후 PDF 변환 로직...
@@ -335,15 +324,28 @@ public class AnyViewerReqServiceImpl implements AnyViewerReqService {
     }
 
 
-    public String convertPPTXToPDF(String pptxPath, String pdfPath, double scale) {
-        pptxPath = "//172.18.18.29/share/forConvertTest/01_input/pptx/testpptx.pptx";
-        pdfPath = "//172.18.18.29/share/forConvertTest/02_output/images/converted202403.pdf";
-        scale = 1.0;
-        try (XMLSlideShow ppt = new XMLSlideShow(new FileInputStream(pptxPath));
+    public String convertPPTXToPDF(String pptxPath, String pdfPath, double scale, int dpi) {
+//        pptxPath = "//172.18.18.29/share/forConvertTest/01_input/pptx/testpptx.pptx";
+//        pptxPath = "//172.18.18.29/share/forConvertTest/01_input/pptx/231.화면 설계서_v1.0_계측기관리 - 복사본.pptx";
+//        pdfPath = "//172.18.18.29/share/forConvertTest/02_output/images/pptx_converted202403.pdf";
+
+//        scale = 1.0;
+//        int dpi = 125; // 원하는 해상도로 설정 //못알아봄
+
+//        scale = 3.0;
+//        int dpi = 250; // 원하는 해상도로 설정 //너무 큼(안좋음)
+
+//        scale = 1.0;
+//        int dpi = 500; // 원하는 해상도로 설정 //3분30초 큼..((괜찮)
+
+//        scale = 2.0;
+//        dpi = 300; // 원하는 해상도로 설정 // 제일큼..(가독성 괜찮음)
+
+        try (XMLSlideShow pptx = new XMLSlideShow(new FileInputStream(pptxPath));
              PDDocument doc = new PDDocument()) {
 
-            for (XSLFSlide slide : ppt.getSlides()) {
-                processSlide(ppt, slide, doc, scale);
+            for (XSLFSlide slide : pptx.getSlides()) {
+                processSlide(pptx, slide, doc, scale, dpi);
             }
 
             doc.save(pdfPath);
@@ -355,15 +357,18 @@ public class AnyViewerReqServiceImpl implements AnyViewerReqService {
         }
     }
 
-    private void processSlide(XMLSlideShow ppt, XSLFSlide slide, PDDocument doc, double scale) {
+    private void processSlide(XMLSlideShow pptx, XSLFSlide slide, PDDocument doc, double scale, int dpi) {
         // XMLSlideShow 객체에서 페이지 크기를 얻음
-        Dimension pageSize = ppt.getPageSize();
-        int scaledWidth = (int) (pageSize.width * scale);
-        int scaledHeight = (int) (pageSize.height * scale);
+        Dimension pageSize = pptx.getPageSize();
 
-        BufferedImage img = new BufferedImage(scaledWidth, scaledHeight, BufferedImage.TYPE_INT_RGB);
+        double scaleFactor = dpi / 96.0; // 96 DPI는 기본 해상도
+        int scaledWidth = (int) (pageSize.width * scaleFactor * scale);
+        int scaledHeight = (int) (pageSize.height * scaleFactor * scale);
+
+        BufferedImage img = new BufferedImage(scaledWidth, scaledHeight, BufferedImage.TYPE_INT_ARGB);
         Graphics2D graphics = img.createGraphics();
-        graphics.scale(scale, scale);
+        graphics.scale(scaleFactor * scale, scaleFactor * scale);
+
         graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         graphics.setPaint(Color.white);
         graphics.fill(new Rectangle2D.Float(0, 0, scaledWidth, scaledHeight));
@@ -390,26 +395,27 @@ public class AnyViewerReqServiceImpl implements AnyViewerReqService {
         }
     }
 
-    public String convertPPTToPDF(String pptPath, String pdfPath, double scale) throws IOException {
-        pptPath = "//172.18.18.29/share/forConvertTest/01_input/ppt/test2.ppt";
-        pdfPath = "//172.18.18.29/share/forConvertTest/02_output/images/converted202403.pdf";
-        scale = 1.0;
-//        int dpi = 384; // 원하는 해상도로 설정
-        int dpi = 384; // 원하는 해상도로 설정
+    public String convertPPTToPDF(String pptPath, String pdfPath, double scale, int dpi) throws IOException {
+//        pptPath = "//172.18.18.29/share/forConvertTest/01_input/ppt/test2.ppt";
+//        pdfPath = "//172.18.18.29/share/forConvertTest/02_output/images/converted202403.pdf";
+//        scale = 1.0;
+//        dpi = 125; // 원하는 해상도로 설정
 
         try (HSLFSlideShow ppt = new HSLFSlideShow(new FileInputStream(pptPath));
              PDDocument doc = new PDDocument()) {
 
             Dimension pgsize = ppt.getPageSize();
-            int scaledWidth = (int) (pgsize.width * scale);
-            int scaledHeight = (int) (pgsize.height * scale);
+            // DPI에 따른 스케일 조정
+            double scaleFactor = dpi / 96.0;
+            int scaledWidth = (int) (pgsize.width * scaleFactor * scale);
+            int scaledHeight = (int) (pgsize.height * scaleFactor * scale);
 
             for (HSLFSlide slide : ppt.getSlides()) {
-                BufferedImage img = new BufferedImage(scaledWidth, scaledHeight, BufferedImage.TYPE_INT_RGB);
+                BufferedImage img = new BufferedImage(scaledWidth, scaledHeight, BufferedImage.TYPE_INT_ARGB);
                 Graphics2D graphics = img.createGraphics();
 
                 // Apply scale
-                graphics.scale(scale, scale);
+                graphics.scale(scaleFactor, scaleFactor);
 
                 graphics.setPaint(Color.white);
                 graphics.fill(new Rectangle2D.Float(0, 0, scaledWidth, scaledHeight));

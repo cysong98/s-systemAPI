@@ -132,18 +132,18 @@ public class AnyViewerController {
     @PostMapping("/convertImagesToPdf")
     public ResponseEntity convertImagesToPdf
             (
-                    @Valid List<String> imagePaths
+                    @RequestBody @Valid List<AttachFileVO> attachFiles
             ) throws Exception
     {
-        String pngFilePath = anyViewerReqService.convertImagesToPdf(imagePaths);
-        return ResponseEntity.ok(pngFilePath);
+        String reseponse = anyViewerReqService.convertImagesToPdf(attachFiles);
+        return ResponseEntity.ok(reseponse);
     }
 
     @PostMapping("/convertImagesToPdf2")
     public ResponseEntity convertImagesToPdf2() throws Exception
     {
-        String pngFilePath = anyViewerReqService.convertImagesToPdf2();
-        return ResponseEntity.ok(pngFilePath);
+        String reseponse = anyViewerReqService.convertImagesToPdf2();
+        return ResponseEntity.ok(reseponse);
     }
 
     @PostMapping("/convertPPTXToPDF")
@@ -151,11 +151,12 @@ public class AnyViewerController {
             (
                     @Valid String pptxPath,
                     @Valid String pdfPath,
-                    @Valid Double scale
+                    @Valid Double scale,
+                    @Valid int dpi
             ) throws Exception
     {
-        String pngFilePath = anyViewerReqService.convertPPTXToPDF(pptxPath, pdfPath, scale);
-        return ResponseEntity.ok(pngFilePath);
+        String reseponse = anyViewerReqService.convertPPTXToPDF(pptxPath, pdfPath, scale, dpi);
+        return ResponseEntity.ok(reseponse);
     }
 
     @PostMapping("/convertPPTToPDF")
@@ -163,11 +164,12 @@ public class AnyViewerController {
             (
                     @Valid String pptPath,
                     @Valid String pdfPath,
-                    @Valid Double scale
+                    @Valid Double scale,
+                    @Valid int dpi
             ) throws Exception
     {
-        String pngFilePath = anyViewerReqService.convertPPTToPDF(pptPath, pdfPath, scale);
-        return ResponseEntity.ok(pngFilePath);
+        String reseponse = anyViewerReqService.convertPPTToPDF(pptPath, pdfPath, scale, dpi);
+        return ResponseEntity.ok(reseponse);
     }
 
 }
