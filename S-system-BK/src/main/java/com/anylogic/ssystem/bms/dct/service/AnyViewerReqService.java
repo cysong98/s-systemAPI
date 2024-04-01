@@ -23,4 +23,5 @@ public interface AnyViewerReqService {
     String convertPPTXToPDF(String pptxPath, String pdfPath, double scale, int dpi) throws Exception;
 
     String convertPPTToPDF(String pptPath, String pdfPath, double scale, int dpi) throws Exception;
+    String splitPDF(String pdfPath, String outputFolder) throws Exception;
 }

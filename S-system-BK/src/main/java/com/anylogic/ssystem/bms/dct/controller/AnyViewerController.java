@@ -172,4 +172,15 @@ public class AnyViewerController {
         return ResponseEntity.ok(reseponse);
     }
 
+    @PostMapping("/splitPDF")
+    public ResponseEntity splitPDF
+            (
+                    @Valid String pdfPath,
+                    @Valid String outputFolder
+            ) throws Exception
+    {
+        String reseponse = anyViewerReqService.splitPDF(pdfPath, outputFolder);
+        return ResponseEntity.ok(reseponse);
+    }
+
 }

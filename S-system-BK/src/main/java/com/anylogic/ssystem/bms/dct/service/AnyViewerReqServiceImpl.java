@@ -18,6 +18,7 @@ import com.anylogic.ssystem.common.exception.AnyXException;
 import com.anylogic.ssystem.common.file.model.AttachFileVO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.pdfbox.Loader;
 import org.apache.pdfbox.pdmodel.font.PDType0Font;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import java.awt.geom.Dimension2D;
@@ -443,4 +444,41 @@ public class AnyViewerReqServiceImpl implements AnyViewerReqService {
             return "PDF로 변환하는 과정에서 오류가 발생했습니다.";
         }
     }
+
+    // pdf 낱장단위 분할 저장.
+    public String splitPDF(String pdfPath, String outputFolder) {
+        File inputFile = new File(pdfPath);
+        File outputDir = new File(outputFolder);
+
+        if (!outputDir.exists()) {
+            boolean wasSuccessful = outputDir.mkdirs();
+            if (!wasSuccessful) {
+                System.err.println("출력 폴더를 생성할 수 없습니다.");
+                return "출력 폴더를 생성할 수 없습니다.";
+            }
+        }
+
+        try (PDDocument document = Loader.loadPDF(inputFile)) {
+            Iterable<PDPage> pages = document.getPages();
+            int pageNumber = 1;
+
+            for (PDPage page : pages) {
+                try (PDDocument newDoc = new PDDocument()) {
+                    newDoc.addPage(page);
+                    String baseName = inputFile.getName().replace(".pdf", "");
+                    String newFileName = outputFolder + File.separator + baseName + "_" + pageNumber + ".pdf";
+                    newDoc.save(newFileName);
+                    System.out.println("저장된 페이지: " + newFileName);
+                    pageNumber++;
+                }
+            }
+            System.out.println("PDF 분할 완료");
+            return "PDF 분할 완료";
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.err.println("PDF 파일 처리 중 오류 발생");
+            return "PDF 파일 처리 중 오류 발생";
+        }
+    }
+
 }
